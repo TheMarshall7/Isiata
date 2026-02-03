@@ -23,17 +23,6 @@
 }
 
 @layer utilities {
-  /* Background Stripe Pattern */
-  .bg-stripes {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 40px,
-      rgba(255, 255, 255, 0.015) 40px,
-      rgba(255, 255, 255, 0.015) 41px
-    );
-  }
-
   /* Globe Glow Effect */
   .globe-glow {
     background: radial-gradient(
