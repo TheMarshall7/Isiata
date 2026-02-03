@@ -11,14 +11,14 @@ export default function HomePage() {
       {/* Full Screen Hero Image */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Hero Image */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-black">
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          {/* Bottom fade into page background */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
         </div>
 
         {/* Scroll indicator */}
