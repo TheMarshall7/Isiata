@@ -21,46 +21,9 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-          <h1
-            className="text-6xl md:text-8xl lg:text-9xl font-semibold tracking-tighter text-white mb-12 aura-reveal"
-          >
-            ISIATA
-          </h1>
-
-          <div className="max-w-3xl mx-auto space-y-6 mb-16">
-            <p
-              className="text-2xl md:text-3xl text-white font-light leading-relaxed aura-reveal"
-              style={{ animationDelay: '100ms' }}
-            >
-              Designed with intention.
-              <br />
-              Released with purpose.
-            </p>
-
-            <p
-              className="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed aura-reveal"
-              style={{ animationDelay: '200ms' }}
-            >
-              This is the work.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-6 justify-center aura-reveal" style={{ animationDelay: '300ms' }}>
-            <Button href="/explore" variant="secondary">
-              Explore
-            </Button>
-            <Button href="/sound" variant="secondary">
-              Listen
-            </Button>
-            <Button href="/access" variant="secondary">
-              Access
-            </Button>
-          </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 aura-reveal" style={{ animationDelay: '400ms' }}>
+        {/* Scroll indicator */}
+        <div className="relative z-10 h-full">
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 aura-reveal">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs text-zinc-400 uppercase tracking-widest">Scroll</span>
               <iconify-icon icon="solar:arrow-down-linear" width="20" height="20" className="text-zinc-400 animate-bounce" />
