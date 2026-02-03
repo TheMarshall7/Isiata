@@ -1,11 +1,7 @@
-import { Metadata } from 'next'
+'use client'
+
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-
-export const metadata: Metadata = {
-  title: 'Explore',
-  description: 'Discover across sound, objects, tools, and access',
-}
 
 export default function ExplorePage() {
   return (
