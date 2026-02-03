@@ -13,12 +13,21 @@ export default function AccessPage() {
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
             Access
           </h1>
-          <p className="text-lg text-zinc-400 mt-6 max-w-2xl">
-            Private sessions, creative direction, and collaborations
-          </p>
+
+          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+            <p>
+              Some work requires conversation.
+            </p>
+
+            <p className="text-zinc-400">
+              Private sessions, direction, and collaboration are available by request.
+              <br />
+              Selective. Focused. Purposeful.
+            </p>
+          </div>
         </Section>
       </Container>
 

@@ -13,9 +13,27 @@ export default function ToolsPage() {
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
-            Tools
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
+            The Tools
           </h1>
+
+          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+            <p>
+              Some tools are created out of necessity.
+            </p>
+
+            <p>
+              Designed to support the work when nothing else felt right.
+              <br />
+              Used in real conditions. Kept only if they proved essential.
+            </p>
+
+            <p className="text-zinc-400">
+              Available in small batches.
+              <br />
+              Quiet by design.
+            </p>
+          </div>
         </Section>
       </Container>
 

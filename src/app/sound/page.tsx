@@ -13,9 +13,23 @@ export default function SoundPage() {
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
-            Sound
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
+            The Sound
           </h1>
+
+          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+            <p>
+              Atmosphere you can step into.
+              <br />
+              Movement that holds attention.
+            </p>
+
+            <p className="text-zinc-400">
+              This is where ideas first take shape.
+              <br />
+              Listen closely.
+            </p>
+          </div>
         </Section>
       </Container>
 

@@ -9,30 +9,40 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <Container bordered className="flex flex-col text-center pt-32 pb-24 items-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 mb-8 uppercase tracking-wider aura-reveal">
-          <iconify-icon icon="solar:star-linear" width="16" height="16" />
-          Culture Over Category
-        </div>
-
+      <Container bordered className="flex flex-col text-center pt-32 pb-32 items-center">
         <h1
-          className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter gradient-text mb-6 max-w-5xl mx-auto leading-[1.1] aura-reveal"
-          style={{ animationDelay: '100ms' }}
+          className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter gradient-text mb-12 max-w-5xl mx-auto leading-[1.1] aura-reveal"
         >
           ISIATA
         </h1>
 
-        <p
-          className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-normal aura-reveal"
-          style={{ animationDelay: '200ms' }}
-        >
-          Sound, objects, tools, and access. Limited offerings for intentional creators.
-        </p>
+        <div className="max-w-3xl mx-auto space-y-6 mb-16">
+          <p
+            className="text-2xl md:text-3xl text-white font-light leading-relaxed aura-reveal"
+            style={{ animationDelay: '100ms' }}
+          >
+            Designed with intention.
+            <br />
+            Released with purpose.
+          </p>
 
-        <div className="aura-reveal" style={{ animationDelay: '300ms' }}>
-          <Button href="/explore" size="lg">
+          <p
+            className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed aura-reveal"
+            style={{ animationDelay: '200ms' }}
+          >
+            This is the work.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-6 justify-center aura-reveal" style={{ animationDelay: '300ms' }}>
+          <Button href="/explore" variant="secondary">
             Explore
-            <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" className="ml-2" />
+          </Button>
+          <Button href="/sound" variant="secondary">
+            Listen
+          </Button>
+          <Button href="/access" variant="secondary">
+            Access
           </Button>
         </div>
       </Container>
@@ -117,11 +127,16 @@ export default function HomePage() {
       <Section reveal>
         <Container bordered className="py-24">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-              Stay Informed
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+              Stay Close
             </h2>
-            <p className="text-zinc-400 mb-8">
-              Early access to private releases and limited offerings.
+            <p className="text-lg text-zinc-400 mb-4 leading-relaxed">
+              Releases don't follow a schedule.
+              <br />
+              Availability is intentional.
+            </p>
+            <p className="text-sm text-zinc-500 mb-8">
+              Join the list for early access and private releases.
             </p>
             <div className="flex justify-center">
               <EmailCapture source="homepage" />

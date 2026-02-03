@@ -10,53 +10,61 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
+      {/* The World */}
       <Container bordered className="pt-32 pb-24">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-16">
-            About
-          </h1>
+          <h2 className="text-2xl font-semibold text-white mb-12">The World</h2>
 
-          <div className="max-w-3xl space-y-8 text-lg text-zinc-300 leading-relaxed">
+          <div className="max-w-3xl space-y-8 text-xl text-zinc-300 leading-relaxed">
             <p>
-              ISIATA is a practice of intentional creation across sound, objects, tools, and access.
+              ISIATA is a studio without a single medium.
             </p>
 
             <p>
-              We operate outside genre and category. Each release is limited by design—not as artificial scarcity, but as respect for craft and attention.
+              Sound, objects, and systems live here side by side.
+              <br />
+              Each piece is shaped by restraint, clarity, and taste.
             </p>
 
             <p>
-              The work speaks. No explanations, no hype. Just offerings for those who recognize quality and coherence.
+              Nothing exists to fill space.
+              <br />
+              Everything earns its place.
             </p>
           </div>
         </Section>
       </Container>
 
-      {/* Principles */}
+      {/* The Work */}
       <Container bordered className="py-24 border-t border-white/10">
         <Section reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Culture Over Category</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                We don't fit into boxes. Sound, objects, tools, and access exist as parts of a unified practice.
-              </p>
-            </div>
+          <h2 className="text-2xl font-semibold text-white mb-12">The Work</h2>
 
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Limited, Intentional</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                Each offering is finite. When it's done, it's archived. This keeps the work focused and the archive meaningful.
-              </p>
-            </div>
+          <div className="max-w-3xl space-y-8 text-xl text-zinc-300 leading-relaxed">
+            <p>
+              The work moves across forms.
+              <br />
+              Music. Garments. Tools. Editions.
+            </p>
 
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Artifacts of Practice</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                Everything we release is a byproduct of our own creative process. Tools we use, sounds we make, objects we wear.
-              </p>
-            </div>
+            <p>
+              What connects them is not category, but point of view.
+              <br />
+              Quiet confidence. Considered choices. Weight without excess.
+            </p>
+          </div>
+        </Section>
+      </Container>
+
+      {/* Footer Principles */}
+      <Container bordered className="py-16 border-t border-white/10">
+        <Section reveal>
+          <div className="max-w-2xl mx-auto text-center space-y-4">
+            <p className="text-zinc-500 text-sm uppercase tracking-widest">
+              Culture over category.
+              <br />
+              Form follows intention.
+            </p>
           </div>
         </Section>
       </Container>
