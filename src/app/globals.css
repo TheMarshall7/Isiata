@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #020202;
+    --surface: #0A0A0A;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-white antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  ::selection {
+    @apply bg-purple-500/30;
+  }
+}
+
+@layer utilities {
+  /* Background Stripe Pattern */
+  .bg-stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 255, 255, 0.015) 40px,
+      rgba(255, 255, 255, 0.015) 41px
+    );
+  }
+
+  /* Globe Glow Effect */
+  .globe-glow {
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Reveal Animation */
+  .aura-reveal {
+    animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-play-state: paused;
+  }
+
+  .aura-reveal.is-visible {
+    animation-play-state: running;
+  }
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* Flashlight Card Effect */
+  .flashlight-card {
+    position: relative;
+    --mouse-x: -999px;
+    --mouse-y: -999px;
+  }
+
+  .flashlight-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.06),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: screen;
+  }
+
+  .flashlight-card:hover::after {
+    opacity: 1;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-zinc-500;
+  }
+
+  /* Container with borders */
+  .container-bordered {
+    @apply border-x border-white/10 max-w-7xl mx-auto;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-600;
+  }
+}
