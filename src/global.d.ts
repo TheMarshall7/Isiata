@@ -1,4 +1,4 @@
-// Type definitions for custom elements and global augmentations
+// Global type declarations for custom elements
 
 declare namespace JSX {
   interface IntrinsicElements {
@@ -15,5 +15,3 @@ declare namespace JSX {
     >
   }
 }
-
-export {}
