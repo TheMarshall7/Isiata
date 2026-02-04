@@ -15,7 +15,7 @@ export default function HomePage() {
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_48%]"
           />
           {/* Bottom fade into page background */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
@@ -37,73 +37,34 @@ export default function HomePage() {
         <Container bordered className="py-24">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Featured Sound */}
-            <a
-              href="/sound"
-              className="group flashlight-card relative aspect-square overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center p-8"
-              onMouseMove={(e) => {
-                const card = e.currentTarget
-                const rect = card.getBoundingClientRect()
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-              }}
-            >
-              <div className="relative z-10 text-center">
-                <iconify-icon
-                  icon="solar:music-library-2-linear"
-                  width="48"
-                  height="48"
-                  className="text-white mb-4 mx-auto"
-                />
-                <h3 className="text-2xl font-semibold text-white mb-2">Sound</h3>
-                <p className="text-sm text-zinc-400">Releases, playlists, visual media</p>
-              </div>
-            </a>
-
-            {/* Featured Objects */}
-            <a
-              href="/objects"
-              className="group flashlight-card relative aspect-square overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center p-8"
-              onMouseMove={(e) => {
-                const card = e.currentTarget
-                const rect = card.getBoundingClientRect()
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-              }}
-            >
-              <div className="relative z-10 text-center">
-                <iconify-icon
-                  icon="solar:shop-2-linear"
-                  width="48"
-                  height="48"
-                  className="text-white mb-4 mx-auto"
-                />
-                <h3 className="text-2xl font-semibold text-white mb-2">Garments</h3>
-                <p className="text-sm text-zinc-400">Fashion drops, garments, accessories</p>
-              </div>
-            </a>
-
-            {/* Featured Tools */}
-            <a
-              href="/tools"
-              className="group flashlight-card relative aspect-square overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center p-8"
-              onMouseMove={(e) => {
-                const card = e.currentTarget
-                const rect = card.getBoundingClientRect()
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-              }}
-            >
-              <div className="relative z-10 text-center">
-                <iconify-icon
-                  icon="solar:diskette-linear"
-                  width="48"
-                  height="48"
-                  className="text-white mb-4 mx-auto"
-                />
-                <h3 className="text-2xl font-semibold text-white mb-2">Tools</h3>
-                <p className="text-sm text-zinc-400">Sample packs, plugins, digital products</p>
-              </div>
-            </a>
+            {[
+              { href: '/sound', icon: 'solar:music-library-2-linear', title: 'Sound', desc: 'Releases, playlists, visual media' },
+              { href: '/objects', icon: 'solar:shop-2-linear', title: 'Garments', desc: 'Fashion drops, garments, accessories' },
+              { href: '/tools', icon: 'solar:diskette-linear', title: 'Tools', desc: 'Sample packs, plugins, digital products' },
+            ].map((card) => (
+              <a
+                key={card.href}
+                href={card.href}
+                className="group flashlight-card relative aspect-square overflow-hidden bg-zinc-900/80 border border-white/10 flex items-center justify-center p-8 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
+                onMouseMove={(e) => {
+                  const el = e.currentTarget
+                  const rect = el.getBoundingClientRect()
+                  el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+                  el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+                }}
+              >
+                <div className="relative z-10 text-center">
+                  <iconify-icon
+                    icon={card.icon}
+                    width="48"
+                    height="48"
+                    className="text-white mb-4 mx-auto group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <h3 className="text-2xl font-semibold text-white mb-2 group-hover:tracking-wider transition-all duration-500">{card.title}</h3>
+                  <p className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{card.desc}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </Container>
       </Section>

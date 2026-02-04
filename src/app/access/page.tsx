@@ -75,12 +75,12 @@ export default function AccessPage() {
         <Section reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {OFFERINGS.map((offering) => (
-              <div key={offering.title} className="flashlight-card border border-white/10 bg-black/40 p-12">
+              <div key={offering.title} className="group flashlight-card hover-lift hover-glow border border-white/10 bg-black/40 p-12">
                 <iconify-icon
                   icon={offering.icon}
                   width="48"
                   height="48"
-                  className="text-white mb-6"
+                  className="text-white mb-6 group-hover:scale-110 transition-transform duration-500"
                 />
                 <h2 className="text-2xl font-semibold text-white mb-6">{offering.title}</h2>
                 <div className="space-y-1 mb-6">

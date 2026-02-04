@@ -38,7 +38,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="hover:text-white transition-colors"
+                className="relative hover:text-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white/60 after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </Link>
