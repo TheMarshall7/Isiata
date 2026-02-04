@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: '#020202',
         surface: '#0A0A0A',
+        'surface-raised': '#111111',
+        'surface-overlay': '#161616',
         border: 'rgba(255, 255, 255, 0.1)',
       },
       fontFamily: {
