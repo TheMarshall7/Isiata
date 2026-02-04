@@ -33,7 +33,7 @@ export default function ExplorePage() {
               <a
                 key={cat.href}
                 href={cat.href}
-                className="group flashlight-card hover-lift hover-glow relative aspect-[4/3] overflow-hidden bg-surface-raised border border-white/10 depth-shadow p-12 flex flex-col justify-end"
+                className="group flashlight-card hover-depth hover-glow relative aspect-[4/3] overflow-hidden bg-surface-raised border border-white/10 depth-shadow p-12 flex flex-col justify-end"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()

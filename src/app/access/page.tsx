@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
@@ -122,7 +123,11 @@ export default function AccessPage() {
         <Section reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {OFFERINGS.map((offering) => (
-              <div key={offering.title} className="group flashlight-card hover-lift hover-glow border border-white/10 bg-surface-raised depth-shadow p-12">
+              <Link
+                key={offering.title}
+                href="/access/booking"
+                className="group flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow p-12 block"
+              >
                 <iconify-icon
                   icon={offering.icon}
                   width="48"
@@ -138,7 +143,7 @@ export default function AccessPage() {
                 <p className="text-sm text-zinc-500 italic">
                   {offering.tagline}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </Section>

@@ -58,7 +58,7 @@ function SamplePackContent() {
   return (
     <div className="space-y-12">
       {/* Hero Card */}
-      <div className="border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
+      <div className="border border-white/10 bg-surface-raised depth-shadow hover-glow overflow-hidden transition-all duration-500">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Image */}
           <div className="aspect-square lg:aspect-auto overflow-hidden">
@@ -87,7 +87,7 @@ function SamplePackContent() {
               <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
             </div>
             <div className="flex items-baseline gap-3 mb-6">
-              <span className="text-2xl font-semibold text-white">$50</span>
+              <span className="text-2xl font-semibold text-white">$67</span>
               <span className="text-sm text-zinc-600 line-through">$150</span>
             </div>
             <Link
@@ -224,7 +224,7 @@ export default function ToolsPage() {
         <Section reveal>
           <button
             onClick={() => setToolboxOpen(true)}
-            className="flashlight-card w-full border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all"
+            className="flashlight-card hover-glow w-full border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all duration-500"
           >
             <div className="flex items-center gap-6">
               <div className="shrink-0 w-12 h-12 flex items-center justify-center border border-white/10 rounded bg-white/5">

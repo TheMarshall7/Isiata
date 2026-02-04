@@ -3,12 +3,13 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { GHL_ORDER_FORM_URL } from '@/lib/constants'
 
 const PRODUCT = {
   title: 'Tsukuyomi Drum Bundle',
   subtitle: 'Premium Archive',
   image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67b7ebca7c922f63503b66c7.png',
-  price: '$50',
+  price: '$67',
   originalPrice: '$150',
   description: 'A premium drum sample pack focused on high-quality, impactful drum sounds — designed for use in major DAWs.',
   format: '32-bit WAV',
@@ -19,15 +20,10 @@ const PRODUCT = {
     'Royalty-free for commercial use',
     'Compatible with all major DAWs',
   ],
-  // ── GoHighLevel Configuration ──────────────────────────────────
-  // Replace this with your GHL order form / funnel URL.
-  // Option A: Embed an order form via iframe
-  // Option B: Redirect to a GHL-hosted checkout page
-  ghlOrderFormUrl: 'https://link.fastpaydirect.com/payment-link/6982c3273533386a60c3d4c7',
 }
 
 export default function CheckoutPage() {
-  const hasGhlForm = PRODUCT.ghlOrderFormUrl.length > 0
+  const hasGhlForm = GHL_ORDER_FORM_URL.length > 0
 
   return (
     <>
@@ -115,18 +111,21 @@ export default function CheckoutPage() {
                   <span className="text-lg text-zinc-600 line-through">{PRODUCT.originalPrice}</span>
                 </div>
 
-                {/* GoHighLevel Payment Integration */}
+                {/* GoHighLevel Payment — opens on dedicated page for full space */}
                 <div className="border border-white/10 bg-surface-raised depth-shadow rounded">
                   {hasGhlForm ? (
-                    // ── GHL Embedded Order Form ──────────────────────
-                    // Your GoHighLevel order form loads here.
-                    // If you prefer a redirect instead, replace the
-                    // iframe with a button that links to the GHL URL.
-                    <iframe
-                      src={PRODUCT.ghlOrderFormUrl}
-                      className="w-full min-h-[500px] rounded"
-                      title="Order Form"
-                    />
+                    <div className="p-8 flex flex-col items-center justify-center min-h-[280px] text-center">
+                      <p className="text-sm text-zinc-400 mb-6">
+                        Complete payment and delivery details on the next page.
+                      </p>
+                      <Link
+                        href="/tools/checkout/order"
+                        className="inline-flex items-center gap-2 bg-white text-black font-semibold px-8 py-4 rounded hover:bg-zinc-200 transition-colors"
+                      >
+                        Proceed to checkout
+                        <iconify-icon icon="solar:arrow-right-linear" width="20" height="20" />
+                      </Link>
+                    </div>
                   ) : (
                     // ── Placeholder until GHL is connected ───────────
                     <div className="p-8 text-center">

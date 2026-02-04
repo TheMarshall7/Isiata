@@ -6,10 +6,10 @@ import { EmailCapture } from '@/components/forms/EmailCapture'
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/10 font-sans relative overflow-hidden">
+    <footer className="bg-black text-white border-t border-white/10 font-sans relative overflow-hidden depth-shadow-lg shadow-2xl shadow-black/50">
       {/* Top Glow Effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-40 bg-white/5 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto border-x border-white/10 relative z-10">
         {/* Social Media Grid */}

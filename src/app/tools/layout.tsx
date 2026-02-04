@@ -18,7 +18,7 @@ const productSchema = {
   brand: { '@type': 'Brand', name: 'ISIATA' },
   offers: {
     '@type': 'Offer',
-    price: '50.00',
+    price: '67.00',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: 'https://isiata.com/tools/checkout',

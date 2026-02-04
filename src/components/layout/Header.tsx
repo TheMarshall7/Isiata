@@ -23,7 +23,7 @@ export function Header() {
       <nav className="fixed flex z-50 px-4 top-6 right-0 left-0 justify-center">
         <div className={`flex w-full max-w-4xl border rounded-full pt-2 pr-2 pb-2 pl-6 backdrop-blur-xl items-center justify-between transition-all duration-500 ${
           scrolled
-            ? 'bg-black/80 border-white/10 shadow-2xl shadow-black/50'
+            ? 'bg-black/80 border-white/10 depth-shadow-nav'
             : 'bg-transparent border-white/0 shadow-none'
         }`}>
           <Link
@@ -50,8 +50,8 @@ export function Header() {
               href="/explore"
               className={`hidden md:block px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 ${
                 scrolled
-                  ? 'bg-white text-black hover:bg-zinc-200'
-                  : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
+                  ? 'bg-white text-black hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98]'
+                  : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98]'
               }`}
             >
               Explore

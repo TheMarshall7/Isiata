@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <>
       {/* Full Screen Hero Image */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative w-full h-screen overflow-hidden -mt-10">
         {/* Hero Image */}
         <div className="absolute inset-0 bg-black">
           <img
@@ -45,7 +45,7 @@ export default function HomePage() {
               <a
                 key={card.href}
                 href={card.href}
-                className="group flashlight-card depth-shadow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-8 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
+                className="group flashlight-card depth-shadow hover-glow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-8 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()

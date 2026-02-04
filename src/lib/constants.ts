@@ -47,3 +47,10 @@ export const ANIMATION_DELAYS = {
   stagger: 100, // ms between staggered animations
   reveal: 1000, // ms for reveal animation
 }
+
+/** GoHighLevel order form URL for tools checkout (used on product page + full-page order) */
+export const GHL_ORDER_FORM_URL =
+  'https://link.fastpaydirect.com/payment-link/6982c3273533386a60c3d4c7'
+
+/** Calendar embed URL for Access booking (Lead Connector / GHL widget). Leave empty to show placeholder. */
+export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/booking/0RMK2V7TPRYpGm701Ain'

@@ -11,10 +11,10 @@ export function Button({
   href,
   disabled = false,
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all rounded-full'
+  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-full active:scale-[0.98]'
 
   const variants = {
-    primary: 'bg-white text-black hover:bg-zinc-200',
+    primary: 'bg-white text-black hover:bg-zinc-200 hover:shadow-lg hover:shadow-white/5',
     secondary: 'bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800',
     ghost: 'text-white hover:text-zinc-300',
   }
