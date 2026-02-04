@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { ProducerToolbox } from '@/components/tools/ProducerToolbox'
 
 const TABS = ['All', 'Sample Packs', 'Plugins', 'Presets'] as const
 type Tab = typeof TABS[number]
@@ -173,9 +174,13 @@ function ComingSoon() {
 
 export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('All')
+  const [toolboxOpen, setToolboxOpen] = useState(false)
 
   return (
     <>
+      {/* Producer Toolbox Modal */}
+      <ProducerToolbox isOpen={toolboxOpen} onClose={() => setToolboxOpen(false)} />
+
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
@@ -200,6 +205,32 @@ export default function ToolsPage() {
               Quiet by design.
             </p>
           </div>
+        </Section>
+      </Container>
+
+      {/* Producer Toolbox Card */}
+      <Container bordered className="py-8 border-t border-white/10">
+        <Section reveal>
+          <button
+            onClick={() => setToolboxOpen(true)}
+            className="flashlight-card w-full border border-white/10 bg-black/40 p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all"
+          >
+            <div className="flex items-center gap-6">
+              <div className="shrink-0 w-12 h-12 flex items-center justify-center border border-white/10 rounded bg-white/5">
+                <iconify-icon icon="solar:tuning-2-linear" width="24" height="24" className="text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-1">Producer Toolbox</h3>
+                <p className="text-sm text-zinc-500">BPM control, key & scale finder, delay calculator, reverb times, unit converter</p>
+              </div>
+            </div>
+            <iconify-icon
+              icon="solar:arrow-right-linear"
+              width="20"
+              height="20"
+              className="text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all shrink-0"
+            />
+          </button>
         </Section>
       </Container>
 
