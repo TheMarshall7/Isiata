@@ -31,12 +31,12 @@ export function Footer() {
           </Link>
 
           <Link
-            href={SITE_CONFIG.links.twitter}
+            href={SITE_CONFIG.links.tiktok}
             className="group flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-4">
-              <iconify-icon icon="solar:chat-round-line-linear" width="20" height="20" className="text-white" />
-              <span className="text-sm font-medium text-white">Twitter</span>
+              <iconify-icon icon="solar:music-note-2-linear" width="20" height="20" className="text-white" />
+              <span className="text-sm font-medium text-white">TikTok</span>
             </div>
             <iconify-icon
               icon="solar:arrow-right-linear"

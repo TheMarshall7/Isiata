@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'Objects',
+  title: 'Garments',
   description: 'Fashion drops, garments, and accessories',
 }
 
@@ -14,7 +14,7 @@ export default function ObjectsPage() {
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
-            The Objects
+            Garments
           </h1>
 
           <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
@@ -49,7 +49,7 @@ export default function ObjectsPage() {
             Signature Releases
           </button>
           <button className="px-4 py-2 text-sm font-medium text-zinc-400 whitespace-nowrap hover:text-white transition-colors">
-            Studio Editions
+            Collections
           </button>
           <button className="px-4 py-2 text-sm font-medium text-zinc-400 whitespace-nowrap hover:text-white transition-colors">
             Archived
@@ -68,7 +68,7 @@ export default function ObjectsPage() {
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white mb-3">Studio Editions</h3>
+              <h3 className="text-lg font-semibold text-white mb-3">Collections</h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
                 Functional objects and garments designed for daily use. Refined. Durable. Intentional.
               </p>
@@ -87,10 +87,7 @@ export default function ObjectsPage() {
               height="64"
               className="text-zinc-700 mx-auto mb-6"
             />
-            <p className="text-zinc-500 text-lg">No drops yet</p>
-            <p className="text-zinc-600 text-sm mt-2">
-              Check back soon for new object releases
-            </p>
+            <p className="text-zinc-500 text-lg">Coming Soon</p>
           </div>
         </Section>
       </Container>

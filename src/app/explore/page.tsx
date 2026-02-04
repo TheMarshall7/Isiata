@@ -63,7 +63,7 @@ export default function ExplorePage() {
                 className="text-white mb-6 opacity-50"
               />
               <h2 className="text-4xl font-semibold text-white mb-3 group-hover:text-zinc-300 transition-colors">
-                Objects
+                Garments
               </h2>
               <p className="text-zinc-400">Fashion drops, garments, and accessories</p>
             </a>

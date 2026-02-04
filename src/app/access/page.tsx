@@ -4,8 +4,47 @@ import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
   title: 'Access',
-  description: 'Private sessions, creative direction, and collaborations',
+  description: 'Creative direction, mixing, private sessions, and live performance',
 }
+
+const OFFERINGS = [
+  {
+    icon: 'solar:lightbulb-minimalistic-linear',
+    title: 'Creative Direction',
+    lines: [
+      'Project-level guidance from concept to finish.',
+      'Decisions, structure, and refinement.',
+    ],
+    tagline: 'For work that needs clarity and a point of view.',
+  },
+  {
+    icon: 'solar:tuning-2-linear',
+    title: 'Mix & Sonic Refinement',
+    lines: [
+      'Precision mixing and final polish.',
+      'Balance, depth, and cohesion without losing character.',
+    ],
+    tagline: 'Built to translate everywhere.',
+  },
+  {
+    icon: 'solar:music-note-slider-linear',
+    title: 'Private Sessions',
+    lines: [
+      'Focused one-on-one work.',
+      'Production, sound development, or problem-solving in real time.',
+    ],
+    tagline: 'Direct. Intentional. Limited.',
+  },
+  {
+    icon: 'solar:microphone-3-linear',
+    title: 'Live Performance',
+    lines: [
+      'Sound experienced in the room.',
+      'Solo or collaborative performances shaped by the space and moment.',
+    ],
+    tagline: 'Unrepeatable by design.',
+  },
+]
 
 export default function AccessPage() {
   return (
@@ -35,73 +74,25 @@ export default function AccessPage() {
       <Container bordered className="py-24">
         <Section reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Private Sessions */}
-            <div className="flashlight-card border border-white/10 bg-black/40 p-12">
-              <iconify-icon
-                icon="solar:music-note-slider-linear"
-                width="48"
-                height="48"
-                className="text-white mb-6"
-              />
-              <h2 className="text-2xl font-semibold text-white mb-4">Private Sessions</h2>
-              <p className="text-zinc-400 mb-6 leading-relaxed">
-                One-on-one production sessions for focused work on your tracks.
-              </p>
-              <p className="text-xs text-zinc-600 uppercase tracking-wider mb-8">
-                Currently unavailable
-              </p>
-            </div>
-
-            {/* Creative Direction */}
-            <div className="flashlight-card border border-white/10 bg-black/40 p-12">
-              <iconify-icon
-                icon="solar:lightbulb-minimalistic-linear"
-                width="48"
-                height="48"
-                className="text-white mb-6"
-              />
-              <h2 className="text-2xl font-semibold text-white mb-4">Creative Direction</h2>
-              <p className="text-zinc-400 mb-6 leading-relaxed">
-                Strategic guidance for your creative projects and releases.
-              </p>
-              <p className="text-xs text-zinc-600 uppercase tracking-wider mb-8">
-                Currently unavailable
-              </p>
-            </div>
-
-            {/* Collaborations */}
-            <div className="flashlight-card border border-white/10 bg-black/40 p-12">
-              <iconify-icon
-                icon="solar:users-group-rounded-linear"
-                width="48"
-                height="48"
-                className="text-white mb-6"
-              />
-              <h2 className="text-2xl font-semibold text-white mb-4">Collaborations</h2>
-              <p className="text-zinc-400 mb-6 leading-relaxed">
-                Joint creative work on music, visual, or concept projects.
-              </p>
-              <p className="text-xs text-zinc-600 uppercase tracking-wider mb-8">
-                Currently unavailable
-              </p>
-            </div>
-
-            {/* Workshops */}
-            <div className="flashlight-card border border-white/10 bg-black/40 p-12">
-              <iconify-icon
-                icon="solar:presentation-graph-linear"
-                width="48"
-                height="48"
-                className="text-white mb-6"
-              />
-              <h2 className="text-2xl font-semibold text-white mb-4">Workshops</h2>
-              <p className="text-zinc-400 mb-6 leading-relaxed">
-                Small group sessions on production techniques and creative process.
-              </p>
-              <p className="text-xs text-zinc-600 uppercase tracking-wider mb-8">
-                Currently unavailable
-              </p>
-            </div>
+            {OFFERINGS.map((offering) => (
+              <div key={offering.title} className="flashlight-card border border-white/10 bg-black/40 p-12">
+                <iconify-icon
+                  icon={offering.icon}
+                  width="48"
+                  height="48"
+                  className="text-white mb-6"
+                />
+                <h2 className="text-2xl font-semibold text-white mb-6">{offering.title}</h2>
+                <div className="space-y-1 mb-6">
+                  {offering.lines.map((line, i) => (
+                    <p key={i} className="text-zinc-400 leading-relaxed">{line}</p>
+                  ))}
+                </div>
+                <p className="text-sm text-zinc-500 italic">
+                  {offering.tagline}
+                </p>
+              </div>
+            ))}
           </div>
         </Section>
       </Container>

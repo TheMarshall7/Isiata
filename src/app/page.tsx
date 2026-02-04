@@ -15,7 +15,7 @@ export default function HomePage() {
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover md:object-contain"
           />
           {/* Bottom fade into page background */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
@@ -77,7 +77,7 @@ export default function HomePage() {
                   height="48"
                   className="text-white mb-4 mx-auto"
                 />
-                <h3 className="text-2xl font-semibold text-white mb-2">Objects</h3>
+                <h3 className="text-2xl font-semibold text-white mb-2">Garments</h3>
                 <p className="text-sm text-zinc-400">Fashion drops, garments, accessories</p>
               </div>
             </a>

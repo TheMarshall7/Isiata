@@ -5,32 +5,29 @@ export const SITE_CONFIG = {
   ogImage: '/og-image.jpg',
   links: {
     soundcloud: '#',
-    twitter: '#',
+    tiktok: '#',
     instagram: '#',
     youtube: '#',
   },
 }
 
 export const NAV_LINKS = [
-  { href: '/explore', label: 'Explore' },
   { href: '/sound', label: 'Sound' },
-  { href: '/objects', label: 'Objects' },
+  { href: '/objects', label: 'Garments' },
   { href: '/tools', label: 'Tools' },
   { href: '/access', label: 'Access' },
-  { href: '/archive', label: 'Archive' },
 ]
 
 export const FOOTER_LINKS = {
   explore: [
     { href: '/sound', label: 'Sound' },
-    { href: '/objects', label: 'Objects' },
+    { href: '/objects', label: 'Garments' },
     { href: '/tools', label: 'Tools' },
     { href: '/access', label: 'Access' },
   ],
   information: [
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
-    { href: '/archive', label: 'Archive' },
   ],
   legal: [
     { href: '/legal/licensing', label: 'Licensing' },
