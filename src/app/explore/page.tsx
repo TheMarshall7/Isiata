@@ -33,7 +33,7 @@ export default function ExplorePage() {
               <a
                 key={cat.href}
                 href={cat.href}
-                className="group flashlight-card hover-depth hover-glow relative aspect-[4/3] overflow-hidden bg-surface-raised border border-white/10 depth-shadow p-12 flex flex-col justify-end"
+                className="group flashlight-card hover-depth hover-glow relative aspect-[4/3] overflow-hidden bg-surface-raised border border-white/10 depth-shadow pt-16 pb-14 px-14 md:pt-20 md:pb-16 md:px-16 flex flex-col justify-end"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()
@@ -43,14 +43,14 @@ export default function ExplorePage() {
               >
                 <iconify-icon
                   icon={cat.icon}
-                  width="64"
-                  height="64"
+                  width="88"
+                  height="88"
                   className="text-white mb-6 opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"
                 />
-                <h2 className="text-4xl font-semibold text-white mb-3 group-hover:tracking-wide transition-all duration-500">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white mt-8 mb-4 group-hover:tracking-wide transition-all duration-500">
                   {cat.title}
                 </h2>
-                <p className="text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{cat.desc}</p>
+                <p className="text-lg text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{cat.desc}</p>
               </a>
             ))}
           </div>

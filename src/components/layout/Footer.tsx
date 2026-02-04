@@ -6,10 +6,10 @@ import { EmailCapture } from '@/components/forms/EmailCapture'
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/10 font-sans relative overflow-hidden depth-shadow-lg shadow-2xl shadow-black/50">
+    <footer className="bg-black text-white border-t border-white/10 font-sans relative overflow-hidden depth-shadow-xl shadow-2xl shadow-black/60">
       {/* Top Glow Effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-40 bg-white/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-48 bg-white/[0.06] blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto border-x border-white/10 relative z-10">
         {/* Social Media Grid */}
@@ -176,7 +176,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="px-8 md:px-12 pb-8 border-t border-white/10 pt-8 flex justify-between items-center text-xs text-zinc-600">
           <span>© {new Date().getFullYear()} ISIATA</span>
-          <span>Made with care</span>
+          <span>Ran on AreoClient™</span>
         </div>
       </div>
     </footer>

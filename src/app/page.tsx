@@ -45,7 +45,7 @@ export default function HomePage() {
               <a
                 key={card.href}
                 href={card.href}
-                className="group flashlight-card depth-shadow hover-glow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-8 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
+                className="group flashlight-card depth-shadow hover-glow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-10 md:p-12 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()
@@ -56,12 +56,12 @@ export default function HomePage() {
                 <div className="relative z-10 text-center">
                   <iconify-icon
                     icon={card.icon}
-                    width="48"
-                    height="48"
-                    className="text-white mb-4 mx-auto group-hover:scale-110 transition-transform duration-500"
+                    width="72"
+                    height="72"
+                    className="text-white mb-6 mx-auto group-hover:scale-110 transition-transform duration-500"
                   />
-                  <h3 className="text-2xl font-semibold text-white mb-2 group-hover:tracking-wider transition-all duration-500">{card.title}</h3>
-                  <p className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{card.desc}</p>
+                  <h3 className="text-3xl md:text-4xl font-semibold text-white mb-3 group-hover:tracking-wider transition-all duration-500">{card.title}</h3>
+                  <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{card.desc}</p>
                 </div>
               </a>
             ))}

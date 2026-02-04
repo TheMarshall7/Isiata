@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Script from 'next/script'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { CALENDAR_EMBED_URL } from '@/lib/constants'
+import { CalendarEmbed } from './CalendarEmbed'
 
 export const metadata: Metadata = {
   title: 'Book a session',
@@ -41,42 +41,29 @@ export default function BookingPage() {
         </Section>
       </Container>
 
-      {/* Calendar embed — set CALENDAR_EMBED_URL in lib/constants.ts to your Calendly/Cal.com URL */}
+      {/* Calendar embed — iframe is transparent and sized to avoid scroll/cutoff */}
       <Container bordered className="py-12">
         <Section reveal>
-          <div className="border border-white/10 bg-surface-raised depth-shadow rounded-lg overflow-hidden min-h-[600px]">
-            {CALENDAR_EMBED_URL ? (
-              <>
-                <Script
-                  src="https://link.msgsndr.com/js/form_embed.js"
-                  strategy="afterInteractive"
+          {CALENDAR_EMBED_URL ? (
+            <CalendarEmbed />
+          ) : (
+            <div className="min-h-[600px] flex items-center justify-center p-8 border border-white/10 bg-surface-raised rounded-lg">
+              <div className="text-center max-w-md">
+                <iconify-icon
+                  icon="solar:calendar-linear"
+                  width="48"
+                  height="48"
+                  className="text-zinc-600 mx-auto mb-4"
                 />
-                <iframe
-                  src={CALENDAR_EMBED_URL}
-                  title="Book a session"
-                  className="w-full border-0 min-h-[600px] h-[700px] overflow-hidden"
-                  scrolling="no"
-                />
-              </>
-            ) : (
-              <div className="min-h-[600px] flex items-center justify-center p-8">
-                <div className="text-center max-w-md">
-                  <iconify-icon
-                    icon="solar:calendar-linear"
-                    width="48"
-                    height="48"
-                    className="text-zinc-600 mx-auto mb-4"
-                  />
-                  <p className="text-zinc-400 text-sm mb-2">Calendar embed</p>
-                  <p className="text-zinc-500 text-xs">
-                    Set <code className="text-zinc-600 bg-white/5 px-1 py-0.5 rounded">CALENDAR_EMBED_URL</code> in{' '}
-                    <code className="text-zinc-600 bg-white/5 px-1 py-0.5 rounded">src/lib/constants.ts</code> to
-                    your Calendly, Cal.com, or other booking URL to enable scheduling.
-                  </p>
-                </div>
+                <p className="text-zinc-400 text-sm mb-2">Calendar embed</p>
+                <p className="text-zinc-500 text-xs">
+                  Set <code className="text-zinc-600 bg-white/5 px-1 py-0.5 rounded">CALENDAR_EMBED_URL</code> in{' '}
+                  <code className="text-zinc-600 bg-white/5 px-1 py-0.5 rounded">src/lib/constants.ts</code> to
+                  enable scheduling.
+                </p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </Section>
       </Container>
     </>
