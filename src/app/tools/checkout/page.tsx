@@ -23,7 +23,7 @@ const PRODUCT = {
   // Replace this with your GHL order form / funnel URL.
   // Option A: Embed an order form via iframe
   // Option B: Redirect to a GHL-hosted checkout page
-  ghlOrderFormUrl: '',
+  ghlOrderFormUrl: 'https://link.fastpaydirect.com/payment-link/6982c3273533386a60c3d4c7',
 }
 
 export default function CheckoutPage() {
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* GoHighLevel Payment Integration */}
-                <div className="border border-white/10 bg-black/40 rounded">
+                <div className="border border-white/10 bg-surface-raised depth-shadow rounded">
                   {hasGhlForm ? (
                     // ── GHL Embedded Order Form ──────────────────────
                     // Your GoHighLevel order form loads here.

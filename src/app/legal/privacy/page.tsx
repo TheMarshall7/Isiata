@@ -4,7 +4,8 @@ import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'How ISIATA handles your data',
+  description: 'How ISIATA collects, uses, and protects your personal data. Read our privacy policy for details on data handling and your rights.',
+  alternates: { canonical: '/legal/privacy' },
 }
 
 export default function PrivacyPage() {

@@ -3,8 +3,13 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'Archive',
-  description: 'Past releases, drops, and offerings',
+  title: 'Archive — Past Releases, Drops & Offerings',
+  description: 'Browse the ISIATA archive of past sound releases, garment drops, and tool offerings. Limited editions documented and preserved.',
+  openGraph: {
+    title: 'ISIATA Archive — Past Releases & Drops',
+    description: 'Past sound releases, garment drops, and tool offerings. Limited editions documented and preserved.',
+  },
+  alternates: { canonical: '/archive' },
 }
 
 export default function ArchivePage() {

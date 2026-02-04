@@ -14,8 +14,10 @@ export function Footer() {
       <div className="max-w-7xl mx-auto border-x border-white/10 relative z-10">
         {/* Social Media Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 border-b border-white/10">
-          <Link
+          <a
             href={SITE_CONFIG.links.soundcloud}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-4">
@@ -28,10 +30,12 @@ export function Footer() {
               height="16"
               className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
             />
-          </Link>
+          </a>
 
-          <Link
+          <a
             href={SITE_CONFIG.links.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-4">
@@ -44,10 +48,12 @@ export function Footer() {
               height="16"
               className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
             />
-          </Link>
+          </a>
 
-          <Link
+          <a
             href={SITE_CONFIG.links.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-4">
@@ -60,10 +66,12 @@ export function Footer() {
               height="16"
               className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
             />
-          </Link>
+          </a>
 
-          <Link
+          <a
             href={SITE_CONFIG.links.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center justify-between p-6 border-b md:border-b-0 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-4">
@@ -76,7 +84,7 @@ export function Footer() {
               height="16"
               className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
             />
-          </Link>
+          </a>
         </div>
 
         {/* Links Grid */}

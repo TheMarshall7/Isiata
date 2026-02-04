@@ -3,8 +3,13 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'Garments',
-  description: 'Fashion drops, garments, and accessories',
+  title: 'Garments — Limited Fashion Drops & Accessories',
+  description: 'Limited-run garments, fashion drops, and accessories by ISIATA. Signature releases and collections built to be worn and built to last.',
+  openGraph: {
+    title: 'ISIATA Garments — Limited Fashion Drops & Accessories',
+    description: 'Limited-run garments and accessories. Signature releases and collections built to be worn and built to last.',
+  },
+  alternates: { canonical: '/objects' },
 }
 
 export default function ObjectsPage() {

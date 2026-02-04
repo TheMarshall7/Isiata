@@ -52,7 +52,7 @@ function DiscographyContent() {
   return (
     <div className="space-y-16">
       {/* EP */}
-      <div className="border border-white/10 bg-black/40 p-8 md:p-12">
+      <div className="border border-white/10 bg-surface-raised depth-shadow p-8 md:p-12">
         <div className="flex flex-wrap items-center gap-3 mb-6">
           <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1">
             {EP.type}
@@ -87,7 +87,7 @@ function DiscographyContent() {
         <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-8">Singles</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {SINGLES.map((single) => (
-            <div key={single.title} className="border border-white/10 bg-black/40 p-8">
+            <div key={single.title} className="border border-white/10 bg-surface-raised depth-shadow p-8">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1">
                   {single.type}

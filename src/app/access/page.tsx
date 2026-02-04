@@ -3,8 +3,13 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'Access',
-  description: 'Creative direction, mixing, private sessions, and live performance',
+  title: 'Access — Creative Direction, Mixing & Private Sessions',
+  description: 'Book creative direction, professional mixing, private studio sessions, and live performance with ISIATA. Selective. Focused. By request only.',
+  openGraph: {
+    title: 'ISIATA Access — Creative Direction, Mixing & Private Sessions',
+    description: 'Creative direction, professional mixing, private studio sessions, and live performance. By request only.',
+  },
+  alternates: { canonical: '/access' },
 }
 
 const OFFERINGS = [
@@ -46,9 +51,51 @@ const OFFERINGS = [
   },
 ]
 
+const serviceSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Creative Direction',
+    provider: { '@type': 'Organization', name: 'ISIATA' },
+    description: 'Project-level guidance from concept to finish. Decisions, structure, and refinement.',
+    url: 'https://isiata.com/access',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Mix & Sonic Refinement',
+    provider: { '@type': 'Organization', name: 'ISIATA' },
+    description: 'Precision mixing and final polish. Balance, depth, and cohesion without losing character.',
+    url: 'https://isiata.com/access',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Private Sessions',
+    provider: { '@type': 'Organization', name: 'ISIATA' },
+    description: 'Focused one-on-one work. Production, sound development, or problem-solving in real time.',
+    url: 'https://isiata.com/access',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Live Performance',
+    provider: { '@type': 'Organization', name: 'ISIATA' },
+    description: 'Sound experienced in the room. Solo or collaborative performances shaped by the space and moment.',
+    url: 'https://isiata.com/access',
+  },
+]
+
 export default function AccessPage() {
   return (
     <>
+      {serviceSchemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
@@ -75,7 +122,7 @@ export default function AccessPage() {
         <Section reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {OFFERINGS.map((offering) => (
-              <div key={offering.title} className="group flashlight-card hover-lift hover-glow border border-white/10 bg-black/40 p-12">
+              <div key={offering.title} className="group flashlight-card hover-lift hover-glow border border-white/10 bg-surface-raised depth-shadow p-12">
                 <iconify-icon
                   icon={offering.icon}
                   width="48"

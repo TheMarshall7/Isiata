@@ -20,36 +20,50 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: SITE_CONFIG.name,
+    default: 'ISIATA — Culture Over Category | Sound, Garments, Tools & Access',
     template: `%s | ${SITE_CONFIG.name}`,
   },
-  description: SITE_CONFIG.description,
+  description: 'ISIATA is a creative studio spanning sound, garments, production tools, and private access. Limited releases. Intentional design. Culture over category.',
+  keywords: ['ISIATA', 'music', 'sound', 'garments', 'production tools', 'sample packs', 'creative direction', 'mixing', 'drum kits', 'fashion drops'],
+  authors: [{ name: 'ISIATA' }],
+  creator: 'ISIATA',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: SITE_CONFIG.url,
-    title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
+    title: 'ISIATA — Culture Over Category',
+    description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
     siteName: SITE_CONFIG.name,
     images: [
       {
         url: SITE_CONFIG.ogImage,
         width: 1200,
         height: 630,
-        alt: SITE_CONFIG.name,
+        alt: 'ISIATA — Culture Over Category',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
+    title: 'ISIATA — Culture Over Category',
+    description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
     images: [SITE_CONFIG.ogImage],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: SITE_CONFIG.url,
   },
 }
 
@@ -76,6 +90,25 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen selection:bg-purple-500/30 relative overflow-x-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'ISIATA',
+              url: 'https://isiata.com',
+              logo: 'https://isiata.com/og-image.jpg',
+              description: 'Creative studio spanning sound, garments, production tools, and private access. Culture over category.',
+              sameAs: [
+                'https://www.instagram.com/isiataofficial',
+                'https://www.tiktok.com/@isiataOfficial',
+                'https://www.youtube.com/channel/UCEUFkFiczRx7RXuunjA3Hmg',
+                'https://soundcloud.com/isiataofficial',
+              ],
+            }),
+          }}
+        />
         <BackgroundEffects />
         <Header />
         <main className="relative z-10">{children}</main>

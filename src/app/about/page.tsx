@@ -3,8 +3,15 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Culture over category',
+  title: 'About ISIATA — Studio Philosophy & Vision',
+  description: 'ISIATA is a studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste. Culture over category.',
+  openGraph: {
+    title: 'About ISIATA — Studio Philosophy & Vision',
+    description: 'A studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste.',
+  },
+  alternates: {
+    canonical: '/about',
+  },
 }
 
 export default function AboutPage() {

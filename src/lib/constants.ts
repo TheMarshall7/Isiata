@@ -4,10 +4,10 @@ export const SITE_CONFIG = {
   url: 'https://isiata.com',
   ogImage: '/og-image.jpg',
   links: {
-    soundcloud: '#',
-    tiktok: '#',
-    instagram: '#',
-    youtube: '#',
+    soundcloud: 'https://soundcloud.com/isiataofficial',
+    tiktok: 'https://www.tiktok.com/@isiataOfficial',
+    instagram: 'https://www.instagram.com/isiataofficial',
+    youtube: 'https://www.youtube.com/channel/UCEUFkFiczRx7RXuunjA3Hmg',
   },
 }
 

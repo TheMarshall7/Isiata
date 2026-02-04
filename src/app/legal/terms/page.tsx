@@ -4,7 +4,8 @@ import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
   title: 'Terms of Use',
-  description: 'Terms and conditions for using ISIATA',
+  description: 'Terms and conditions governing the use of the ISIATA website, digital products, and services. All sales of digital products are final.',
+  alternates: { canonical: '/legal/terms' },
 }
 
 export default function TermsPage() {

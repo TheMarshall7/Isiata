@@ -58,7 +58,7 @@ function SamplePackContent() {
   return (
     <div className="space-y-12">
       {/* Hero Card */}
-      <div className="border border-white/10 bg-black/40 overflow-hidden">
+      <div className="border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Image */}
           <div className="aspect-square lg:aspect-auto overflow-hidden">
@@ -118,7 +118,7 @@ function SamplePackContent() {
         <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Bonus Kits</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {DRUM_BUNDLE.bonusKits.map((kit) => (
-            <div key={kit} className="border border-white/10 bg-black/40 p-5">
+            <div key={kit} className="border border-white/10 bg-surface-raised depth-shadow p-5">
               <h5 className="text-sm font-semibold text-white mb-1">{kit}</h5>
               <p className="text-xs text-zinc-500">{DRUM_BUNDLE.bonusDescriptions[kit]}</p>
             </div>
@@ -128,7 +128,7 @@ function SamplePackContent() {
 
       {/* Style & Processing */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="border border-white/10 bg-black/40 p-8">
+        <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
           <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Style & Intent</h4>
           <p className="text-sm text-zinc-400 leading-relaxed mb-6">
             Designed to elevate production across modern genres with hard-hitting low end, crisp transient detail, and textured percussive elements.
@@ -144,7 +144,7 @@ function SamplePackContent() {
         </div>
 
         <div className="space-y-6">
-          <div className="border border-white/10 bg-black/40 p-8">
+          <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-4">Licensing</h4>
             <p className="text-sm text-zinc-400 leading-relaxed mb-3">
               All sounds are royalty-free, except the melody layers.
@@ -157,7 +157,7 @@ function SamplePackContent() {
             </p>
           </div>
 
-          <div className="border border-white/10 bg-black/40 p-8">
+          <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-4">Compatibility</h4>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Works with all major digital audio workstations and sample systems.
@@ -224,7 +224,7 @@ export default function ToolsPage() {
         <Section reveal>
           <button
             onClick={() => setToolboxOpen(true)}
-            className="flashlight-card w-full border border-white/10 bg-black/40 p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all"
+            className="flashlight-card w-full border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all"
           >
             <div className="flex items-center gap-6">
               <div className="shrink-0 w-12 h-12 flex items-center justify-center border border-white/10 rounded bg-white/5">

@@ -76,7 +76,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full bg-zinc-900 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
+                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
                 />
               </div>
 
@@ -89,7 +89,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full bg-zinc-900 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
+                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
                 />
               </div>
 
@@ -102,7 +102,7 @@ export default function ContactPage() {
                   id="subject"
                   name="subject"
                   required
-                  className="w-full bg-zinc-900 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
+                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
                 />
               </div>
 
@@ -115,7 +115,7 @@ export default function ContactPage() {
                   name="message"
                   rows={8}
                   required
-                  className="w-full bg-zinc-900 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300 resize-none"
+                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300 resize-none"
                 />
               </div>
 

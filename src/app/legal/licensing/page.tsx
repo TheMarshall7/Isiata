@@ -3,8 +3,9 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
-  title: 'Licensing',
-  description: 'Licensing information for ISIATA products and content',
+  title: 'Licensing — Sample Packs, Tools & Content',
+  description: 'Licensing terms for ISIATA sample packs, digital tools, and content. Royalty-free drum samples for commercial use. Melody licensing details included.',
+  alternates: { canonical: '/legal/licensing' },
 }
 
 export default function LicensingPage() {
