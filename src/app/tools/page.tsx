@@ -182,7 +182,7 @@ export default function ToolsPage() {
       <ProducerToolbox isOpen={toolboxOpen} onClose={() => setToolboxOpen(false)} />
 
       {/* Page Header */}
-      <Container bordered className="pt-44 pb-16">
+      <Container bordered className="pt-56 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
             The Tools
