@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { ProducerToolbox } from '@/components/tools/ProducerToolbox'
@@ -80,11 +81,21 @@ function SamplePackContent() {
             <p className="text-sm text-zinc-400 leading-relaxed mb-8">
               {DRUM_BUNDLE.description}
             </p>
-            <div className="flex flex-wrap gap-3 text-xs text-zinc-500">
+            <div className="flex flex-wrap gap-3 text-xs text-zinc-500 mb-8">
               <span className="border border-white/10 px-3 py-1">{DRUM_BUNDLE.format}</span>
               <span className="border border-white/10 px-3 py-1">Royalty-Free</span>
               <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
             </div>
+            <div className="flex items-baseline gap-3 mb-6">
+              <span className="text-2xl font-semibold text-white">$50</span>
+              <span className="text-sm text-zinc-600 line-through">$150</span>
+            </div>
+            <Link
+              href="/tools/checkout"
+              className="inline-flex items-center justify-center bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors w-fit"
+            >
+              Get It Now
+            </Link>
           </div>
         </div>
       </div>

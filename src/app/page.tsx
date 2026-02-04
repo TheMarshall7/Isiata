@@ -15,7 +15,7 @@ export default function HomePage() {
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-cover object-[center_33%]"
+            className="w-full h-full object-cover object-[center_28%]"
           />
           {/* Bottom fade into page background */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
