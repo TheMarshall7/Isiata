@@ -15,7 +15,7 @@ export default function HomePage() {
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-cover object-[center_48%]"
+            className="w-full h-full object-cover object-[center_44%]"
           />
           {/* Bottom fade into page background */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
@@ -45,7 +45,7 @@ export default function HomePage() {
               <a
                 key={card.href}
                 href={card.href}
-                className="group flashlight-card depth-shadow hover-glow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-10 md:p-12 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
+                className="group flashlight-card depth-shadow-lg hover-glow relative aspect-square overflow-hidden bg-surface-raised border border-white/10 flex items-center justify-center p-10 md:p-12 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()
@@ -53,16 +53,29 @@ export default function HomePage() {
                   el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
                 }}
               >
+                {/* Grain texture overlay */}
+                <div className="absolute inset-0 opacity-[0.025] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
+
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
                 <div className="relative z-10 text-center">
-                  <iconify-icon
-                    icon={card.icon}
-                    width="72"
-                    height="72"
-                    className="text-white mb-6 mx-auto group-hover:scale-110 transition-transform duration-500"
-                  />
+                  {/* Icon with glow */}
+                  <div className="relative inline-block">
+                    <div className="absolute inset-0 bg-white/10 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500 scale-150" />
+                    <iconify-icon
+                      icon={card.icon}
+                      width="72"
+                      height="72"
+                      className="relative z-10 text-white mb-6 mx-auto group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
                   <h3 className="text-3xl md:text-4xl font-semibold text-white mb-3 group-hover:tracking-wider transition-all duration-500">{card.title}</h3>
                   <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{card.desc}</p>
                 </div>
+
+                {/* Bottom border glow */}
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </a>
             ))}
           </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -52,6 +52,115 @@ const DRUM_BUNDLE = {
     'Tight dynamics',
     'Subtle vintage warmth',
   ],
+  // Audio previews - replace URLs with your actual audio file URLs
+  previews: [
+    { name: 'Kick 01', category: 'Kicks', url: '' },
+    { name: '808 Deep', category: '808s', url: '' },
+    { name: 'Snare Punch', category: 'Snares', url: '' },
+    { name: 'Hat Crisp', category: 'Closed Hats', url: '' },
+  ],
+}
+
+function AudioPreview({ name, category, url }: { name: string; category: string; url: string }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  const togglePlay = () => {
+    if (!url) return
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const progressPercent = (audioRef.current.currentTime / audioRef.current.duration) * 100
+      setProgress(progressPercent)
+    }
+  }
+
+  const handleEnded = () => {
+    setIsPlaying(false)
+    setProgress(0)
+  }
+
+  return (
+    <div className="group relative border border-white/10 bg-surface-raised hover:bg-surface-overlay hover:border-white/20 transition-all duration-300 p-4 flex items-center gap-4">
+      {url && <audio ref={audioRef} src={url} onTimeUpdate={handleTimeUpdate} onEnded={handleEnded} />}
+
+      {/* Play button */}
+      <button
+        onClick={togglePlay}
+        disabled={!url}
+        className={`relative w-10 h-10 flex items-center justify-center border rounded-full transition-all duration-300 ${
+          url
+            ? 'border-white/20 hover:border-white/40 hover:bg-white/5'
+            : 'border-white/10 opacity-40 cursor-not-allowed'
+        }`}
+      >
+        <iconify-icon
+          icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
+          width="16"
+          height="16"
+          className="text-white"
+        />
+        {/* Progress ring */}
+        {isPlaying && (
+          <svg className="absolute inset-0 -rotate-90" viewBox="0 0 40 40">
+            <circle
+              cx="20"
+              cy="20"
+              r="18"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="2"
+            />
+            <circle
+              cx="20"
+              cy="20"
+              r="18"
+              fill="none"
+              stroke="rgba(255,255,255,0.5)"
+              strokeWidth="2"
+              strokeDasharray={`${progress * 1.13} 113`}
+              className="transition-all duration-100"
+            />
+          </svg>
+        )}
+      </button>
+
+      {/* Info */}
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-white truncate">{name}</p>
+        <p className="text-xs text-zinc-500">{category}</p>
+      </div>
+
+      {/* Waveform placeholder */}
+      <div className="hidden sm:flex items-center gap-[2px] h-6">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className={`w-[3px] rounded-full transition-all duration-300 ${
+              isPlaying && progress > (i / 12) * 100
+                ? 'bg-white/60'
+                : 'bg-white/20'
+            }`}
+            style={{ height: `${Math.random() * 16 + 8}px` }}
+          />
+        ))}
+      </div>
+
+      {!url && (
+        <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Preview Soon</span>
+      )}
+    </div>
+  )
 }
 
 function SamplePackContent() {
@@ -98,6 +207,19 @@ function SamplePackContent() {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Audio Previews */}
+      <div>
+        <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Preview Sounds</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {DRUM_BUNDLE.previews.map((preview) => (
+            <AudioPreview key={preview.name} {...preview} />
+          ))}
+        </div>
+        <p className="text-xs text-zinc-600 mt-4 text-center">
+          Add your audio URLs to the previews array to enable playback
+        </p>
       </div>
 
       {/* Sound Grid */}
