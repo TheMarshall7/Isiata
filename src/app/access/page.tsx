@@ -149,6 +149,35 @@ export default function AccessPage() {
               </Link>
             ))}
           </div>
+
+          {/* Join the community — horizontal card */}
+          <Link
+            href="/community"
+            className="group mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 p-8 sm:p-10 flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow"
+          >
+            <div className="flex-shrink-0">
+              <iconify-icon
+                icon="solar:users-group-two-rounded-linear"
+                width="56"
+                height="56"
+                className="text-white group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl font-semibold text-white mb-2">Join the community</h2>
+              <p className="text-zinc-400 leading-relaxed">
+                Connect with other creators and supporters. Early access, exclusive drops, and a place for the people behind the work. Coming soon.
+              </p>
+            </div>
+            <div className="flex-shrink-0 self-center sm:self-auto">
+              <iconify-icon
+                icon="solar:arrow-right-linear"
+                width="24"
+                height="24"
+                className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all duration-300"
+              />
+            </div>
+          </Link>
         </Section>
       </Container>
     </>
