@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Explore — Discover Sound, Garments, Tools & Access',
-  description: 'Discover everything ISIATA offers across sound, garments, production tools, and private access. Culture over category.',
+  description: 'Discover everything ISIATA offers across sound, garments, production tools, and private access. Culture and innovation.',
   openGraph: {
     title: 'Explore ISIATA — Sound, Garments, Tools & Access',
     description: 'Discover everything across sound, garments, production tools, and private access.',

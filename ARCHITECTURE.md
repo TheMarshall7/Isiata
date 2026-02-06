@@ -21,7 +21,7 @@ ISIATA is a premium, minimal website that spans four core categories:
 - **Access**: Private sessions, creative direction, collaborations
 
 ### Brand Principles
-- Culture over category
+- Culture and innovation
 - No genre labels or excessive explanations
 - Premium restraint and clarity
 - Limited, intentional offerings

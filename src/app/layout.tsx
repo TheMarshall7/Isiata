@@ -22,10 +22,10 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'ISIATA — Culture Over Category | Sound, Garments, Tools & Access',
+    default: 'ISIATA — Culture and Innovation | Sound, Garments, Tools & Access',
     template: `%s | ${SITE_CONFIG.name}`,
   },
-  description: 'ISIATA is a creative studio spanning sound, garments, production tools, and private access. Limited releases. Intentional design. Culture over category.',
+  description: 'ISIATA is a creative studio spanning sound, garments, production tools, and private access. Limited releases. Intentional design. Culture and innovation.',
   keywords: ['ISIATA', 'music', 'sound', 'garments', 'production tools', 'sample packs', 'creative direction', 'mixing', 'drum kits', 'fashion drops'],
   authors: [{ name: 'ISIATA' }],
   creator: 'ISIATA',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: SITE_CONFIG.url,
-    title: 'ISIATA — Culture Over Category',
+    title: 'ISIATA — Culture and Innovation',
     description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
     siteName: SITE_CONFIG.name,
     images: [
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
         url: SITE_CONFIG.ogImage,
         width: 1200,
         height: 630,
-        alt: 'ISIATA — Culture Over Category',
+        alt: 'ISIATA — Culture and Innovation',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ISIATA — Culture Over Category',
+    title: 'ISIATA — Culture and Innovation',
     description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
     images: [SITE_CONFIG.ogImage],
   },
@@ -103,7 +103,7 @@ export default function RootLayout({
               name: 'ISIATA',
               url: 'https://isiata.com',
               logo: 'https://isiata.com/og-image.jpg',
-              description: 'Creative studio spanning sound, garments, production tools, and private access. Culture over category.',
+              description: 'Creative studio spanning sound, garments, production tools, and private access. Culture and innovation.',
               sameAs: [
                 'https://www.instagram.com/isiataofficial',
                 'https://www.tiktok.com/@isiataOfficial',

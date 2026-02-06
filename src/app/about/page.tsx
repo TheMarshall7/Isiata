@@ -4,7 +4,7 @@ import { Section } from '@/components/ui/Section'
 
 export const metadata: Metadata = {
   title: 'About ISIATA — Studio Philosophy & Vision',
-  description: 'ISIATA is a studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste. Culture over category.',
+  description: 'ISIATA is a studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste. Culture and innovation.',
   openGraph: {
     title: 'About ISIATA — Studio Philosophy & Vision',
     description: 'A studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste.',
@@ -68,7 +68,7 @@ export default function AboutPage() {
         <Section reveal>
           <div className="max-w-2xl mx-auto text-center space-y-4">
             <p className="text-zinc-500 text-sm uppercase tracking-widest">
-              Culture over category.
+              Culture and innovation.
               <br />
               Form follows intention.
             </p>

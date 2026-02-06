@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   name: 'ISIATA',
-  description: 'Culture over category. Sound, objects, tools, and access.',
+  description: 'Culture and innovation. Sound, objects, tools, and access.',
   url: 'https://isiata.com',
   ogImage: '/og-image.jpg',
   contactEmail: 'Brian@areoclient.com',

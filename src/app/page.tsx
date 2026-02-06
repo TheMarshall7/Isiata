@@ -8,14 +8,14 @@ import { EmailCapture } from '@/components/forms/EmailCapture'
 export default function HomePage() {
   return (
     <>
-      {/* Full Screen Hero Image */}
-      <section className="relative w-full h-screen overflow-hidden -mt-10">
+      {/* Full Screen Hero Image - height compensates for -mt-10 so section fills 100vh with no gap */}
+      <section className="relative w-full h-[calc(100vh+2.5rem)] -mt-10 overflow-hidden">
         {/* Hero Image */}
         <div className="absolute inset-0 bg-black">
           <img
             src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg"
             alt="ISIATA"
-            className="w-full h-full object-cover object-[center_44%] lg:-translate-y-[25px]"
+            className="w-full h-full object-cover object-[center_44%] lg:object-[center_52%]"
           />
           {/* Bottom fade into page background */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />

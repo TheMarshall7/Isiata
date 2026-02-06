@@ -191,7 +191,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-zinc-500 leading-relaxed max-w-xs font-medium">
-              Culture over category. Sound, objects, tools, and access.
+              Culture and innovation. Sound, objects, tools, and access.
             </p>
           </div>
 

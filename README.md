@@ -142,7 +142,7 @@ CONTACT_EMAIL=contact@isiata.com
 
 ## Brand Rules
 
-1. **No genre labels** - Culture over category
+1. **No genre labels** - Culture and innovation
 2. **Restraint** - Subtle CTAs, no hype language
 3. **Limited offerings** - Drops can be archived
 4. **Premium tone** - Clarity and atmosphere
