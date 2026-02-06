@@ -199,9 +199,14 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="px-8 md:px-12 pb-8 border-t border-white/10 pt-8 flex justify-between items-center text-xs text-zinc-600">
+        <div className="px-8 md:px-12 pb-8 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-600">
           <span>© {new Date().getFullYear()} ISIATA</span>
-          <span>Ran on AreoClient™</span>
+          <img
+            src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png"
+            alt="ISIATA"
+            className="h-6 opacity-40"
+          />
+          <span>Made with care</span>
         </div>
       </div>
     </footer>

@@ -20,7 +20,7 @@ const productSchema = {
     '@type': 'Offer',
     price: '67.00',
     priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
+    availability: 'https://schema.org/PreOrder',
     url: 'https://isiata.com/tools/checkout',
   },
   category: 'Music Production > Sample Packs',

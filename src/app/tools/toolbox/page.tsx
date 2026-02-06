@@ -16,6 +16,9 @@ const FLAT_MAP: Record<string, string> = {
   'C#': 'Db', 'D#': 'Eb', 'F#': 'Gb', 'G#': 'Ab', 'A#': 'Bb',
 }
 
+// Minor keys that traditionally use flats in their key signature
+const FLAT_MINOR_KEYS = ['D', 'G', 'C', 'F', 'A#', 'D#', 'G#'] as const
+
 const NOTE_FRACTIONS = [
   { label: '1/1', value: 1 },
   { label: '1/2', value: 1 / 2 },
@@ -40,10 +43,13 @@ const REVERB_SPACES = [
 function getScaleNotes(root: string, isMajor: boolean) {
   const rootIndex = ALL_NOTES.indexOf(root)
   const intervals = isMajor ? MAJOR_INTERVALS : MINOR_INTERVALS
+  // Only use flats for minor keys that traditionally have flat key signatures
+  const useFlats = !isMajor && FLAT_MINOR_KEYS.includes(root as typeof FLAT_MINOR_KEYS[number])
+
   return intervals.map((interval, i) => {
     const noteIndex = (rootIndex + interval) % 12
     const note = ALL_NOTES[noteIndex]
-    if (!isMajor && i > 0 && FLAT_MAP[note]) return FLAT_MAP[note]
+    if (useFlats && i > 0 && FLAT_MAP[note]) return FLAT_MAP[note]
     return note
   })
 }
@@ -294,7 +300,9 @@ function DelayTable({ bpm }: { bpm: number }) {
           </thead>
           <tbody>
             {NOTE_FRACTIONS.map((note) => {
-              const ms = note.value * 60000 / bpm
+              // Convert whole-note fraction to beats in 4/4 time, then to ms
+              const beats = note.value * 4
+              const ms = beats * (60000 / bpm)
               const dotted = ms * 1.5
               const triplet = ms * (2 / 3)
               const hz = 1000 / ms

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -36,14 +36,13 @@ const DRUM_BUNDLE = {
     { name: 'Tape Drum Fills', count: 18 },
     { name: 'Stomps & Impacts', count: 16 },
   ],
-  bonusKits: ['Thrashed', 'Reel', 'Pandiero', 'Alt', 'Brush'],
-  bonusDescriptions: {
-    Thrashed: 'Raw, gritty drum textures',
-    Reel: 'Vintage analog-style electronic drums',
-    Pandiero: 'Light, rhythmic percussion',
-    Alt: 'Darker, unconventional tones',
-    Brush: 'Soft, brushed drum sounds',
-  } as Record<string, string>,
+  bonusKits: [
+    { name: 'Thrashed', desc: 'Raw, gritty drum textures', image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e5f4312d640e48f679.png' },
+    { name: 'Reel', desc: 'Vintage analog-style electronic drums', image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e5e519edfcf731e4bd.png' },
+    { name: 'Pandiero', desc: 'Light, rhythmic percussion', image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e51870f4826b4ff353.png' },
+    { name: 'Alt', desc: 'Darker, unconventional tones', image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e57cb4a87478b50ef9.png' },
+    { name: 'Brush', desc: 'Soft, brushed drum sounds', image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e5903b502ee60a3a44.png' },
+  ],
   style: [
     'Rich harmonic character',
     'Punch and clarity',
@@ -76,10 +75,18 @@ const DRUM_BUNDLE = {
   ],
 }
 
+const BAR_COUNT = 12
+
 function AudioPreview({ name, category, url }: { name: string; category: string; url: string }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
+
+  // Generate stable random heights once per component instance
+  const barHeights = useMemo(
+    () => Array.from({ length: BAR_COUNT }, () => Math.random() * 16 + 8),
+    []
+  )
 
   const togglePlay = () => {
     if (!url) return
@@ -158,15 +165,15 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
 
       {/* Waveform placeholder */}
       <div className="hidden sm:flex items-center gap-[2px] h-6">
-        {[...Array(12)].map((_, i) => (
+        {barHeights.map((height, i) => (
           <div
             key={i}
             className={`w-[3px] rounded-full transition-all duration-300 ${
-              isPlaying && progress > (i / 12) * 100
+              isPlaying && progress > (i / BAR_COUNT) * 100
                 ? 'bg-white/60'
                 : 'bg-white/20'
             }`}
-            style={{ height: `${Math.random() * 16 + 8}px` }}
+            style={{ height: `${height}px` }}
           />
         ))}
       </div>
@@ -174,6 +181,181 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
       {!url && (
         <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Preview Soon</span>
       )}
+    </div>
+  )
+}
+
+// Featured producer data
+const FEATURED_PRODUCER = {
+  name: 'J-Milly',
+  handle: '@jmillyfr',
+  instagram: 'https://instagram.com/jmillyfr',
+  image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/69863cbc5f9399ca749611c3.jpeg',
+  trackUrl: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698641603fae0ad2e4385336.mp3',
+  trackTitle: 'Produced with Tsukuyomi',
+}
+
+// DAW compatibility icons
+const DAW_ICONS = [
+  { name: 'FL Studio', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59dd775cd617e4ec240.png' },
+  { name: 'Ableton', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59c0e32026d6395a96f.png' },
+  { name: 'Pro Tools', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59c0e320217c795a96e.png' },
+  { name: 'Logic Pro', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59c0e32023a8f95a970.png' },
+  { name: 'Cubase', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59cd775cd7f0d4ec23f.png' },
+]
+
+function FeaturedProducer() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime)
+      setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100)
+    }
+  }
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration)
+    }
+  }
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (audioRef.current) {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const clickX = e.clientX - rect.left
+      const newProgress = (clickX / rect.width) * 100
+      const newTime = (newProgress / 100) * audioRef.current.duration
+      audioRef.current.currentTime = newTime
+      setProgress(newProgress)
+    }
+  }
+
+  const formatTime = (time: number) => {
+    const mins = Math.floor(time / 60)
+    const secs = Math.floor(time % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  return (
+    <div>
+      <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Featured Producer</h4>
+      <div className="relative border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
+        {/* Grunge texture overlay */}
+        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }} />
+
+        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0">
+          {/* Producer Image */}
+          <div className="relative aspect-square md:aspect-auto">
+            <img
+              src={FEATURED_PRODUCER.image}
+              alt={FEATURED_PRODUCER.name}
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </div>
+
+          {/* Content */}
+          <div className="p-6 md:p-8 flex flex-col justify-center relative">
+            <audio
+              ref={audioRef}
+              src={FEATURED_PRODUCER.trackUrl}
+              onTimeUpdate={handleTimeUpdate}
+              onLoadedMetadata={handleLoadedMetadata}
+              onEnded={() => { setIsPlaying(false); setProgress(0) }}
+            />
+
+            {/* Producer info */}
+            <div className="flex items-center gap-4 mb-6">
+              <div>
+                <h5 className="text-xl font-bold text-white tracking-tight">{FEATURED_PRODUCER.name}</h5>
+                <a
+                  href={FEATURED_PRODUCER.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-zinc-500 hover:text-white transition-colors"
+                >
+                  {FEATURED_PRODUCER.handle}
+                </a>
+              </div>
+            </div>
+
+            {/* Player controls */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={togglePlay}
+                  className="w-14 h-14 flex items-center justify-center bg-white text-black rounded-full hover:bg-zinc-200 transition-colors shrink-0"
+                >
+                  <iconify-icon
+                    icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
+                    width="24"
+                    height="24"
+                  />
+                </button>
+
+                <div className="flex-1">
+                  <p className="text-sm text-zinc-400 mb-2">{FEATURED_PRODUCER.trackTitle}</p>
+                  {/* Progress bar */}
+                  <div
+                    className="h-2 bg-white/10 rounded-full cursor-pointer group"
+                    onClick={handleSeek}
+                  >
+                    <div
+                      className="h-full bg-white rounded-full relative"
+                      style={{ width: `${progress}%` }}
+                    >
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs text-zinc-600 mt-1">
+                    <span>{formatTime(currentTime)}</span>
+                    <span>{formatTime(duration)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Urban accent line */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function DAWCompatibility() {
+  return (
+    <div>
+      <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Works With All Major DAWs</h4>
+      <div className="flex flex-wrap justify-center gap-6 md:gap-10 py-8 border border-white/10 bg-surface-raised depth-shadow">
+        {DAW_ICONS.map((daw) => (
+          <div key={daw.name} className="flex flex-col items-center gap-2 group">
+            <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity">
+              <img src={daw.icon} alt={daw.name} className="w-full h-full object-contain" />
+            </div>
+            <span className="text-[10px] text-zinc-600 uppercase tracking-wider">{daw.name}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -264,15 +446,30 @@ function SamplePackContent() {
       {/* Bonus Kits */}
       <div>
         <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Bonus Kits</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {DRUM_BUNDLE.bonusKits.map((kit) => (
-            <div key={kit} className="border border-white/10 bg-surface-raised depth-shadow p-5">
-              <h5 className="text-sm font-semibold text-white mb-1">{kit}</h5>
-              <p className="text-xs text-zinc-500">{DRUM_BUNDLE.bonusDescriptions[kit]}</p>
+            <div key={kit.name} className="group border border-white/10 bg-surface-raised depth-shadow overflow-hidden hover:border-white/20 transition-all duration-300">
+              <div className="aspect-square overflow-hidden bg-black/50">
+                <img
+                  src={kit.image}
+                  alt={kit.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4">
+                <h5 className="text-sm font-semibold text-white mb-1">{kit.name}</h5>
+                <p className="text-xs text-zinc-500">{kit.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Featured Producer */}
+      <FeaturedProducer />
+
+      {/* DAW Compatibility */}
+      <DAWCompatibility />
 
       {/* Style & Processing */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

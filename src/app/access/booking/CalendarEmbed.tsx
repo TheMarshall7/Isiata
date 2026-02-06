@@ -1,17 +1,28 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { CALENDAR_EMBED_URL } from '@/lib/constants'
 
 const IFRAME_ID = '0RMK2V7TPRYpGm701Ain_1770183133670'
 
+// Allowed origins for postMessage (GoHighLevel/Lead Connector domains)
+const ALLOWED_ORIGINS = [
+  'https://api.leadconnectorhq.com',
+  'https://link.msgsndr.com',
+  'https://msgsndr.com',
+]
+
 export function CalendarEmbed() {
-  const iframeRef = useRef<HTMLIFrameElement>(null)
   const [height, setHeight] = useState(1100)
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      // Validate origin for security
+      if (!ALLOWED_ORIGINS.some(origin => e.origin.includes(new URL(origin).hostname))) {
+        return
+      }
+
       const data = e.data
       if (data == null) return
       const h = typeof data === 'object' && 'height' in data ? Number((data as { height: number }).height) : typeof data === 'number' ? data : null
@@ -30,7 +41,6 @@ export function CalendarEmbed() {
         strategy="afterInteractive"
       />
       <iframe
-        ref={iframeRef}
         id={IFRAME_ID}
         src={CALENDAR_EMBED_URL}
         title="Book a session"

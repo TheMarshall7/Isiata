@@ -21,6 +21,19 @@ const WHAT_TO_EXPECT = [
   { icon: 'solar:calendar-mark-linear', text: 'Easy reschedule if needed' },
 ]
 
+const TESTIMONIALS = [
+  {
+    name: 'Moqemae',
+    avatar: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
+    screenshot: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a323c0890ba.png',
+  },
+  {
+    name: 'Jozy',
+    avatar: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
+    screenshot: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc1276f60c1083fd0333.png',
+  },
+]
+
 const TRUST_SIGNALS = [
   { value: '50+', label: 'Sessions Delivered' },
   { value: '100%', label: 'Response Rate' },
@@ -165,6 +178,50 @@ export default function BookingPage() {
             </div>
           </div>
         </Section>
+      </Container>
+
+      {/* Testimonials */}
+      <Container bordered className="py-16">
+        <Section reveal>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-8 text-center">What Artists Are Saying</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {TESTIMONIALS.map((testimonial) => (
+              <div key={testimonial.name} className="border border-white/10 bg-surface-raised depth-shadow p-6 rounded-lg">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">{testimonial.name}</h4>
+                    <p className="text-xs text-zinc-500">Artist</p>
+                  </div>
+                </div>
+                <div className="rounded-lg overflow-hidden border border-white/10">
+                  <img
+                    src={testimonial.screenshot}
+                    alt={`Testimonial from ${testimonial.name}`}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      </Container>
+
+      {/* ISIATA Logo */}
+      <Container bordered className="py-8">
+        <div className="flex justify-center">
+          <img
+            src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png"
+            alt="ISIATA"
+            className="h-8 opacity-40"
+          />
+        </div>
       </Container>
 
       {/* Bottom reassurance */}

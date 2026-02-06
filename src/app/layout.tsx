@@ -65,6 +65,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_CONFIG.url,
   },
+  icons: {
+    icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67e216041870f43c643a7e9a.png',
+    apple: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67e216041870f43c643a7e9a.png',
+  },
 }
 
 export default function RootLayout({

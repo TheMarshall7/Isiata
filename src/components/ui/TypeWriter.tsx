@@ -45,25 +45,28 @@ export function TypeWriter({
   useEffect(() => {
     if (!hasStarted) return
 
+    let typeInterval: ReturnType<typeof setInterval> | null = null
+
     // Initial delay before starting
     const startTimeout = setTimeout(() => {
       let currentIndex = 0
 
-      const typeInterval = setInterval(() => {
+      typeInterval = setInterval(() => {
         if (currentIndex < text.length) {
           setDisplayedText(text.slice(0, currentIndex + 1))
           currentIndex++
         } else {
-          clearInterval(typeInterval)
+          if (typeInterval) clearInterval(typeInterval)
           setIsComplete(true)
           onComplete?.()
         }
       }, speed)
-
-      return () => clearInterval(typeInterval)
     }, delay)
 
-    return () => clearTimeout(startTimeout)
+    return () => {
+      clearTimeout(startTimeout)
+      if (typeInterval) clearInterval(typeInterval)
+    }
   }, [hasStarted, text, speed, delay, onComplete])
 
   return (
