@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { TypeWriter } from '@/components/ui/TypeWriter'
 
 const TABS = ['All', 'Discography', 'Live', 'Unreleased', 'Collaborations'] as const
 type Tab = typeof TABS[number]
@@ -48,6 +49,7 @@ const EP = {
   trackCount: 5,
   cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6733c6a0e40bddb43f5d3d0a.jpeg',
   spotify: 'https://open.spotify.com/album/76ajdmnFjm5nadqbVqRBqR?si=PB0ovGiFTrS6ll6C685HHg',
+  appleMusic: 'https://music.apple.com/ca/album/they-might-be-mad-ep/1650275317',
   tracks: [
     { number: 1, title: 'THEY MIGHT BE MAD' },
     { number: 2, title: 'TELL ME WHAT YOU WANT' },
@@ -101,6 +103,15 @@ function DiscographyContent() {
               >
                 <iconify-icon icon="mdi:spotify" width="20" height="20" className="text-[#1DB954]" />
                 <span className="text-sm text-white">Spotify</span>
+              </a>
+              <a
+                href={EP.appleMusic}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+              >
+                <iconify-icon icon="mdi:apple" width="20" height="20" className="text-white" />
+                <span className="text-sm text-white">Apple Music</span>
               </a>
             </div>
 
@@ -201,7 +212,7 @@ export default function SoundPage() {
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
-            The Sound
+            <TypeWriter text="The Sound" speed={100} />
           </h1>
 
           <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">

@@ -8,10 +8,16 @@
     --surface: #0A0A0A;
     --surface-raised: #111111;
     --surface-overlay: #161616;
+    --cursor-size: 20px;
   }
 
   * {
     @apply border-border;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23000000'/%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E") 10 10, auto;
+  }
+
+  a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23000000'/%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ffffff'/%3E%3C/svg%3E") 12 12, pointer;
   }
 
   body {
@@ -161,6 +167,48 @@
       0 0 0 1px rgba(255, 255, 255, 0.06),
       0 8px 24px -6px rgba(0, 0, 0, 0.4),
       0 20px 40px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Icon hover animations */
+  .icon-hover-pulse {
+    @apply transition-all duration-300;
+  }
+  .icon-hover-pulse:hover iconify-icon,
+  .group:hover .icon-hover-pulse iconify-icon {
+    animation: iconPulse 0.5s ease-out;
+  }
+
+  .icon-hover-bounce {
+    @apply transition-transform duration-300;
+  }
+  .icon-hover-bounce:hover iconify-icon,
+  .group:hover .icon-hover-bounce iconify-icon {
+    animation: iconBounce 0.4s ease-out;
+  }
+
+  .icon-hover-wiggle {
+    @apply transition-transform duration-300;
+  }
+  .icon-hover-wiggle:hover iconify-icon,
+  .group:hover .icon-hover-wiggle iconify-icon {
+    animation: iconWiggle 0.4s ease-out;
+  }
+
+  @keyframes iconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+  }
+
+  @keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-4px); }
+    60% { transform: translateY(-2px); }
+  }
+
+  @keyframes iconWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
   }
 }
 

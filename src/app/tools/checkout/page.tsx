@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { GHL_ORDER_FORM_URL } from '@/lib/constants'
 
 const PRODUCT = {
   title: 'Tsukuyomi Drum Bundle',
@@ -23,8 +22,6 @@ const PRODUCT = {
 }
 
 export default function CheckoutPage() {
-  const hasGhlForm = GHL_ORDER_FORM_URL.length > 0
-
   return (
     <>
       {/* Back link */}
@@ -111,38 +108,28 @@ export default function CheckoutPage() {
                   <span className="text-lg text-zinc-600 line-through">{PRODUCT.originalPrice}</span>
                 </div>
 
-                {/* GoHighLevel Payment — opens on dedicated page for full space */}
+                {/* Availability Notice */}
                 <div className="border border-white/10 bg-surface-raised depth-shadow rounded">
-                  {hasGhlForm ? (
-                    <div className="p-8 flex flex-col items-center justify-center min-h-[280px] text-center">
-                      <p className="text-sm text-zinc-400 mb-6">
-                        Complete payment and delivery details on the next page.
-                      </p>
-                      <Link
-                        href="/tools/checkout/order"
-                        className="inline-flex items-center gap-2 bg-white text-black font-semibold px-8 py-4 rounded hover:bg-zinc-200 transition-colors"
-                      >
-                        Proceed to checkout
-                        <iconify-icon icon="solar:arrow-right-linear" width="20" height="20" />
-                      </Link>
-                    </div>
-                  ) : (
-                    // ── Placeholder until GHL is connected ───────────
-                    <div className="p-8 text-center">
-                      <iconify-icon
-                        icon="solar:cart-large-minimalistic-linear"
-                        width="48"
-                        height="48"
-                        className="text-zinc-700 mx-auto mb-4"
-                      />
-                      <p className="text-zinc-400 text-sm mb-2">
-                        Payment integration loading
-                      </p>
-                      <p className="text-zinc-600 text-xs">
-                        Connect your GoHighLevel order form URL to enable checkout
-                      </p>
-                    </div>
-                  )}
+                  <div className="p-8 flex flex-col items-center justify-center min-h-[280px] text-center">
+                    <iconify-icon
+                      icon="solar:calendar-mark-linear"
+                      width="48"
+                      height="48"
+                      className="text-zinc-600 mx-auto mb-4"
+                    />
+                    <p className="text-lg text-white font-medium mb-2">
+                      Available February 28
+                    </p>
+                    <p className="text-sm text-zinc-500 mb-6">
+                      Be the first to know when this drops.
+                    </p>
+                    <button
+                      disabled
+                      className="inline-flex items-center gap-2 bg-zinc-800 text-zinc-500 font-semibold px-8 py-4 rounded cursor-not-allowed"
+                    >
+                      Coming Soon
+                    </button>
+                  </div>
                 </div>
 
                 {/* Trust signals */}

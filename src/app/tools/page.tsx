@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { ProducerToolbox } from '@/components/tools/ProducerToolbox'
+import { TypeWriter } from '@/components/ui/TypeWriter'
 
 const TABS = ['All', 'Sample Packs', 'Plugins', 'Presets'] as const
 type Tab = typeof TABS[number]
@@ -210,16 +210,20 @@ function SamplePackContent() {
               <span className="border border-white/10 px-3 py-1">Royalty-Free</span>
               <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
             </div>
-            <div className="flex items-baseline gap-3 mb-6">
+            <div className="flex items-baseline gap-3 mb-4">
               <span className="text-2xl font-semibold text-white">$67</span>
               <span className="text-sm text-zinc-600 line-through">$150</span>
             </div>
-            <Link
-              href="/tools/checkout"
-              className="inline-flex items-center justify-center bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors w-fit"
+            <div className="flex items-center gap-3 mb-6">
+              <iconify-icon icon="solar:calendar-mark-linear" width="16" height="16" className="text-zinc-500" />
+              <span className="text-sm text-zinc-400">Available February 28</span>
+            </div>
+            <button
+              disabled
+              className="inline-flex items-center justify-center bg-zinc-800 text-zinc-500 px-8 py-3 rounded-full text-sm font-semibold cursor-not-allowed w-fit"
             >
-              Get It Now
-            </Link>
+              Coming Soon
+            </button>
           </div>
         </div>
       </div>
@@ -329,18 +333,14 @@ function ComingSoon() {
 
 export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('All')
-  const [toolboxOpen, setToolboxOpen] = useState(false)
 
   return (
     <>
-      {/* Producer Toolbox Modal */}
-      <ProducerToolbox isOpen={toolboxOpen} onClose={() => setToolboxOpen(false)} />
-
       {/* Page Header */}
       <Container bordered className="pt-56 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
-            The Tools
+            <TypeWriter text="The Tools" speed={100} />
           </h1>
 
           <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
@@ -366,9 +366,9 @@ export default function ToolsPage() {
       {/* Producer Toolbox Card */}
       <Container bordered className="py-8 border-t border-white/10">
         <Section reveal>
-          <button
-            onClick={() => setToolboxOpen(true)}
-            className="flashlight-card hover-glow w-full border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 flex items-center justify-between gap-6 group text-left hover:border-white/20 transition-all duration-500"
+          <Link
+            href="/tools/toolbox"
+            className="flashlight-card hover-glow w-full border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 flex items-center justify-between gap-6 group hover:border-white/20 transition-all duration-500"
           >
             <div className="flex items-center gap-6">
               <div className="shrink-0 w-12 h-12 flex items-center justify-center border border-white/10 rounded bg-white/5">
@@ -385,7 +385,7 @@ export default function ToolsPage() {
               height="20"
               className="text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all shrink-0"
             />
-          </button>
+          </Link>
         </Section>
       </Container>
 

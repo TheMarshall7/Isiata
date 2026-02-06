@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { TypeWriter } from '@/components/ui/TypeWriter'
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -40,7 +41,7 @@ export default function ContactPage() {
       <Container bordered className="pt-44 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
-            Contact
+            <TypeWriter text="Contact" speed={120} />
           </h1>
         </Section>
       </Container>

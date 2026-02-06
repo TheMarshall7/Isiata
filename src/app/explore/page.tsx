@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { TypeWriter } from '@/components/ui/TypeWriter'
 
 const CATEGORIES = [
   { href: '/sound', icon: 'solar:music-library-2-linear', title: 'Sound', desc: 'Music releases, playlists, and visual media' },
@@ -17,7 +18,7 @@ export default function ExplorePage() {
       <Container bordered className="pt-44 pb-16">
         <Section reveal>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
-            Explore
+            <TypeWriter text="Explore" speed={120} />
           </h1>
           <p className="text-lg text-zinc-400 mt-6 max-w-2xl">
             Discover across sound, objects, tools, and access
