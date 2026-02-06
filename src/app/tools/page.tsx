@@ -52,12 +52,27 @@ const DRUM_BUNDLE = {
     'Tight dynamics',
     'Subtle vintage warmth',
   ],
-  // Audio previews - replace URLs with your actual audio file URLs
-  previews: [
-    { name: 'Kick 01', category: 'Kicks', url: '' },
-    { name: '808 Deep', category: '808s', url: '' },
-    { name: 'Snare Punch', category: 'Snares', url: '' },
-    { name: 'Hat Crisp', category: 'Closed Hats', url: '' },
+  // One-shot previews
+  oneShots: [
+    { name: 'Kick 6', category: 'Kicks', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d5734233ae11.mpeg' },
+    { name: 'Kick 9', category: 'Kicks', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d7a11863bbd75ec70.mpeg' },
+    { name: '808 2', category: '808s', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d7a1186331a75ec6f.mpeg' },
+    { name: '808 6', category: '808s', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d1b97ac0e15ffe804.mpeg' },
+    { name: 'Snare 12', category: 'Snares', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d5ff0133ae13.mpeg' },
+    { name: 'Snare 16', category: 'Snares', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d543c233ae10.mpeg' },
+    { name: 'Claps 1', category: 'Claps', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d1b97ac5398ffe803.mpeg' },
+    { name: 'Claps 8', category: 'Claps', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d1b97acaf05ffe802.mpeg' },
+    { name: 'Gong 2', category: 'Gongs', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d7a1186524b75ec71.mpeg' },
+    { name: 'Gong 6', category: 'Gongs', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d5725e33ae15.mpeg' },
+    { name: 'Tape Drums 3', category: 'Tape Drum Fills', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d58f6f33ae12.mpeg' },
+    { name: 'Tape Drums 10', category: 'Tape Drum Fills', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d5fe3d5106d51d9733ae14.mpeg' },
+  ],
+  // Instrumental examples made with the kit
+  instrumentals: [
+    { name: 'Nivea', category: 'Instrumental', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67b8d06df4c684b395b0b7f3.mpeg' },
+    { name: 'Drowning Angels', category: '808 Mafia Style', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d602ff5106d5a20a33b2de.mpeg' },
+    { name: 'Samba X RnB', category: 'Fusion', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d602ee5106d5417b33b2d4.mpeg' },
+    { name: 'Latin X Hip Hop', category: 'Fusion', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d602fd5106d51e6033b2dd.mpeg' },
   ],
 }
 
@@ -209,17 +224,24 @@ function SamplePackContent() {
         </div>
       </div>
 
-      {/* Audio Previews */}
+      {/* Audio Previews - One Shots */}
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Preview Sounds</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {DRUM_BUNDLE.previews.map((preview) => (
+        <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">One-Shot Previews</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {DRUM_BUNDLE.oneShots.map((preview) => (
             <AudioPreview key={preview.name} {...preview} />
           ))}
         </div>
-        <p className="text-xs text-zinc-600 mt-4 text-center">
-          Add your audio URLs to the previews array to enable playback
-        </p>
+      </div>
+
+      {/* Audio Previews - Instrumentals */}
+      <div>
+        <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Instrumentals Made With This Kit</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {DRUM_BUNDLE.instrumentals.map((preview) => (
+            <AudioPreview key={preview.name} {...preview} />
+          ))}
+        </div>
       </div>
 
       {/* Sound Grid */}
