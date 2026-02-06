@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { GHL_NEWSLETTER_WEBHOOK_URL } from '@/lib/constants'
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,8 +13,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // TODO: Integrate with your email service (Mailchimp, ConvertKit, etc.)
-    // For now, just log it
+    // Send to GoHighLevel webhook if configured
+    if (GHL_NEWSLETTER_WEBHOOK_URL) {
+      try {
+        await fetch(GHL_NEWSLETTER_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            source: source || 'website_footer',
+            timestamp: new Date().toISOString(),
+          }),
+        })
+      } catch (webhookError) {
+        console.error('GHL webhook error:', webhookError)
+        // Continue even if webhook fails - we still want to show success to user
+      }
+    }
+
     console.log('Newsletter signup:', { email, source, timestamp: new Date().toISOString() })
 
     return NextResponse.json(

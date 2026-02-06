@@ -3,6 +3,7 @@ export const SITE_CONFIG = {
   description: 'Culture over category. Sound, objects, tools, and access.',
   url: 'https://isiata.com',
   ogImage: '/og-image.jpg',
+  contactEmail: 'Brian@areoclient.com',
   links: {
     soundcloud: 'https://soundcloud.com/isiataofficial',
     tiktok: 'https://www.tiktok.com/@isiataOfficial',
@@ -54,3 +55,25 @@ export const GHL_ORDER_FORM_URL =
 
 /** Calendar embed URL for Access booking (Lead Connector / GHL widget). Leave empty to show placeholder. */
 export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/booking/0RMK2V7TPRYpGm701Ain'
+
+/**
+ * GoHighLevel webhook URL for newsletter/mailing list signups.
+ * To set this up in GHL:
+ * 1. Go to Automations > Create Workflow
+ * 2. Add trigger "Inbound Webhook"
+ * 3. Copy the webhook URL and paste it here
+ * 4. In the workflow, add actions to create/update contact with the email
+ * Leave empty to disable newsletter functionality.
+ */
+export const GHL_NEWSLETTER_WEBHOOK_URL = ''
+
+/**
+ * GoHighLevel webhook URL for contact form submissions.
+ * To set this up in GHL:
+ * 1. Go to Automations > Create Workflow
+ * 2. Add trigger "Inbound Webhook"
+ * 3. Copy the webhook URL and paste it here
+ * 4. In the workflow, add actions to send email notification to Brian@areoclient.com
+ * Leave empty to only log submissions (no email notification).
+ */
+export const GHL_CONTACT_WEBHOOK_URL = ''
