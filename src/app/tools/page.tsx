@@ -189,10 +189,10 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
 const FEATURED_PRODUCER = {
   name: 'J-Milly',
   handle: '@jmillyfr',
-  instagram: 'https://instagram.com/jmillyfr',
+  instagram: 'https://www.instagram.com/jmillyfr?igsh=MWwxZHd5aDFocWo5cQ==',
   image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/69863cbc5f9399ca749611c3.jpeg',
   trackUrl: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698641603fae0ad2e4385336.mp3',
-  trackTitle: 'Produced with Tsukuyomi',
+  trackTitle: 'Produced with Tsukuyomi Drums',
 }
 
 // DAW compatibility icons
@@ -262,15 +262,25 @@ function FeaturedProducer() {
         }} />
 
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0">
-          {/* Producer Image */}
-          <div className="relative aspect-square md:aspect-auto">
+          {/* Producer Image - hover to darken + link to Instagram */}
+          <a
+            href={FEATURED_PRODUCER.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative aspect-square md:aspect-auto block group/img overflow-hidden"
+          >
             <img
               src={FEATURED_PRODUCER.image}
               alt={FEATURED_PRODUCER.name}
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          </div>
+            <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+              <span className="text-white text-sm font-medium opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 text-center px-4">
+                Go to Instagram profile
+              </span>
+            </div>
+          </a>
 
           {/* Content */}
           <div className="p-6 md:p-8 flex flex-col justify-center relative">
@@ -393,7 +403,7 @@ function SamplePackContent() {
               <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
             </div>
             <div className="flex items-baseline gap-3 mb-4">
-              <span className="text-2xl font-semibold text-white">$67</span>
+              <span className="text-2xl font-semibold text-white">$77</span>
               <span className="text-sm text-zinc-600 line-through">$150</span>
             </div>
             <div className="flex items-center gap-3 mb-6">
@@ -409,6 +419,9 @@ function SamplePackContent() {
           </div>
         </div>
       </div>
+
+      {/* Featured Producer - before previews to draw more attention */}
+      <FeaturedProducer />
 
       {/* Audio Previews - One Shots */}
       <div>
@@ -464,9 +477,6 @@ function SamplePackContent() {
           ))}
         </div>
       </div>
-
-      {/* Featured Producer */}
-      <FeaturedProducer />
 
       {/* DAW Compatibility */}
       <DAWCompatibility />

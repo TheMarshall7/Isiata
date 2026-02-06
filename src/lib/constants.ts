@@ -65,7 +65,7 @@ export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/bookin
  * 4. In the workflow, add actions to create/update contact with the email
  * Leave empty to disable newsletter functionality.
  */
-export const GHL_NEWSLETTER_WEBHOOK_URL = ''
+export const GHL_NEWSLETTER_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/F1J2yvd2AUT4owDs9EPl/webhook-trigger/af5825e1-fc93-4ba9-99f1-b5c2968df234'
 
 /**
  * GoHighLevel webhook URL for contact form submissions.

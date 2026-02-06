@@ -8,7 +8,7 @@ const PRODUCT = {
   title: 'Tsukuyomi Drum Bundle',
   subtitle: 'Premium Archive',
   image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67b7ebca7c922f63503b66c7.png',
-  price: '$67',
+  price: '$77',
   originalPrice: '$150',
   description: 'A premium drum sample pack focused on high-quality, impactful drum sounds — designed for use in major DAWs.',
   format: '32-bit WAV',

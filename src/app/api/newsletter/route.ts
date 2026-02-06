@@ -4,7 +4,7 @@ import { GHL_NEWSLETTER_WEBHOOK_URL } from '@/lib/constants'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { email, source } = body
+    const { email, name, source } = body
 
     if (!email || !email.includes('@')) {
       return NextResponse.json(
@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send to GoHighLevel webhook if configured
+    // Send to GoHighLevel webhook if configured (name + email for contact creation)
     if (GHL_NEWSLETTER_WEBHOOK_URL) {
       try {
         await fetch(GHL_NEWSLETTER_WEBHOOK_URL, {
@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email,
+            name: name || '',
             source: source || 'website_footer',
             timestamp: new Date().toISOString(),
           }),
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log('Newsletter signup:', { email, source, timestamp: new Date().toISOString() })
+    console.log('Newsletter signup:', { email, name, source, timestamp: new Date().toISOString() })
 
     return NextResponse.json(
       { success: true, message: 'Successfully subscribed' },
