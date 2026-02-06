@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { PageTitle } from '@/components/ui/PageTitle'
 
 export const metadata: Metadata = {
   title: 'Access — Creative Direction, Mixing & Private Sessions',
@@ -100,9 +101,11 @@ export default function AccessPage() {
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
-            Access
-          </h1>
+          <PageTitle
+            text="Access"
+            className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12"
+            speed={120}
+          />
 
           <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
             <p>
