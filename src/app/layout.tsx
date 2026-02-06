@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { BackgroundEffects } from '@/components/layout/BackgroundEffects'
+import { ScrollbarVisibility } from '@/components/layout/ScrollbarVisibility'
 import { SITE_CONFIG } from '@/lib/constants'
 
 const jakarta = Plus_Jakarta_Sans({
@@ -113,6 +114,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <ScrollbarVisibility />
         <BackgroundEffects />
         <Header />
         <main className="relative z-10">{children}</main>

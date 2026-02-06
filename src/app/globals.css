@@ -217,21 +217,55 @@
 }
 
 @layer components {
-  /* Custom scrollbar */
+  /* Premium scrollbar — hidden by default; appears on scroll or hover near right edge (see ScrollbarVisibility) */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 0;
+    height: 0;
+    transition: width 0.2s ease, height 0.2s ease;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-black;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-700 rounded-full;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: background 0.25s ease, border-width 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-600;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Visible when .scrollbar-visible is on html (scroll or hover near right edge) */
+  html.scrollbar-visible ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  /* Firefox — hidden by default */
+  html {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+  }
+
+  html.scrollbar-visible {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   }
 }

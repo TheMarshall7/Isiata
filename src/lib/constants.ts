@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: 'ISIATA',
   description: 'Culture and innovation. Sound, objects, tools, and access.',
   url: 'https://isiata.com',
-  ogImage: '/og-image.jpg',
+  ogImage: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg',
   contactEmail: 'Brian@areoclient.com',
   links: {
     soundcloud: 'https://soundcloud.com/isiataofficial',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -76,17 +76,13 @@ const DRUM_BUNDLE = {
 }
 
 const BAR_COUNT = 12
+// Deterministic heights so server and client match (avoids hydration warning)
+const WAVEFORM_HEIGHTS = [10, 14, 18, 20, 22, 18, 14, 16, 20, 16, 12, 10]
 
 function AudioPreview({ name, category, url }: { name: string; category: string; url: string }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
-
-  // Generate stable random heights once per component instance
-  const barHeights = useMemo(
-    () => Array.from({ length: BAR_COUNT }, () => Math.random() * 16 + 8),
-    []
-  )
 
   const togglePlay = () => {
     if (!url) return
@@ -165,7 +161,7 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
 
       {/* Waveform placeholder */}
       <div className="hidden sm:flex items-center gap-[2px] h-6">
-        {barHeights.map((height, i) => (
+        {WAVEFORM_HEIGHTS.map((height, i) => (
           <div
             key={i}
             className={`w-[3px] rounded-full transition-all duration-300 ${
