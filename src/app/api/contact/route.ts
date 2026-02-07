@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { GHL_CONTACT_WEBHOOK_URL, SITE_CONFIG } from '@/lib/constants'
+import { SITE_CONFIG } from '@/lib/constants'
+
+const FORMSUBMIT_URL = 'https://formsubmit.co'
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,30 +22,28 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const submission = {
+    const toEmail = SITE_CONFIG.contactEmail
+    const formBody = new URLSearchParams({
       name,
       email,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
-      notifyEmail: SITE_CONFIG.contactEmail, // Brian@areoclient.com
-    }
+      _subject: `[Contact] ${subject}`,
+      message: `From: ${name} <${email}>\nSubject: ${subject}\n\n${message}`,
+      _captcha: 'false',
+    })
 
-    // Send to GoHighLevel webhook if configured
-    if (GHL_CONTACT_WEBHOOK_URL) {
-      try {
-        await fetch(GHL_CONTACT_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(submission),
-        })
-      } catch (webhookError) {
-        console.error('GHL contact webhook error:', webhookError)
-        // Continue even if webhook fails
-      }
-    }
+    const res = await fetch(`${FORMSUBMIT_URL}/${encodeURIComponent(toEmail)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formBody.toString(),
+    })
 
-    console.log('Contact form submission:', submission)
+    if (!res.ok) {
+      console.error('[Contact] Formsubmit error', res.status, await res.text())
+      return NextResponse.json(
+        { error: 'Failed to send message' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json(
       { success: true, message: 'Message sent successfully' },

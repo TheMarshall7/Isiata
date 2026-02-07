@@ -13,26 +13,39 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send to GoHighLevel webhook if configured (name + email for contact creation)
-    if (GHL_NEWSLETTER_WEBHOOK_URL) {
-      try {
-        await fetch(GHL_NEWSLETTER_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            name: name || '',
-            source: source || 'website_footer',
-            timestamp: new Date().toISOString(),
-          }),
-        })
-      } catch (webhookError) {
-        console.error('GHL webhook error:', webhookError)
-        // Continue even if webhook fails - we still want to show success to user
-      }
+    const fullName = (name || '').trim()
+    const [firstName, ...lastParts] = fullName.split(/\s+/)
+    const lastName = lastParts.join(' ') || fullName
+
+    const payload = {
+      email,
+      name: fullName || email,
+      first_name: firstName || fullName || '',
+      last_name: lastName || '',
+      source: source || 'website_footer',
+      timestamp: new Date().toISOString(),
     }
 
-    console.log('Newsletter signup:', { email, name, source, timestamp: new Date().toISOString() })
+    if (!GHL_NEWSLETTER_WEBHOOK_URL) {
+      console.warn('[Newsletter] No GHL_NEWSLETTER_WEBHOOK_URL set. Add your webhook URL in lib/constants.ts.')
+      console.log('Newsletter signup (no webhook):', payload)
+    } else {
+      try {
+        const webhookRes = await fetch(GHL_NEWSLETTER_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+        const text = await webhookRes.text()
+        if (!webhookRes.ok) {
+          console.error('[Newsletter] Webhook error', webhookRes.status, text)
+        } else {
+          console.log('Newsletter signup sent to webhook:', email)
+        }
+      } catch (webhookError) {
+        console.error('GHL newsletter webhook error:', webhookError)
+      }
+    }
 
     return NextResponse.json(
       { success: true, message: 'Successfully subscribed' },

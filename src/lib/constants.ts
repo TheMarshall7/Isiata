@@ -57,23 +57,22 @@ export const GHL_ORDER_FORM_URL =
 export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/booking/0RMK2V7TPRYpGm701Ain'
 
 /**
- * GoHighLevel webhook URL for newsletter/mailing list signups.
- * To set this up in GHL:
- * 1. Go to Automations > Create Workflow
- * 2. Add trigger "Inbound Webhook"
- * 3. Copy the webhook URL and paste it here
- * 4. In the workflow, add actions to create/update contact with the email
- * Leave empty to disable newsletter functionality.
+ * GoHighLevel webhook URL for newsletter / community “get notified” signups.
+ * Payload (JSON): email, name, first_name, last_name, source, timestamp.
+ *
+ * In the workflow Create/Update Contact action, use INBOUND WEBHOOK variables, not contact:
+ *   Email field  → {{inboundWebhookRequest.email}}
+ *   Name field  → {{inboundWebhookRequest.name}}
+ *   First name  → {{inboundWebhookRequest.first_name}}
+ *   Last name   → {{inboundWebhookRequest.last_name}}
+ *   Source      → {{inboundWebhookRequest.source}}
+ * (Contact placeholders like {{contact.email}} are for the contact record after it’s created; the action needs to pull from inboundWebhookRequest to fill those.)
+ * Leave empty to disable.
  */
-export const GHL_NEWSLETTER_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/F1J2yvd2AUT4owDs9EPl/webhook-trigger/af5825e1-fc93-4ba9-99f1-b5c2968df234'
+export const GHL_NEWSLETTER_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/F1J2yvd2AUT4owDs9EPl/webhook-trigger/c1a53b5c-caf4-4703-9d45-03b9f0ca3119'
 
 /**
- * GoHighLevel webhook URL for contact form submissions.
- * To set this up in GHL:
- * 1. Go to Automations > Create Workflow
- * 2. Add trigger "Inbound Webhook"
- * 3. Copy the webhook URL and paste it here
- * 4. In the workflow, add actions to send email notification to Brian@areoclient.com
- * Leave empty to only log submissions (no email notification).
+ * Optional. Contact form uses Formsubmit.co (no API key). Leave empty.
+ * Legacy: GHL webhook fallback if you ever switch.
  */
 export const GHL_CONTACT_WEBHOOK_URL = ''
