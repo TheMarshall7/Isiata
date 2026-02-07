@@ -217,11 +217,11 @@
 }
 
 @layer components {
-  /* Premium scrollbar — hidden by default; appears on scroll or hover near right edge (see ScrollbarVisibility) */
+  /* Premium scrollbar — hidden by default; appears on scroll/hover (ScrollbarVisibility); smooth width transition */
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
-    transition: width 0.2s ease, height 0.2s ease;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   ::-webkit-scrollbar-track {
@@ -237,7 +237,7 @@
     border-radius: 9999px;
     border: 1px solid transparent;
     background-clip: padding-box;
-    transition: background 0.25s ease, border-width 0.2s ease;
+    transition: background 0.25s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -252,7 +252,6 @@
     background-clip: padding-box;
   }
 
-  /* Visible when .scrollbar-visible is on html (scroll or hover near right edge) */
   html.scrollbar-visible ::-webkit-scrollbar {
     width: 3px;
     height: 3px;
