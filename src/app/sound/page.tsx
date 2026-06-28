@@ -104,7 +104,7 @@ function DiscographyContent() {
                   <li key={track.number} className="flex items-baseline gap-4">
                     <span className="text-xs text-zinc-600 w-6 text-right shrink-0">{track.number}</span>
                     <span className="text-sm text-zinc-300">{track.title}</span>
-                    {track.featuring && (
+                    {'featuring' in track && track.featuring && (
                       <span className="text-xs text-zinc-600">ft. {track.featuring}</span>
                     )}
                   </li>
