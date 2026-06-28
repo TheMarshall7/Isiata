@@ -1,0 +1,103 @@
+{
+    "interval": [
+        {
+            "id": "easy",
+            "name": "Easy",
+            "intervals": [
+                "m3",
+                "M3",
+                "P4",
+                "P5",
+                "P8"
+            ]
+        },
+        {
+            "id": "medium",
+            "name": "Medium",
+            "intervals": [
+                "m2",
+                "M2",
+                "m3",
+                "M3",
+                "P4",
+                "P5",
+                "M6",
+                "P8"
+            ]
+        },
+        {
+            "id": "hard",
+            "name": "Hard",
+            "intervals": [
+                "m2",
+                "M2",
+                "m3",
+                "M3",
+                "P4",
+                "tt",
+                "P5",
+                "m6",
+                "M6",
+                "m7",
+                "M7",
+                "P8"
+            ]
+        }
+    ],
+    "chord": [
+        {
+            "id": "easy",
+            "name": "Easy",
+            "chords": [
+                "maj",
+                "min",
+                "dim",
+                "aug",
+                "power5"
+            ]
+        },
+        {
+            "id": "medium",
+            "name": "Medium",
+            "chords": [
+                "maj7",
+                "min7",
+                "dom7",
+                "halfdim7"
+            ]
+        },
+        {
+            "id": "hard",
+            "name": "Hard",
+            "chords": [
+                "maj9",
+                "min9",
+                "dom9",
+                "maj11",
+                "min11",
+                "maj13",
+                "dom13",
+                "dom7b9",
+                "dom7sharp9",
+                "dom7b5",
+                "dom7sharp5",
+                "dom9b5",
+                "dom9sharp5",
+                "dom13b5",
+                "dom13sharp5",
+                "dom13b9",
+                "dom13sharp9",
+                "dom7b5b9",
+                "dom7sharp5b9",
+                "dom7b5sharp9",
+                "dom7sharp5sharp9",
+                "dom13b5b9",
+                "dom13sharp5b9",
+                "dom13b5sharp9",
+                "dom13sharp5sharp9",
+                "altered",
+                "min9b5"
+            ]
+        }
+    ]
+}

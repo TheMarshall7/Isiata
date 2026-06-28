@@ -1,144 +1,153 @@
-'use client'
-
-import { useState, FormEvent } from 'react'
+import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { TypeWriter } from '@/components/ui/TypeWriter'
+import { PageTitle } from '@/components/ui/PageTitle'
+import {
+  CONTACT_ALONGSIDE,
+  CONTACT_BOOKING_HREF,
+  CONTACT_DELIVERED,
+  CONTACT_HREF,
+  CONTACT_INQUIRY_HREF,
+  type ContactOffering,
+} from '@/lib/contact/offerings'
+
+function OfferingCard({ offering }: { offering: ContactOffering }) {
+  return (
+    <Link
+      href={offering.href}
+      className="group flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow p-10 lg:p-12 block h-full"
+    >
+      <iconify-icon
+        icon={offering.icon}
+        width="48"
+        height="48"
+        className="text-white mb-6 group-hover:scale-110 transition-transform duration-500"
+      />
+      <h3 className="text-2xl font-semibold text-white mb-6">{offering.title}</h3>
+      <div className="space-y-1 mb-6">
+        {offering.lines.map((line) => (
+          <p key={line} className="text-zinc-400 leading-relaxed">
+            {line}
+          </p>
+        ))}
+      </div>
+      <p className="text-sm text-zinc-500 italic mb-8">{offering.tagline}</p>
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:gap-3 transition-all duration-300">
+        {offering.cta}
+        <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
+      </span>
+    </Link>
+  )
+}
+
+function SectionHeader({ label, description }: { label: string; description: string }) {
+  return (
+    <div className="mb-10 max-w-2xl">
+      <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">{label}</p>
+      <p className="text-lg text-zinc-400 leading-relaxed">{description}</p>
+    </div>
+  )
+}
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('sending')
-
-    const form = e.currentTarget
-    const data = {
-      name: (form.elements.namedItem('name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      subject: (form.elements.namedItem('subject') as HTMLInputElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
-    }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-
-      if (!res.ok) throw new Error('Failed to send')
-      setStatus('sent')
-      form.reset()
-    } catch {
-      setStatus('error')
-    }
-  }
-
   return (
     <>
-      {/* Page Header */}
-      <Container bordered className="pt-44 pb-16">
+      <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
-            <TypeWriter text="Contact" speed={120} />
-          </h1>
+          <PageTitle
+            text="Contact"
+            className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
+            speed={120}
+          />
+
+          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+            <p>Select what fits below, then book a call to get started.</p>
+            <p className="text-zinc-400">
+              Collaborative work and fully delivered services. Coaching, systems, and community.
+              Not sure yet? Send a general inquiry.
+            </p>
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              href={CONTACT_BOOKING_HREF}
+              className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+            >
+              Book a call
+              <iconify-icon icon="solar:calendar-linear" width="18" height="18" />
+            </Link>
+            <Link
+              href={CONTACT_INQUIRY_HREF}
+              className="inline-flex items-center justify-center gap-2 border border-white/15 text-zinc-300 px-8 py-3 rounded-full text-sm font-medium hover:text-white hover:border-white/30 transition-colors"
+            >
+              General inquiry
+            </Link>
+          </div>
         </Section>
       </Container>
 
-      {/* Contact Form */}
-      <Container bordered maxWidth="2xl" className="py-24">
+      <Container bordered className="py-24 border-t border-white/10">
         <Section reveal>
-          {status === 'sent' ? (
-            <div className="text-center py-16">
+          <SectionHeader
+            label="Alongside you"
+            description="Collaborative work. You stay in the process."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {CONTACT_ALONGSIDE.map((offering) => (
+              <OfferingCard key={offering.title} offering={offering} />
+            ))}
+          </div>
+        </Section>
+      </Container>
+
+      <Container bordered className="py-24 border-t border-white/10">
+        <Section reveal>
+          <SectionHeader
+            label="Fully delivered"
+            description="We execute. You receive the finished result."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {CONTACT_DELIVERED.map((offering) => (
+              <OfferingCard key={offering.title} offering={offering} />
+            ))}
+          </div>
+        </Section>
+      </Container>
+
+      <Container bordered className="py-24 border-t border-white/10">
+        <Section reveal>
+          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-8">
+            Coming soon
+          </p>
+
+          <Link
+            href="/community"
+            className="group flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 p-8 sm:p-10 flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow"
+          >
+            <div className="flex-shrink-0">
               <iconify-icon
-                icon="solar:check-circle-linear"
-                width="64"
-                height="64"
-                className="text-white mx-auto mb-6"
+                icon="solar:users-group-two-rounded-linear"
+                width="56"
+                height="56"
+                className="text-white group-hover:scale-110 transition-transform duration-500"
               />
-              <h2 className="text-2xl font-semibold text-white mb-3">Message Sent</h2>
-              <p className="text-zinc-400 mb-8">We typically respond within 2-3 business days.</p>
-              <button
-                onClick={() => setStatus('idle')}
-                className="border border-white/10 text-zinc-400 px-6 py-2.5 text-sm hover:text-white hover:border-white/20 transition-all duration-300"
-              >
-                Send another message
-              </button>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-zinc-400 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-zinc-400 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-zinc-400 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-zinc-400 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={8}
-                  required
-                  className="w-full bg-surface-raised border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-white/30 hover:border-white/20 transition-all duration-300 resize-none"
-                />
-              </div>
-
-              {status === 'error' && (
-                <p className="text-red-400 text-sm">Something went wrong. Please try again.</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === 'sending'}
-                className="bg-white text-black px-8 py-3 font-semibold hover:bg-zinc-200 hover:shadow-lg hover:shadow-white/5 active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {status === 'sending' ? 'Sending...' : 'Send'}
-              </button>
-            </form>
-          )}
-
-          {status === 'idle' && (
-            <p className="text-xs text-zinc-600 mt-8">
-              We typically respond within 2-3 business days.
-            </p>
-          )}
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl font-semibold text-white mb-2">Community</h2>
+              <p className="text-zinc-400 leading-relaxed">
+                A place for collaborators, supporters, and people who care about the work. Early
+                access, exclusive drops, and updates. Join the waitlist.
+              </p>
+            </div>
+            <div className="flex-shrink-0 self-center sm:self-auto">
+              <iconify-icon
+                icon="solar:arrow-right-linear"
+                width="24"
+                height="24"
+                className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all duration-300"
+              />
+            </div>
+          </Link>
         </Section>
       </Container>
     </>

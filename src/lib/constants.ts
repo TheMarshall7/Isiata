@@ -16,7 +16,8 @@ export const NAV_LINKS = [
   { href: '/sound', label: 'Sound' },
   { href: '/objects', label: 'Garments' },
   { href: '/tools', label: 'Tools' },
-  { href: '/access', label: 'Access' },
+  { href: '/systems', label: 'Systems' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export const FOOTER_LINKS = {
@@ -24,11 +25,12 @@ export const FOOTER_LINKS = {
     { href: '/sound', label: 'Sound' },
     { href: '/objects', label: 'Garments' },
     { href: '/tools', label: 'Tools' },
-    { href: '/access', label: 'Access' },
+    { href: '/systems', label: 'Systems' },
+    { href: '/contact', label: 'Contact' },
   ],
   information: [
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/contact/inquiry', label: 'General Inquiry' },
   ],
   legal: [
     { href: '/legal/licensing', label: 'Licensing' },
@@ -49,7 +51,8 @@ export const ANIMATION_DELAYS = {
   reveal: 1000, // ms for reveal animation
 }
 
-/** GoHighLevel order form URL for tools checkout (used on product page + full-page order) */
+/** GoHighLevel order form URL for tools checkout (used on product page + full-page order).
+ *  Update the product price in GHL to match DRUM_BUNDLE_PRICE ($49.97). */
 export const GHL_ORDER_FORM_URL =
   'https://link.fastpaydirect.com/payment-link/6982c3273533386a60c3d4c7'
 

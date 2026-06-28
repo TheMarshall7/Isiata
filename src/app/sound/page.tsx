@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
+import { THEY_MIGHT_BE_MAD_EP, TWO_TALES_COVER } from '@/lib/sound/releases'
 
 const TABS = ['All', 'Discography', 'Live', 'Unreleased', 'Collaborations'] as const
 type Tab = typeof TABS[number]
@@ -41,25 +42,7 @@ const SINGLES = [
   },
 ]
 
-const EP = {
-  title: 'THEY MIGHT BE MAD',
-  type: 'EP',
-  date: 'October 29, 2022',
-  runtime: '18 minutes',
-  trackCount: 5,
-  cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6733c6a0e40bddb43f5d3d0a.jpeg',
-  spotify: 'https://open.spotify.com/album/76ajdmnFjm5nadqbVqRBqR?si=PB0ovGiFTrS6ll6C685HHg',
-  appleMusic: 'https://music.apple.com/ca/album/they-might-be-mad-ep/1650275317',
-  tracks: [
-    { number: 1, title: 'THEY MIGHT BE MAD' },
-    { number: 2, title: 'TELL ME WHAT YOU WANT' },
-    { number: 3, title: 'GODSPEED' },
-    { number: 4, title: 'SAY & IGNORANCE', featuring: 'Malone the Chemist' },
-    { number: 5, title: 'WAR' },
-  ],
-  notes: 'Cohesive project. Themes of conflict, self-assertion, communication, and personal reckoning. More aggressive and declarative than earlier singles.',
-  advisory: 'Explicit (select tracks)',
-}
+const EP = THEY_MIGHT_BE_MAD_EP
 
 function DiscographyContent() {
   return (
@@ -71,7 +54,7 @@ function DiscographyContent() {
           <div className="aspect-square lg:aspect-auto overflow-hidden">
             <img
               src={EP.cover}
-              alt={EP.title}
+              alt={EP.displayTitle}
               className="w-full h-full object-cover"
             />
           </div>
@@ -87,7 +70,7 @@ function DiscographyContent() {
               <span className="text-xs text-red-400/80 border border-red-400/20 px-2 py-0.5">{EP.advisory}</span>
             </div>
             <h3 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-6">
-              {EP.title}
+              {EP.displayTitle}
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed mb-8">
               {EP.notes}
@@ -211,22 +194,34 @@ export default function SoundPage() {
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
-            <TypeWriter text="The Sound" speed={100} />
-          </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
+                <TypeWriter text="The Sound" speed={100} />
+              </h1>
 
-          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
-            <p>
-              Atmosphere you can step into.
-              <br />
-              Movement that holds attention.
-            </p>
+              <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+                <p>
+                  Sonic atmosphere you can step into.
+                  <br />
+                  Moments that hold attention.
+                </p>
 
-            <p className="text-zinc-400">
-              This is where ideas first take shape.
-              <br />
-              Listen closely.
-            </p>
+                <p className="text-zinc-400">
+                  Unlocking frequency, the key to the world.
+                  <br />
+                  Listen closely.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative aspect-square max-w-md lg:max-w-none mx-auto lg:mx-0 w-full border border-white/10 overflow-hidden depth-shadow">
+              <img
+                src={TWO_TALES_COVER}
+                alt="Two Tales"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </Section>
       </Container>

@@ -1,0 +1,612 @@
+/**
+ * Train Page Component
+ * 
+ * Main training interface that handles all game modes.
+ * Manages question generation, audio playback, user input, scoring, and feedback.
+ * Routes to specific mode components based on currentMode from game context.
+ */
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useGame } from '../context/GameContext';
+import { getLevelFromXP } from '../context/GameContext';
+import { generateIntervalQuestion, type IntervalQuestion } from '../logic/trainers/intervalTrainer';
+import { generateChordQuestion, resetEasyModeKey, type ChordQuestion } from '../logic/trainers/chordTrainer';
+import { getRandomBassVoicing, getRandomGuitarVoicing } from '../logic/voicing/guitarVoicing';
+import { audioEngine } from '../audio/audioEngine';
+import { loadInstrument, getInstrumentSampleId } from '../audio/sampleLoader';
+import { Player } from '../components/Player';
+import { AnswerGrid } from '../components/AnswerGrid';
+import { Feedback } from '../components/Feedback';
+import { ProgressMeter } from '../components/ProgressMeter';
+import { Paywall } from '../components/Paywall';
+import { ProgressionRound } from '../components/ProgressionRound';
+import { ScalesMode } from '../components/modes/ScalesMode';
+import { KeyFinderMode } from '../components/modes/KeyFinderMode';
+import { NumberSystemMode } from '../components/modes/NumberSystemMode';
+import { MelodyMode } from '../components/modes/MelodyMode';
+import { TempoMode } from '../components/modes/TempoMode';
+import { ParticleEffect } from '../components/ParticleEffect';
+import { StreakCelebration } from '../components/StreakCelebration';
+import { CelebrationOverlay } from '../components/CelebrationOverlay';
+import { AchievementToast } from '../components/AchievementToast';
+import { recordAnswer, updateBestStreak, loadStats, saveStats } from '../logic/statsTracker';
+import { checkAchievements, loadAchievements, type Achievement } from '../logic/achievements';
+import { updateChallengeProgress, getDailyChallenges } from '../logic/dailyChallenges';
+import { BrandLogo } from '../components/BrandLogo';
+import { Footer } from '../components/Footer';
+import { AudioEnableBanner } from '../components/AudioEnableBanner';
+import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
+import { ModeHeader } from '../components/ModeHeader';
+
+// Calculate combo multiplier based on streak
+const getComboMultiplier = (streak: number): number => {
+    if (streak >= 20) return 4;
+    if (streak >= 10) return 3;
+    if (streak >= 5) return 2;
+    return 1;
+};
+
+export const Train: React.FC = () => {
+    const navigate = useNavigate();
+    const { state, dispatch } = useGame();
+
+    const [question, setQuestion] = useState<IntervalQuestion | ChordQuestion | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [correctId, setCorrectId] = useState<string | null>(null);
+    const [checking, setChecking] = useState(false);
+    const [showParticles, setShowParticles] = useState(false);
+    const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+    const [celebration, setCelebration] = useState<{ type: 'level-up' | 'perfect-run'; message: string; subtitle?: string } | null>(null);
+    const [dailyChallenges, setDailyChallenges] = useState(getDailyChallenges());
+
+    // Init - only for interval and chord modes (other modes have their own components)
+    useEffect(() => {        // Only run for interval and chord modes - other modes use their own components
+        if (state.currentMode !== 'interval' && state.currentMode !== 'chord') {
+            return;
+        }
+
+        const modeKey = `${state.currentMode}-${state.difficulty}`;
+
+        // Only load question if mode/difficulty actually changed or first init
+        if (!hasInitializedRef.current || lastModeRef.current !== modeKey) {
+            hasInitializedRef.current = true;
+            lastModeRef.current = modeKey;
+
+            if (state.isLocked) {
+                // Show locked state immediately
+            } else {
+                loadNextQuestion();
+            }
+        } else { }
+    }, [state.currentMode, state.difficulty]);
+
+    // Preload instrument when component mounts or mode/instrument changes
+    useEffect(() => {
+        loadInstrument(state.currentInstrument).catch(() => {
+            // Silent fail - will load on first play
+        });
+    }, [state.currentMode, state.currentInstrument]);
+
+    // Update page title
+    useEffect(() => {
+        document.title = 'Training - ISIATA';
+    }, []);
+
+    // Audio initialization is now handled globally in App.tsx
+    // No need for per-page audio state management
+
+    const loadNextQuestion = () => {
+        setSelectedId(null);
+        setCorrectId(null);
+        setChecking(false);
+
+        // Check limits
+        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+            dispatch({ type: 'INCREMENT_SESSION' });
+        }
+
+        if (state.currentMode === 'interval') {
+            const newQuestion = generateIntervalQuestion(state.difficulty); setQuestion(newQuestion);
+        } else {
+            const newQuestion = generateChordQuestion(state.difficulty, state.isDiatonicMode); setQuestion(newQuestion);
+        }
+    };
+
+    const playQuestion = useCallback(async () => {
+        // CRITICAL: Unlock audio SYNCHRONOUSLY FIRST, inside user gesture, before ANY await/async work
+        audioEngine.ensureUnlockedSync();
+
+        console.log('Train: playQuestion called. State:', audioEngine.getContext()?.state);
+
+        if (!question || isPlaying) return;
+        setIsPlaying(true);
+
+        try {
+            // Now safe to do async work (init, loading)
+            await audioEngine.init();
+            await loadInstrument(state.currentInstrument);
+            // wait a tiny bit for loader
+            if (!audioEngine.hasSample(getInstrumentSampleId(state.currentInstrument))) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            // Get the current instrument's sample ID
+            const sampleId = getInstrumentSampleId(state.currentInstrument);
+
+            if ('intervalId' in question) {
+                // Play interval
+                const q = question as IntervalQuestion;                // For bass, reduce note duration to prevent muddy low-register intervals
+                const noteDuration = state.currentInstrument === 'bass' ? 0.5 : undefined;
+                audioEngine.playNote(sampleId, q.rootMidi, 60, 0, 1.0, noteDuration);
+                audioEngine.playNote(sampleId, q.targetMidi, 60, 0.8, 1.0, noteDuration);
+            } else {
+                // Play chord
+                const q = question as ChordQuestion; const chordNotes = state.currentInstrument === 'guitar'
+                    ? getRandomGuitarVoicing(q.notes, q.rootMidi)
+                    : state.currentInstrument === 'bass'
+                        ? getRandomBassVoicing(q.notes, q.rootMidi, 'resource') // Use resource context for higher register
+                        : q.notes;
+                // Reduce gain per note to prevent clipping when multiple notes play together
+                const gainPerNote = Math.min(1.0, 1.0 / chordNotes.length);
+                chordNotes.forEach((note, i) => {
+                    // Arpeggiate slightly or verify strum
+                    audioEngine.playNote(sampleId, note, 60, 0 + (i * 0.05), gainPerNote);
+                });
+            }
+        } catch (e) {
+            console.error('Error playing question:', e);
+            setIsPlaying(false);
+            return;
+        }
+
+        setTimeout(() => setIsPlaying(false), 1500);
+    }, [question, isPlaying]);
+
+    // Auto-play once when question loads
+    const hasAutoPlayedRef = useRef(false);
+    const hasInitializedRef = useRef(false);
+    const lastModeRef = useRef<string>('');
+
+    useEffect(() => {
+        // Reset flag when question changes        hasAutoPlayedRef.current = false;
+    }, [question]);
+
+    useEffect(() => {
+        if (question && !hasAutoPlayedRef.current && !selectedId) {
+            hasAutoPlayedRef.current = true;
+            const timer = setTimeout(() => playQuestion(), 500);
+            return () => clearTimeout(timer);
+        }
+    }, [question, selectedId, playQuestion]);
+
+    const handleAnswer = (id: string) => {
+        if (checking || !question) return;
+
+        setSelectedId(id);
+        setChecking(true);
+
+        const isCorrect =
+            ('intervalId' in question && id === question.intervalId) ||
+            ('chordId' in question && id === question.chordId);
+
+        if (isCorrect) {
+            setCorrectId(id);
+            setShowParticles(true);
+            setTimeout(() => setShowParticles(false), 100);
+
+            const newStreak = state.streak + 1;
+            const newRunProgress = state.runProgress + 1;
+
+            // Check for perfect run
+            const isPerfectRun = newRunProgress === 10 && isCorrect;
+
+            // Update stats
+            let stats = loadStats();
+            stats = recordAnswer(stats, true, state.currentMode, isPerfectRun);
+            stats = updateBestStreak(stats, newStreak);
+            saveStats(stats);
+
+            // Check achievements
+            const achievements = loadAchievements();
+            const newlyUnlocked = checkAchievements(achievements, {
+                bestStreak: stats.bestStreak,
+                totalQuestions: stats.totalQuestions,
+                totalCorrect: stats.totalCorrect,
+                perfectRuns: stats.perfectRuns,
+                modeStats: stats.modeStats,
+                dailyStreak: stats.dailyStreak,
+                level: state.level,
+                currentSessionQuestions: state.runProgress
+            });
+
+            if (newlyUnlocked.length > 0) {
+                setNewAchievement(newlyUnlocked[0]);
+
+                // Automatically navigate to platinum gift page if Mystery Platinum Gift is unlocked
+                const platinumGift = newlyUnlocked.find(ach => ach.id === 'mystery_platinum_gift');
+                if (platinumGift) {
+                    // Delay navigation slightly to show the toast first
+                    setTimeout(() => {
+                        navigate('/platinum-gift');
+                    }, 2000);
+                }
+            }
+
+            // Update daily challenges
+            let updatedChallenges = dailyChallenges;
+
+            // Update questions challenge
+            const challengeUpdate1 = updateChallengeProgress(updatedChallenges, 'questions', 1);
+            updatedChallenges = challengeUpdate1.challenges;
+
+            // Check streak challenges - if streak meets threshold, mark as complete
+            updatedChallenges = updatedChallenges.map(challenge => {
+                if (challenge.completed || challenge.type !== 'streak') return challenge;
+                if (newStreak >= challenge.target) {
+                    return { ...challenge, progress: challenge.target, completed: true };
+                }
+                return challenge;
+            });
+
+            // Save streak challenge updates
+            if (updatedChallenges.some(c => c.type === 'streak' && !c.completed)) {
+                localStorage.setItem('ear_trainer_daily_challenges', JSON.stringify(updatedChallenges));
+            }
+
+            if (isPerfectRun) {
+                const challengeUpdate3 = updateChallengeProgress(updatedChallenges, 'perfect', 1);
+                updatedChallenges = challengeUpdate3.challenges;
+            }
+
+            setDailyChallenges(updatedChallenges);
+
+            // Check for level up
+            const currentXP = state.xp;
+            const xpGained = Math.floor(30 * (1 + state.streak * 0.1));
+            const newXP = currentXP + xpGained;
+            const newLevel = getLevelFromXP(newXP);
+
+            if (newLevel > state.level) {
+                setCelebration({
+                    type: 'level-up',
+                    message: `Level ${newLevel}!`,
+                    subtitle: 'Keep it up!'
+                });
+            }
+
+            // Check for perfect run celebration
+            if (isPerfectRun) {
+                setCelebration({
+                    type: 'perfect-run',
+                    message: 'Perfect Run!',
+                    subtitle: '10/10 Correct!'
+                });
+            }
+
+            // Apply combo multiplier to points
+            const basePoints = 30;
+            const multiplier = getComboMultiplier(state.streak);
+            const finalPoints = basePoints * multiplier;
+
+            dispatch({ type: 'CORRECT_ANSWER', payload: finalPoints });
+        } else {
+            setCorrectId('intervalId' in question ? (question as IntervalQuestion).intervalId : (question as ChordQuestion).chordId);
+
+            // Reset easy mode key if in chord mode easy difficulty or diatonic mode (for key consistency learning)
+            if (state.currentMode === 'chord' && (state.difficulty === 'easy' || state.isDiatonicMode)) {
+                resetEasyModeKey();
+            }
+
+            // Update stats
+            let stats = loadStats();
+            stats = recordAnswer(stats, false, state.currentMode);
+            saveStats(stats);
+
+            dispatch({ type: 'WRONG_ANSWER' });
+        }
+    };
+
+    const handleNext = () => {
+        if (state.isLocked) return; // Keep paywall up if locked state triggered during question
+        loadNextQuestion();
+    };
+
+    // Render mode-specific components
+    if (state.currentMode === 'progression') {
+        return (
+            <>
+                <ProgressionRound
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    level={state.level}
+                    xp={state.xp}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    if (state.currentMode === 'scale') {
+        return (
+            <>
+                <ScalesMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    // Legacy: perfectPitch mode now routes to keyFinder
+    if (state.currentMode === 'perfectPitch' || state.currentMode === 'keyFinder') {
+        return (
+            <>
+                <KeyFinderMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    if (state.currentMode === 'numberSystem') {
+        return (
+            <>
+                <NumberSystemMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    if (state.currentMode === 'melody') {
+        return (
+            <>
+                <MelodyMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    if (state.currentMode === 'tempo') {
+        return (
+            <>
+                <TempoMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
+    if (!question) return <div className="p-8 text-center">Loading...</div>;
+
+    return (
+        <div className="min-h-screen bg-background text-white relative flex flex-col">
+            {/* Background gradient */}
+            <div className="fixed inset-0 -z-0">
+                <div className="absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full top-1/4 left-1/4 blur-3xl"></div>
+                <div className="absolute translate-x-1/2 translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full bottom-1/4 right-1/4 blur-3xl"></div>
+            </div>
+
+            {/* Top Left Branding */}
+            <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
+                <BrandLogo showText={false} />
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1 min-h-0 overflow-y-auto">
+                {/* Header / Nav */}
+                <div className="w-full max-w-4xl px-4 flex justify-between items-center mb-8 relative z-50 pl-20 lg:pl-24">
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            navigate('/');
+                        }}
+                        className="group flex items-center gap-2 text-zinc-600 hover:text-zinc-400 font-medium text-sm relative z-50 cursor-pointer transition-all duration-300 hover:gap-3"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform duration-300">
+                            <path d="m12 19-7-7 7-7"></path>
+                            <path d="M19 12H5"></path>
+                        </svg>
+                        <span>Home</span>
+                    </button>
+                    <div className="text-xs lg:text-sm font-bold text-zinc-500 uppercase tracking-widest bg-surface-raised/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
+                        {state.difficulty} {state.currentMode}
+                    </div>
+                    <div className="w-16"></div>
+                </div>
+
+                {/* iOS Silent Mode Warning - Shows immediately for iOS users */}
+                <div className="w-full max-w-4xl px-4 mb-4">
+                    <IOSSilentModeWarning />
+                </div>
+
+                {/* Audio Enable Banner - All Devices */}
+                <div className="w-full max-w-4xl px-4 mb-4">
+                    <AudioEnableBanner />
+                </div>
+
+                <ProgressMeter
+                    current={state.runProgress + 1}
+                    total={10}
+                    streak={state.streak}
+                    level={state.level}
+                    xp={state.xp}
+                />
+
+                <StreakCelebration streak={state.streak} />
+
+                <ParticleEffect trigger={showParticles} />
+
+                {celebration && (
+                    <CelebrationOverlay
+                        type={celebration.type}
+                        message={celebration.message}
+                        subtitle={celebration.subtitle}
+                        onComplete={() => setCelebration(null)}
+                    />
+                )}
+
+                <AchievementToast
+                    achievement={newAchievement}
+                    onClose={() => setNewAchievement(null)}
+                />
+
+                {/* Mode Header with Diatonic Toggle for Chord Mode */}
+                {state.currentMode === 'chord' && (
+                    <ModeHeader
+                        title="Chord Identification"
+                        difficulty={state.difficulty}
+                        streak={state.streak}
+                        runProgress={state.runProgress}
+                        currentMode={state.currentMode}
+                        isDiatonicMode={state.isDiatonicMode}
+                        onToggleDiatonicMode={() => dispatch({ type: 'TOGGLE_DIATONIC_MODE' })}
+                        tip={state.isDiatonicMode
+                            ? "Same key mode: Perfect for learning diatonic chord relationships"
+                            : "Random keys: Great for developing absolute chord recognition"}
+                    />
+                )}
+
+                <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center">
+                    <div className="card w-full max-w-xl mx-auto mb-8 bg-surface-raised/50 backdrop-blur-sm">
+                        <h2 className="text-center text-xl font-semibold text-zinc-300 mb-2">
+                            Listen and Identify
+                        </h2>
+                        <Player
+                            onPlay={playQuestion}
+                            isPlaying={isPlaying}
+                            autoPlay={false} // Handled by effect
+                        />
+                    </div>
+
+                    <AnswerGrid
+                        options={question.options}
+                        onSelect={handleAnswer}
+                        disabled={checking || isPlaying}
+                        selectedId={selectedId}
+                        correctId={correctId}
+                    />
+                </div>
+
+                {checking && (
+                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-6 flex flex-col items-center animate-slide-up pb-8">
+                        <Feedback
+                            correct={correctId === selectedId}
+                            points={30}
+                            multiplier={getComboMultiplier(state.streak)}
+                            onShowParticles={() => setShowParticles(true)}
+                        />
+                        <button
+                            onClick={handleNext}
+                            className={`mt-4 btn-primary w-full max-w-md text-lg ${state.isLocked ? 'opacity-50 pointer-events-none' : ''}`}
+                        >
+                            Next Question
+                        </button>
+                    </div>
+                )}
+
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                        // Ideally navigate to success or just close
+                    }}
+                />
+            </div>
+
+            {/* Footer */}
+            <Footer />
+        </div>
+    );
+};
+

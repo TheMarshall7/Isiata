@@ -47,14 +47,14 @@ export function Header() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="/explore"
+              href="/contact/booking"
               className={`hidden md:block px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 ${
                 scrolled
                   ? 'bg-white text-black hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98]'
                   : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98]'
               }`}
             >
-              Explore
+              Book
             </Link>
 
             <button

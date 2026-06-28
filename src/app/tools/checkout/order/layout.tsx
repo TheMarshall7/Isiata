@@ -1,0 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Checkout — Tsukuyomi Drum Bundle',
+  robots: { index: false, follow: false },
+}
+
+export default function CheckoutOrderLayout({ children }: { children: React.ReactNode }) {
+  return <div className="min-h-screen bg-background">{children}</div>
+}

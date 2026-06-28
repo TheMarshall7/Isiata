@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { getAllGarmentSlugs } from '@/lib/garments/catalog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://isiata.com'
@@ -22,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    ...getAllGarmentSlugs().map((slug) => ({
+      url: `${baseUrl}/objects/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    })),
     {
       url: `${baseUrl}/tools`,
       lastModified: new Date(),
@@ -29,13 +36,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tools/checkout`,
+      url: `${baseUrl}/tools/sample-packs/tsukuyomi-drum-bundle`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/tools/toolbox`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/access`,
+      url: `${baseUrl}/tools/training/ear-trainer`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/tools/checkout/order`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/systems`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/contact/booking`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

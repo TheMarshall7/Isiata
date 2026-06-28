@@ -2,36 +2,54 @@
 
 import { SectionProps } from '@/types'
 import { cn } from '@/lib/utils'
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
+
+const VIEWPORT_BUFFER = 320
+
+function isNearViewport(el: HTMLElement) {
+  const rect = el.getBoundingClientRect()
+  return rect.top < window.innerHeight + VIEWPORT_BUFFER && rect.bottom > -VIEWPORT_BUFFER
+}
 
 export function Section({ children, className, reveal = false }: SectionProps) {
   const ref = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!reveal) return
+
+    const el = ref.current
+    if (!el) return
+
+    const markVisible = () => setIsVisible(true)
+
+    // Safety net for slow layouts or observer edge cases
+    const fallback = window.setTimeout(markVisible, 400)
+
+    if (isNearViewport(el)) {
+      markVisible()
+      return () => window.clearTimeout(fallback)
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          markVisible()
           observer.unobserve(entry.target)
         }
       },
       {
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.1,
+        // Trigger well before content scrolls into view
+        rootMargin: `${VIEWPORT_BUFFER}px 0px ${VIEWPORT_BUFFER}px 0px`,
+        threshold: 0,
       }
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
+    observer.observe(el)
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
+      window.clearTimeout(fallback)
+      observer.unobserve(el)
     }
   }, [reveal])
 

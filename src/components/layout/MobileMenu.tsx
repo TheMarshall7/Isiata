@@ -52,14 +52,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           ))}
 
           <Link
-            href="/explore"
+            href="/contact/booking"
             onClick={onClose}
             className="mt-8 bg-white text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-zinc-200 transition-colors"
             style={{
               animation: `reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both ${NAV_LINKS.length * 50}ms`,
             }}
           >
-            Explore
+            Book
           </Link>
         </nav>
       </div>

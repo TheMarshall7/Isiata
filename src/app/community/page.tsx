@@ -29,10 +29,10 @@ export default function CommunityPage() {
             A place for collaborators, supporters, and people who care about the work. Coming soon.
           </p>
           <Link
-            href="/access"
+            href="/contact"
             className="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white tracking-wide transition-all duration-300"
           >
-            <span className="group-hover:-translate-x-0.5 transition-transform duration-300">Back to Access</span>
+            <span className="group-hover:-translate-x-0.5 transition-transform duration-300">Back to Contact</span>
             <iconify-icon icon="solar:arrow-left-linear" width="20" height="20" className="group-hover:-translate-x-1 transition-transform duration-300" />
           </Link>
         </Section>
@@ -46,7 +46,7 @@ export default function CommunityPage() {
               Notify me
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-oswald uppercase tracking-tight text-white mb-6 leading-[1.05] transition-all duration-300 hover:tracking-wide">
-              Get notified when I open Access
+              Get notified when we open
             </h2>
             <p className="text-lg md:text-xl text-zinc-400 mb-12 leading-relaxed max-w-lg mx-auto transition-colors duration-300 hover:text-zinc-300">
               Be first in and be notified of community and ISIATA updates.

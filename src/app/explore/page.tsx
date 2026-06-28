@@ -8,7 +8,8 @@ const CATEGORIES = [
   { href: '/sound', icon: 'solar:music-library-2-linear', title: 'Sound', desc: 'Music releases, playlists, and visual media' },
   { href: '/objects', icon: 'solar:shop-2-linear', title: 'Garments', desc: 'Fashion drops, garments, and accessories' },
   { href: '/tools', icon: 'solar:diskette-linear', title: 'Tools', desc: 'Sample packs, plugins, and digital products' },
-  { href: '/access', icon: 'solar:key-linear', title: 'Access', desc: 'Private sessions, creative direction, collaborations' },
+  { href: '/systems', icon: 'solar:server-square-linear', title: 'Systems', desc: 'Backend business infrastructure for artists and musicians' },
+  { href: '/contact', icon: 'solar:chat-round-dots-linear', title: 'Contact', desc: 'Creative direction, session work, coaching, mixing, and live performance' },
 ]
 
 export default function ExplorePage() {
