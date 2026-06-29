@@ -88,11 +88,11 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="relative max-w-md lg:max-w-none mx-auto lg:mx-0 w-full flex items-center justify-center bg-transparent">
+            <div className="relative aspect-[3/4] max-w-md lg:max-w-none mx-auto lg:mx-0 w-full border border-white/10 bg-black overflow-hidden depth-shadow flex items-center justify-center p-12 sm:p-16">
               <img
                 src={ISIATA_LOGO_URL}
                 alt="ISIATA"
-                className="w-full max-w-sm lg:max-w-md h-auto object-contain bg-transparent"
+                className="w-full max-w-[180px] sm:max-w-[220px] h-auto object-contain"
               />
             </div>
           </div>
