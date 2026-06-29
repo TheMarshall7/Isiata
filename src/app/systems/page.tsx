@@ -58,9 +58,13 @@ export default function SystemsPage() {
 
           <div className="space-y-8">
             {SYSTEMS_TIERS.map((tier) => (
-              <article
+              <Link
                 key={tier.id}
-                className="group flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised/50 depth-shadow overflow-hidden"
+                href={`/systems/${tier.id}`}
+                className="block group"
+              >
+              <article
+                className="flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised/50 depth-shadow overflow-hidden"
               >
                 <div className="p-8 lg:p-12">
                   <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
@@ -82,21 +86,9 @@ export default function SystemsPage() {
                         {tier.tagline}
                       </p>
 
-                      <div className="space-y-3 pt-6 border-t border-white/10">
-                        <div>
-                          <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1">Starting at</p>
-                          <p className="text-3xl font-semibold text-white">{tier.startingAt}</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1">Retainer</p>
-                            <p className="text-zinc-300">{tier.retainer}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1">Timeline</p>
-                            <p className="text-zinc-300">{tier.timeline}</p>
-                          </div>
-                        </div>
+                      <div className="pt-4 border-t border-white/10">
+                        <p className="text-xs uppercase tracking-widest text-zinc-600 mb-1">Timeline</p>
+                        <p className="text-sm text-zinc-300">{tier.timeline}</p>
                       </div>
                     </div>
 
@@ -126,17 +118,17 @@ export default function SystemsPage() {
                         <p className="text-zinc-200 leading-relaxed">{tier.outcome}</p>
                       </div>
 
-                      <Link
-                        href={SYSTEMS_BOOKING_HREF}
-                        className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+                      <span
+                        className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full text-sm font-semibold group-hover:bg-zinc-200 transition-colors"
                       >
-                        Book a call
+                        Explore system
                         <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
-                      </Link>
+                      </span>
                     </div>
                   </div>
                 </div>
               </article>
+              </Link>
             ))}
           </div>
 
@@ -175,12 +167,6 @@ export default function SystemsPage() {
                   <th className="py-4 pr-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
                     Name
                   </th>
-                  <th className="py-4 pr-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                    Starting at
-                  </th>
-                  <th className="py-4 pr-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                    Retainer
-                  </th>
                   <th className="py-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
                     Timeline
                   </th>
@@ -190,9 +176,14 @@ export default function SystemsPage() {
                 {SYSTEMS_TIERS.map((tier) => (
                   <tr key={tier.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                     <td className="py-4 pr-4 text-sm text-zinc-500">{tier.tier}</td>
-                    <td className="py-4 pr-4 text-sm font-medium text-white">{tier.name}</td>
-                    <td className="py-4 pr-4 text-sm text-zinc-300">{tier.startingAt}</td>
-                    <td className="py-4 pr-4 text-sm text-zinc-400">{tier.retainer}</td>
+                    <td className="py-4 pr-4 text-sm font-medium text-white">
+                      <Link
+                        href={`/systems/${tier.id}`}
+                        className="hover:text-zinc-300 transition-colors"
+                      >
+                        {tier.name}
+                      </Link>
+                    </td>
                     <td className="py-4 text-sm text-zinc-400">{tier.timeline}</td>
                   </tr>
                 ))}

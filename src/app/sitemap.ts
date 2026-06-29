@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getAllGarmentSlugs } from '@/lib/garments/catalog'
+import { getAllTierSlugs } from '@/lib/systems/funnel-content'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://isiata.com'
@@ -65,6 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.85,
     },
+    ...getAllTierSlugs().map((slug) => ({
+      url: `${baseUrl}/systems/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

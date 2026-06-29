@@ -41,8 +41,8 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
   {
     slug: 'ear-trainer',
     href: '/tools/training/ear-trainer',
-    title: 'Ear Trainer',
-    description: 'Intervals, chords, scales, perfect pitch — gamified ear training',
+    title: 'Ear Mastery',
+    description: 'Intervals, chords, scales, perfect pitch, gamified ear training',
     icon: 'solar:headphones-round-sound-linear',
     category: 'tools',
     categoryLabel: 'Tool',

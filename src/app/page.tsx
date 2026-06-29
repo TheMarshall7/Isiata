@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { EmailCapture } from '@/components/forms/EmailCapture'
 import { TheyMightBeMadSection } from '@/components/sound/TheyMightBeMadSection'
+import { DrumBundleFeaturedSection } from '@/components/tools/DrumBundleFeaturedSection'
 import { getGarmentBySlug } from '@/lib/garments/catalog'
 import { TWO_TALES_COVER } from '@/lib/sound/releases'
 
@@ -57,6 +58,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <DrumBundleFeaturedSection />
 
       <TheyMightBeMadSection />
 

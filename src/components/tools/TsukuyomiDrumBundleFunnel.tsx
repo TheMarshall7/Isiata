@@ -1,15 +1,13 @@
 'use client'
 
-import Link from 'next/link'
 import { useState, useRef } from 'react'
 import {
   DAW_ICONS,
   DRUM_BUNDLE,
-  DRUM_BUNDLE_CHECKOUT_HREF,
-  DRUM_BUNDLE_PRICE,
   FEATURED_PRODUCERS,
   FeaturedProducer,
 } from '@/lib/tools/drum-bundle'
+import { DrumBundlePurchaseCta } from '@/components/tools/DrumBundlePurchaseCta'
 
 const BAR_COUNT = 12
 // Deterministic heights so server and client match (avoids hydration warning)
@@ -342,49 +340,7 @@ function DAWCompatibility() {
 export function TsukuyomiDrumBundleFunnel() {
   return (
     <div className="space-y-12">
-      {/* Hero Card */}
-      <div className="border border-white/10 bg-surface-raised depth-shadow hover-glow overflow-hidden transition-all duration-500">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* Image */}
-          <div className="aspect-square lg:aspect-auto overflow-hidden">
-            <img
-              src={DRUM_BUNDLE.image}
-              alt={DRUM_BUNDLE.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Info */}
-          <div className="p-8 md:p-12 flex flex-col justify-center">
-            <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1 w-fit mb-6">
-              Sample Pack
-            </span>
-            <h3 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-2">
-              {DRUM_BUNDLE.title}
-            </h3>
-            <p className="text-sm text-zinc-500 uppercase tracking-widest mb-6">{DRUM_BUNDLE.subtitle}</p>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-8">
-              {DRUM_BUNDLE.description}
-            </p>
-            <div className="flex flex-wrap gap-3 text-xs text-zinc-500 mb-8">
-              <span className="border border-white/10 px-3 py-1">{DRUM_BUNDLE.format}</span>
-              <span className="border border-white/10 px-3 py-1">Royalty-Free</span>
-              <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
-            </div>
-            <div className="flex items-baseline gap-3 mb-6">
-              <span className="text-2xl font-semibold text-white">{DRUM_BUNDLE_PRICE.display}</span>
-              <span className="text-sm text-zinc-600 line-through">{DRUM_BUNDLE_PRICE.original}</span>
-            </div>
-            <Link
-              href={DRUM_BUNDLE_CHECKOUT_HREF}
-              className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors w-fit"
-            >
-              Get the bundle
-              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" />
-            </Link>
-          </div>
-        </div>
-      </div>
+      <DrumBundlePurchaseCta variant="hero" />
 
       {/* Featured Producers - before previews to draw more attention */}
       <div>
@@ -496,6 +452,8 @@ export function TsukuyomiDrumBundleFunnel() {
           </div>
         </div>
       </div>
+
+      <DrumBundlePurchaseCta variant="footer" />
     </div>
   )
 }
