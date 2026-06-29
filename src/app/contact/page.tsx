@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 import {
   CONTACT_ALONGSIDE,
   CONTACT_BOOKING_HREF,
   CONTACT_DELIVERED,
-  CONTACT_HREF,
   CONTACT_INQUIRY_HREF,
   type ContactOffering,
 } from '@/lib/contact/offerings'
@@ -52,36 +52,49 @@ function SectionHeader({ label, description }: { label: string; description: str
 export default function ContactPage() {
   return (
     <>
-      <Container bordered className="pt-32 pb-16">
+      <Container bordered className="pt-32 pb-20">
         <Section reveal>
-          <PageTitle
-            text="Contact"
-            className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
-            speed={120}
-          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <PageTitle
+                text="Contact"
+                className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
+                speed={120}
+              />
 
-          <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
-            <p>Select what fits below, then book a call to get started.</p>
-            <p className="text-zinc-400">
-              Collaborative work and fully delivered services. Coaching, systems, and community.
-              Not sure yet? Send a general inquiry.
-            </p>
-          </div>
+              <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+                <p>Select what fits below, then book a call to get started.</p>
+                <p className="text-zinc-400">
+                  Collaborative work and fully delivered services. Coaching, systems, and community.
+                  Not sure yet? Send a general inquiry.
+                </p>
+              </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href={CONTACT_BOOKING_HREF}
-              className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
-            >
-              Book a call
-              <iconify-icon icon="solar:calendar-linear" width="18" height="18" />
-            </Link>
-            <Link
-              href={CONTACT_INQUIRY_HREF}
-              className="inline-flex items-center justify-center gap-2 border border-white/15 text-zinc-300 px-8 py-3 rounded-full text-sm font-medium hover:text-white hover:border-white/30 transition-colors"
-            >
-              General inquiry
-            </Link>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href={CONTACT_BOOKING_HREF}
+                  className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+                >
+                  Book a call
+                  <iconify-icon icon="solar:calendar-linear" width="18" height="18" />
+                </Link>
+                <a
+                  href={CONTACT_INQUIRY_HREF}
+                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-zinc-300 px-8 py-3 rounded-full text-sm font-medium hover:text-white hover:border-white/30 transition-colors"
+                >
+                  General inquiry
+                  <iconify-icon icon="solar:letter-linear" width="18" height="18" />
+                </a>
+              </div>
+            </div>
+
+            <div className="relative max-w-md lg:max-w-none mx-auto lg:mx-0 w-full flex items-center justify-center bg-transparent">
+              <img
+                src={ISIATA_LOGO_URL}
+                alt="ISIATA"
+                className="w-full max-w-sm lg:max-w-md h-auto object-contain bg-transparent"
+              />
+            </div>
           </div>
         </Section>
       </Container>

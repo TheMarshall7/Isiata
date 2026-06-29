@@ -1,9 +1,12 @@
+export const ISIATA_LOGO_URL =
+  'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png'
+
 export const SITE_CONFIG = {
   name: 'ISIATA',
   description: 'Culture and innovation. Sound, objects, tools, and access.',
   url: 'https://isiata.com',
   ogImage: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg',
-  contactEmail: 'Brian@areoclient.com',
+  contactEmail: 'isiataofficial@gmail.com',
   links: {
     soundcloud: 'https://soundcloud.com/isiataofficial',
     tiktok: 'https://www.tiktok.com/@isiataOfficial',
@@ -30,7 +33,7 @@ export const FOOTER_LINKS = {
   ],
   information: [
     { href: '/about', label: 'About' },
-    { href: '/contact/inquiry', label: 'General Inquiry' },
+    { href: 'mailto:isiataofficial@gmail.com', label: 'General Inquiry' },
   ],
   legal: [
     { href: '/legal/licensing', label: 'Licensing' },

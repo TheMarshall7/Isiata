@@ -167,13 +167,13 @@ export default function BookingPage() {
                   className="text-zinc-600 mx-auto mb-3"
                 />
                 <p className="text-sm text-zinc-400 mb-4">Have questions before booking?</p>
-                <Link
+                <a
                   href={CONTACT_INQUIRY_HREF}
                   className="inline-flex items-center gap-2 text-sm text-white hover:text-zinc-300 transition-colors"
                 >
                   Send an inquiry
                   <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
-                </Link>
+                </a>
               </div>
           </Section>
         </div>

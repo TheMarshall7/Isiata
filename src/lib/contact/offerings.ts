@@ -1,6 +1,7 @@
 export const CONTACT_HREF = '/contact'
 export const CONTACT_BOOKING_HREF = '/contact/booking'
-export const CONTACT_INQUIRY_HREF = '/contact/inquiry'
+export const CONTACT_INQUIRY_EMAIL = 'isiataofficial@gmail.com'
+export const CONTACT_INQUIRY_HREF = `mailto:${CONTACT_INQUIRY_EMAIL}`
 
 export type ContactOffering = {
   icon: string
