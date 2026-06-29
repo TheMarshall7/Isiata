@@ -44,15 +44,15 @@ export const Player: React.FC<PlayerProps> = ({ onPlay, isPlaying, label = "Play
           group relative w-24 h-24 lg:w-32 lg:h-32 rounded-full flex items-center justify-center
           transition-all duration-300 transform
           ${isPlaying 
-            ? 'scale-95 bg-gradient-to-br from-orange-500 to-orange-400' 
-            : 'bg-white text-black hover:bg-zinc-200 hover:scale-110 shadow-xl shadow-white/10'
+            ? 'scale-95 bg-gradient-to-br from-orange-600 to-orange-400' 
+            : 'bg-gradient-to-br from-orange-500 to-orange-400 text-black hover:from-orange-400 hover:to-orange-300 hover:scale-110 shadow-xl shadow-orange-500/30'
           }
           disabled:cursor-not-allowed
         `}
             >
                 {/* Glow effect */}
                 {!isPlaying && (
-                    <div className="absolute inset-0 rounded-full bg-white/5 animate-pulse-glow" />
+                    <div className="absolute inset-0 rounded-full bg-orange-300/20 animate-pulse-glow" />
                 )}
 
                 {hasPlayed ? (
@@ -66,7 +66,7 @@ export const Player: React.FC<PlayerProps> = ({ onPlay, isPlaying, label = "Play
                     </svg>
                 )}
             </button>
-            <div className="mt-4 lg:mt-6 text-zinc-500 font-medium tracking-wide text-sm lg:text-base">
+            <div className="mt-4 lg:mt-6 text-orange-300/80 font-medium tracking-wide text-sm lg:text-base">
                 {isPlaying ? 'Listening...' : hasPlayed ? 'Re-listen' : label}
             </div>
         </div>

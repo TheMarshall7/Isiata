@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import type { ResourceCategory } from '../../types/resources';
 import { BrandLogo } from '../BrandLogo';
 import { AppInfo } from '../AppInfo';
+import { TrainerAmbientBackground } from '../TrainerAmbientBackground';
 
 interface ResourcesLayoutProps {
     children: React.ReactNode;
@@ -26,11 +27,7 @@ export const ResourcesLayout: React.FC<ResourcesLayoutProps> = ({ children, cate
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
-            {/* Background gradient */}
-            <div className="fixed inset-0 -z-0">
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full top-1/4 left-1/4 blur-3xl"></div>
-                <div className="absolute translate-x-1/2 translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full bottom-1/4 right-1/4 blur-3xl"></div>
-            </div>
+            <TrainerAmbientBackground />
 
             {/* Top Left Branding */}
             <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">

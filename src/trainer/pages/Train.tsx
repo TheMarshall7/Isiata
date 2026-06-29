@@ -38,6 +38,8 @@ import { Footer } from '../components/Footer';
 import { AudioEnableBanner } from '../components/AudioEnableBanner';
 import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
 import { ModeHeader } from '../components/ModeHeader';
+import { TrainerAmbientBackground } from '../components/TrainerAmbientBackground';
+import { hasEarTrainerAccess } from '../lib/access';
 
 // Calculate combo multiplier based on streak
 const getComboMultiplier = (streak: number): number => {
@@ -50,6 +52,12 @@ const getComboMultiplier = (streak: number): number => {
 export const Train: React.FC = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useGame();
+
+    useEffect(() => {
+        if (!hasEarTrainerAccess()) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const [question, setQuestion] = useState<IntervalQuestion | ChordQuestion | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -471,11 +479,7 @@ export const Train: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
-            {/* Background gradient */}
-            <div className="fixed inset-0 -z-0">
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full top-1/4 left-1/4 blur-3xl"></div>
-                <div className="absolute translate-x-1/2 translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full bottom-1/4 right-1/4 blur-3xl"></div>
-            </div>
+            <TrainerAmbientBackground />
 
             {/* Top Left Branding */}
             <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
@@ -499,7 +503,7 @@ export const Train: React.FC = () => {
                         </svg>
                         <span>Home</span>
                     </button>
-                    <div className="text-xs lg:text-sm font-bold text-zinc-500 uppercase tracking-widest bg-surface-raised/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
+                    <div className="text-xs lg:text-sm font-bold text-orange-300/90 uppercase tracking-widest bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-full border border-orange-500/30 shadow-sm shadow-orange-500/10">
                         {state.difficulty} {state.currentMode}
                     </div>
                     <div className="w-16"></div>
@@ -558,8 +562,8 @@ export const Train: React.FC = () => {
                 )}
 
                 <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center">
-                    <div className="card w-full max-w-xl mx-auto mb-8 bg-surface-raised/50 backdrop-blur-sm">
-                        <h2 className="text-center text-xl font-semibold text-zinc-300 mb-2">
+                    <div className="trainer-card w-full max-w-xl mx-auto mb-8 pt-8 pb-2">
+                        <h2 className="text-center text-xl font-semibold mb-4 px-4">
                             Listen and Identify
                         </h2>
                         <Player

@@ -42,6 +42,7 @@ export default function EarTrainerApp() {
   }, [])
 
   return (
+    <div className="ear-trainer min-h-screen">
     <BrowserRouter basename={BASE_PATH}>
       <GameProvider>
         <Routes>
@@ -60,5 +61,6 @@ export default function EarTrainerApp() {
         <DebugConsole />
       </GameProvider>
     </BrowserRouter>
+    </div>
   )
 }

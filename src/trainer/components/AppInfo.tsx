@@ -36,7 +36,7 @@ export const AppInfo: React.FC = () => {
                     <div className="relative text-xs space-y-3">
                         <div className="mb-3 pb-3 border-b border-white/10">
                             <div className="font-oswald uppercase text-base text-white tracking-tight mb-1">
-                                Master Your Ear
+                                Ear Mastery
                             </div>
                             <div className="text-xs text-zinc-500 font-medium">
                                 Ear Training Platform

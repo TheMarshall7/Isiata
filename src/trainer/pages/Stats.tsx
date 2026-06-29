@@ -9,6 +9,7 @@ import { AchievementToast } from '../components/AchievementToast';
 import { AchievementCarousel } from '../components/AchievementCarousel';
 import { BrandLogo } from '../components/BrandLogo';
 import { Footer } from '../components/Footer';
+import { TrainerAmbientBackground } from '../components/TrainerAmbientBackground';
 import { 
     BarChart3, 
     Target, 
@@ -61,11 +62,7 @@ export const Stats: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
-            {/* Background gradient */}
-            <div className="fixed inset-0 -z-0">
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full top-1/4 left-1/4 blur-3xl"></div>
-                <div className="absolute translate-x-1/2 translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full bottom-1/4 right-1/4 blur-3xl"></div>
-            </div>
+            <TrainerAmbientBackground />
 
             {/* Top Left Branding */}
             <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">

@@ -296,7 +296,7 @@ export const MelodyMode: React.FC<MelodyModeProps> = ({
                 />
 
                 <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center">
-                    <div className="card w-full max-w-xl mx-auto mb-8 bg-surface-raised/50 backdrop-blur-sm">
+                    <div className="trainer-card w-full max-w-xl mx-auto mb-8 pt-6 pb-2">
                         <RoundControls
                             onPlay={playMelody}
                             onReplay={playMelody}

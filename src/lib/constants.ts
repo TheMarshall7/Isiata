@@ -77,6 +77,9 @@ export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/bookin
  */
 export const GHL_NEWSLETTER_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/F1J2yvd2AUT4owDs9EPl/webhook-trigger/c1a53b5c-caf4-4703-9d45-03b9f0ca3119'
 
+/** Formsubmit.co inbox for mailing list lead email notifications (runs alongside the GHL webhook). */
+export const NEWSLETTER_LEAD_NOTIFY_EMAIL = 'brian.marshallca@gmail.com'
+
 /**
  * Optional. Contact form uses Formsubmit.co (no API key). Leave empty.
  * Legacy: GHL webhook fallback if you ever switch.

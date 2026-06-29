@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Ear Mastery, Interactive Ear Training',
   description:
-    'Master your musical ear with ISIATA. Practice intervals, chords, scales, perfect pitch, and more with gamified interactive training.',
+    'Tune your ear with ISIATA Ear Mastery. Practice intervals, chords, scales, and more with interactive training.',
   alternates: { canonical: '/tools/training/ear-trainer' },
 }
 

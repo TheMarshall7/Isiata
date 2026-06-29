@@ -68,12 +68,12 @@ export const ModeSelect: React.FC<ModeSelectProps> = ({
                                     className={`group py-4 px-4 rounded-xl font-medium transition-all duration-300 text-xs sm:text-sm relative overflow-hidden ${locked
                                             ? 'bg-white/5 text-zinc-600 cursor-pointer hover:bg-white/10'
                                             : isActive
-                                                ? 'bg-white/10 border border-white/20 text-white shadow-lg scale-105'
-                                                : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white hover:scale-[1.08] hover:shadow-lg border border-white/20 hover:border-white/20'
+                                                ? 'bg-orange-500/15 border border-orange-500/45 text-orange-100 shadow-lg shadow-orange-500/20 scale-105'
+                                                : 'bg-white/5 text-zinc-400 hover:bg-orange-500/10 hover:text-orange-200 hover:scale-[1.08] hover:shadow-lg border border-white/20 hover:border-orange-500/30'
                                         }`}
                                 >
                                     {isActive && !locked && (
-                                        <div className="absolute inset-0 bg-white/10 translate-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <div className="absolute inset-0 bg-orange-400/10 translate-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     )}
                                     <span className="relative group-hover:scale-105 inline-block transition-transform duration-300 flex items-center justify-center gap-2">
                                         {locked && <Lock size={14} />}
@@ -93,12 +93,12 @@ export const ModeSelect: React.FC<ModeSelectProps> = ({
                                 key={diff}
                                 onClick={() => onSelectDifficulty(diff)}
                                 className={`group flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden ${currentDifficulty === diff
-                                    ? 'bg-white text-black shadow-lg shadow-white/10 scale-105'
-                                    : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white hover:scale-[1.08] hover:shadow-lg border border-white/20 hover:border-white/20'
+                                    ? 'bg-gradient-to-r from-orange-500 to-orange-400 text-black shadow-lg shadow-orange-500/25 scale-105'
+                                    : 'bg-white/5 text-zinc-400 hover:bg-orange-500/10 hover:text-orange-200 hover:scale-[1.08] hover:shadow-lg border border-white/20 hover:border-orange-500/30'
                                     }`}
                             >
                                 {currentDifficulty === diff && (
-                                    <div className="absolute inset-0 bg-white/20 translate-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="absolute inset-0 bg-orange-300/20 translate-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 )}
                                 <span className="relative group-hover:scale-105 inline-block transition-transform duration-300">
                                     {diff.charAt(0).toUpperCase() + diff.slice(1)}

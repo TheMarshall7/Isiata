@@ -12,12 +12,19 @@ import { InstrumentOnboarding } from '../components/InstrumentOnboarding';
 import { AudioEnableBanner } from '../components/AudioEnableBanner';
 import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
 import { PageShell } from '../components/PageShell';
+import { EarTrainerEmailGate } from '../components/EarTrainerEmailGate';
+import { hasEarTrainerAccess } from '../lib/access';
 import { trainerLogoSrc } from '../lib/logo';
 
 export const Home: React.FC = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useGame();
     const [dailyChallenges, setDailyChallenges] = useState(getDailyChallenges());
+    const [unlocked, setUnlocked] = useState(false);
+
+    useEffect(() => {
+        setUnlocked(hasEarTrainerAccess());
+    }, []);
 
     useEffect(() => {
         // Preload current instrument
@@ -25,7 +32,7 @@ export const Home: React.FC = () => {
     }, [state.currentInstrument]);
 
     useEffect(() => {
-        document.title = 'ISIATA - Master Your Musical Ear | Interactive Ear Training';
+        document.title = 'ISIATA - Ear Mastery | Interactive Ear Training';
     }, []);
 
     const handleInstrumentChange = async (instrumentId: string) => {
@@ -55,6 +62,10 @@ export const Home: React.FC = () => {
     const chordBasedModes = ['chord', 'progression', 'keyFinder', 'numberSystem'];
     const disabledInstruments = chordBasedModes.includes(state.currentMode) ? ['bass'] : [];
 
+    if (!unlocked) {
+        return <EarTrainerEmailGate onUnlock={() => setUnlocked(true)} />;
+    }
+
     return (
         <PageShell>
             <InstrumentOnboarding onSelectInstrument={handleInstrumentChange} />
@@ -74,11 +85,12 @@ export const Home: React.FC = () => {
                             />
                         </div>
                         <h1 className="text-5xl lg:text-7xl xl:text-8xl font-oswald uppercase tracking-tight leading-[0.95] mb-6 text-white">
-                            <span className="block">Master Your</span>
                             <span className="block">Ear</span>
+                            <span className="block">Mastery</span>
                         </h1>
                         <p className="text-lg lg:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                            The gamified path to perfect pitch. Identify intervals, chords, and progressions with instant feedback and AI-powered training.
+                            Tune your ear to create with intention. Hear intervals, chords, and
+                            progressions clearly, then carry that clarity into everything you make.
                         </p>
                     </div>
 
