@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { CALENDAR_EMBED_URL } from '@/lib/constants'
 import { CONTACT_HREF, CONTACT_INQUIRY_HREF } from '@/lib/contact/offerings'
-import { CalendarEmbed } from './CalendarEmbed'
+import { CalendarEmbed } from '@/components/booking/CalendarEmbed'
 
 export const metadata: Metadata = {
   title: 'Book a session | ISIATA Contact',
@@ -80,30 +80,41 @@ export default function BookingPage() {
       </Container>
 
       <Container bordered className="py-12">
-        <Section reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              {CALENDAR_EMBED_URL ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            {CALENDAR_EMBED_URL ? (
+              <>
                 <CalendarEmbed />
-              ) : (
-                <div className="min-h-[600px] flex items-center justify-center p-8 border border-white/10 bg-surface-raised rounded-lg">
-                  <div className="text-center max-w-md">
-                    <iconify-icon
-                      icon="solar:calendar-linear"
-                      width="48"
-                      height="48"
-                      className="text-zinc-600 mx-auto mb-4"
-                    />
-                    <p className="text-zinc-400 text-sm mb-2">Calendar embed</p>
-                    <p className="text-zinc-500 text-xs">
-                      Set CALENDAR_EMBED_URL in src/lib/constants.ts to enable scheduling.
-                    </p>
-                  </div>
+                <p className="mt-4 text-center">
+                  <a
+                    href={CALENDAR_EMBED_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+                  >
+                    Calendar not loading? Open in a new tab
+                  </a>
+                </p>
+              </>
+            ) : (
+              <div className="min-h-[600px] flex items-center justify-center p-8 border border-white/10 bg-surface-raised rounded-lg">
+                <div className="text-center max-w-md">
+                  <iconify-icon
+                    icon="solar:calendar-linear"
+                    width="48"
+                    height="48"
+                    className="text-zinc-600 mx-auto mb-4"
+                  />
+                  <p className="text-zinc-400 text-sm mb-2">Calendar embed</p>
+                  <p className="text-zinc-500 text-xs">
+                    Set CALENDAR_EMBED_URL in src/lib/constants.ts to enable scheduling.
+                  </p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+          </div>
 
-            <div className="space-y-6">
+          <Section reveal className="space-y-6">
               <div className="border border-white/10 bg-surface-raised depth-shadow p-6 rounded-lg">
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-4">What to Expect</h3>
                 <ul className="space-y-4">
@@ -164,9 +175,8 @@ export default function BookingPage() {
                   <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
                 </Link>
               </div>
-            </div>
-          </div>
-        </Section>
+          </Section>
+        </div>
       </Container>
 
       <Container bordered className="py-16">

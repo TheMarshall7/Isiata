@@ -18,6 +18,7 @@ import { BenefitsFeatureGrid } from '@/components/systems/sections/BenefitsFeatu
 import { CloserStaggerSection } from '@/components/systems/sections/CloserStaggerSection'
 import { PricingNestedSection } from '@/components/systems/sections/PricingNestedSection'
 import { TestimonialSlider } from '@/components/systems/sections/TestimonialSlider'
+import { TiersAtAGlance } from '@/components/systems/TiersAtAGlance'
 
 type SystemFunnelProps = {
   tier: SystemsTier
@@ -201,6 +202,23 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
             <FaqAccordion items={funnel.faqs} />
           </div>
         </Section>
+      </Container>
+
+      <Container bordered>
+        <FunnelDivider />
+      </Container>
+
+      {/* At a glance — all tiers */}
+      <Container bordered className="py-20 md:py-28">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
+            At a glance
+          </p>
+          <h2 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-10">
+            Compare tiers
+          </h2>
+          <TiersAtAGlance currentTierId={tier.id} />
+        </div>
       </Container>
 
       <Container bordered>

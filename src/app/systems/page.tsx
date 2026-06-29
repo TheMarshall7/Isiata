@@ -145,54 +145,6 @@ export default function SystemsPage() {
         </Section>
       </Container>
 
-      {/* Summary */}
-      <Container bordered className="py-24 border-t border-white/10">
-        <Section reveal>
-          <div className="mb-10">
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
-              At a glance
-            </p>
-            <h2 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
-              Compare tiers
-            </h2>
-          </div>
-
-          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-            <table className="w-full min-w-[640px] text-left border-collapse">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="py-4 pr-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                    Tier
-                  </th>
-                  <th className="py-4 pr-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                    Name
-                  </th>
-                  <th className="py-4 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                    Timeline
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {SYSTEMS_TIERS.map((tier) => (
-                  <tr key={tier.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                    <td className="py-4 pr-4 text-sm text-zinc-500">{tier.tier}</td>
-                    <td className="py-4 pr-4 text-sm font-medium text-white">
-                      <Link
-                        href={`/systems/${tier.id}`}
-                        className="hover:text-zinc-300 transition-colors"
-                      >
-                        {tier.name}
-                      </Link>
-                    </td>
-                    <td className="py-4 text-sm text-zinc-400">{tier.timeline}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Section>
-      </Container>
-
       {/* CTA */}
       <Container bordered className="py-24 border-t border-white/10">
         <Section reveal>
