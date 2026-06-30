@@ -10,6 +10,7 @@ interface ModeHeaderProps {
     currentMode?: GameMode;
     isDiatonicMode?: boolean;
     onToggleDiatonicMode?: () => void;
+    compact?: boolean;
 }
 
 export const ModeHeader: React.FC<ModeHeaderProps> = ({
@@ -20,9 +21,32 @@ export const ModeHeader: React.FC<ModeHeaderProps> = ({
     tip,
     currentMode,
     isDiatonicMode,
-    onToggleDiatonicMode
+    onToggleDiatonicMode,
+    compact = false,
 }) => {
     const showDiatonicToggle = (currentMode === 'chord' || currentMode === 'progression') && onToggleDiatonicMode;
+
+    if (compact) {
+        return (
+            <div className="w-full max-w-4xl px-4 mb-1 shrink-0">
+                <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <h2 className="text-sm font-semibold text-white">{title}</h2>
+                    {showDiatonicToggle && (
+                        <button
+                            onClick={onToggleDiatonicMode}
+                            className={`text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full border transition-all duration-200 ${
+                                isDiatonicMode
+                                    ? 'bg-white text-black border-orange-500'
+                                    : 'bg-surface-raised/80 text-zinc-400 border-white/20 hover:bg-white/10'
+                            }`}
+                        >
+                            Diatonic {isDiatonicMode ? 'ON' : 'OFF'}
+                        </button>
+                    )}
+                </div>
+            </div>
+        );
+    }
     
     return (
         <div className="w-full max-w-4xl px-4 mb-6">

@@ -34,7 +34,6 @@ import { recordAnswer, updateBestStreak, loadStats, saveStats } from '../logic/s
 import { checkAchievements, loadAchievements, type Achievement } from '../logic/achievements';
 import { updateChallengeProgress, getDailyChallenges } from '../logic/dailyChallenges';
 import { BrandLogo } from '../components/BrandLogo';
-import { Footer } from '../components/Footer';
 import { AudioEnableBanner } from '../components/AudioEnableBanner';
 import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
 import { ModeHeader } from '../components/ModeHeader';
@@ -68,6 +67,13 @@ export const Train: React.FC = () => {
     const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
     const [celebration, setCelebration] = useState<{ type: 'level-up' | 'perfect-run'; message: string; subtitle?: string } | null>(null);
     const [dailyChallenges, setDailyChallenges] = useState(getDailyChallenges());
+    const [questionKey, setQuestionKey] = useState(0);
+
+    const isPlayingRef = useRef(false);
+    const hasAutoPlayedRef = useRef(false);
+    const hasInitializedRef = useRef(false);
+    const lastModeRef = useRef<string>('');
+    const playQuestionRef = useRef<() => Promise<void>>(async () => {});
 
     // Init - only for interval and chord modes (other modes have their own components)
     useEffect(() => {        // Only run for interval and chord modes - other modes use their own components
@@ -109,6 +115,10 @@ export const Train: React.FC = () => {
         setSelectedId(null);
         setCorrectId(null);
         setChecking(false);
+        setIsPlaying(false);
+        isPlayingRef.current = false;
+        hasAutoPlayedRef.current = false;
+        setQuestionKey((k) => k + 1);
 
         // Check limits
         if (state.runProgress > 0 && state.runProgress % 10 === 0) {
@@ -128,8 +138,9 @@ export const Train: React.FC = () => {
 
         console.log('Train: playQuestion called. State:', audioEngine.getContext()?.state);
 
-        if (!question || isPlaying) return;
+        if (!question || isPlayingRef.current) return;
         setIsPlaying(true);
+        isPlayingRef.current = true;
 
         try {
             // Now safe to do async work (init, loading)
@@ -166,28 +177,27 @@ export const Train: React.FC = () => {
         } catch (e) {
             console.error('Error playing question:', e);
             setIsPlaying(false);
+            isPlayingRef.current = false;
             return;
         }
 
-        setTimeout(() => setIsPlaying(false), 1500);
-    }, [question, isPlaying]);
+        setTimeout(() => {
+            setIsPlaying(false);
+            isPlayingRef.current = false;
+        }, 1500);
+    }, [question, state.currentInstrument]);
 
-    // Auto-play once when question loads
-    const hasAutoPlayedRef = useRef(false);
-    const hasInitializedRef = useRef(false);
-    const lastModeRef = useRef<string>('');
-
-    useEffect(() => {
-        // Reset flag when question changes        hasAutoPlayedRef.current = false;
-    }, [question]);
+    playQuestionRef.current = playQuestion;
 
     useEffect(() => {
-        if (question && !hasAutoPlayedRef.current && !selectedId) {
-            hasAutoPlayedRef.current = true;
-            const timer = setTimeout(() => playQuestion(), 500);
+        if (question && !hasAutoPlayedRef.current && !selectedId && !checking) {
+            const timer = setTimeout(() => {
+                hasAutoPlayedRef.current = true;
+                playQuestionRef.current();
+            }, 600);
             return () => clearTimeout(timer);
         }
-    }, [question, selectedId, playQuestion]);
+    }, [question, selectedId, checking]);
 
     const handleAnswer = (id: string) => {
         if (checking || !question) return;
@@ -478,46 +488,38 @@ export const Train: React.FC = () => {
     if (!question) return <div className="p-8 text-center">Loading...</div>;
 
     return (
-        <div className="min-h-screen bg-background text-white relative flex flex-col">
+        <div className="h-dvh max-h-dvh bg-background text-white relative flex flex-col overflow-hidden trainer-play-shell">
             <TrainerAmbientBackground />
 
-            {/* Top Left Branding */}
-            <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
+            {/* Top Left: logo + back button grouped */}
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-50 flex items-center gap-2">
                 <BrandLogo showText={false} />
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        navigate('/');
+                    }}
+                    className="group flex items-center gap-1 text-zinc-500 hover:text-zinc-300 font-medium text-[10px] sm:text-xs cursor-pointer transition-all duration-200 border border-white/10 hover:border-white/20 rounded-full px-2.5 py-1 bg-white/5 hover:bg-white/10 backdrop-blur-sm"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-0.5 transition-transform duration-200">
+                        <path d="m12 19-7-7 7-7"></path>
+                        <path d="M19 12H5"></path>
+                    </svg>
+                    <span>Home</span>
+                </button>
             </div>
 
-            <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1 min-h-0 overflow-y-auto">
-                {/* Header / Nav */}
-                <div className="w-full max-w-4xl px-4 flex justify-between items-center mb-8 relative z-50 pl-20 lg:pl-24">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            navigate('/');
-                        }}
-                        className="group flex items-center gap-2 text-zinc-600 hover:text-zinc-400 font-medium text-sm relative z-50 cursor-pointer transition-all duration-300 hover:gap-3"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform duration-300">
-                            <path d="m12 19-7-7 7-7"></path>
-                            <path d="M19 12H5"></path>
-                        </svg>
-                        <span>Home</span>
-                    </button>
-                    <div className="text-xs lg:text-sm font-bold uppercase tracking-widest brand-eyebrow backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+            <div className="relative z-10 flex flex-col items-center pt-8 sm:pt-10 pb-3 flex-1 min-h-0 overflow-hidden">
+                {/* Mode badge — centered top bar */}
+                <div className="w-full max-w-4xl px-4 flex justify-center items-center mt-5 mb-4 relative z-50 shrink-0">
+                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest brand-eyebrow backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
                         {state.difficulty} {state.currentMode}
                     </div>
-                    <div className="w-16"></div>
                 </div>
 
-                {/* iOS Silent Mode Warning - Shows immediately for iOS users */}
-                <div className="w-full max-w-4xl px-4 mb-4">
-                    <IOSSilentModeWarning />
-                </div>
-
-                {/* Audio Enable Banner - All Devices */}
-                <div className="w-full max-w-4xl px-4 mb-4">
-                    <AudioEnableBanner />
-                </div>
+                <IOSSilentModeWarning />
+                <AudioEnableBanner />
 
                 <ProgressMeter
                     current={state.runProgress + 1}
@@ -525,6 +527,7 @@ export const Train: React.FC = () => {
                     streak={state.streak}
                     level={state.level}
                     xp={state.xp}
+                    compact
                 />
 
                 <StreakCelebration streak={state.streak} />
@@ -545,7 +548,6 @@ export const Train: React.FC = () => {
                     onClose={() => setNewAchievement(null)}
                 />
 
-                {/* Mode Header with Diatonic Toggle for Chord Mode */}
                 {state.currentMode === 'chord' && (
                     <ModeHeader
                         title="Chord Identification"
@@ -558,18 +560,32 @@ export const Train: React.FC = () => {
                         tip={state.isDiatonicMode
                             ? "Same key mode: Perfect for learning diatonic chord relationships"
                             : "Random keys: Great for developing absolute chord recognition"}
+                        compact
                     />
                 )}
 
-                <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center">
-                    <div className="trainer-card w-full max-w-xl mx-auto mb-8 pt-8 pb-2">
-                        <h2 className="text-center text-xl font-semibold mb-4 px-4">
+                <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center min-h-0 gap-2 px-4">
+                    <div className="trainer-card trainer-listen-card relative w-full max-w-xl mx-auto shrink-0 px-5 py-5 sm:px-6 sm:py-6">
+                        {checking && correctId === selectedId && (
+                            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10">
+                                <Feedback
+                                    correct
+                                    points={30}
+                                    multiplier={getComboMultiplier(state.streak)}
+                                    onShowParticles={() => setShowParticles(true)}
+                                    variant="inline"
+                                />
+                            </div>
+                        )}
+                        <h2 className="text-center text-base sm:text-lg font-semibold mb-2 px-2 pt-2">
                             Listen and Identify
                         </h2>
                         <Player
+                            key={questionKey}
                             onPlay={playQuestion}
                             isPlaying={isPlaying}
-                            autoPlay={false} // Handled by effect
+                            autoPlay={false}
+                            size="compact"
                         />
                     </div>
 
@@ -579,20 +595,26 @@ export const Train: React.FC = () => {
                         disabled={checking || isPlaying}
                         selectedId={selectedId}
                         correctId={correctId}
+                        compact
                     />
+
+                    {checking && correctId !== selectedId && (
+                        <div className="w-full max-w-xl mx-auto px-1 mt-1 shrink-0">
+                            <div className="flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6"/><path d="m9 9 6 6"/>
+                                </svg>
+                                Try Again — correct answer highlighted above
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {checking && (
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-6 flex flex-col items-center animate-slide-up pb-8">
-                        <Feedback
-                            correct={correctId === selectedId}
-                            points={30}
-                            multiplier={getComboMultiplier(state.streak)}
-                            onShowParticles={() => setShowParticles(true)}
-                        />
+                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-4 sm:p-6 flex flex-col items-center animate-slide-up pb-6 sm:pb-8">
                         <button
                             onClick={handleNext}
-                            className={`mt-4 btn-primary w-full max-w-md text-lg ${state.isLocked ? 'opacity-50 pointer-events-none' : ''}`}
+                            className={`btn-primary w-full max-w-md text-base sm:text-lg ${state.isLocked ? 'opacity-50 pointer-events-none' : ''}`}
                         >
                             Next Question
                         </button>
@@ -603,13 +625,9 @@ export const Train: React.FC = () => {
                     visible={state.isLocked}
                     onUnlock={() => {
                         dispatch({ type: 'UNLOCK_FEATURE' });
-                        // Ideally navigate to success or just close
                     }}
                 />
             </div>
-
-            {/* Footer */}
-            <Footer />
         </div>
     );
 };

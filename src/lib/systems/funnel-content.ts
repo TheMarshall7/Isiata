@@ -143,7 +143,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroTestimonial: {
       name: 'Moqemae',
       role: 'Artist',
-      quote: 'Finally have a system that actually books people while I focus on music.',
+      quote: 'Working with ISIATA has truly taken my career to the next level...',
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },
@@ -315,7 +315,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroTestimonial: {
       name: 'Jozy',
       role: 'Artist',
-      quote: 'Having everything in one place changed how I run my business.',
+      quote: 'Working with you has been the best investment I could have made...',
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
     },
@@ -482,7 +482,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroTestimonial: {
       name: 'Moqemae',
       role: 'Artist',
-      quote: 'Finally have a system that actually books people while I focus on music.',
+      quote: 'Working with ISIATA has truly taken my career to the next level...',
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },
@@ -649,7 +649,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroTestimonial: {
       name: 'Jozy',
       role: 'Artist',
-      quote: 'Having everything in one place changed how I run my business.',
+      quote: 'Working with you has been the best investment I could have made...',
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
     },
@@ -816,7 +816,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroTestimonial: {
       name: 'Moqemae',
       role: 'Artist',
-      quote: 'Finally have a system that actually books people while I focus on music.',
+      quote: 'Working with ISIATA has truly taken my career to the next level...',
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },

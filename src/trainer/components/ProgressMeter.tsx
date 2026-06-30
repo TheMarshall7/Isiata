@@ -7,6 +7,7 @@ interface ProgressMeterProps {
     streak: number;
     level?: number;
     xp?: number;
+    compact?: boolean;
 }
 
 export const ProgressMeter: React.FC<ProgressMeterProps> = ({ 
@@ -14,7 +15,8 @@ export const ProgressMeter: React.FC<ProgressMeterProps> = ({
     total, 
     streak,
     level = 1,
-    xp = 0
+    xp = 0,
+    compact = false,
 }) => {
     const runPercentage = Math.min(100, (current / total) * 100);
     
@@ -34,6 +36,48 @@ export const ProgressMeter: React.FC<ProgressMeterProps> = ({
     };
     
     const multiplier = getComboMultiplier(streak);
+
+    if (compact) {
+        return (
+            <div className="w-full max-w-4xl mx-auto mb-2 px-4 shrink-0">
+                <div className="glass-card !p-3 space-y-2.5">
+                    <div className="flex items-center justify-between gap-2 text-[11px] sm:text-xs">
+                        <span className="font-bold text-zinc-300 uppercase tracking-wider">
+                            Level {level}
+                        </span>
+                        <span className="text-zinc-500 font-medium tabular-nums">
+                            {xpInLevel}/{xpNeededForNext} XP
+                        </span>
+                        <span className="font-semibold text-zinc-500 uppercase tracking-widest tabular-nums">
+                            Run {current}/{total}
+                        </span>
+                        {streak > 1 && (
+                            <span className={`text-orange-500 font-bold tabular-nums ${streak >= 5 ? 'animate-bounce' : ''}`}>
+                                {streak}🔥
+                            </span>
+                        )}
+                        {multiplier > 1 && (
+                            <span className="brand-eyebrow px-2 py-0.5 rounded-full text-[10px] font-bold">
+                                {multiplier}x
+                            </span>
+                        )}
+                    </div>
+                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
+                        <div
+                            className="h-full brand-progress-fill transition-all duration-500 ease-out"
+                            style={{ width: `${xpPercentage}%` }}
+                        />
+                    </div>
+                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
+                        <div
+                            className="h-full brand-progress-fill transition-all duration-500 ease-out"
+                            style={{ width: `${runPercentage}%` }}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full max-w-4xl mx-auto mb-8 lg:mb-12 px-4">

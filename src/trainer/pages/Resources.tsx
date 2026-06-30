@@ -165,19 +165,19 @@ export const Resources: React.FC = () => {
                 <ResourceCategoryCards categories={categoryCards} />
                 
                 {/* Quick Tips */}
-                <div className="mt-12 card bg-gradient-to-br from-orange-500/10 to-orange-500/5/50 border-orange-500/30/50">
+                <div className="mt-12 card" style={{ background: 'linear-gradient(135deg, rgba(76,29,149,0.18) 0%, rgba(124,58,237,0.12) 50%, rgba(251,146,60,0.08) 100%)', borderColor: 'rgba(124,58,237,0.25)' }}>
                     <h3 className="font-semibold text-white mb-3">Quick Tips</h3>
                     <ul className="space-y-2 text-sm text-zinc-300">
                         <li className="flex items-start gap-2">
-                            <span className="text-orange-500 mt-0.5">•</span>
+                            <span className="text-violet-400 mt-0.5">•</span>
                             <span>Best results: 20 minutes daily.</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <span className="text-orange-500 mt-0.5">•</span>
+                            <span className="text-violet-400 mt-0.5">•</span>
                             <span>Replay and compare similar sounds.</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <span className="text-orange-500 mt-0.5">•</span>
+                            <span className="text-orange-400 mt-0.5">•</span>
                             <span>Start with Easy, move up when consistent.</span>
                         </li>
                     </ul>

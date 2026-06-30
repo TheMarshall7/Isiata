@@ -538,10 +538,10 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                     disabled={isPlaying && !isVocalWarmupActive}
                     className={`ml-4 px-6 py-2 rounded-lg font-medium transition-all flex-shrink-0 ${
                         isVocalWarmupActive
-                            ? 'bg-red-500 hover:bg-red-600 text-white shadow-md hover:shadow-lg cursor-pointer'
+                            ? 'resource-play-btn-stop cursor-pointer'
                             : isPlaying
-                            ? 'bg-orange-300 text-white cursor-not-allowed'
-                            : 'bg-white hover:bg-zinc-200 text-black shadow-md hover:shadow-lg cursor-pointer'
+                            ? 'resource-play-btn cursor-not-allowed'
+                            : 'resource-play-btn cursor-pointer'
                     }`}
                 >
                     {isVocalWarmupActive ? 'Stop' : isPlaying ? 'Playing...' : isScaleExercise ? 'Start Exercise' : 'Play'}

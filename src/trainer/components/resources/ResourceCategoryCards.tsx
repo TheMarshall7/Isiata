@@ -30,11 +30,11 @@ export const ResourceCategoryCards: React.FC<ResourceCategoryCardsProps> = ({ ca
                     className="card hover:shadow-xl transition-all duration-300 text-left group hover:border-orange-500/40/50"
                 >
                     <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-orange-500/15 flex items-center justify-center text-orange-400 group-hover:bg-orange-200 transition-colors">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-opacity duration-300 resource-icon-bg">
                             {category.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-white mb-1 group-hover:text-orange-400 transition-colors">
+                            <h3 className="font-semibold text-white mb-1 group-hover:text-violet-300 transition-colors">
                                 {category.title}
                             </h3>
                             <p className="text-sm text-zinc-500 mb-2">
@@ -54,7 +54,7 @@ export const ResourceCategoryCards: React.FC<ResourceCategoryCardsProps> = ({ ca
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="text-zinc-600 group-hover:text-orange-500 transition-colors flex-shrink-0"
+                            className="text-zinc-600 group-hover:text-violet-400 transition-colors flex-shrink-0"
                         >
                             <path d="m9 18 6-6-6-6"></path>
                         </svg>

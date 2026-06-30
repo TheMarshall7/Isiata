@@ -11,6 +11,7 @@ interface AnswerGridProps {
     disabled: boolean;
     correctId?: string | null;
     selectedId?: string | null;
+    compact?: boolean;
 }
 
 export const AnswerGrid: React.FC<AnswerGridProps> = ({
@@ -18,10 +19,11 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
     onSelect,
     disabled,
     correctId,
-    selectedId
+    selectedId,
+    compact = false,
 }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl mx-auto p-4">
+        <div className={`grid grid-cols-2 w-full max-w-xl mx-auto ${compact ? 'gap-2 p-1' : 'gap-4 max-w-2xl p-4 md:grid-cols-2'}`}>
             {options.map((option) => {
                 let statusClass = "bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-orange-500 hover:text-orange-400 hover:bg-white/10 shadow-sm";
 
@@ -47,7 +49,8 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                         onClick={() => onSelect(option.id)}
                         disabled={disabled}
                         className={`
-              h-16 lg:h-20 rounded-2xl text-base lg:text-lg font-medium transition-all duration-300
+              rounded-xl font-medium transition-all duration-300
+              ${compact ? 'h-11 sm:h-12 text-sm' : 'h-16 lg:h-20 rounded-2xl text-base lg:text-lg'}
               ${statusClass}
               disabled:cursor-not-allowed disabled:transform-none
               active:scale-95 hover:scale-105

@@ -492,6 +492,18 @@
     @apply backdrop-blur-sm;
   }
 
+  .ear-trainer .trainer-play-shell .trainer-card {
+    @apply p-0;
+  }
+
+  .ear-trainer .trainer-play-shell .trainer-listen-card {
+    @apply px-5 py-5 sm:px-6 sm:py-6;
+  }
+
+  .ear-trainer .trainer-play-shell {
+    overscroll-behavior: none;
+  }
+
   .ear-trainer .glass-card::before,
   .ear-trainer .trainer-card::before {
     content: '';
@@ -519,9 +531,18 @@
     border: none;
   }
 
+  @keyframes progress-glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 8px -2px rgba(124, 58, 237, 0.3), 0 0 16px -4px rgba(251, 146, 60, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 16px -1px rgba(124, 58, 237, 0.7), 0 0 28px -4px rgba(251, 146, 60, 0.5);
+    }
+  }
+
   .ear-trainer .brand-progress-fill {
     background: linear-gradient(90deg, #7c3aed 0%, #fb923c 100%);
-    box-shadow: 0 0 12px -2px rgba(124, 58, 237, 0.35);
+    animation: progress-glow-pulse 2.4s ease-in-out infinite;
   }
 
   .ear-trainer .btn-primary {
@@ -620,5 +641,42 @@
 
   .producer-toolbox .toolbox-table-head {
     @apply border-b border-white/10;
+  }
+
+  /* Resources section — brand gradient icon bg */
+  .ear-trainer .resource-icon-bg {
+    background: linear-gradient(135deg, rgba(76, 29, 149, 0.25) 0%, rgba(124, 58, 237, 0.2) 50%, rgba(251, 146, 60, 0.15) 100%);
+    color: #a78bfa;
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    transition: opacity 0.2s, background 0.2s;
+  }
+
+  .ear-trainer .resource-icon-bg:is(div) {
+    /* icon color inherited from text */
+    color: #a78bfa;
+  }
+
+  .ear-trainer .resource-play-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 45%, #fb923c 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 14px -4px rgba(124, 58, 237, 0.45);
+    transition: opacity 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+
+  .ear-trainer .resource-play-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 18px -4px rgba(124, 58, 237, 0.55);
+    transform: translateY(-1px);
+  }
+
+  .ear-trainer .resource-play-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .ear-trainer .resource-play-btn-stop {
+    @apply bg-red-600 hover:bg-red-700 text-white;
+    background: #dc2626;
+    box-shadow: 0 4px 14px -4px rgba(220, 38, 38, 0.4);
   }
 }
