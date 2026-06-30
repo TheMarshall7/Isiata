@@ -87,6 +87,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <script
+          dangerouslySetInnerHTML={{
+            __html: 'document.documentElement.classList.add("js")',
+          }}
+        />
+        <script
           src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
           async
         />

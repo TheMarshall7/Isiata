@@ -12,7 +12,7 @@ export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="gradient-border flashlight-card border border-white/10 bg-surface-raised/50 depth-shadow-lg p-8 lg:p-12 text-center relative overflow-hidden">
+      <div className="gradient-border-brand flashlight-card bg-surface-raised/50 depth-shadow-lg p-8 lg:p-12 text-center relative overflow-hidden">
         <div className={`glow-orb top-0 left-1/2 -translate-x-1/2 w-64 h-64 ${accent.glow}`} aria-hidden />
 
         <div className="relative">

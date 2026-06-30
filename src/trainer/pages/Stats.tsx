@@ -146,7 +146,7 @@ export const Stats: React.FC = () => {
                                         const xpPercentage = xpNeededForNext > 0 ? Math.min(100, (xpInLevel / xpNeededForNext) * 100) : 100;
                                         return (
                                             <div 
-                                                className="h-full bg-gradient-to-r from-orange-500 to-white transition-all duration-500 shadow-lg shadow-white/10"
+                                                className="h-full brand-progress-fill transition-all duration-500"
                                                 style={{ width: `${xpPercentage}%` }}
                                             />
                                         );

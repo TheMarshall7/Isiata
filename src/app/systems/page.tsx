@@ -12,6 +12,9 @@ export default function SystemsPage() {
         <Section reveal>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
+                For artists, producers, and creatives
+              </p>
               <PageTitle
                 text="Systems"
                 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
@@ -21,7 +24,7 @@ export default function SystemsPage() {
                 Full backend business systems for artists, musicians, and creatives.
               </p>
 
-              <div className="max-w-2xl space-y-6 text-lg text-zinc-400 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-base font-light text-zinc-500 leading-[1.8]">
                 <p>
                   The creative work is only half the job. Your audience, bookings, and revenue need
                   infrastructure behind them.
@@ -64,7 +67,7 @@ export default function SystemsPage() {
                 className="block group"
               >
               <article
-                className="flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised/50 depth-shadow overflow-hidden"
+                className="flashlight-card hover-depth hover-glow gradient-border-brand rounded-lg bg-surface-raised/50 depth-shadow overflow-hidden"
               >
                 <div className="p-8 lg:p-12">
                   <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
@@ -167,7 +170,7 @@ export default function SystemsPage() {
                 <iconify-icon icon="solar:calendar-linear" width="18" height="18" />
               </Link>
               <p className="mt-6 text-xs text-zinc-600">
-                Built for artists, producers, and independent labels.
+                Built for artists, producers, and creatives.
               </p>
             </div>
           </div>

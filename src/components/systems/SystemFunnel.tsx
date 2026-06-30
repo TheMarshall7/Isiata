@@ -123,7 +123,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <div
-            className={`relative max-w-4xl mx-auto text-center p-10 lg:p-16 rounded-lg gradient-border border ${accent.border} bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg overflow-hidden`}
+            className={`relative max-w-4xl mx-auto text-center p-10 lg:p-16 rounded-lg gradient-border-brand bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg overflow-hidden`}
           >
             <div className={`glow-orb top-0 left-1/2 -translate-x-1/2 w-72 h-72 ${accent.glow}`} aria-hidden />
             <div className="relative">

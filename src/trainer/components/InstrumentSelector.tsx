@@ -57,7 +57,7 @@ export const InstrumentSelector: React.FC<InstrumentSelectorProps> = ({
                             <div className="flex flex-col items-center gap-2 relative">
                                 <Icon 
                                     className={`w-6 h-6 group-hover:scale-110 transition-transform duration-300 ${
-                                        isSelected ? 'text-black' : 'text-orange-400'
+                                        isSelected ? 'text-black' : 'text-zinc-400'
                                     }`} 
                                     strokeWidth={2} 
                                 />

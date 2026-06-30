@@ -67,7 +67,7 @@ export const Home: React.FC = () => {
     }
 
     return (
-        <PageShell>
+        <PageShell className="ear-trainer-home">
             <InstrumentOnboarding onSelectInstrument={handleInstrumentChange} />
 
             <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">

@@ -503,7 +503,7 @@ export const Train: React.FC = () => {
                         </svg>
                         <span>Home</span>
                     </button>
-                    <div className="text-xs lg:text-sm font-bold text-orange-300/90 uppercase tracking-widest bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-full border border-orange-500/30 shadow-sm shadow-orange-500/10">
+                    <div className="text-xs lg:text-sm font-bold uppercase tracking-widest brand-eyebrow backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
                         {state.difficulty} {state.currentMode}
                     </div>
                     <div className="w-16"></div>

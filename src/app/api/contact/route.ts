@@ -26,8 +26,15 @@ export async function POST(request: NextRequest) {
     const formBody = new URLSearchParams({
       name,
       email,
-      _subject: `[Contact] ${subject}`,
-      message: `From: ${name} <${email}>\nSubject: ${subject}\n\n${message}`,
+      _subject: `[ISIATA Contact] ${subject}`,
+      message: [
+        'Form: Contact page',
+        '',
+        `From: ${name} <${email}>`,
+        `Subject: ${subject}`,
+        '',
+        message,
+      ].join('\n'),
       _captcha: 'false',
     })
 

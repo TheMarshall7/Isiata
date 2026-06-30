@@ -66,7 +66,7 @@ export function ProcessSteps({ steps, accent, tierIcon }: ProcessStepsProps) {
         </div>
       </div>
 
-      <div className={`relative rounded-lg border ${accent.border} bg-transparent depth-shadow-lg overflow-hidden min-h-[280px] transition-all duration-300 isolate`}>
+      <div className="relative rounded-lg gradient-border-brand bg-transparent depth-shadow-lg overflow-hidden min-h-[280px] transition-all duration-300 isolate">
         <div className={`absolute inset-0 ${accent.glow} opacity-40`} aria-hidden />
         <div className="absolute inset-0 flex items-center justify-center p-12 opacity-25 pointer-events-none">
           <AreoClientWhiteLogo alt="" className="w-full max-w-[180px] h-auto" />

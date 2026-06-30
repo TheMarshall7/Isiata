@@ -11,7 +11,7 @@ export function AsymmetricPainGrid({ painPoints }: AsymmetricPainGridProps) {
   return (
     <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
       {primary && (
-        <div className="md:col-span-1 lg:row-span-2 flashlight-card hover-depth hover-glow gradient-border border border-white/10 bg-surface-raised/50 depth-shadow p-8 lg:p-10 flex flex-col justify-center">
+        <div className="md:col-span-1 lg:row-span-2 flashlight-card hover-depth hover-glow gradient-border-brand bg-surface-raised/50 depth-shadow p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center justify-center w-14 h-14 rounded-xl border border-white/10 bg-black/30 mb-6">
             <iconify-icon icon={primary.icon} width="28" height="28" className="text-white" />
           </div>

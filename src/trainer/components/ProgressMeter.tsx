@@ -45,7 +45,7 @@ export const ProgressMeter: React.FC<ProgressMeterProps> = ({
                             Level {level}
                         </span>
                         {multiplier > 1 && (
-                            <span className="text-xs lg:text-sm bg-gradient-to-r from-orange-500 to-orange-400 text-black px-3 py-1.5 rounded-full font-bold shadow-lg shadow-orange-500/20">
+                            <span className="text-xs lg:text-sm brand-eyebrow px-3 py-1.5 rounded-full font-bold">
                                 {multiplier}x COMBO
                             </span>
                         )}
@@ -56,7 +56,7 @@ export const ProgressMeter: React.FC<ProgressMeterProps> = ({
                 </div>
                 <div className="h-3 lg:h-4 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
                     <div
-                        className="h-full bg-gradient-to-r from-orange-500 to-white transition-all duration-500 ease-out shadow-lg shadow-white/10"
+                        className="h-full brand-progress-fill transition-all duration-500 ease-out"
                         style={{ width: `${xpPercentage}%` }}
                     />
                 </div>
@@ -78,7 +78,7 @@ export const ProgressMeter: React.FC<ProgressMeterProps> = ({
                 </div>
                 <div className="h-3 lg:h-4 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
                     <div
-                        className="h-full bg-gradient-to-r from-orange-500 to-white transition-all duration-500 ease-out shadow-lg shadow-white/10"
+                        className="h-full brand-progress-fill transition-all duration-500 ease-out"
                         style={{ width: `${runPercentage}%` }}
                     />
                 </div>

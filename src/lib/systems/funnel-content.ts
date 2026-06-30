@@ -1,6 +1,7 @@
 import { SYSTEMS_TIERS, SystemsTier } from '@/lib/systems/tiers'
 
 export const AREOCLIENT_LOGO_WHITE = '/systems/areoclient-logo-white.png?v=2'
+export const AREOCLIENT_LOGO_COLOR = '/systems/areoclient-hero.png'
 
 export type FunnelAccent = {
   name: string
@@ -637,7 +638,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     vslPoster: '/systems/areoclient-hero.png',
   },
   'growth-infrastructure': {
-    heroHeadline: 'Your music business earns while you create',
+    heroHeadline: 'Your creative business earns while you create',
     heroSubheadline:
       'For established artists and labels ready to treat their career as a real business. Book a free strategy call, your AreoClient Creator Account connects every income stream into one system.',
     heroBenefits: [

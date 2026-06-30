@@ -180,7 +180,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
   }
 
   return (
-    <div className="relative border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
+    <div className="relative rounded-lg gradient-border-tsukuyomi bg-surface-raised depth-shadow overflow-hidden">
       {/* Grunge texture overlay */}
       <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,

@@ -33,7 +33,7 @@ export function TestimonialSlider() {
         {FUNNEL_TESTIMONIALS.map((testimonial) => (
           <div
             key={testimonial.name}
-            className="min-w-[85%] sm:min-w-[420px] snap-start shrink-0 border border-white/10 bg-surface-raised depth-shadow p-6 rounded-lg gradient-border"
+            className="min-w-[85%] sm:min-w-[420px] snap-start shrink-0 bg-surface-raised depth-shadow p-6 rounded-lg gradient-border-brand"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10">

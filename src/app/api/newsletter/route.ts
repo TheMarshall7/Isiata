@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GHL_NEWSLETTER_WEBHOOK_URL, NEWSLETTER_LEAD_NOTIFY_EMAIL } from '@/lib/constants'
+import { formatNewsletterSource } from '@/lib/form-source-labels'
 
 const FORMSUBMIT_URL = 'https://formsubmit.co'
 
@@ -33,18 +34,21 @@ async function sendGhlWebhook(payload: NewsletterPayload) {
 }
 
 async function sendFormsubmitNotification(payload: NewsletterPayload) {
+  const sourceLabel = formatNewsletterSource(payload.source)
   const formBody = new URLSearchParams({
     name: payload.name,
     email: payload.email,
-    _subject: `[Mailing List] ${payload.source}`,
+    _subject: `[ISIATA Mailing List] ${sourceLabel}`,
     message: [
+      `Source: ${sourceLabel}`,
+      '',
       'New mailing list signup',
       '',
       `Email: ${payload.email}`,
       `Name: ${payload.name}`,
       `First name: ${payload.first_name}`,
       `Last name: ${payload.last_name}`,
-      `Source: ${payload.source}`,
+      `Source slug: ${payload.source}`,
       `Time: ${payload.timestamp}`,
     ].join('\n'),
     _captcha: 'false',

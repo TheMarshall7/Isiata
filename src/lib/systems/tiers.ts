@@ -84,7 +84,7 @@ export const SYSTEMS_TIERS: SystemsTier[] = [
     startingAt: '$14,997',
     retainer: '$1,500/month',
     timeline: '12 to 16 weeks',
-    tagline: 'A fully connected, continuously optimized music business that generates income whether you\'re working or not.',
+    tagline: 'A fully connected, continuously optimized creative business that generates income whether you\'re working or not.',
     includesNote: 'Everything in The Client Machine, plus:',
     features: [
       'Multiple income streams connected (beats, services, coaching, email, funnels)',

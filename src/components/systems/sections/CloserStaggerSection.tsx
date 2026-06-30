@@ -10,7 +10,7 @@ export function CloserStaggerSection({ funnel }: CloserStaggerSectionProps) {
   const staggered = funnel.closerBenefits.slice(0, 3)
 
   return (
-    <div className="relative max-w-3xl mx-auto p-10 lg:p-14 rounded-lg gradient-border border border-white/15 bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg overflow-hidden">
+    <div className="relative max-w-3xl mx-auto p-10 lg:p-14 rounded-lg gradient-border-brand bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg overflow-hidden">
       <div className={`glow-orb top-0 left-1/2 -translate-x-1/2 w-72 h-72 ${accent.glow}`} aria-hidden />
 
       <div className="relative text-center">

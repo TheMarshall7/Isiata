@@ -18,7 +18,7 @@ const TRUST_BADGES = [
 export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCtaProps) {
   if (variant === 'footer') {
     return (
-      <div className="relative overflow-hidden rounded-lg border border-white/15 bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg p-8 lg:p-12">
+      <div className="relative overflow-hidden rounded-lg gradient-border-tsukuyomi bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent depth-shadow-lg p-8 lg:p-12">
         <div className="glow-orb top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-amber-500/10" aria-hidden />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-10 lg:gap-14 items-center">
@@ -73,7 +73,7 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
   }
 
   return (
-    <div className="border border-white/10 bg-surface-raised depth-shadow hover-glow overflow-hidden transition-all duration-500 gradient-border">
+    <div className="rounded-lg bg-surface-raised depth-shadow hover-glow overflow-hidden transition-all duration-500 gradient-border-tsukuyomi">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="aspect-square lg:aspect-auto overflow-hidden">
           <img src={DRUM_BUNDLE.image} alt={DRUM_BUNDLE.title} className="w-full h-full object-cover" />

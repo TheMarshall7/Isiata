@@ -104,7 +104,7 @@ export function AccountHaloSection({ funnel }: AccountHaloSectionProps) {
         </div>
       </div>
 
-      <div className="hidden lg:block mt-8 p-6 rounded-lg gradient-border border border-white/10 bg-surface-raised/40 depth-shadow">
+      <div className="hidden lg:block mt-8 p-6 rounded-lg gradient-border-brand bg-surface-raised/40 depth-shadow">
         <p className="text-sm text-zinc-300 leading-relaxed">{capabilities[activeIndex]?.description}</p>
         {capabilities[activeIndex]?.title === 'Owned contact list' && (
           <p className="text-xs text-zinc-500 mt-2 italic">{FUNNEL_SHARED.contactsTrustLine}</p>

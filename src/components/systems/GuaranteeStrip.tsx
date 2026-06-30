@@ -11,7 +11,7 @@ type GuaranteeStripProps = {
 
 export function GuaranteeStrip({ accentText = 'text-zinc-500' }: GuaranteeStripProps) {
   return (
-    <div className="gradient-border rounded-lg border border-white/10 bg-surface-raised/40 depth-shadow p-6 md:p-8">
+    <div className="gradient-border-brand rounded-lg bg-surface-raised/40 depth-shadow p-6 md:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {GUARANTEE_ITEMS.map((item) => (
           <div key={item.text} className="flex items-center gap-3">

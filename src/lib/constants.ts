@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   description: 'Culture and innovation. Sound, objects, tools, and access.',
   url: 'https://isiata.com',
   ogImage: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg',
-  contactEmail: 'isiataofficial@gmail.com',
+  contactEmail: 'brianmarshallca@gmail.com',
   links: {
     soundcloud: 'https://soundcloud.com/isiataofficial',
     tiktok: 'https://www.tiktok.com/@isiataOfficial',
@@ -33,7 +33,7 @@ export const FOOTER_LINKS = {
   ],
   information: [
     { href: '/about', label: 'About' },
-    { href: 'mailto:isiataofficial@gmail.com', label: 'General Inquiry' },
+    { href: 'mailto:brianmarshallca@gmail.com', label: 'General Inquiry' },
   ],
   legal: [
     { href: '/legal/licensing', label: 'Licensing' },
@@ -78,7 +78,7 @@ export const CALENDAR_EMBED_URL = 'https://api.leadconnectorhq.com/widget/bookin
 export const GHL_NEWSLETTER_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/F1J2yvd2AUT4owDs9EPl/webhook-trigger/c1a53b5c-caf4-4703-9d45-03b9f0ca3119'
 
 /** Formsubmit.co inbox for mailing list lead email notifications (runs alongside the GHL webhook). */
-export const NEWSLETTER_LEAD_NOTIFY_EMAIL = 'brian.marshallca@gmail.com'
+export const NEWSLETTER_LEAD_NOTIFY_EMAIL = 'brianmarshallca@gmail.com'
 
 /**
  * Optional. Contact form uses Formsubmit.co (no API key). Leave empty.

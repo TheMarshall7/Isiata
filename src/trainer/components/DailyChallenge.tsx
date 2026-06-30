@@ -15,7 +15,7 @@ export const DailyChallengeCard: React.FC<DailyChallengeProps> = ({ challenge, i
                 challenge.completed 
                     ? 'border-green-300/50 bg-gradient-to-br from-green-50/50 to-green-100/30' 
                     : 'border-white/20'
-            } hover:scale-[1.02] hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1 animate-fade-in-up`}
+            } hover:scale-[1.02] hover:shadow-xl hover:-translate-y-1 animate-fade-in-up`}
             style={{
                 animationDelay: `${index * 100}ms`,
                 animationFillMode: 'both'
@@ -38,7 +38,7 @@ export const DailyChallengeCard: React.FC<DailyChallengeProps> = ({ challenge, i
                     </div>
                 </div>
                 <div className="text-right">
-                    <div className="text-sm font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full group-hover:bg-orange-500/15 group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                    <div className="text-sm font-bold text-zinc-300 bg-white/5 border border-white/10 px-3 py-1 rounded-full group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300">
                         +{challenge.reward.xp} XP
                     </div>
                 </div>
@@ -48,7 +48,7 @@ export const DailyChallengeCard: React.FC<DailyChallengeProps> = ({ challenge, i
                     className={`h-full transition-all duration-500 group-hover:shadow-lg ${
                         challenge.completed 
                             ? 'bg-gradient-to-r from-green-400 to-green-600 shadow-lg shadow-green-500/30 group-hover:shadow-green-500/50' 
-                            : 'bg-gradient-to-r from-orange-500 to-white shadow-lg shadow-white/10 group-hover:shadow-orange-500/30'
+                            : 'brand-progress-fill shadow-lg shadow-white/5 group-hover:shadow-white/10'
                     }`}
                     style={{ width: `${percentage}%` }}
                 />

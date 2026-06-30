@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 }
 
 export default function ToolboxLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return <div className="producer-toolbox">{children}</div>
 }

@@ -24,7 +24,7 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
         className={`relative inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest border px-3 py-1.5 rounded-full mb-6 ${accent.badge}`}
       >
         <iconify-icon icon={tier.icon} width="14" height="14" />
-        For artists & producers · Tier {tier.tier}
+        For artists, producers, and creatives · Tier {tier.tier}
       </span>
 
       <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-oswald uppercase tracking-tight gradient-text mb-5 leading-[0.95]">
@@ -59,7 +59,7 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
         <TrustMetricsRow />
       </div>
 
-      <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-lg gradient-border border border-white/10 bg-surface-raised/50 depth-shadow mb-8 text-left">
+      <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-lg gradient-border-brand bg-surface-raised/50 depth-shadow mb-8 text-left">
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 shrink-0 mx-auto sm:mx-0">
           <img src={heroTestimonial.avatar} alt={heroTestimonial.name} className="w-full h-full object-cover" />
         </div>
