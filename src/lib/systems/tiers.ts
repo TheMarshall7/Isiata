@@ -14,6 +14,8 @@ export type SystemsTier = {
   features: string[]
   outcome: string
   icon: string
+  /** Scoped pricing — no fixed dollar amounts; discovery call first */
+  isScoped?: boolean
 }
 
 export const SYSTEMS_TIERS: SystemsTier[] = [
@@ -97,5 +99,28 @@ export const SYSTEMS_TIERS: SystemsTier[] = [
     ],
     outcome: 'Your business runs like a catalog. Generating income in the background while you focus on the work.',
     icon: 'solar:buildings-3-linear',
+  },
+  {
+    id: 'custom',
+    tier: 5,
+    name: 'Custom Build',
+    startingAt: 'Scoped on call',
+    retainer: 'Based on scope',
+    timeline: 'Varies by project',
+    tagline:
+      'When your vision needs more than a fixed tier — we scope your goals, design the architecture, and build exactly what your business requires.',
+    includesNote: 'What a custom engagement can include:',
+    isScoped: true,
+    features: [
+      'Discovery call to map your offers, audience, workflows, and revenue goals',
+      'Written scope and system architecture before anything gets built',
+      'Mix capabilities from any tier — plus net-new automations and integrations',
+      'Phased delivery aligned to your priorities, timeline, and budget',
+      'Custom pages, funnels, and client journeys designed around how you actually sell',
+      'Flexible retainer structured around what the project needs — not a one-size package',
+    ],
+    outcome:
+      'A backend built for your business — not a template with your name on it. You get what you need, nothing you do not.',
+    icon: 'solar:slider-vertical-linear',
   },
 ]

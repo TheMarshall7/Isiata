@@ -32,7 +32,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
     tier.tagline,
     tier.outcome,
     tier.startingAt,
-    funnel.heroImage
+    funnel.heroImage,
+    tier.isScoped
   )
 
   return buildPageMetadata(meta)
@@ -55,7 +56,7 @@ export default function SystemFunnelPage({ params }: PageProps) {
       description: `${tier.tagline} ${tier.outcome}`,
       url: `/systems/${params.slug}`,
       image: funnel.heroImage,
-      price: tier.startingAt,
+      ...(tier.isScoped ? {} : { price: tier.startingAt }),
     }),
     faqPageSchema(funnel.faqs),
   ]

@@ -53,10 +53,18 @@ export function TiersAtAGlance({ currentTierId }: TiersAtAGlanceProps) {
                   )}
                 </td>
                 <td className="py-4 pr-4 text-sm text-zinc-300">
-                  <Price value={tier.startingAt} />
+                  {tier.isScoped ? (
+                    <span>{tier.startingAt}</span>
+                  ) : (
+                    <Price value={tier.startingAt} />
+                  )}
                 </td>
                 <td className="py-4 pr-4 text-sm text-zinc-400">
-                  <Price value={tier.retainer} />
+                  {tier.isScoped ? (
+                    <span>{tier.retainer}</span>
+                  ) : (
+                    <Price value={tier.retainer} />
+                  )}
                 </td>
                 <td className="py-4 text-sm text-zinc-400">{tier.timeline}</td>
               </tr>

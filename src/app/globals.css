@@ -296,6 +296,37 @@
     z-index: 1;
   }
 
+  @keyframes gradient-border-brand-pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .gradient-border-brand-pulse {
+    position: relative;
+    background: transparent;
+  }
+
+  .gradient-border-brand-pulse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 40%, #fb923c 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+    animation: gradient-border-brand-pulse 2.8s ease-in-out infinite;
+  }
+
   /* Tsukuyomi drum bundle — warm orange to muted cream (matches pack artwork) */
   .gradient-border-tsukuyomi {
     position: relative;

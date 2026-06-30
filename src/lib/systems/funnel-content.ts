@@ -804,6 +804,175 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     heroImage: '/systems/areoclient-hero.png',
     vslPoster: '/systems/areoclient-hero.png',
   },
+  custom: {
+    heroHeadline: 'We scope it. We build it. Your way.',
+    heroSubheadline:
+      'For artists and creatives whose business does not fit a fixed package. Book a free discovery call. We map your goals, define the system, and quote a custom build around what you actually need.',
+    heroBenefits: [
+      'You get a written scope before anything is built — no surprises',
+      'Pull from any tier capability or request something entirely new',
+      'Phased delivery so you launch what matters first, then expand',
+    ],
+    heroTestimonial: {
+      name: 'Moqemae',
+      role: 'Artist',
+      quote: 'Finally have a system that actually books people while I focus on music.',
+      avatar:
+        'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
+    },
+    ctaLabel: 'Book your free discovery call',
+    accountHeadline: 'Your system, architected around your business',
+    accountSubheadline:
+      'Custom Build starts with discovery — we learn how you sell, what you offer, and where the gaps are. Then we design and launch an AreoClient Creator Account tailored to your workflows.',
+    creatorAccountHighlights: [
+      {
+        title: 'Discovery + written scope',
+        description:
+          'We document your offers, audience, tools, and goals before a single page or automation goes live.',
+        icon: 'solar:document-text-linear',
+      },
+      {
+        title: 'Modular architecture',
+        description:
+          'Combine booking, revenue, automation, and growth pieces — or invent workflows that only your business needs.',
+        icon: 'solar:widget-4-linear',
+      },
+      {
+        title: 'Phased rollout',
+        description:
+          'Launch the highest-impact pieces first. Expand when you are ready — not when a package says so.',
+        icon: 'solar:layers-linear',
+      },
+    ],
+    benefits: [
+      {
+        title: 'Built for your model',
+        description:
+          'Not every artist sells the same way. Custom Build adapts to sessions, beats, coaching, merch, licensing, or hybrid offers.',
+        icon: 'solar:slider-vertical-linear',
+      },
+      {
+        title: 'You approve the plan first',
+        description:
+          'Scope, timeline, and investment are agreed in writing before build starts. You know exactly what you are getting.',
+        icon: 'solar:clipboard-check-linear',
+      },
+      {
+        title: 'Any tier, plus more',
+        description:
+          'Need booking automation and a custom application funnel? Done. Want growth infrastructure with a bespoke dashboard? We scope it.',
+        icon: 'solar:box-linear',
+      },
+      {
+        title: 'Flexible ongoing support',
+        description:
+          'Retainer scales with what the system needs to maintain — not a flat fee for features you do not use.',
+        icon: 'solar:hand-stars-linear',
+      },
+      {
+        title: 'You still own everything',
+        description:
+          'Same AreoClient Creator Account foundation — your contacts, data, and automations stay portable and yours.',
+        icon: 'solar:shield-check-linear',
+      },
+    ],
+    comparisonRows: [
+      { label: 'Fit', diy: 'Force your business into templates', account: 'Architecture designed around how you sell' },
+      { label: 'Scope', diy: 'Guess what you need', account: 'Written scope before build' },
+      { label: 'Features', diy: 'All-or-nothing packages', account: 'Mix tier capabilities + custom workflows' },
+      { label: 'Timeline', diy: 'Rigid package timelines', account: 'Phased delivery on your priorities' },
+      { label: 'Investment', diy: 'Pay for what you do not need', account: 'Quoted to the project' },
+      { label: 'Support', diy: 'Generic docs', account: 'Ongoing support matched to scope' },
+    ],
+    closerHeadline: 'Ready to scope your custom system?',
+    closerBenefits: [
+      'Free discovery call — no credit card required',
+      'Written scope before any build begins',
+      'Modular: start lean, expand when ready',
+      'Your contacts and data stay yours',
+      'Built on AreoClient — premium creator infrastructure',
+    ],
+    painPoints: [
+      {
+        icon: 'solar:widget-4-linear',
+        title: 'Fixed tiers do not fit',
+        description:
+          'You need pieces from multiple packages — or capabilities that are not in any of them. One-size-fits-all leaves gaps.',
+      },
+      {
+        icon: 'solar:routing-2-linear',
+        title: 'Your offers are unique',
+        description:
+          'Multiple revenue streams, custom client journeys, or niche workflows that off-the-shelf tools cannot handle.',
+      },
+      {
+        icon: 'solar:clock-circle-linear',
+        title: 'You need the right sequence',
+        description:
+          'You cannot launch everything at once. You need a phased plan that matches your bandwidth and budget.',
+      },
+      {
+        icon: 'solar:question-circle-linear',
+        title: 'You want clarity before committing',
+        description:
+          'You will not drop five figures without knowing exactly what gets built, when, and why.',
+      },
+    ],
+    processSteps: [
+      {
+        title: 'Free discovery call',
+        description:
+          'We learn your offers, audience, current tools, pain points, and goals. No pitch — just understanding.',
+      },
+      {
+        title: 'Scope + architecture',
+        description:
+          'You receive a written plan: what we build, phases, timeline, and investment. You approve before we start.',
+      },
+      {
+        title: 'Phased build + launch',
+        description:
+          'We configure your AreoClient Creator Account in priority order. You see progress at every stage.',
+      },
+      {
+        title: 'Optimize + expand',
+        description:
+          'Once live, we refine based on real data. Add phases or capabilities when your business is ready.',
+      },
+    ],
+    faqs: [
+      ...ACCOUNT_FAQS,
+      {
+        question: 'How is Custom Build different from the fixed tiers?',
+        answer:
+          'Fixed tiers are proven packages with set scope and pricing. Custom Build is for when your needs span multiple tiers, require unique workflows, or do not map cleanly to a single package.',
+      },
+      {
+        question: 'Do I get a quote before paying?',
+        answer:
+          'Yes. After discovery, you receive a written scope with timeline and investment. Nothing starts until you approve.',
+      },
+      {
+        question: 'Can Custom Build include pieces from Booking Foundation or Growth Infrastructure?',
+        answer:
+          'Absolutely. We mix and match capabilities from any tier — plus build net-new automations, pages, or integrations your business requires.',
+      },
+      {
+        question: 'What does pricing look like?',
+        answer:
+          'It depends on scope. Some projects start lean; others are full infrastructure builds. We quote after discovery — not before.',
+      },
+    ],
+    accent: {
+      name: 'violet',
+      glow: 'bg-violet-500/10',
+      border: 'border-violet-500/30',
+      badge: 'bg-violet-500/10 text-violet-300 border-violet-500/20',
+      text: 'text-violet-300',
+    },
+    heroImage: '/systems/areoclient-hero.png',
+    vslPoster: '/systems/areoclient-hero.png',
+  },
 }
 
 export const FUNNEL_TESTIMONIALS = [

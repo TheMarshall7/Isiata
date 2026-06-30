@@ -67,7 +67,9 @@ export default function SystemsPage() {
                 className="block group"
               >
               <article
-                className="flashlight-card hover-depth hover-glow gradient-border-brand rounded-lg bg-surface-raised/50 depth-shadow overflow-hidden"
+                className={`flashlight-card hover-depth hover-glow rounded-lg bg-surface-raised/50 depth-shadow overflow-hidden ${
+                  tier.isScoped ? 'gradient-border-brand-pulse' : 'gradient-border-brand'
+                }`}
               >
                 <div className="p-8 lg:p-12">
                   <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
@@ -77,7 +79,7 @@ export default function SystemsPage() {
                           <iconify-icon icon={tier.icon} width="28" height="28" className="text-white" />
                         </div>
                         <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                          Tier {tier.tier}
+                          {tier.isScoped ? 'Custom' : `Tier ${tier.tier}`}
                         </span>
                       </div>
 

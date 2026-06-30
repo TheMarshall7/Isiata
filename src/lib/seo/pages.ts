@@ -186,20 +186,19 @@ export function systemTierMeta(
   tagline: string,
   outcome: string,
   startingAt: string,
-  heroImage: string
+  heroImage: string,
+  isScoped?: boolean
 ) {
   return {
-    title: `${name} — Artist Business System from ${startingAt}`,
+    title: isScoped
+      ? `${name} — Custom Artist Business System`
+      : `${name} — Artist Business System from ${startingAt}`,
     description: `${tagline} ${outcome}`.slice(0, 160),
     path: `/systems/${slug}`,
     image: heroImage,
     imageAlt: `${name} — ISIATA Systems`,
-    keywords: [
-      name,
-      'artist business system',
-      'music producer CRM',
-      'booking automation',
-      startingAt,
-    ],
+    keywords: isScoped
+      ? [name, 'custom artist business system', 'bespoke CRM', 'scoped systems build']
+      : [name, 'artist business system', 'music producer CRM', 'booking automation', startingAt],
   } satisfies PageMetadataInput & { keywords?: string[] }
 }
