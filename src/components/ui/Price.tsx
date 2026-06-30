@@ -14,7 +14,7 @@ export function Price({
   value,
   amount,
   className = '',
-  superscriptClassName = 'text-[0.58em] font-light align-super -top-[0.35em] relative tabular-nums',
+  superscriptClassName = 'text-[0.58em] font-thin align-super -top-[0.35em] relative tabular-nums',
   strikethrough = false,
 }: PriceProps) {
   const parsed = amount != null ? parsePriceAmount(amount) : parsePriceString(value ?? '')
