@@ -1,10 +1,15 @@
 export const ISIATA_LOGO_URL =
   'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png'
 
+const DEFAULT_SITE_URL = 'https://isiata.com'
+
 export const SITE_CONFIG = {
   name: 'ISIATA',
   description: 'Culture and innovation. Sound, objects, tools, and access.',
-  url: 'https://isiata.com',
+  url: (process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || DEFAULT_SITE_URL).replace(
+    /\/$/,
+    ''
+  ),
   ogImage: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/6777a197ce41a65e1d80127d.jpeg',
   contactEmail: 'brianmarshallca@gmail.com',
   links: {

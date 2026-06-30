@@ -1,12 +1,10 @@
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Terms of Use',
-  description: 'Terms and conditions governing the use of the ISIATA website, digital products, and services. All sales of digital products are final.',
-  alternates: { canonical: '/legal/terms' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.legalTerms)
 
 export default function TermsPage() {
   return (

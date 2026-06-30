@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SYSTEMS_TIERS } from '@/lib/systems/tiers'
+import { Price } from '@/components/ui/Price'
 
 type TiersAtAGlanceProps = {
   currentTierId: string
@@ -51,8 +52,12 @@ export function TiersAtAGlance({ currentTierId }: TiersAtAGlanceProps) {
                     </Link>
                   )}
                 </td>
-                <td className="py-4 pr-4 text-sm text-zinc-300">{tier.startingAt}</td>
-                <td className="py-4 pr-4 text-sm text-zinc-400">{tier.retainer}</td>
+                <td className="py-4 pr-4 text-sm text-zinc-300">
+                  <Price value={tier.startingAt} />
+                </td>
+                <td className="py-4 pr-4 text-sm text-zinc-400">
+                  <Price value={tier.retainer} />
+                </td>
                 <td className="py-4 text-sm text-zinc-400">{tier.timeline}</td>
               </tr>
             )

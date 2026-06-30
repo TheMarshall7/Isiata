@@ -1,17 +1,24 @@
 import { Metadata } from 'next'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { itemListSchema } from '@/lib/seo/json-ld'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
+import { TOOL_CATALOG } from '@/lib/tools/catalog'
 
-export const metadata: Metadata = {
-  title: 'Tools — Sample Packs, Plugins & Producer Toolbox',
-  description:
-    'Premium production tools by ISIATA. Sample packs, plugins, presets, utilities, and the Producer Toolbox.',
-  openGraph: {
-    title: 'ISIATA Tools — Sample Packs, Plugins & Producer Toolbox',
-    description:
-      'Browse sample packs, plugins, presets, and production tools from ISIATA.',
-  },
-  alternates: { canonical: '/tools' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.tools)
 
 export default function ToolsLayout({ children }: { children: React.ReactNode }) {
-  return children
+  const itemList = itemListSchema(
+    TOOL_CATALOG.map((item) => ({
+      name: item.title,
+      url: item.href,
+    }))
+  )
+
+  return (
+    <>
+      <JsonLd data={itemList} />
+      {children}
+    </>
+  )
 }

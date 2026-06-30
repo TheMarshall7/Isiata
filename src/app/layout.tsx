@@ -2,7 +2,11 @@ import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Oswald } from 'next/font/google'
 import './globals.css'
 import { SiteChrome } from '@/components/layout/SiteChrome'
+import { JsonLd } from '@/components/seo/JsonLd'
 import { SITE_CONFIG } from '@/lib/constants'
+import { organizationSchema, webSiteSchema } from '@/lib/seo/json-ld'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -17,38 +21,24 @@ const oswald = Oswald({
   display: 'swap',
 })
 
+const homeSeo = buildPageMetadata({
+  ...SEO_PAGES.home,
+  title: 'ISIATA — Culture and Innovation',
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: 'ISIATA — Culture and Innovation | Sound, Garments, Tools & Access',
     template: `%s | ${SITE_CONFIG.name}`,
   },
-  description: 'ISIATA is a creative studio spanning sound, garments, production tools, and private access. Limited releases. Intentional design. Culture and innovation.',
-  keywords: ['ISIATA', 'music', 'sound', 'garments', 'production tools', 'sample packs', 'creative direction', 'mixing', 'drum kits', 'fashion drops'],
+  description: homeSeo.description,
+  keywords: SEO_PAGES.home.keywords,
+  openGraph: homeSeo.openGraph,
+  twitter: homeSeo.twitter,
+  alternates: homeSeo.alternates,
   authors: [{ name: 'ISIATA' }],
   creator: 'ISIATA',
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: SITE_CONFIG.url,
-    title: 'ISIATA — Culture and Innovation',
-    description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
-    siteName: SITE_CONFIG.name,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        alt: 'ISIATA — Culture and Innovation',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ISIATA — Culture and Innovation',
-    description: 'Sound, garments, production tools, and private access. Limited releases. Intentional design.',
-    images: [SITE_CONFIG.ogImage],
-  },
   robots: {
     index: true,
     follow: true,
@@ -60,13 +50,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: SITE_CONFIG.url,
-  },
   icons: {
     icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67e216041870f43c643a7e9a.png',
     apple: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67e216041870f43c643a7e9a.png',
   },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 }
 
 export default function RootLayout({
@@ -97,25 +87,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen selection:bg-purple-500/30 relative overflow-x-hidden">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'ISIATA',
-              url: 'https://isiata.com',
-              logo: 'https://isiata.com/og-image.jpg',
-              description: 'Creative studio spanning sound, garments, production tools, and private access. Culture and innovation.',
-              sameAs: [
-                'https://www.instagram.com/isiataofficial',
-                'https://www.tiktok.com/@isiataOfficial',
-                'https://www.youtube.com/channel/UCEUFkFiczRx7RXuunjA3Hmg',
-                'https://soundcloud.com/isiataofficial',
-              ],
-            }),
-          }}
-        />
+        <JsonLd data={[organizationSchema(), webSiteSchema()]} />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

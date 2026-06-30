@@ -5,16 +5,10 @@ import { Section } from '@/components/ui/Section'
 import { CALENDAR_EMBED_URL } from '@/lib/constants'
 import { CONTACT_HREF, CONTACT_INQUIRY_HREF } from '@/lib/contact/offerings'
 import { CalendarEmbed } from '@/components/booking/CalendarEmbed'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Book a session | ISIATA Contact',
-  description: 'Schedule creative direction, mixing, session work, coaching, or live performance with ISIATA.',
-  openGraph: {
-    title: 'Book a session | ISIATA Contact',
-    description: 'Schedule creative direction, mixing, session work, coaching, or live performance with ISIATA.',
-  },
-  alternates: { canonical: '/contact/booking' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.contactBooking)
 
 const WHAT_TO_EXPECT = [
   { icon: 'solar:clock-circle-linear', text: 'Confirmation within 24 hours' },

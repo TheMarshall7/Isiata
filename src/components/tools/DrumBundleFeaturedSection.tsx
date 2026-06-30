@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { Price } from '@/components/ui/Price'
 import {
   DRUM_BUNDLE,
   DRUM_BUNDLE_CHECKOUT_HREF,
@@ -45,10 +46,11 @@ export function DrumBundleFeaturedSection() {
               </div>
 
               <div className="flex items-baseline gap-3 mb-8">
-                <span className="text-3xl font-oswald font-semibold text-white">
-                  {DRUM_BUNDLE_PRICE.display}
-                </span>
-                <span className="text-sm text-zinc-600 line-through">{DRUM_BUNDLE_PRICE.original}</span>
+                <Price
+                  amount={DRUM_BUNDLE_PRICE.amount}
+                  className="text-3xl font-oswald font-semibold text-white"
+                />
+                <Price value={DRUM_BUNDLE_PRICE.original} className="text-sm text-zinc-600" strikethrough />
               </div>
 
               <div className="flex flex-wrap gap-4">

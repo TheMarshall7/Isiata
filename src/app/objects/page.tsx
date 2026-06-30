@@ -4,23 +4,27 @@ import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
 import { EmailCapture } from '@/components/forms/EmailCapture'
 import { GarmentGrid } from '@/components/garments/GarmentGrid'
-import { getGarmentBySlug } from '@/lib/garments/catalog'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { GARMENT_CATALOG, getGarmentBySlug } from '@/lib/garments/catalog'
+import { itemListSchema } from '@/lib/seo/json-ld'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Garments — Limited Fashion Drops & Accessories',
-  description: 'Limited-run garments, fashion drops, and accessories by ISIATA. Signature releases and collections built to be worn and built to last.',
-  openGraph: {
-    title: 'ISIATA Garments — Limited Fashion Drops & Accessories',
-    description: 'Limited-run garments and accessories. Signature releases and collections built to be worn and built to last.',
-  },
-  alternates: { canonical: '/objects' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.objects)
 
 export default function ObjectsPage() {
   const heroJacket = getGarmentBySlug('they-might-be-mad-champion-jacket')
 
+  const itemList = itemListSchema(
+    GARMENT_CATALOG.map((product) => ({
+      name: product.title,
+      url: `/objects/${product.slug}`,
+    }))
+  )
+
   return (
     <>
+      <JsonLd data={itemList} />
       {/* Page Header */}
       <Container bordered className="pt-32 pb-16">
         <Section reveal>

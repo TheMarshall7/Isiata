@@ -1,16 +1,10 @@
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Archive — Past Releases, Drops & Offerings',
-  description: 'Browse the ISIATA archive of past sound releases, garment drops, and tool offerings. Limited editions documented and preserved.',
-  openGraph: {
-    title: 'ISIATA Archive — Past Releases & Drops',
-    description: 'Past sound releases, garment drops, and tool offerings. Limited editions documented and preserved.',
-  },
-  alternates: { canonical: '/archive' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.archive)
 
 export default function ArchivePage() {
   return (

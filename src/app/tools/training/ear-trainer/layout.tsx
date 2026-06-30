@@ -1,11 +1,8 @@
 import { Metadata } from 'next'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Ear Mastery, Interactive Ear Training',
-  description:
-    'Tune your ear with ISIATA Ear Mastery. Practice intervals, chords, scales, and more with interactive training.',
-  alternates: { canonical: '/tools/training/ear-trainer' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.earTrainer)
 
 export default function EarTrainerLayout({ children }: { children: React.ReactNode }) {
   return children

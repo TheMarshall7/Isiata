@@ -1,10 +1,8 @@
 import { Metadata } from 'next'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'General Inquiry | ISIATA Contact',
-  description: 'Send a general inquiry to ISIATA. We typically respond within 2 to 3 business days.',
-  alternates: { canonical: '/contact/inquiry' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.contactInquiry)
 
 export default function ContactInquiryLayout({ children }: { children: React.ReactNode }) {
   return children

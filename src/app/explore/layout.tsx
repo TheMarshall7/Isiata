@@ -1,14 +1,8 @@
 import { Metadata } from 'next'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Explore — Discover Sound, Garments, Tools & Access',
-  description: 'Discover everything ISIATA offers across sound, garments, production tools, and private access. Culture and innovation.',
-  openGraph: {
-    title: 'Explore ISIATA — Sound, Garments, Tools & Access',
-    description: 'Discover everything across sound, garments, production tools, and private access.',
-  },
-  alternates: { canonical: '/explore' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.explore)
 
 export default function ExploreLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>

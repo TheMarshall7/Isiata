@@ -9,6 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, Gift, Star, Zap, Medal } from 'lucide-react';
 import { DRUM_BUNDLE, DRUM_BUNDLE_CHECKOUT_HREF, DRUM_BUNDLE_PRICE, DRUM_BUNDLE_REWARD_PRICE } from '@/lib/tools/drum-bundle';
+import { Price } from '@/components/ui/Price';
 
 export const PlatinumGift: React.FC = () => {
     const navigate = useNavigate();
@@ -163,7 +164,11 @@ export const PlatinumGift: React.FC = () => {
                                     25% Off the {DRUM_BUNDLE.title}
                                 </h3>
                                 <p className="text-lg text-white/90">
-                                    {DRUM_BUNDLE_REWARD_PRICE.display} <span className="line-through text-white/50">{DRUM_BUNDLE_PRICE.display}</span> — exclusive ISIATA reward
+                                    <Price amount={DRUM_BUNDLE_REWARD_PRICE.amount} className="text-lg text-white/90" />{' '}
+                                    <span className="line-through text-white/50">
+                                      <Price amount={DRUM_BUNDLE_PRICE.amount} />
+                                    </span>{' '}
+                                    — exclusive ISIATA reward
                                 </p>
                             </div>
                         </div>

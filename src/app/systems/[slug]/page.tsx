@@ -3,7 +3,15 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/ui/Container'
 import { SystemFunnel } from '@/components/systems/SystemFunnel'
+import { JsonLd } from '@/components/seo/JsonLd'
 import { getAllTierSlugs, getTierWithFunnel } from '@/lib/systems/funnel-content'
+import {
+  breadcrumbListSchema,
+  faqPageSchema,
+  serviceSchema,
+} from '@/lib/seo/json-ld'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { systemTierMeta } from '@/lib/seo/pages'
 
 type PageProps = {
   params: { slug: string }
@@ -18,17 +26,16 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!data) return {}
 
   const { tier, funnel } = data
+  const meta = systemTierMeta(
+    params.slug,
+    tier.name,
+    tier.tagline,
+    tier.outcome,
+    tier.startingAt,
+    funnel.heroImage
+  )
 
-  return {
-    title: `${tier.name} | ISIATA Systems`,
-    description: funnel.heroSubheadline,
-    openGraph: {
-      title: `${tier.name} | ISIATA Systems`,
-      description: funnel.heroSubheadline,
-      images: [{ url: funnel.heroImage }],
-    },
-    alternates: { canonical: `/systems/${params.slug}` },
-  }
+  return buildPageMetadata(meta)
 }
 
 export default function SystemFunnelPage({ params }: PageProps) {
@@ -37,8 +44,25 @@ export default function SystemFunnelPage({ params }: PageProps) {
 
   const { tier, funnel } = data
 
+  const schemas = [
+    breadcrumbListSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Systems', path: '/systems' },
+      { name: tier.name, path: `/systems/${params.slug}` },
+    ]),
+    serviceSchema({
+      name: tier.name,
+      description: `${tier.tagline} ${tier.outcome}`,
+      url: `/systems/${params.slug}`,
+      image: funnel.heroImage,
+      price: tier.startingAt,
+    }),
+    faqPageSchema(funnel.faqs),
+  ]
+
   return (
     <>
+      <JsonLd data={schemas} />
       <Container bordered className="pt-28 pb-4">
         <Link
           href="/systems"

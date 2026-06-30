@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 import { getAllGarmentSlugs } from '@/lib/garments/catalog'
 import { getAllTierSlugs } from '@/lib/systems/funnel-content'
+import { siteUrl } from '@/lib/seo/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://isiata.com'
+  const baseUrl = siteUrl
 
   return [
     {
@@ -40,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/tools/sample-packs/tsukuyomi-drum-bundle`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/tools/toolbox`,
@@ -55,22 +56,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/tools/checkout/order`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/systems`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.85,
+      priority: 0.9,
     },
     ...getAllTierSlugs().map((slug) => ({
       url: `${baseUrl}/systems/${slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      priority: 0.85,
     })),
     {
       url: `${baseUrl}/contact`,
@@ -83,6 +78,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact/inquiry`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.75,
     },
     {
       url: `${baseUrl}/community`,
@@ -107,12 +108,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.4,
     },
     {
       url: `${baseUrl}/legal/licensing`,

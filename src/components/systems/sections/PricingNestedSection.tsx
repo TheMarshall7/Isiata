@@ -1,6 +1,7 @@
 import type { FunnelContent } from '@/lib/systems/funnel-content'
 import type { SystemsTier } from '@/lib/systems/tiers'
 import { FunnelCta } from '@/components/systems/FunnelCta'
+import { Price } from '@/components/ui/Price'
 
 type PricingNestedSectionProps = {
   tier: SystemsTier
@@ -26,16 +27,20 @@ export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps
             className="text-4xl md:text-5xl font-oswald font-semibold text-white mb-8"
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
-            {tier.startingAt}
+            <Price value={tier.startingAt} />
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">
-              <p className="text-lg font-semibold text-white">{tier.startingAt}</p>
+              <p className="text-lg font-semibold text-white">
+                <Price value={tier.startingAt} />
+              </p>
               <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Starting at</p>
             </div>
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">
-              <p className="text-lg font-semibold text-white">{tier.retainer}</p>
+              <p className="text-lg font-semibold text-white">
+                <Price value={tier.retainer} />
+              </p>
               <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Retainer</p>
             </div>
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">

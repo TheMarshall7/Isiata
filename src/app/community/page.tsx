@@ -4,16 +4,10 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
 import { EmailCapture } from '@/components/forms/EmailCapture'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Community — ISIATA',
-  description: 'Join the ISIATA community. Get notified when we open.',
-  openGraph: {
-    title: 'Community — ISIATA',
-    description: 'Join the ISIATA community. Get notified when we open.',
-  },
-  alternates: { canonical: '/community' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.community)
 
 export default function CommunityPage() {
   return (

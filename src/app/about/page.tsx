@@ -1,18 +1,10 @@
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'About ISIATA — Studio Philosophy & Vision',
-  description: 'ISIATA is a studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste. Culture and innovation.',
-  openGraph: {
-    title: 'About ISIATA — Studio Philosophy & Vision',
-    description: 'A studio without a single medium. Sound, objects, and systems shaped by restraint, clarity, and taste.',
-  },
-  alternates: {
-    canonical: '/about',
-  },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.about)
 
 export default function AboutPage() {
   return (

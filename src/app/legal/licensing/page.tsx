@@ -1,12 +1,10 @@
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { buildPageMetadata } from '@/lib/seo/metadata'
+import { SEO_PAGES } from '@/lib/seo/pages'
 
-export const metadata: Metadata = {
-  title: 'Licensing — Sample Packs, Tools & Content',
-  description: 'Licensing terms for ISIATA sample packs, digital tools, and content. Royalty-free drum samples for commercial use. Melody licensing details included.',
-  alternates: { canonical: '/legal/licensing' },
-}
+export const metadata: Metadata = buildPageMetadata(SEO_PAGES.legalLicensing)
 
 export default function LicensingPage() {
   return (
