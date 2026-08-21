@@ -54,7 +54,7 @@ export default function HomePage() {
             href={TWO_TALES.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-4 group max-w-[calc(100%-3rem)]"
+            className="absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-6 md:gap-8 group max-w-[min(100%-3rem,28rem)] pr-4"
           >
             <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-white/15 depth-shadow">
               <img
@@ -75,7 +75,7 @@ export default function HomePage() {
             </span>
           </a>
 
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 is-visible aura-reveal">
+          <div className="absolute bottom-12 right-6 md:right-10 is-visible aura-reveal">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs text-zinc-400 uppercase tracking-widest">Scroll</span>
               <iconify-icon icon="solar:arrow-down-linear" width="20" height="20" className="text-zinc-400 animate-bounce" />
