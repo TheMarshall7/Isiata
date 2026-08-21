@@ -45,7 +45,7 @@ export default function SystemsPage() {
               <img
                 src={ISIATA_LOGO_URL}
                 alt="ISIATA"
-                className="w-full max-w-sm lg:max-w-md h-auto object-contain bg-transparent"
+                className="w-full max-w-[11.664rem] lg:max-w-[13.608rem] h-auto object-contain bg-transparent"
               />
             </div>
           </div>
