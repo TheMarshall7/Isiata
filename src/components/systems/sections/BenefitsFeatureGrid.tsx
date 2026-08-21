@@ -1,5 +1,5 @@
 import type { FunnelAccent, FunnelBenefit } from '@/lib/systems/funnel-content'
-import { AREOCLIENT_LOGO_COLOR } from '@/lib/systems/funnel-content'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 import { Stagger } from '@/components/ui/Stagger'
 
 type BenefitsFeatureGridProps = {
@@ -14,8 +14,8 @@ export function BenefitsFeatureGrid({ benefits, tierName, accent }: BenefitsFeat
       <div className="relative lg:sticky lg:top-28 flex items-center justify-center aspect-[4/3] p-12 md:p-16 isolate">
         <div className={`absolute inset-0 ${accent.glow} blur-3xl rounded-full opacity-40`} aria-hidden />
         <img
-          src={AREOCLIENT_LOGO_COLOR}
-          alt={tierName}
+          src={ISIATA_LOGO_URL}
+          alt={`${tierName} — ISIATA`}
           className="relative w-full max-w-[220px] h-auto object-contain"
         />
       </div>

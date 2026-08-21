@@ -1,29 +1,15 @@
 import type { FunnelContent } from '@/lib/systems/funnel-content'
 import type { SystemsTier } from '@/lib/systems/tiers'
+import { SYSTEMS_STARTING_AT } from '@/lib/systems/tiers'
 import { FunnelCta } from '@/components/systems/FunnelCta'
-import { Price } from '@/components/ui/Price'
 
 type PricingNestedSectionProps = {
   tier: SystemsTier
   funnel: FunnelContent
 }
 
-function PricingValue({
-  value,
-  className = '',
-}: {
-  value: string
-  className?: string
-}) {
-  if (!value.trim().startsWith('$')) {
-    return <span className={className}>{value}</span>
-  }
-  return <Price value={value} className={className} />
-}
-
 export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps) {
   const { accent } = funnel
-  const investmentLabel = tier.isScoped ? 'Scoped together' : tier.startingAt
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -36,40 +22,30 @@ export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps
 
         <div className="relative">
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-2">
-            {tier.isScoped ? 'Your project' : 'Your investment'}
+            What determines your investment
           </p>
           <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight gradient-text mb-2">
             {tier.name}
           </h2>
           <p className="text-sm text-zinc-500 italic mb-8">{tier.tagline}</p>
 
-          <p
-            className="text-4xl md:text-5xl font-oswald font-semibold text-white mb-8"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
-          >
-            <PricingValue value={investmentLabel} />
+          <p className="text-base font-light text-zinc-400 leading-relaxed mb-8">
+            Every artist&apos;s starting point is different. Systems start from {SYSTEMS_STARTING_AT}. On the call,
+            we&apos;ll figure out exactly what you need and what it costs.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">
-              <p className="text-lg font-semibold text-white">
-                <PricingValue value={tier.startingAt} />
-              </p>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">
-                {tier.isScoped ? 'Investment' : 'Starting at'}
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border border-white/10 bg-black/20">
-              <p className="text-lg font-semibold text-white">
-                <PricingValue value={tier.retainer} />
-              </p>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Retainer</p>
+              <p className="text-lg font-semibold text-white">From {SYSTEMS_STARTING_AT}</p>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Starting point</p>
             </div>
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">
               <p className="text-lg font-semibold text-white">{tier.timeline}</p>
               <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Timeline</p>
             </div>
           </div>
+
+          <p className="text-sm text-zinc-500 leading-relaxed mb-8">{tier.forYouIf}</p>
 
           <FunnelCta
             label={funnel.ctaLabel}

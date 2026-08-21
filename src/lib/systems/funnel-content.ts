@@ -1,7 +1,5 @@
-import { SYSTEMS_TIERS, SystemsTier } from '@/lib/systems/tiers'
-
-export const AREOCLIENT_LOGO_WHITE = '/systems/areoclient-logo-white.png?v=2'
-export const AREOCLIENT_LOGO_COLOR = '/systems/areoclient-hero.png'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
+import { SYSTEMS_CTA_LABEL, SYSTEMS_TIERS, SystemsTier } from '@/lib/systems/tiers'
 
 export type FunnelAccent = {
   name: string
@@ -79,7 +77,7 @@ export const FUNNEL_SHARED = {
   ctaMicrocopy: 'Free strategy call · No credit card · 24h confirmation',
   comparisonColumns: {
     diy: 'DIY / Link-in-bio',
-    account: 'AreoClient Creator Account',
+    account: 'ISIATA Systems',
   },
   trustMetrics: [
     { value: '50+', label: 'Projects delivered' },
@@ -116,17 +114,17 @@ const ACCOUNT_FAQS: FunnelFaq[] = [
   {
     question: 'Do I own my contacts and data?',
     answer:
-      'Yes. Your AreoClient Creator Account gives you an owned contact list, not followers trapped on social platforms. You can export your data and your audience stays with you.',
+      'Yes. You get an owned contact list, not followers trapped on social platforms. You can export your data and your audience stays with you.',
   },
   {
-    question: 'What platform is this built on?',
+    question: 'Who builds and maintains this?',
     answer:
-      'Your system runs on AreoClient, a premium CRM and automation platform built for creators. ISIATA configures, launches, and maintains everything inside your account.',
+      'ISIATA designs, configures, and maintains the backend. You work with one partner who understands both the creative work and the infrastructure.',
   },
   {
     question: 'What happens after the build is done?',
     answer:
-      'Your account keeps running. The monthly retainer covers hosting, automation maintenance, and keeping your sequences active. You create, your account handles the backend.',
+      'Your system keeps running. Hosting, automations, and sequences stay active. You create. The system handles the backend.',
   },
 ]
 
@@ -134,7 +132,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
   'booking-foundation': {
     heroHeadline: 'Your audience starts paying you in 7 days',
     heroSubheadline:
-      'For artists and producers with real engagement who are tired of losing inquiries in DMs. Book a free strategy call. We map your offers and launch your AreoClient Creator Account.',
+      'For artists and producers with real engagement who are tired of losing inquiries in DMs. You have an audience but no way to capture or convert them consistently, and you want something working in a week, not a quarter.',
     heroBenefits: [
       'You own your audience, followers become contacts that survive algorithm changes',
       'Your calendar fills without you chasing people in DMs',
@@ -147,10 +145,10 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },
-    ctaLabel: 'Book your free strategy call',
+    ctaLabel: SYSTEMS_CTA_LABEL,
     accountHeadline: 'Your backend runs from one creator account',
     accountSubheadline:
-      'The Booking Foundation gives you a live AreoClient Creator Account that captures, follows up, and books from the audience you already have, in 7 days.',
+      'The Booking Foundation gives you a live ISIATA system that captures, follows up, and books from the audience you already have, in 7 days.',
     creatorAccountHighlights: [
       {
         title: 'Lead capture that you own',
@@ -216,7 +214,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
     ],
     closerHeadline: 'Stop leaving money in your DMs',
     closerBenefits: [
-      'Your AreoClient Creator Account goes live in 7 days',
+      'Your ISIATA system goes live in 7 days',
       'You own every contact, not the algorithm',
       'Follow-up runs while you create',
       'Your calendar books without you chasing people',
@@ -300,13 +298,13 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
       text: 'text-amber-400',
     },
-    heroImage: '/systems/areoclient-hero.png',
-    vslPoster: '/systems/areoclient-hero.png',
+    heroImage: ISIATA_LOGO_URL,
+    vslPoster: ISIATA_LOGO_URL,
   },
   'revenue-system': {
     heroHeadline: 'Turn your existing audience into consistent income',
     heroSubheadline:
-      'For creators with traffic but no conversion system. Book a free strategy call, we build your AreoClient Creator Account to monetize new leads and revive the ones you already lost.',
+      'You\'re already getting inquiries but leads are slipping through the cracks, and you know there\'s revenue sitting in your old DMs and inbox.',
     heroBenefits: [
       'You recover revenue from old DMs and inquiries you already paid for',
       'Your site converts visitors instead of sending them to a dead link-in-bio',
@@ -319,10 +317,10 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
     },
-    ctaLabel: 'Book your free strategy call',
+    ctaLabel: SYSTEMS_CTA_LABEL,
     accountHeadline: 'Your account converts traffic and revives dead leads',
     accountSubheadline:
-      'The Revenue System upgrades your AreoClient Creator Account with a conversion website, sales pages, and Cold Lead Revival, so income stops depending on your next post.',
+      'The Revenue System upgrades your ISIATA system with a conversion website, sales pages, and Cold Lead Revival, so income stops depending on your next post.',
     creatorAccountHighlights: [
       {
         title: 'Cold Lead Revival',
@@ -467,13 +465,13 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
       text: 'text-emerald-400',
     },
-    heroImage: '/systems/areoclient-hero.png',
-    vslPoster: '/systems/areoclient-hero.png',
+    heroImage: ISIATA_LOGO_URL,
+    vslPoster: ISIATA_LOGO_URL,
   },
   'client-machine': {
     heroHeadline: 'Your business runs from inquiry to paid, without you in the middle',
     heroSubheadline:
-      'For artists selling services, coaching, or premium packages who are drowning in admin. Book a free strategy call. Your AreoClient Creator Account handles the full client journey.',
+      'You\'re busy enough that manual follow-up and onboarding are eating your creative time, and you want the business to run without you chasing it.',
     heroBenefits: [
       'You only talk to buyers who are serious, applications filter the rest',
       'Payment and onboarding happen automatically after they say yes',
@@ -486,10 +484,10 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },
-    ctaLabel: 'Book your free strategy call',
+    ctaLabel: SYSTEMS_CTA_LABEL,
     accountHeadline: 'Your account runs the full client journey on autopilot',
     accountSubheadline:
-      'The Client Machine turns your AreoClient Creator Account into an end-to-end system, inquiry, qualification, payment, onboarding, and retention without you managing every step.',
+      'The Client Machine turns your ISIATA system into an end-to-end system, inquiry, qualification, payment, onboarding, and retention without you managing every step.',
     creatorAccountHighlights: [
       {
         title: 'Application filtering',
@@ -634,13 +632,13 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       badge: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
       text: 'text-violet-400',
     },
-    heroImage: '/systems/areoclient-hero.png',
-    vslPoster: '/systems/areoclient-hero.png',
+    heroImage: ISIATA_LOGO_URL,
+    vslPoster: ISIATA_LOGO_URL,
   },
   'growth-infrastructure': {
     heroHeadline: 'Your creative business earns while you create',
     heroSubheadline:
-      'For established artists and labels ready to treat their career as a real business. Book a free strategy call, your AreoClient Creator Account connects every income stream into one system.',
+      'You have more than one income stream (beats, coaching, services) running separately, and you want them connected into one system with one view of the numbers.',
     heroBenefits: [
       'You connect beats, services, coaching, and email into one ecosystem',
       'Your content captures leads automatically, not just likes',
@@ -653,10 +651,10 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
     },
-    ctaLabel: 'Book your free strategy call',
+    ctaLabel: SYSTEMS_CTA_LABEL,
     accountHeadline: 'Your account connects every income stream you have',
     accountSubheadline:
-      'Growth Infrastructure turns your AreoClient Creator Account into a full business operating system, multiple funnels, content capture, launch campaigns, and a performance dashboard in one place.',
+      'Growth Infrastructure turns your ISIATA system into a full business operating system, multiple funnels, content capture, launch campaigns, and a performance dashboard in one place.',
     creatorAccountHighlights: [
       {
         title: 'Content-to-lead engine',
@@ -801,13 +799,13 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       badge: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
       text: 'text-sky-400',
     },
-    heroImage: '/systems/areoclient-hero.png',
-    vslPoster: '/systems/areoclient-hero.png',
+    heroImage: ISIATA_LOGO_URL,
+    vslPoster: ISIATA_LOGO_URL,
   },
   custom: {
     heroHeadline: 'We scope it. We build it. Your way.',
     heroSubheadline:
-      'For artists and creatives whose business does not fit a fixed package. Book a free discovery call. We map your goals, define the system, and quote a custom build around what you actually need.',
+      'Your setup doesn\'t fit cleanly into a tier. Multiple revenue streams, an unusual workflow, or specific integrations already in place.',
     heroBenefits: [
       'You get a written scope before anything is built — no surprises',
       'Pull from any tier capability or request something entirely new',
@@ -820,10 +818,10 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       avatar:
         'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
     },
-    ctaLabel: 'Book your free discovery call',
+    ctaLabel: SYSTEMS_CTA_LABEL,
     accountHeadline: 'Your system, architected around your business',
     accountSubheadline:
-      'Custom Build starts with discovery — we learn how you sell, what you offer, and where the gaps are. Then we design and launch an AreoClient Creator Account tailored to your workflows.',
+      'Custom Build starts with discovery — we learn how you sell, what you offer, and where the gaps are. Then we design and launch an ISIATA system tailored to your workflows.',
     creatorAccountHighlights: [
       {
         title: 'Discovery + written scope',
@@ -872,7 +870,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       {
         title: 'You still own everything',
         description:
-          'Same AreoClient Creator Account foundation — your contacts, data, and automations stay portable and yours.',
+          'Same ISIATA system foundation — your contacts, data, and automations stay portable and yours.',
         icon: 'solar:shield-check-linear',
       },
     ],
@@ -890,7 +888,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       'Written scope before any build begins',
       'Modular: start lean, expand when ready',
       'Your contacts and data stay yours',
-      'Built on AreoClient — premium creator infrastructure',
+      'ISIATA systems — sound and infrastructure from one partner',
     ],
     painPoints: [
       {
@@ -915,7 +913,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
         icon: 'solar:question-circle-linear',
         title: 'You want clarity before committing',
         description:
-          'You will not drop five figures without knowing exactly what gets built, when, and why.',
+          'You will not commit without knowing exactly what gets built, when, and why.',
       },
     ],
     processSteps: [
@@ -932,7 +930,7 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       {
         title: 'Phased build + launch',
         description:
-          'We configure your AreoClient Creator Account in priority order. You see progress at every stage.',
+          'We configure your ISIATA system in priority order. You see progress at every stage.',
       },
       {
         title: 'Optimize + expand',
@@ -970,8 +968,8 @@ const FUNNEL_CONTENT: Record<string, FunnelContent> = {
       badge: 'bg-violet-500/10 text-violet-300 border-violet-500/20',
       text: 'text-violet-300',
     },
-    heroImage: '/systems/areoclient-hero.png',
-    vslPoster: '/systems/areoclient-hero.png',
+    heroImage: ISIATA_LOGO_URL,
+    vslPoster: ISIATA_LOGO_URL,
   },
 }
 

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FUNNEL_SHARED } from '@/lib/systems/funnel-content'
-import { SYSTEMS_BOOKING_HREF } from '@/lib/systems/tiers'
+import { SYSTEMS_BOOKING_HREF, SYSTEMS_CTA_LABEL } from '@/lib/systems/tiers'
 
 type StickyCtaBarProps = {
   tierName: string
@@ -13,7 +13,7 @@ type StickyCtaBarProps = {
 
 export function StickyCtaBar({
   tierName,
-  ctaLabel = 'Book your free strategy call',
+  ctaLabel = SYSTEMS_CTA_LABEL,
   heroId = 'funnel-hero',
 }: StickyCtaBarProps) {
   const [visible, setVisible] = useState(false)

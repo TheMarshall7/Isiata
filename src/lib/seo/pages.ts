@@ -87,7 +87,7 @@ export const SEO_PAGES = {
       'music producer CRM',
       'booking system for artists',
       'creative business infrastructure',
-      'AreoClient',
+      'ISIATA',
     ],
   },
   contact: {
@@ -185,20 +185,19 @@ export function systemTierMeta(
   name: string,
   tagline: string,
   outcome: string,
-  startingAt: string,
   heroImage: string,
   isScoped?: boolean
 ) {
   return {
     title: isScoped
       ? `${name} — Custom Artist Business System`
-      : `${name} — Artist Business System from ${startingAt}`,
+      : `${name} — Artist Business System`,
     description: `${tagline} ${outcome}`.slice(0, 160),
     path: `/systems/${slug}`,
     image: heroImage,
     imageAlt: `${name} — ISIATA Systems`,
     keywords: isScoped
       ? [name, 'custom artist business system', 'bespoke CRM', 'scoped systems build']
-      : [name, 'artist business system', 'music producer CRM', 'booking automation', startingAt],
+      : [name, 'artist business system', 'music producer CRM', 'booking automation'],
   } satisfies PageMetadataInput & { keywords?: string[] }
 }

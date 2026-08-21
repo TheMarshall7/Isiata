@@ -84,7 +84,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
             Benefits and outcomes
           </h2>
           <p className="text-zinc-400 mb-12 max-w-2xl">
-            This is what your AreoClient Creator Account actually does for your business.
+            This is what the system actually does for your business.
           </p>
           <BenefitsFeatureGrid
             benefits={funnel.benefits}
@@ -106,7 +106,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
         <Section reveal>
           <SectionEyebrow number="05" label="Why not DIY?" accentText={accent.text} />
           <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-10">
-            Link-in-bio vs your creator account
+            Link-in-bio vs ISIATA Systems
           </h2>
           <ComparisonTable rows={funnel.comparisonRows} accent={accent} />
           <div className="mt-12">

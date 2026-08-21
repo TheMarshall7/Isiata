@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { SYSTEMS_BOOKING_HREF } from '@/lib/systems/tiers'
+import { SYSTEMS_CTA_LABEL, SYSTEMS_BOOKING_HREF } from '@/lib/systems/tiers'
 import { FUNNEL_SHARED } from '@/lib/systems/funnel-content'
 
 type FunnelCtaProps = {
@@ -17,7 +17,7 @@ const AVATAR_URLS = [
 ]
 
 export function FunnelCta({
-  label = 'Book your free strategy call',
+  label = SYSTEMS_CTA_LABEL,
   microcopy = FUNNEL_SHARED.ctaMicrocopy,
   className = '',
   align = 'center',

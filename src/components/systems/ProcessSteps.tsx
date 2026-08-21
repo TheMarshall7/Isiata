@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import type { FunnelAccent, FunnelProcessStep } from '@/lib/systems/funnel-content'
-import { AreoClientWhiteLogo } from '@/components/systems/AreoClientWhiteLogo'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 
 type ProcessStepsProps = {
   steps: FunnelProcessStep[]
@@ -69,7 +69,7 @@ export function ProcessSteps({ steps, accent, tierIcon }: ProcessStepsProps) {
       <div className="relative rounded-lg gradient-border-brand bg-transparent depth-shadow-lg overflow-hidden min-h-[280px] transition-all duration-300 isolate">
         <div className={`absolute inset-0 ${accent.glow} opacity-40`} aria-hidden />
         <div className="absolute inset-0 flex items-center justify-center p-12 opacity-25 pointer-events-none">
-          <AreoClientWhiteLogo alt="" className="w-full max-w-[180px] h-auto" />
+          <img src={ISIATA_LOGO_URL} alt="" className="w-full max-w-[180px] h-auto object-contain" />
         </div>
         <div className="relative h-full p-8 flex flex-col justify-center">
           <div className={`w-16 h-16 rounded-2xl border ${accent.border} bg-white/[0.05] flex items-center justify-center mb-6 transition-transform duration-300 scale-100`}>

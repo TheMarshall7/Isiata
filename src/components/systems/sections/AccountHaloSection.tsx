@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { FunnelContent } from '@/lib/systems/funnel-content'
 import { FUNNEL_SHARED } from '@/lib/systems/funnel-content'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 import { FunnelCta } from '@/components/systems/FunnelCta'
 import { SectionEyebrow } from '@/components/systems/SectionEyebrow'
 
@@ -21,7 +22,7 @@ export function AccountHaloSection({ funnel }: AccountHaloSectionProps) {
 
   return (
     <div>
-      <SectionEyebrow number="02" label="Your creator account" accentText={accent.text} />
+      <SectionEyebrow number="02" label="Your system" accentText={accent.text} />
 
       <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4 leading-tight max-w-2xl">
         {funnel.accountHeadline}
@@ -51,13 +52,13 @@ export function AccountHaloSection({ funnel }: AccountHaloSectionProps) {
           <div className={`absolute inset-0 ${accent.glow} blur-3xl rounded-full opacity-60`} aria-hidden />
           <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border border-white/15 bg-transparent flex items-center justify-center depth-shadow-lg">
             <img
-              src="/systems/areoclient-hero.png"
-              alt="AreoClient Creator Account"
+              src={ISIATA_LOGO_URL}
+              alt="ISIATA"
               className="w-32 h-32 object-contain"
             />
           </div>
           <p className="relative mt-4 text-xs text-zinc-500 text-center">
-            AreoClient Creator Account
+            ISIATA Systems
           </p>
         </div>
 

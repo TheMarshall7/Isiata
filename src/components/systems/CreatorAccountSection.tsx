@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { FunnelContent } from '@/lib/systems/funnel-content'
 import { FUNNEL_SHARED } from '@/lib/systems/funnel-content'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 import { FunnelCta } from '@/components/systems/FunnelCta'
 
 type CreatorAccountSectionProps = {
@@ -28,22 +29,12 @@ export function CreatorAccountSection({ funnel }: CreatorAccountSectionProps) {
         <div className={`absolute -inset-4 ${accent.glow} blur-3xl rounded-full pointer-events-none opacity-60`} />
         <div className="relative rounded-lg border border-white/10 overflow-hidden depth-shadow">
           <img
-            src="/systems/areoclient-hero.png"
-            alt="AreoClient Creator Account"
+            src={ISIATA_LOGO_URL}
+            alt="ISIATA"
             className="w-full h-auto object-contain bg-black/40 p-6"
           />
         </div>
-        <p className="mt-4 text-xs text-zinc-500 text-center">
-          Powered by{' '}
-          <a
-            href="https://areoclient.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-white transition-colors"
-          >
-            AreoClient
-          </a>
-        </p>
+        <p className="mt-4 text-xs text-zinc-500 text-center">ISIATA Systems</p>
       </div>
 
       <div>

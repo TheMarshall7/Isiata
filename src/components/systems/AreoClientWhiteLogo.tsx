@@ -1,17 +1,17 @@
-import { AREOCLIENT_LOGO_WHITE } from '@/lib/systems/funnel-content'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 
-type AreoClientWhiteLogoProps = {
+type IsiataSystemsLogoProps = {
   alt?: string
   className?: string
 }
 
-/** White AC mark — PNG is keyed out; screen blend hides any residual black on dark UI. */
-export function AreoClientWhiteLogo({ alt = '', className = '' }: AreoClientWhiteLogoProps) {
+/** ISIATA mark for systems pages. */
+export function AreoClientWhiteLogo({ alt = 'ISIATA', className = '' }: IsiataSystemsLogoProps) {
   return (
     <img
-      src={AREOCLIENT_LOGO_WHITE}
+      src={ISIATA_LOGO_URL}
       alt={alt}
-      className={`logo-knockout object-contain ${className}`.trim()}
+      className={`object-contain ${className}`.trim()}
     />
   )
 }

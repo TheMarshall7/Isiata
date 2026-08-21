@@ -1,7 +1,6 @@
 'use client'
 
 import type { FunnelContent } from '@/lib/systems/funnel-content'
-import { FUNNEL_SHARED } from '@/lib/systems/funnel-content'
 import type { SystemsTier } from '@/lib/systems/tiers'
 import { FunnelCta } from '@/components/systems/FunnelCta'
 import { TrustMetricsRow } from '@/components/systems/TrustMetricsRow'
@@ -24,7 +23,7 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
         className={`relative inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest border px-3 py-1.5 rounded-full mb-6 ${accent.badge}`}
       >
         <iconify-icon icon={tier.icon} width="14" height="14" />
-        For artists, producers, and creatives · Tier {tier.tier}
+        For artists, producers, and creatives · {tier.isScoped ? 'Custom' : `Tier ${tier.tier}`}
       </span>
 
       <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-oswald uppercase tracking-tight gradient-text mb-5 leading-[0.95]">

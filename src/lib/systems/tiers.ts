@@ -1,20 +1,21 @@
 import { CONTACT_BOOKING_HREF } from '@/lib/contact/offerings'
 
 export const SYSTEMS_BOOKING_HREF = CONTACT_BOOKING_HREF
+export const SYSTEMS_STARTING_AT = '$2,500'
+export const SYSTEMS_CTA_LABEL = 'Talk it through'
 
 export type SystemsTier = {
   id: string
   tier: number
   name: string
-  startingAt: string
-  retainer: string
   timeline: string
   tagline: string
+  forYouIf: string
   includesNote?: string
   features: string[]
   outcome: string
   icon: string
-  /** Scoped pricing — no fixed dollar amounts; discovery call first */
+  /** Custom / scoped engagement — no fixed package */
   isScoped?: boolean
 }
 
@@ -23,104 +24,104 @@ export const SYSTEMS_TIERS: SystemsTier[] = [
     id: 'booking-foundation',
     tier: 1,
     name: 'The Booking Foundation',
-    startingAt: '$2,500',
-    retainer: '$497/month',
     timeline: '7 days',
-    tagline: 'Get your first paying clients from your existing audience in 7 days.',
+    tagline: 'Turn the audience you already have into paying clients. Fast.',
+    forYouIf:
+      'You have an audience but no way to capture or convert them consistently, and you want something working in a week, not a quarter.',
     features: [
-      'Lead capture page (turn followers into contacts you own)',
-      'Booking calendar for sessions, beats, services, or consultations',
-      'Automated follow-up (SMS + email) at 1hr, 24hr, and 72hr',
-      'Instant reply system for inquiries and requests',
-      'Missed message recovery system',
-      'No-show reminder + rebooking automation',
-      'Basic tracking so you see who\'s moving toward buying',
+      'A lead capture page that turns followers into contacts you actually own',
+      'A booking calendar for sessions, beats, mixes, or consults',
+      'Automated follow-up (SMS + email) so no inquiry goes cold',
+      'Instant replies to DMs and requests, even when you\'re not online',
+      'Missed message recovery. nothing falls through the cracks',
+      'No-show reminders and automatic rebooking',
+      'Basic tracking so you can see who\'s actually close to buying',
     ],
-    outcome: 'The audience you already have starts paying and booking automatically.',
+    outcome: 'The audience you already have starts paying and booking on its own.',
     icon: 'solar:calendar-mark-linear',
   },
   {
     id: 'revenue-system',
     tier: 2,
     name: 'The Revenue System',
-    startingAt: '$4,997',
-    retainer: '$597/month',
     timeline: '3 weeks',
-    tagline: 'Monetize your existing audience AND recover the leads you\'ve already lost.',
+    tagline: 'Monetize what you have. Recover what you already lost.',
+    forYouIf:
+      'You\'re already getting inquiries but leads are slipping through the cracks, and you know there\'s revenue sitting in your old DMs and inbox.',
     includesNote: 'Everything in The Booking Foundation, plus:',
     features: [
-      'Conversion website built around what you sell',
-      'Dedicated sales page for your core offer',
-      'Higher-converting lead capture pages',
-      'Cold Lead Revival system (re-engages past DMs, emails, old inquiries)',
-      'Stronger email + SMS follow-up sequences',
-      'Full CRM setup so no lead goes untracked',
+      'A real website built around what you sell, not a template with your name on it',
+      'A dedicated sales page for your core offer',
+      'Higher-converting lead capture, tuned for your actual audience',
+      'Cold Lead Revival: old DMs, old inquiries, dead leads, brought back',
+      'Stronger email + SMS sequences that do the follow-up you don\'t have time for',
+      'A full CRM, so every lead is tracked instead of buried in your inbox',
     ],
-    outcome: 'New content brings in leads. The system converts the ones you already had. Income becomes consistent.',
+    outcome:
+      'New content brings leads in. The system converts the ones you already had. Income stops being random.',
     icon: 'solar:graph-up-linear',
   },
   {
     id: 'client-machine',
     tier: 3,
     name: 'The Client Machine',
-    startingAt: '$8,997',
-    retainer: '$997/month',
     timeline: '8 to 10 weeks',
-    tagline: 'Fully automated from first inquiry to paid and onboarded, without you managing it.',
+    tagline: 'Inquiry to paid to onboarded, without you touching it.',
+    forYouIf:
+      'You\'re busy enough that manual follow-up and onboarding are eating your creative time, and you want the business to run without you chasing it.',
     includesNote: 'Everything in The Revenue System, plus:',
     features: [
-      'Full client journey automation (inquiry to follow-up to booking to payment to onboarding)',
-      'Application system to filter serious buyers',
-      'Automated client onboarding (welcome, delivery, next steps)',
-      'Behavior-based follow-up sequences',
-      'Re-engagement campaigns for cold leads',
-      'Upsell and retention messaging for existing clients',
+      'Full client journey automation: inquiry, follow-up, booking, payment, onboarding',
+      'An application layer that filters out tire-kickers before they reach you',
+      'Automated onboarding: welcome, delivery, next steps, no manual work',
+      'Behavior-based follow-up (what happens next depends on what they actually did)',
+      'Re-engagement campaigns that keep working the cold list in the background',
+      'Upsell and retention messaging for clients you\'ve already closed',
     ],
-    outcome: 'Clients move through your business on autopilot. You create. The system closes.',
+    outcome: 'Clients move through your business on their own. You create. The system closes.',
     icon: 'solar:cpu-bolt-linear',
   },
   {
     id: 'growth-infrastructure',
     tier: 4,
     name: 'The Growth Infrastructure',
-    startingAt: '$14,997',
-    retainer: '$1,500/month',
     timeline: '12 to 16 weeks',
-    tagline: 'A fully connected, continuously optimized creative business that generates income whether you\'re working or not.',
+    tagline: 'A creative business that runs whether you\'re working or not.',
+    forYouIf:
+      'You have more than one income stream (beats, coaching, services) running separately, and you want them connected into one system with one view of the numbers.',
     includesNote: 'Everything in The Client Machine, plus:',
     features: [
-      'Multiple income streams connected (beats, services, coaching, email, funnels)',
-      'Content-to-lead system (posts and releases capture leads automatically)',
-      'Owned audience growth system (email list, not algorithm-dependent)',
-      'Launch and release campaign system',
-      'Ongoing page, message, and conversion optimization',
-      'Performance dashboard (leads, bookings, revenue in one view)',
+      'Every income stream connected: beats, services, coaching, email, funnels. One system, not five disconnected tools',
+      'Content-to-lead: your posts and releases capture leads automatically',
+      'An owned audience system (email list) that isn\'t at the mercy of an algorithm',
+      'A full launch and release campaign engine',
+      'Ongoing optimization: pages, messaging, conversion, always improving',
+      'One dashboard for leads, bookings, and revenue',
       'Weekly strategy support',
     ],
-    outcome: 'Your business runs like a catalog. Generating income in the background while you focus on the work.',
+    outcome:
+      'Your business runs like a catalog, generating in the background while you focus on the work that actually matters.',
     icon: 'solar:buildings-3-linear',
   },
   {
     id: 'custom',
     tier: 5,
     name: 'Custom Build',
-    startingAt: 'Scoped on call',
-    retainer: 'Based on scope',
     timeline: 'Varies by project',
-    tagline:
-      'When your vision needs more than a fixed tier — we scope your goals, design the architecture, and build exactly what your business requires.',
+    tagline: 'When your business needs more than a fixed tier.',
+    forYouIf:
+      'Your setup doesn\'t fit cleanly into a tier. multiple revenue streams, an unusual workflow, or specific integrations already in place.',
     includesNote: 'What a custom engagement can include:',
     isScoped: true,
     features: [
-      'Discovery call to map your offers, audience, workflows, and revenue goals',
-      'Written scope and system architecture before anything gets built',
-      'Mix capabilities from any tier — plus net-new automations and integrations',
-      'Phased delivery aligned to your priorities, timeline, and budget',
-      'Custom pages, funnels, and client journeys designed around how you actually sell',
-      'Flexible retainer structured around what the project needs — not a one-size package',
+      'A discovery call to map your offers, audience, workflows, and goals',
+      'A written scope and system architecture before anything gets built',
+      'Any mix of the above tiers, plus net-new automation and integrations built for you specifically',
+      'Phased delivery, built around your priorities and budget',
+      'Custom pages, funnels, and client journeys designed around how you actually sell, not how a template assumes you sell',
+      'A flexible retainer sized to the work, not a fixed package',
     ],
-    outcome:
-      'A backend built for your business — not a template with your name on it. You get what you need, nothing you do not.',
+    outcome: 'A backend built for your business. Nothing you don\'t need, nothing missing that you do.',
     icon: 'solar:slider-vertical-linear',
   },
 ]
