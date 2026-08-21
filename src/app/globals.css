@@ -365,7 +365,75 @@
     }
   }
 
-  /* Animated orange-to-cream hairline for FL Studio template cards */
+  /* Blood orange hairline — starter samples */
+  .gradient-border-blood {
+    position: relative;
+    background: transparent;
+  }
+
+  .gradient-border-blood::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #7f1d1d 0%, #c2410c 38%, #ea580c 68%, #fb923c 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .sample-card-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    padding: 1px;
+    background: rgba(194, 65, 12, 0.12);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  }
+
+  .sample-card-frame::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 220%;
+    height: 220%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      transparent 52%,
+      #7f1d1d 68%,
+      #c2410c 80%,
+      #ea580c 90%,
+      #fb923c 96%,
+      transparent 100%
+    );
+    animation: tsukuyomi-border-spin 8s linear infinite;
+    pointer-events: none;
+  }
+
+  .sample-card-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 56px -24px rgba(194, 65, 12, 0.45);
+  }
+
+  .sample-card-frame:hover::before {
+    animation-duration: 3.5s;
+  }
+
+  .sample-card-inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(0.5rem - 1px);
+    background: #111111;
+  }
   .template-card-frame {
     position: relative;
     overflow: hidden;
@@ -436,6 +504,21 @@
 
     .lightbox-image {
       animation: none;
+    }
+
+    .sample-card-frame::before {
+      animation: none;
+      background: linear-gradient(135deg, #7f1d1d 0%, #c2410c 38%, #ea580c 68%, #fb923c 100%);
+      inset: 0;
+      width: auto;
+      height: auto;
+      transform: none;
+      left: 0;
+      top: 0;
+    }
+
+    .sample-card-frame:hover {
+      transform: none;
     }
   }
 

@@ -543,75 +543,149 @@ function StarterSamples() {
   }
 
   return (
-    <div className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 md:p-12 overflow-hidden">
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">
-        {String(DRUM_BUNDLE.starterSamples.count).padStart(2, '0')} Samples
-      </p>
-      <h4 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
-        {DRUM_BUNDLE.starterSamples.title}
-      </h4>
-      <div className="mb-7 h-px w-10 bg-white/25" />
-      <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl mb-10">
-        {DRUM_BUNDLE.starterSamples.lede}
-      </p>
+    <div className="relative overflow-hidden rounded-lg gradient-border-blood bg-gradient-to-br from-[#7f1d1d]/20 via-surface-raised/90 to-black/50 depth-shadow-lg p-6 md:p-8">
+      <div className="glow-orb -top-16 left-8 w-64 h-64 bg-orange-700/25" aria-hidden />
+      <div className="glow-orb -bottom-24 right-0 w-80 h-80 bg-red-800/15" aria-hidden />
+      <div
+        className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+        aria-hidden
+      />
 
-      <div className="rounded-lg border border-white/10 bg-black/30 p-6 md:p-8 mb-8">
-        {featured.url && (
-          <audio
-            ref={audioRef}
-            src={featured.url}
-            onTimeUpdate={() => {
-              if (!audioRef.current) return
-              setCurrentTime(audioRef.current.currentTime)
-              const d = audioRef.current.duration
-              setProgress(d ? (audioRef.current.currentTime / d) * 100 : 0)
-            }}
-            onLoadedMetadata={() => {
-              if (audioRef.current) setDuration(audioRef.current.duration)
-            }}
-            onEnded={() => {
-              setIsPlaying(false)
-              setProgress(0)
-            }}
-          />
-        )}
-        <div className="flex items-center gap-5">
-          <button
-            type="button"
-            onClick={togglePlay}
-            disabled={!featured.url}
-            className="w-14 h-14 flex items-center justify-center bg-white text-black rounded-full hover:bg-zinc-200 transition-colors shrink-0 disabled:opacity-40"
-            aria-label={isPlaying ? `Pause ${featured.name}` : `Play ${featured.name}`}
-          >
-            <iconify-icon icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'} width="24" height="24" />
-          </button>
-          <div className="flex-1 min-w-0">
-            <p className="text-lg font-oswald uppercase tracking-tight text-white">{featured.name}</p>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-zinc-500 mt-1 mb-3">
-              {featured.bpm} BPM · {featured.key}
-            </p>
-            <div className="h-1.5 bg-white/10 rounded-full cursor-pointer group" onClick={handleSeek}>
-              <div className="h-full bg-white rounded-full relative" style={{ width: `${progress || 0}%` }}>
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+        <div className="relative shrink-0 w-14 h-14">
+          <div className="absolute inset-0 rounded-full bg-orange-700/40 blur-md animate-pulse-glow" aria-hidden />
+          <div className="relative w-full h-full rounded-full border border-orange-600/30 bg-black/50 flex items-center justify-center text-orange-200">
+            <iconify-icon icon="solar:soundwave-linear" width="26" height="26" />
+          </div>
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-orange-200/60 mb-1">
+            {String(DRUM_BUNDLE.starterSamples.count).padStart(2, '0')} Samples
+          </p>
+          <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-300">
+            {DRUM_BUNDLE.starterSamples.title}
+          </h4>
+          <p className="text-sm text-zinc-400 mt-1">{DRUM_BUNDLE.starterSamples.lede}</p>
+        </div>
+        <span className="self-start sm:self-center text-[10px] font-semibold uppercase tracking-widest text-orange-100/90 bg-orange-700/20 border border-orange-500/30 px-3 py-1.5 rounded-full">
+          Included
+        </span>
+      </div>
+
+      <div
+        className="relative sample-card-frame group flashlight-card mb-6"
+        onMouseMove={(e) => {
+          const el = e.currentTarget
+          const rect = el.getBoundingClientRect()
+          el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+          el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+        }}
+      >
+        <div className="sample-card-inner p-6 md:p-8">
+          {featured.url && (
+            <audio
+              ref={audioRef}
+              src={featured.url}
+              onTimeUpdate={() => {
+                if (!audioRef.current) return
+                setCurrentTime(audioRef.current.currentTime)
+                const d = audioRef.current.duration
+                setProgress(d ? (audioRef.current.currentTime / d) * 100 : 0)
+              }}
+              onLoadedMetadata={() => {
+                if (audioRef.current) setDuration(audioRef.current.duration)
+              }}
+              onEnded={() => {
+                setIsPlaying(false)
+                setProgress(0)
+              }}
+            />
+          )}
+          <div className="flex items-center gap-5">
+            <button
+              type="button"
+              onClick={togglePlay}
+              disabled={!featured.url}
+              className={`relative w-14 h-14 flex items-center justify-center rounded-full shrink-0 transition-colors disabled:opacity-40 ${
+                isPlaying
+                  ? 'bg-orange-600 text-white hover:bg-orange-500'
+                  : 'bg-white text-black hover:bg-zinc-200'
+              }`}
+              aria-label={isPlaying ? `Pause ${featured.name}` : `Play ${featured.name}`}
+            >
+              {isPlaying && (
+                <span className="absolute inset-0 rounded-full bg-orange-500/40 animate-ping" aria-hidden />
+              )}
+              <iconify-icon
+                icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
+                width="24"
+                height="24"
+                className="relative z-10"
+              />
+            </button>
+            <div className="flex-1 min-w-0">
+              <p className="text-lg font-oswald uppercase tracking-tight gradient-text">{featured.name}</p>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-orange-200/50 mt-1 mb-3">
+                {featured.bpm} BPM · {featured.key}
+              </p>
+              <div className="h-1.5 bg-white/10 rounded-full cursor-pointer group/seek" onClick={handleSeek}>
+                <div
+                  className="h-full rounded-full relative bg-gradient-to-r from-red-800 via-orange-600 to-orange-400"
+                  style={{ width: `${progress || 0}%` }}
+                >
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-orange-200 rounded-full opacity-0 group-hover/seek:opacity-100 transition-opacity" />
+                </div>
+              </div>
+              <div className="flex justify-between text-[10px] text-zinc-500 mt-1.5 tabular-nums">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
               </div>
             </div>
-            <div className="flex justify-between text-[10px] text-zinc-600 mt-1.5 tabular-nums">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
+            <div className="hidden sm:flex items-center gap-[3px] h-8 shrink-0">
+              {WAVEFORM_HEIGHTS.map((height, i) => (
+                <div
+                  key={i}
+                  className={`w-[3px] rounded-full transition-all duration-300 ${
+                    isPlaying && progress > (i / BAR_COUNT) * 100
+                      ? 'bg-orange-400'
+                      : 'bg-white/15'
+                  }`}
+                  style={{ height: `${height + 6}px` }}
+                />
+              ))}
             </div>
           </div>
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-600/40 to-transparent" />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {DRUM_BUNDLE.starterSamples.items.map((sample) => (
-          <div key={sample.name} className="border border-white/[0.06] bg-black/20 px-4 py-4">
-            <p className="text-sm text-white mb-1">{sample.name}</p>
-            <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-              {sample.bpm} BPM · {sample.key}
-            </p>
-          </div>
-        ))}
+      <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {DRUM_BUNDLE.starterSamples.items.map((sample) => {
+          const isActive = sample.name === featured.name
+          return (
+            <div
+              key={sample.name}
+              className={`transition-all duration-300 ${
+                isActive
+                  ? 'sample-card-frame'
+                  : 'border border-white/[0.06] bg-black/30 hover:border-orange-700/40 px-4 py-4'
+              }`}
+            >
+              <div className={isActive ? 'sample-card-inner px-4 py-4' : ''}>
+                <p className="text-[10px] uppercase tracking-widest text-orange-200/50 mb-1">
+                  {sample.url ? 'Preview' : 'Included'}
+                </p>
+                <p className="text-sm font-oswald uppercase tracking-tight text-white mb-1">{sample.name}</p>
+                <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+                  {sample.bpm} BPM · {sample.key}
+                </p>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
