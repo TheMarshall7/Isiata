@@ -1,11 +1,13 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import {
   DAW_ICONS,
   DRUM_BUNDLE,
   FEATURED_PRODUCERS,
   FeaturedProducer,
+  LIVE_KIT,
 } from '@/lib/tools/drum-bundle'
 import { DrumBundlePurchaseCta } from '@/components/tools/DrumBundlePurchaseCta'
 
@@ -319,6 +321,302 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
   )
 }
 
+const FL_STUDIO_LOGO = DAW_ICONS.find((daw) => daw.name === 'FL Studio')?.icon ?? ''
+
+function FlStudioTemplates() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
+
+  useEffect(() => {
+    if (!lightbox) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKey)
+    }
+  }, [lightbox])
+
+  return (
+    <div className="relative overflow-hidden rounded-lg gradient-border-tsukuyomi bg-gradient-to-br from-white/[0.05] via-surface-raised/90 to-black/40 depth-shadow-lg p-6 md:p-8">
+      <div className="glow-orb -top-16 left-8 w-64 h-64 bg-orange-500/15" aria-hidden />
+      <div className="glow-orb -bottom-20 right-0 w-72 h-72 bg-amber-200/5" aria-hidden />
+      <div
+        className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+        aria-hidden
+      />
+
+      <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+        {FL_STUDIO_LOGO && (
+          <div className="relative shrink-0 w-14 h-14">
+            <div className="absolute inset-0 rounded-full bg-orange-500/25 blur-md animate-pulse-glow" aria-hidden />
+            <div className="relative w-full h-full rounded-full border border-orange-400/25 bg-black/50 flex items-center justify-center">
+              <img src={FL_STUDIO_LOGO} alt="FL Studio" className="w-8 h-8 object-contain" />
+            </div>
+          </div>
+        )}
+        <div className="min-w-0 flex-1">
+          <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-1">
+            FL Studio Templates
+          </h4>
+          <p className="text-sm text-zinc-400">
+            I&apos;m adding two FL Studio templates to the bundle, included with purchase.
+          </p>
+        </div>
+        <span className="self-start sm:self-center text-[10px] font-semibold uppercase tracking-widest text-amber-100/90 bg-orange-500/10 border border-orange-400/25 px-3 py-1.5 rounded-full">
+          Included
+        </span>
+      </div>
+
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6">
+        {DRUM_BUNDLE.flStudioTemplates.map((template, index) => (
+          <div
+            key={template.name}
+            className="template-card-frame group flashlight-card"
+            onMouseMove={(e) => {
+              const el = e.currentTarget
+              const rect = el.getBoundingClientRect()
+              el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+              el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+            }}
+          >
+            <div className="template-card-inner">
+              <span className="absolute top-3 left-3 z-20 text-[10px] font-semibold uppercase tracking-wider text-amber-50/90 bg-black/70 border border-orange-400/20 px-2 py-1 rounded pointer-events-none">
+                {index === 0 ? 'Template 01' : 'Template 02'}
+              </span>
+              <div className="aspect-[16/10] overflow-hidden bg-black/60">
+                {template.image ? (
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: template.image!, alt: template.name })}
+                    className="cta-sheen relative block w-full h-full cursor-zoom-in"
+                    aria-label={`View ${template.name} full screen`}
+                  >
+                    <img
+                      src={template.image}
+                      alt={template.name}
+                      className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                    />
+                    <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+                    <span className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/90 bg-black/70 border border-white/15 px-2.5 py-1 rounded opacity-70 group-hover:opacity-100 transition-opacity">
+                      <iconify-icon icon="solar:full-screen-linear" width="12" height="12" />
+                      Expand
+                    </span>
+                  </button>
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-zinc-600">
+                    <iconify-icon icon="solar:soundwave-linear" width="32" height="32" />
+                    <span className="text-[10px] uppercase tracking-widest">Preview coming</span>
+                  </div>
+                )}
+              </div>
+              <div className="p-6">
+                <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">{template.format}</p>
+                <h5 className="text-lg font-oswald uppercase tracking-tight gradient-text mb-3">{template.name}</h5>
+                <p className={`text-sm text-zinc-400 leading-relaxed${template.highlights.length ? ' mb-4' : ''}`}>
+                  {template.desc}
+                </p>
+                {template.highlights.length > 0 && (
+                  <ul className="space-y-2">
+                    {template.highlights.map((item) => (
+                      <li key={item} className="text-sm text-zinc-500 flex items-start gap-2">
+                        <span className="w-1 h-1 bg-orange-400/60 rounded-full shrink-0 mt-2" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-400/25 to-transparent" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {lightbox &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[80] flex flex-col items-center justify-center p-4 md:p-10 animate-fade-in"
+            role="dialog"
+            aria-modal="true"
+            aria-label={lightbox.alt}
+          >
+            <button
+              type="button"
+              className="absolute inset-0 bg-black/92 backdrop-blur-sm"
+              onClick={() => setLightbox(null)}
+              aria-label="Close full screen preview"
+            />
+            <button
+              type="button"
+              onClick={() => setLightbox(null)}
+              className="absolute top-5 right-5 z-10 text-zinc-400 hover:text-white transition-colors p-2"
+              aria-label="Close"
+            >
+              <iconify-icon icon="solar:close-circle-linear" width="28" height="28" />
+            </button>
+            <img
+              src={lightbox.src}
+              alt={lightbox.alt}
+              className="lightbox-image relative z-10 max-w-full max-h-[85vh] object-contain depth-shadow-xl rounded-sm"
+            />
+            <p className="relative z-10 mt-4 text-xs uppercase tracking-widest text-zinc-500">{lightbox.alt}</p>
+          </div>,
+          document.body
+        )}
+    </div>
+  )
+}
+
+function LiveKit() {
+  return (
+    <div className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 md:p-12 overflow-hidden">
+      <div className="flex items-center gap-3 mb-6">
+        <span className="relative flex h-2 w-2" aria-hidden>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400/70" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+        </span>
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">Live Kit</p>
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-300 border border-white/15 px-2 py-0.5 rounded">
+          Currently {LIVE_KIT.version}
+        </span>
+      </div>
+      <h4 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
+        {LIVE_KIT.title}
+      </h4>
+      <div className="mb-7 h-px w-10 bg-white/25" />
+      <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl mb-10">
+        {LIVE_KIT.lede}
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
+        {LIVE_KIT.points.map((point, index) => (
+          <div key={point.label}>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-600 mb-3">
+              {String(index + 1).padStart(2, '0')}
+            </p>
+            <p className="text-lg font-oswald uppercase tracking-tight text-white mb-2">{point.label}</p>
+            <p className="text-sm font-light text-zinc-500 leading-relaxed">{point.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function StarterSamples() {
+  const featured = DRUM_BUNDLE.starterSamples.items.find((sample) => sample.url) ?? DRUM_BUNDLE.starterSamples.items[0]
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  const togglePlay = () => {
+    if (!featured.url || !audioRef.current) return
+    if (isPlaying) {
+      audioRef.current.pause()
+    } else {
+      audioRef.current.play()
+    }
+    setIsPlaying(!isPlaying)
+  }
+
+  const formatTime = (time: number) => {
+    if (!time || Number.isNaN(time)) return '0:00'
+    const mins = Math.floor(time / 60)
+    const secs = Math.floor(time % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!audioRef.current || !audioRef.current.duration) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const nextTime = ((e.clientX - rect.left) / rect.width) * audioRef.current.duration
+    audioRef.current.currentTime = nextTime
+  }
+
+  return (
+    <div className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 md:p-12 overflow-hidden">
+      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">
+        {String(DRUM_BUNDLE.starterSamples.count).padStart(2, '0')} Samples
+      </p>
+      <h4 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
+        {DRUM_BUNDLE.starterSamples.title}
+      </h4>
+      <div className="mb-7 h-px w-10 bg-white/25" />
+      <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl mb-10">
+        {DRUM_BUNDLE.starterSamples.lede}
+      </p>
+
+      <div className="rounded-lg border border-white/10 bg-black/30 p-6 md:p-8 mb-8">
+        {featured.url && (
+          <audio
+            ref={audioRef}
+            src={featured.url}
+            onTimeUpdate={() => {
+              if (!audioRef.current) return
+              setCurrentTime(audioRef.current.currentTime)
+              const d = audioRef.current.duration
+              setProgress(d ? (audioRef.current.currentTime / d) * 100 : 0)
+            }}
+            onLoadedMetadata={() => {
+              if (audioRef.current) setDuration(audioRef.current.duration)
+            }}
+            onEnded={() => {
+              setIsPlaying(false)
+              setProgress(0)
+            }}
+          />
+        )}
+        <div className="flex items-center gap-5">
+          <button
+            type="button"
+            onClick={togglePlay}
+            disabled={!featured.url}
+            className="w-14 h-14 flex items-center justify-center bg-white text-black rounded-full hover:bg-zinc-200 transition-colors shrink-0 disabled:opacity-40"
+            aria-label={isPlaying ? `Pause ${featured.name}` : `Play ${featured.name}`}
+          >
+            <iconify-icon icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'} width="24" height="24" />
+          </button>
+          <div className="flex-1 min-w-0">
+            <p className="text-lg font-oswald uppercase tracking-tight text-white">{featured.name}</p>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-zinc-500 mt-1 mb-3">
+              {featured.bpm} BPM · {featured.key}
+            </p>
+            <div className="h-1.5 bg-white/10 rounded-full cursor-pointer group" onClick={handleSeek}>
+              <div className="h-full bg-white rounded-full relative" style={{ width: `${progress || 0}%` }}>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </div>
+            <div className="flex justify-between text-[10px] text-zinc-600 mt-1.5 tabular-nums">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {DRUM_BUNDLE.starterSamples.items.map((sample) => (
+          <div key={sample.name} className="border border-white/[0.06] bg-black/20 px-4 py-4">
+            <p className="text-sm text-white mb-1">{sample.name}</p>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+              {sample.bpm} BPM · {sample.key}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function DAWCompatibility() {
   return (
     <div>
@@ -333,6 +631,9 @@ function DAWCompatibility() {
           </div>
         ))}
       </div>
+      <p className="mt-3 text-[10px] text-zinc-600 tracking-wide">
+        FL Studio templates only work with FL Studio.
+      </p>
     </div>
   )
 }
@@ -389,17 +690,29 @@ export function TsukuyomiDrumBundleFunnel() {
       {/* Bonus Kits - included with Tsukuyomi Drum Bundle */}
       <div>
         <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-2">Bonus Kits Included With Purchase</h4>
-        <p className="text-sm text-zinc-500 mb-6">Additional kits paired with the Tsukuyomi Drum Bundle, included at no extra cost when you purchase.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <p className="text-sm text-zinc-500 mb-6">
+          Additional kits paired with the Tsukuyomi Drum Bundle, included at no extra cost when you purchase — plus extra uncut kits.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {DRUM_BUNDLE.bonusKits.map((kit) => (
             <div key={kit.name} className="group relative border border-white/5 bg-black/30 overflow-hidden transition-all duration-300">
-              <span className="absolute top-2 left-2 z-10 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 bg-black/60 border border-white/10 px-2 py-1 rounded">Included</span>
+              <span className="absolute top-2 left-2 z-10 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 bg-black/60 border border-white/10 px-2 py-1 rounded">
+                {kit.image ? 'Included' : 'Extra'}
+              </span>
               <div className="aspect-square overflow-hidden bg-black/50">
-                <img
-                  src={kit.image}
-                  alt={kit.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {kit.image ? (
+                  <img
+                    src={kit.image}
+                    alt={kit.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-white/[0.04] to-transparent">
+                    <span className="font-oswald text-2xl uppercase tracking-tight text-white/80 group-hover:text-white transition-colors">
+                      {kit.name}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="p-4">
                 <h5 className="text-sm font-semibold text-white mb-1">{kit.name}</h5>
@@ -410,46 +723,70 @@ export function TsukuyomiDrumBundleFunnel() {
         </div>
       </div>
 
+      <LiveKit />
+
+      <FlStudioTemplates />
+
+      <StarterSamples />
+
       {/* DAW Compatibility */}
       <DAWCompatibility />
 
-      {/* Style & Processing */}
+      {/* Specs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
-          <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-6">Style & Intent</h4>
-          <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+        <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">01</p>
+          <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+            Style & Intent
+          </h4>
+          <div className="mt-5 mb-7 h-px w-10 bg-white/25" />
+          <p className="text-base font-light text-zinc-400 leading-[1.8] mb-8">
             Designed to elevate production across modern genres with hard-hitting low end, crisp transient detail, and textured percussive elements.
           </p>
-          <ul className="space-y-2">
+          <ul className="divide-y divide-white/[0.06]">
             {DRUM_BUNDLE.style.map((item) => (
-              <li key={item} className="text-sm text-zinc-500 flex items-center gap-2">
-                <span className="w-1 h-1 bg-zinc-600 rounded-full shrink-0" />
+              <li key={item} className="py-3 text-sm font-light tracking-wide text-zinc-300">
                 {item}
               </li>
             ))}
           </ul>
-        </div>
+        </article>
 
-        <div className="space-y-6">
-          <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-4">Licensing</h4>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+        <div className="space-y-8">
+          <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">02</p>
+            <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+              Licensing
+            </h4>
+            <div className="mt-5 mb-7 h-px w-10 bg-white/25" />
+            <p className="text-base font-light text-zinc-300 leading-[1.8] mb-5">
               All sounds are royalty-free, except the melody layers.
             </p>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-3">
-              Melody layers are royalty-free for up to 1,000,000 streams or until a major placement is secured.
+            <p className="text-sm font-light text-zinc-400 leading-[1.8] mb-6">
+              Melody layers are royalty-free for up to
             </p>
-            <p className="text-xs text-zinc-600 leading-relaxed">
+            <p className="font-oswald text-3xl uppercase tracking-tight text-white mb-2">1,000,000</p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500 mb-6">
+              Streams, or until a major placement is secured
+            </p>
+            <p className="text-xs font-light text-zinc-500 leading-relaxed">
               You cannot resell the sounds as standalone products, but you can use them in commercial compositions.
             </p>
-          </div>
+          </article>
 
-          <div className="border border-white/10 bg-surface-raised depth-shadow p-8">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-4">Compatibility</h4>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+          <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">03</p>
+            <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+              Compatibility
+            </h4>
+            <div className="mt-5 mb-7 h-px w-10 bg-white/25" />
+            <p className="text-base font-light text-zinc-300 leading-[1.8] mb-6">
               Works with all major digital audio workstations and sample systems.
             </p>
-          </div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+              {DAW_ICONS.map((daw) => daw.name).join('  ·  ')}
+            </p>
+          </article>
         </div>
       </div>
 

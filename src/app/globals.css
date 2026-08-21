@@ -348,6 +348,97 @@
     z-index: 1;
   }
 
+  @keyframes tsukuyomi-border-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes lightbox-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Animated orange-to-cream hairline for FL Studio template cards */
+  .template-card-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    padding: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  }
+
+  .template-card-frame::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 220%;
+    height: 220%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      transparent 58%,
+      #f97316 74%,
+      #e8a060 84%,
+      #e8e0d0 92%,
+      transparent 100%
+    );
+    animation: tsukuyomi-border-spin 8s linear infinite;
+    pointer-events: none;
+  }
+
+  .template-card-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 56px -24px rgba(249, 115, 22, 0.35);
+  }
+
+  .template-card-frame:hover::before {
+    animation-duration: 3.5s;
+  }
+
+  .template-card-inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(0.5rem - 1px);
+    background: #111111;
+  }
+
+  .lightbox-image {
+    animation: lightbox-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .template-card-frame::before {
+      animation: none;
+      background: linear-gradient(135deg, #f97316 0%, #e8a060 42%, #e8e0d0 100%);
+      inset: 0;
+      width: auto;
+      height: auto;
+      transform: none;
+      left: 0;
+      top: 0;
+    }
+
+    .template-card-frame:hover {
+      transform: none;
+    }
+
+    .lightbox-image {
+      animation: none;
+    }
+  }
+
   /* CTA sheen sweep */
   .cta-sheen {
     position: relative;

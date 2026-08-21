@@ -70,6 +70,11 @@ export const DRUM_BUNDLE = {
       desc: 'Soft, brushed drum sounds',
       image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67ec41e5903b502ee60a3a44.png',
     },
+    {
+      name: 'Uncut',
+      desc: 'Extra raw, uncut drum kits',
+      image: null,
+    },
   ],
   style: [
     'Rich harmonic character',
@@ -99,6 +104,55 @@ export const DRUM_BUNDLE = {
     { name: 'Samba X RnB', category: 'Fusion', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d602ee5106d5417b33b2d4.mpeg' },
     { name: 'Latin X Hip Hop', category: 'Fusion', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67d602fd5106d51e6033b2dd.mpeg' },
   ],
+  flStudioTemplates: [
+    {
+      name: 'ISIATA Complete Mix Template',
+      format: 'FL Studio .flp',
+      image: '/tools/tsukuyomi-drum-bundle/isiata-complete-mix-template.png',
+      desc: 'A pre-routed mix session with labeled drum, instrument, and vocal busses. Tsukuyomi percussion is already in the browser.',
+      highlights: [
+        'Separate master instrumental and vocal busses',
+        'Parallel drum processing — smash, punch, excite',
+        'Shared reverb and delay sends',
+      ],
+    },
+    {
+      name: 'ISIATA Vocal Template',
+      format: 'FL Studio .flp',
+      image: '/tools/tsukuyomi-drum-bundle/isiata-vocal-template.png',
+      desc: 'A vocal recording session with labeled verse, chorus, and adlib tracks, plus a dedicated vocal processing chain.',
+      highlights: [
+        'Verse, pre-chorus, chorus, doubles, and adlibs',
+        'Vocal delay, reverb, compression, and spread busses',
+        'Separate vocal master bus',
+      ],
+    },
+  ],
+  starterSamples: {
+    count: 3,
+    title: 'Starter Samples',
+    lede: 'Contains 3 samples. These are full samples that just need drums, so you can start right away.',
+    items: [
+      {
+        name: 'Tortula',
+        bpm: 133,
+        key: 'E min',
+        url: '/tools/tsukuyomi-drum-bundle/tortula-133-emin.mp3',
+      },
+      {
+        name: 'Juny Be',
+        bpm: 91,
+        key: 'A min',
+        url: '',
+      },
+      {
+        name: 'Beautiful Cold Winter',
+        bpm: 108,
+        key: 'A min',
+        url: '',
+      },
+    ],
+  },
 }
 
 export type FeaturedProducerSong = { title: string; url: string }
@@ -140,6 +194,17 @@ export const DAW_ICONS = [
   { name: 'Logic Pro', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59c0e32023a8f95a970.png' },
   { name: 'Cubase', icon: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67f2e59cd775cd7f0d4ec23f.png' },
 ]
+
+export const LIVE_KIT = {
+  title: 'A Live Kit',
+  version: 'V2',
+  lede: 'Currently at V2. This kit is constantly updated with new sounds. Pay once. New kits are emailed to you as they are added.',
+  points: [
+    { label: 'Pay once', detail: 'One purchase. No subscription.' },
+    { label: 'Always updating', detail: 'New sounds and kits added over time.' },
+    { label: 'Sent to your email', detail: 'Every update is delivered as it lands.' },
+  ],
+} as const
 
 export const SAMPLE_PACKS = [
   {

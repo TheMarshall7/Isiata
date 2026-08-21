@@ -4,6 +4,7 @@ import {
   DRUM_BUNDLE,
   DRUM_BUNDLE_CHECKOUT_HREF,
   DRUM_BUNDLE_PRICE,
+  LIVE_KIT,
 } from '@/lib/tools/drum-bundle'
 
 type DrumBundlePurchaseCtaProps = {
@@ -12,6 +13,7 @@ type DrumBundlePurchaseCtaProps = {
 
 const TRUST_BADGES = [
   { icon: 'solar:download-linear', label: 'Instant download' },
+  { icon: 'solar:letter-linear', label: 'Kit updates by email' },
   { icon: 'solar:shield-check-linear', label: 'Secure checkout' },
   { icon: 'solar:verified-check-linear', label: 'Royalty-free' },
 ]
@@ -96,6 +98,13 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
             <span className="border border-white/10 px-3 py-1">{DRUM_BUNDLE.format}</span>
             <span className="border border-white/10 px-3 py-1">Royalty-Free</span>
             <span className="border border-white/10 px-3 py-1">100+ Sounds</span>
+            <span className="inline-flex items-center gap-2 border border-green-500/25 bg-green-500/10 px-3 py-1 text-green-200">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400/80" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-400" />
+              </span>
+              Live kit · {LIVE_KIT.version}
+            </span>
           </div>
           <div className="flex items-baseline gap-3 mb-6">
             <Price amount={DRUM_BUNDLE_PRICE.amount} className="text-2xl font-semibold text-white" />
