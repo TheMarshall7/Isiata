@@ -6,7 +6,7 @@ import { EmailCapture } from '@/components/forms/EmailCapture'
 import { TheyMightBeMadSection } from '@/components/sound/TheyMightBeMadSection'
 import { DrumBundleFeaturedSection } from '@/components/tools/DrumBundleFeaturedSection'
 import { getGarmentBySlug } from '@/lib/garments/catalog'
-import { TWO_TALES_COVER } from '@/lib/sound/releases'
+import { TWO_TALES, TWO_TALES_COVER } from '@/lib/sound/releases'
 
 const FEATURED_CARDS = [
   {
@@ -50,6 +50,31 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <div className="relative z-10 h-full">
+          <a
+            href={TWO_TALES.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-4 group max-w-[calc(100%-3rem)]"
+          >
+            <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-white/15 depth-shadow">
+              <img
+                src={TWO_TALES.cover}
+                alt={TWO_TALES.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-zinc-400 mb-0.5">Single</p>
+              <p className="font-oswald uppercase tracking-tight text-white text-lg md:text-xl truncate">
+                {TWO_TALES.title}
+              </p>
+              <p className="text-xs text-zinc-400 mt-0.5">{TWO_TALES.streamsLabel}</p>
+            </div>
+            <span className="flex items-center justify-center w-10 h-10 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm shrink-0 group-hover:border-[#1DB954]/50 group-hover:bg-black/60 transition-colors">
+              <iconify-icon icon="mdi:spotify" width="20" height="20" className="text-[#1DB954]" />
+            </span>
+          </a>
+
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 is-visible aura-reveal">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs text-zinc-400 uppercase tracking-widest">Scroll</span>

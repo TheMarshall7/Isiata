@@ -21,5 +21,17 @@ export const THEY_MIGHT_BE_MAD_EP = {
   ],
 } as const
 
-export const TWO_TALES_COVER =
-  'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e01dfc02df0ab0d108.jpeg'
+export const TWO_TALES = {
+  title: 'Two Tales',
+  type: 'Single',
+  date: 'August 8, 2020',
+  runtime: '4 minutes',
+  notes: 'Early release. Introspective. Sets the emotional and thematic foundation of the catalog.',
+  cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e01dfc02df0ab0d108.jpeg',
+  spotify: 'https://open.spotify.com/track/27NZpNhtYUUrPa2t40jRVM?si=EYZnAQh1Rqmtn40E2OD3Xw',
+  appleMusic: 'https://music.apple.com/ca/album/two-tales-single/1525969395',
+  streams: '43K',
+  streamsLabel: '43K streams',
+} as const
+
+export const TWO_TALES_COVER = TWO_TALES.cover

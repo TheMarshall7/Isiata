@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
-import { THEY_MIGHT_BE_MAD_EP, TWO_TALES_COVER } from '@/lib/sound/releases'
+import { THEY_MIGHT_BE_MAD_EP, TWO_TALES, TWO_TALES_COVER } from '@/lib/sound/releases'
 
 const TABS = ['All', 'Discography', 'Live', 'Unreleased', 'Collaborations'] as const
 type Tab = typeof TABS[number]
@@ -31,14 +31,15 @@ const SINGLES = [
     appleMusic: 'https://music.apple.com/ca/album/no-need/1678432815?i=1678432906',
   },
   {
-    title: 'Two Tales',
-    type: 'Single',
-    date: 'August 8, 2020',
-    runtime: '4 minutes',
-    notes: 'Early release. Introspective. Sets the emotional and thematic foundation of the catalog.',
-    cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e01dfc02df0ab0d108.jpeg',
-    spotify: 'https://open.spotify.com/track/27NZpNhtYUUrPa2t40jRVM?si=EYZnAQh1Rqmtn40E2OD3Xw',
-    appleMusic: 'https://music.apple.com/ca/album/two-tales-single/1525969395',
+    title: TWO_TALES.title,
+    type: TWO_TALES.type,
+    date: TWO_TALES.date,
+    runtime: TWO_TALES.runtime,
+    notes: TWO_TALES.notes,
+    cover: TWO_TALES.cover,
+    spotify: TWO_TALES.spotify,
+    appleMusic: TWO_TALES.appleMusic,
+    streams: TWO_TALES.streamsLabel,
   },
 ]
 
@@ -140,6 +141,11 @@ function DiscographyContent() {
                 </div>
                 <h4 className="text-lg font-semibold text-white mb-2">{single.title}</h4>
                 <p className="text-xs text-zinc-600 mb-4">{single.date}</p>
+                {'streams' in single && single.streams && (
+                  <p className="text-xs uppercase tracking-[0.16em] text-zinc-400 mb-4">
+                    {single.streams}
+                  </p>
+                )}
                 <p className="text-sm text-zinc-400 leading-relaxed mb-6">{single.notes}</p>
 
                 {/* Streaming Links */}
@@ -221,6 +227,22 @@ export default function SoundPage() {
                 alt="Two Tales"
                 className="w-full h-full object-cover"
               />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 flex items-end justify-between gap-4">
+                <div>
+                  <p className="font-oswald uppercase tracking-tight text-white text-lg">{TWO_TALES.title}</p>
+                  <p className="text-xs uppercase tracking-[0.16em] text-zinc-300 mt-1">{TWO_TALES.streamsLabel}</p>
+                </div>
+                <a
+                  href={TWO_TALES.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-11 h-11 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm hover:border-[#1DB954]/50 transition-colors shrink-0"
+                  title="Listen on Spotify"
+                  aria-label="Listen to Two Tales on Spotify"
+                >
+                  <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#1DB954]" />
+                </a>
+              </div>
             </div>
           </div>
         </Section>
