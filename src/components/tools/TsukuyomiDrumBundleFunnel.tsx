@@ -189,25 +189,58 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
       }} />
 
       <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0">
-        {/* Producer Image - hover to darken + link to Instagram */}
-        <a
-          href={producer.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative aspect-square md:aspect-auto block group/img overflow-hidden"
-        >
-          <img
-            src={producer.image}
-            alt={producer.name}
-            className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-            <span className="text-white text-sm font-medium opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 text-center px-4">
-              Go to Instagram profile
-            </span>
-          </div>
-        </a>
+        {/* Producer Image - hover links to socials */}
+        <div className="relative aspect-square md:aspect-auto md:min-h-[200px] group/img overflow-hidden bg-black/60">
+          {producer.image ? (
+            <img
+              src={producer.image}
+              alt={producer.name}
+              className="absolute inset-0 w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500 pointer-events-none"
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center border-r border-white/5 pointer-events-none">
+              <p className="font-oswald uppercase tracking-tight text-white text-2xl leading-none">
+                {producer.name}
+              </p>
+              <p className="text-xs text-zinc-500">{producer.handle}</p>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+          {producer.tiktok ? (
+            <div className="absolute inset-0 flex flex-col opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
+              <a
+                href={producer.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 bg-black/55 hover:bg-black/70 border-b border-white/15 transition-colors"
+              >
+                <iconify-icon icon="mdi:instagram" width="18" height="18" className="text-white" />
+                <span className="text-white text-sm font-medium">Instagram</span>
+              </a>
+              <a
+                href={producer.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 bg-black/55 hover:bg-black/70 transition-colors"
+              >
+                <iconify-icon icon="ic:baseline-tiktok" width="18" height="18" className="text-white" />
+                <span className="text-white text-sm font-medium">TikTok</span>
+              </a>
+            </div>
+          ) : (
+            <a
+              href={producer.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 bg-black/0 group-hover/img:bg-black/50 transition-colors duration-300 flex items-center justify-center"
+            >
+              <span className="text-white text-sm font-medium opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 text-center px-4">
+                Go to Instagram profile
+              </span>
+            </a>
+          )}
+        </div>
 
         {/* Content */}
         <div className="p-6 md:p-8 flex flex-col justify-center relative">

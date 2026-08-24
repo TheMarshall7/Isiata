@@ -160,7 +160,8 @@ export type FeaturedProducer = {
   name: string
   handle: string
   instagram: string
-  image: string
+  tiktok?: string
+  image?: string
   songs: FeaturedProducerSong[]
 }
 
@@ -183,6 +184,19 @@ export const FEATURED_PRODUCERS: FeaturedProducer[] = [
       { title: 'slide.m4a', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698662ebd017c36f65f4b210.mp3' },
       { title: 'generations v2.1 78bpm', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698662eb5f93997f509d0836.mp3' },
       { title: 'MONOSHPHERE 140 harrison adore.mp3', url: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698662675f939962329ceefc.mp3' },
+    ],
+  },
+  {
+    name: 'Wayne Tee',
+    handle: '@prodbywaynetee',
+    instagram: 'https://www.instagram.com/prodbywaynetee/',
+    tiktok: 'https://www.tiktok.com/@prodbywaynetee',
+    image: '/tools/tsukuyomi-drum-bundle/prodbywaynetee.jpg',
+    songs: [
+      {
+        title: 'groundwork · 160 · G min',
+        url: '/tools/tsukuyomi-drum-bundle/prodbywaynetee-groundwork-160-gmin.mp3',
+      },
     ],
   },
 ]
