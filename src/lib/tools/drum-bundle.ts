@@ -159,8 +159,9 @@ export type FeaturedProducerSong = { title: string; url: string }
 export type FeaturedProducer = {
   name: string
   handle: string
-  instagram: string
+  instagram?: string
   tiktok?: string
+  links?: string
   image?: string
   songs: FeaturedProducerSong[]
 }
@@ -196,6 +197,18 @@ export const FEATURED_PRODUCERS: FeaturedProducer[] = [
       {
         title: 'groundwork · 160 · G min',
         url: '/tools/tsukuyomi-drum-bundle/prodbywaynetee-groundwork-160-gmin.mp3',
+      },
+    ],
+  },
+  {
+    name: 'Xendorphins',
+    handle: '@xendorphins',
+    links: 'https://beacons.ai/xendorphins',
+    image: '/tools/tsukuyomi-drum-bundle/xendorphins.jpg',
+    songs: [
+      {
+        title: 'Huey · 145 · A min',
+        url: '/tools/tsukuyomi-drum-bundle/xendorphins-huey-amin-145bpm.mp3',
       },
     ],
   },

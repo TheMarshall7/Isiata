@@ -129,6 +129,8 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
 
   const currentSong = producer.songs[currentTrackIndex]
   const hasMultipleSongs = producer.songs.length > 1
+  const profileUrl = producer.links ?? producer.instagram
+  const profileCta = producer.links ? 'All links' : 'Go to Instagram profile'
 
   const goToTrack = (index: number) => {
     const next = (index + producer.songs.length) % producer.songs.length
@@ -207,7 +209,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-          {producer.tiktok ? (
+          {producer.tiktok && producer.instagram ? (
             <div className="absolute inset-0 flex flex-col opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
               <a
                 href={producer.instagram}
@@ -228,18 +230,18 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                 <span className="text-white text-sm font-medium">TikTok</span>
               </a>
             </div>
-          ) : (
+          ) : profileUrl ? (
             <a
-              href={producer.instagram}
+              href={profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 bg-black/0 group-hover/img:bg-black/50 transition-colors duration-300 flex items-center justify-center"
             >
               <span className="text-white text-sm font-medium opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 text-center px-4">
-                Go to Instagram profile
+                {profileCta}
               </span>
             </a>
-          )}
+          ) : null}
         </div>
 
         {/* Content */}
@@ -257,14 +259,18 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
           <div className="flex items-center gap-4 mb-6">
             <div>
               <h5 className="text-xl font-bold text-white tracking-tight">{producer.name}</h5>
-              <a
-                href={producer.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-zinc-500 hover:text-white transition-colors"
-              >
-                {producer.handle}
-              </a>
+              {profileUrl ? (
+                <a
+                  href={profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-zinc-500 hover:text-white transition-colors"
+                >
+                  {producer.handle}
+                </a>
+              ) : (
+                <p className="text-sm text-zinc-500">{producer.handle}</p>
+              )}
             </div>
           </div>
 
