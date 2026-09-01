@@ -80,7 +80,7 @@ export const SEO_PAGES = {
   systems: {
     title: 'Systems — Backend Business Infrastructure for Artists',
     description:
-      'Backend business systems for artists, producers, and creatives. Booking, revenue, client automation, and growth infrastructure from $2,500.',
+      'Backend business systems for artists, producers, and creatives. Booking, revenue, client automation, and growth infrastructure.',
     path: '/systems',
     keywords: [
       'artist business systems',
@@ -88,6 +88,18 @@ export const SEO_PAGES = {
       'booking system for artists',
       'creative business infrastructure',
       'ISIATA',
+    ],
+  },
+  systemsArchitecture: {
+    title: 'Systems Architecture — How ISIATA Infrastructure Works',
+    description:
+      'Interactive map of ISIATA systems architecture: capture, organize, convert, deliver, retain, and measure. See how the machine reconfigures for artists, producers, and agencies.',
+    path: '/systems/architecture',
+    keywords: [
+      'artist business architecture',
+      'music producer CRM architecture',
+      'creative operating system',
+      'ISIATA systems',
     ],
   },
   contact: {

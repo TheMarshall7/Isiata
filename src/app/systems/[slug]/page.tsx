@@ -5,7 +5,6 @@ import { Container } from '@/components/ui/Container'
 import { SystemFunnel } from '@/components/systems/SystemFunnel'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getAllTierSlugs, getTierWithFunnel } from '@/lib/systems/funnel-content'
-import { SYSTEMS_STARTING_AT } from '@/lib/systems/tiers'
 import {
   breadcrumbListSchema,
   faqPageSchema,
@@ -56,7 +55,6 @@ export default function SystemFunnelPage({ params }: PageProps) {
       description: `${tier.tagline} ${tier.outcome}`,
       url: `/systems/${params.slug}`,
       image: funnel.heroImage,
-      ...(tier.isScoped ? {} : { price: SYSTEMS_STARTING_AT }),
     }),
     faqPageSchema(funnel.faqs),
   ]

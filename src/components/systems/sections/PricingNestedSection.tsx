@@ -1,6 +1,5 @@
 import type { FunnelContent } from '@/lib/systems/funnel-content'
 import type { SystemsTier } from '@/lib/systems/tiers'
-import { SYSTEMS_STARTING_AT } from '@/lib/systems/tiers'
 import { FunnelCta } from '@/components/systems/FunnelCta'
 
 type PricingNestedSectionProps = {
@@ -30,15 +29,10 @@ export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps
           <p className="text-sm text-zinc-500 italic mb-8">{tier.tagline}</p>
 
           <p className="text-base font-light text-zinc-400 leading-relaxed mb-8">
-            Every artist&apos;s starting point is different. Systems start from {SYSTEMS_STARTING_AT}. On the call,
-            we&apos;ll figure out exactly what you need and what it costs.
+            Every artist&apos;s starting point is different. On the call, we&apos;ll figure out exactly what you need.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <div className="p-4 rounded-lg border border-white/10 bg-black/20">
-              <p className="text-lg font-semibold text-white">From {SYSTEMS_STARTING_AT}</p>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Starting point</p>
-            </div>
+          <div className="max-w-xs mx-auto mb-8">
             <div className="p-4 rounded-lg border border-white/10 bg-black/20">
               <p className="text-lg font-semibold text-white">{tier.timeline}</p>
               <p className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Timeline</p>

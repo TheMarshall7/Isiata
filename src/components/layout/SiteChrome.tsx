@@ -6,13 +6,15 @@ import { Footer } from '@/components/layout/Footer'
 import { FunnelHeader } from '@/components/systems/FunnelHeader'
 import { BackgroundEffects } from '@/components/layout/BackgroundEffects'
 import { ScrollbarVisibility } from '@/components/layout/ScrollbarVisibility'
+import { SYSTEMS_FUNNEL_SLUGS } from '@/lib/systems/tiers'
 
 const TRAINER_PREFIX = '/tools/training/ear-trainer'
 const CHECKOUT_ORDER_PREFIX = '/tools/checkout/order'
-const SYSTEMS_FUNNEL_PREFIX = '/systems/'
 
 function isSystemsFunnel(pathname: string | null) {
-  return Boolean(pathname?.startsWith(SYSTEMS_FUNNEL_PREFIX) && pathname !== '/systems')
+  if (!pathname?.startsWith('/systems/')) return false
+  const slug = pathname.slice('/systems/'.length).split('/')[0]
+  return SYSTEMS_FUNNEL_SLUGS.includes(slug)
 }
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {

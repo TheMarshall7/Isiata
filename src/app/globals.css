@@ -569,6 +569,55 @@
     filter: blur(120px);
     opacity: 0.5;
   }
+
+  /* Systems page — living graph */
+  .system-node-pulse {
+    animation: system-node-pulse 2.4s ease-in-out infinite;
+  }
+
+  .system-draw {
+    stroke-dasharray: 8 6;
+    animation: system-draw 18s linear infinite;
+  }
+
+  .system-token {
+    animation: system-token-pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes system-node-pulse {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes system-draw {
+    to { stroke-dashoffset: -280; }
+  }
+
+  @keyframes system-token-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.7; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aura-reveal,
+    html.js .aura-reveal,
+    html.js .aura-reveal.is-visible {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    .gradient-border-brand-pulse::before {
+      animation: none;
+    }
+
+    .system-node-pulse,
+    .system-draw,
+    .system-token {
+      animation: none;
+    }
+  }
 }
 
 @layer components {
