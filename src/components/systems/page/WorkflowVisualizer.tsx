@@ -18,7 +18,7 @@ export function WorkflowVisualizer() {
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">
         Same underlying system. Different configuration. This is the path a person takes through a {lens.label.toLowerCase()} business.
       </p>
-      <div className="rounded-lg border border-white/10 bg-surface-raised/40 p-6 md:p-8 depth-shadow">
+      <div className="rounded-lg border border-white/10 bg-surface-raised/40 p-4 sm:p-6 md:p-8 depth-shadow overflow-hidden">
         <AnimatedFlow steps={lens.workflow.map((step) => step.label)} />
       </div>
     </Section>

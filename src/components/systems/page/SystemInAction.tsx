@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Section } from '@/components/ui/Section'
 import { AnimatedFlow } from '@/components/systems/page/AnimatedFlow'
 import { useSystemsLens } from '@/components/systems/page/SystemsLensContext'
@@ -28,6 +28,10 @@ export function SystemInAction() {
   }, [lens.id, lens.crmStates.length, reduced])
 
   const currentState = lens.crmStates[stateIndex] ?? lens.crmStates[0]
+  const crmStateLabels = useMemo(
+    () => lens.crmStates.map((state) => state.label),
+    [lens.crmStates]
+  )
 
   return (
     <Section reveal>
@@ -88,7 +92,7 @@ export function SystemInAction() {
           )}
           <div className="mt-8">
             <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-3">State morph</p>
-            <AnimatedFlow steps={lens.crmStates.map((state) => state.label)} />
+            <AnimatedFlow steps={crmStateLabels} activeIndex={stateIndex} />
           </div>
         </div>
       </div>

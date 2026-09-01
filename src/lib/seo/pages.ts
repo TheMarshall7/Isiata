@@ -1,4 +1,5 @@
 import type { PageMetadataInput } from '@/lib/seo/metadata'
+import { ISIATA_LOGO_URL } from '@/lib/constants'
 
 /** SEO-optimized meta copy per route (not visible on page). */
 export const SEO_PAGES = {
@@ -82,6 +83,7 @@ export const SEO_PAGES = {
     description:
       'Backend business systems for artists, producers, and creatives. Booking, revenue, client automation, and growth infrastructure.',
     path: '/systems',
+    image: ISIATA_LOGO_URL,
     keywords: [
       'artist business systems',
       'music producer CRM',
@@ -95,6 +97,7 @@ export const SEO_PAGES = {
     description:
       'Interactive map of ISIATA systems architecture: capture, organize, convert, deliver, retain, and measure. See how the machine reconfigures for artists, producers, and agencies.',
     path: '/systems/architecture',
+    image: ISIATA_LOGO_URL,
     keywords: [
       'artist business architecture',
       'music producer CRM architecture',
