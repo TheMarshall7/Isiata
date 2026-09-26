@@ -8,6 +8,8 @@ interface ToolCatalogCardProps {
 }
 
 export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
+  const isContained = item.imageFit === 'contain'
+
   return (
     <Link
       href={item.href}
@@ -19,12 +21,18 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
         el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
       }}
     >
-      <div className="relative aspect-square overflow-hidden bg-black/40">
+      <div
+        className={`relative overflow-hidden bg-black/40 ${
+          isContained ? 'aspect-[16/10]' : 'aspect-square'
+        }`}
+      >
         {item.image ? (
           <img
             src={item.image}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className={`h-full w-full group-hover:scale-105 transition-transform duration-500 ${
+              isContained ? 'object-contain p-2' : 'object-cover'
+            }`}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/[0.04] via-transparent to-white/[0.02]">

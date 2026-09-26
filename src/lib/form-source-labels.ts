@@ -4,6 +4,7 @@ const NEWSLETTER_SOURCE_LABELS: Record<string, string> = {
   community: 'Community — Waitlist',
   garments: 'Objects / Garments — Notify',
   ear_trainer_gate: 'Ear Mastery — Access Gate',
+  tsukuyomi_drum_engine: 'Tsukuyomi Drum Engine — Release Notify',
   website_footer: 'Website — Mailing List',
 }
 

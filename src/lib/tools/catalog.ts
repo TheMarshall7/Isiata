@@ -1,4 +1,10 @@
 import { SAMPLE_PACKS } from './drum-bundle'
+import {
+  TSUKUYOMI_DRUM_ENGINE,
+  TSUKUYOMI_DRUM_ENGINE_HREF,
+  TSUKUYOMI_DRUM_ENGINE_SLUG,
+  TSUKUYOMI_MAIN_UI_IMAGE,
+} from './tsukuyomi-drum-engine'
 
 export const TOOL_CATEGORIES = [
   { id: 'all', label: 'All' },
@@ -16,6 +22,7 @@ export type ToolCatalogItem = {
   title: string
   description: string
   image?: string
+  imageFit?: 'cover' | 'contain'
   price?: string
   icon: string
   category: Exclude<ToolCategoryId, 'all'>
@@ -28,6 +35,17 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     category: 'sample-packs' as const,
     categoryLabel: 'Sample Pack',
   })),
+  {
+    slug: TSUKUYOMI_DRUM_ENGINE_SLUG,
+    href: TSUKUYOMI_DRUM_ENGINE_HREF,
+    title: TSUKUYOMI_DRUM_ENGINE.title,
+    description: 'A 16-pad drum instrument for loading, sequencing, shaping, mixing, and finishing drum tracks.',
+    image: TSUKUYOMI_MAIN_UI_IMAGE,
+    imageFit: 'contain',
+    icon: 'solar:music-note-2-linear',
+    category: 'plugins',
+    categoryLabel: 'Plugin',
+  },
   {
     slug: 'producer-toolbox',
     href: '/tools/toolbox',

@@ -78,6 +78,22 @@ export const SEO_PAGES = {
       'WAV samples',
     ],
   },
+  drumEngine: {
+    title: 'Tsukuyomi Drum Engine — 16-Pad Drum Instrument',
+    description:
+      'A 16-pad drum instrument that takes you from raw samples to a finished drum track without leaving the plugin. VST3 and Standalone available; AU coming soon.',
+    path: '/tools/tsukuyomi-drum-engine',
+    keywords: [
+      'Tsukuyomi Drum Engine',
+      'drum plugin',
+      'drum instrument',
+      'drum sequencer',
+      'VST3 drum instrument',
+      'standalone drum instrument',
+      'music production',
+    ],
+  },
+
   systems: {
     title: 'Systems — Backend Business Infrastructure for Artists',
     description:
