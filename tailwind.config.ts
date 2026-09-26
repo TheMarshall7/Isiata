@@ -17,9 +17,9 @@ const config: Config = {
         border: 'rgba(255, 255, 255, 0.1)',
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        oswald: ['Oswald', 'sans-serif'],
-        geist: ['Geist', 'sans-serif'],
+        sans: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+        oswald: ['var(--font-oswald)', 'system-ui', 'sans-serif'],
+        geist: ['system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'monospace'],
       },
       animation: {
