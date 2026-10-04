@@ -33,6 +33,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const isHome = pathname === '/'
   const isActive = (href: string) =>
     pathname === href || Boolean(pathname?.startsWith(`${href}/`))
 
@@ -49,7 +50,9 @@ export function Header() {
         className="fixed z-50 top-5 md:top-6 inset-x-0 flex justify-center px-3 md:px-5"
         aria-label="Primary navigation"
       >
-        <div className={`artifact-navbar group relative h-[52px] md:h-[58px] w-[calc(100vw-1.5rem)] md:w-full max-w-5xl overflow-hidden rounded-full ${scrolled ? 'is-scrolled' : ''}`}>
+        <div
+          className={`artifact-navbar group relative h-[52px] md:h-[58px] w-[calc(100vw-1.5rem)] md:w-full max-w-5xl overflow-hidden rounded-full ${isHome ? 'is-home-hero' : ''} ${scrolled ? 'is-scrolled' : ''}`}
+        >
           <div aria-hidden className="artifact-navbar-sheen" />
 
           {/* Left links — Music, Tools */}

@@ -87,26 +87,128 @@ export default function ObjectsPage() {
       </Container>
 
       {/* Notify for next drop */}
-      <Container bordered className="py-20 md:py-28 border-t border-[#d8aa67]/15">
-        <Section reveal>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-6">
-              Next drop
-            </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-normal text-gold mb-6 leading-[1.05]">
-              Get notified for more releases
-            </h2>
-            <p className="text-lg text-zinc-400 mb-12 leading-relaxed max-w-lg mx-auto">
-              Join the list to hear about the next garment drop and future ISIATA releases first.
-            </p>
-            <div className="flex justify-center">
-              <div className="group/form w-full max-w-lg mx-auto p-8 md:p-10 rounded-lg border border-white/15 bg-white/[0.03] transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06]">
-                <EmailCapture source="garments" />
+      <Section reveal>
+        <Container bordered className="border-t border-[#d8aa67]/15 py-24 md:py-32">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-[min(100%,28rem)] overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0">
+              {heroJacket ? (
+                <img
+                  src={heroJacket.image}
+                  alt=""
+                  aria-hidden
+                  className="h-full w-full object-cover object-center opacity-55"
+                />
+              ) : null}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20"
+              />
+              <img
+                src="/brand/overlays/overlay-6.png"
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-screen"
+              />
+              <div className="absolute inset-x-0 bottom-0 z-10 p-6 sm:p-8">
+                <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
+                  Private list
+                </p>
+                <p className="mt-2 font-display text-2xl uppercase tracking-[0.08em] text-[#f3ede3] sm:text-3xl">
+                  Next drop
+                </p>
+              </div>
+            </div>
+
+            <div className="relative flex flex-col justify-center">
+              <div className="mb-5 flex items-center gap-4">
+                <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
+                <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
+                  Garments
+                </p>
+                <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
+              </div>
+
+              <h2 className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
+                Get notified
+              </h2>
+
+              <p className="mt-4 font-spaced text-[10px] uppercase tracking-[0.38em] text-[#bca98e]">
+                Early access · Future releases
+              </p>
+
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
+                Join the list to hear about the next garment drop and future ISIATA releases first.
+                Focused runs. No noise.
+              </p>
+
+              <div className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
+                <div className="pr-4">
+                  <iconify-icon
+                    icon="solar:bell-bing-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                    First word
+                  </p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">
+                    Before public
+                  </p>
+                </div>
+                <div className="border-x border-[#d8aa67]/25 px-4">
+                  <iconify-icon
+                    icon="solar:box-minimalistic-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                    Focused runs
+                  </p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">
+                    Limited stock
+                  </p>
+                </div>
+                <div className="pl-4">
+                  <iconify-icon
+                    icon="solar:archive-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                    Archive
+                  </p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">
+                    Once gone
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 max-w-md">
+                <EmailCapture
+                  source="garments"
+                  placeholder="EMAIL"
+                  buttonLabel="Join"
+                  className="w-full items-stretch"
+                />
               </div>
             </div>
           </div>
-        </Section>
-      </Container>
+
+          <div className="mt-14 flex items-end justify-between border-t border-[#d8aa67]/25 pt-4 text-[8px] uppercase tracking-[0.28em] text-[#8d7b66]">
+            <div>
+              <p>List</p>
+              <p className="mt-1 text-[#b89a72]">Private</p>
+            </div>
+            <div className="text-right">
+              <p>Isiata</p>
+              <p className="mt-1 text-[#b89a72]">Garments</p>
+            </div>
+          </div>
+        </Container>
+      </Section>
     </>
   )
 }
