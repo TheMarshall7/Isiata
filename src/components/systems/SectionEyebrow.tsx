@@ -8,9 +8,9 @@ type SectionEyebrowProps = {
 export function SectionEyebrow({ number, label, accentText = 'text-zinc-500', className = '' }: SectionEyebrowProps) {
   return (
     <div className={`flex items-center gap-3 mb-4 ${className}`}>
-      <span className={`text-xs font-oswald font-semibold tracking-widest ${accentText}`}>{number}</span>
+      <span className={`text-xs font-display font-semibold tracking-widest ${accentText}`}>{number}</span>
       <span className={`h-px w-8 bg-current opacity-30 ${accentText}`} aria-hidden />
-      <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{label}</span>
+      <span className="text-xs font-spaced font-semibold uppercase tracking-wide text-zinc-500">{label}</span>
     </div>
   )
 }

@@ -1,14 +1,20 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 export function BackgroundEffects() {
+  const pathname = usePathname()
+  // Systems keeps the grayscale ambient; the main site gets warm energy light
+  const warm = !pathname?.startsWith('/systems')
+
   return (
     <>
       {/* Ambient gradient blobs - grayscale */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Top-left glow */}
-        <div className="absolute -top-[30%] -left-[20%] w-[60%] h-[60%] rounded-full bg-zinc-700/10 blur-[120px]" />
+        <div className={`absolute -top-[30%] -left-[20%] w-[60%] h-[60%] rounded-full blur-[120px] ${warm ? 'bg-gold/10' : 'bg-zinc-700/10'}`} />
         {/* Bottom-right glow */}
-        <div className="absolute -bottom-[20%] -right-[20%] w-[50%] h-[50%] rounded-full bg-zinc-600/10 blur-[120px]" />
+        <div className={`absolute -bottom-[20%] -right-[20%] w-[50%] h-[50%] rounded-full blur-[120px] ${warm ? 'bg-gold/10' : 'bg-zinc-600/10'}`} />
         {/* Center subtle glow */}
         <div className="absolute top-[40%] left-[30%] w-[40%] h-[40%] rounded-full bg-neutral-800/20 blur-[100px]" />
       </div>

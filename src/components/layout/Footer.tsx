@@ -1,212 +1,199 @@
 'use client'
 
 import Link from 'next/link'
-import { FOOTER_LINKS, SITE_CONFIG } from '@/lib/constants'
-import { EmailCapture } from '@/components/forms/EmailCapture'
+import { FOOTER_LINKS, ISIATA_LOGO_URL, SITE_CONFIG } from '@/lib/constants'
+
+const SOCIAL = [
+  {
+    href: SITE_CONFIG.links.soundcloud,
+    label: 'SoundCloud',
+    icon: 'solar:soundwave-linear',
+  },
+  {
+    href: SITE_CONFIG.links.tiktok,
+    label: 'TikTok',
+    icon: 'solar:music-note-2-linear',
+  },
+  {
+    href: SITE_CONFIG.links.instagram,
+    label: 'Instagram',
+    icon: 'solar:camera-linear',
+  },
+  {
+    href: SITE_CONFIG.links.youtube,
+    label: 'YouTube',
+    icon: 'solar:play-circle-linear',
+  },
+] as const
+
+function ColumnHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-8">
+      <span
+        aria-hidden
+        className="mb-3 block h-px w-8 bg-gradient-to-r from-[#d8aa67]/80 to-transparent"
+      />
+      <h4 className="font-display text-[11px] font-normal uppercase tracking-[0.28em] text-[#d8c3a4]">
+        {children}
+      </h4>
+    </div>
+  )
+}
+
+function FooterNavLink({ href, label }: { href: string; label: string }) {
+  const external = href.startsWith('mailto:') || href.startsWith('http')
+  const className =
+    'group relative inline-block text-sm text-[#b8a890]/90 transition-colors duration-300 hover:text-[#ece3d7]'
+
+  const inner = (
+    <>
+      <span className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">
+        {label}
+      </span>
+      <span className="absolute bottom-0 left-0 h-px w-0 bg-[#d8aa67]/50 transition-all duration-300 group-hover:w-full" />
+    </>
+  )
+
+  if (external) {
+    return (
+      <a href={href} className={className} {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+        {inner}
+      </a>
+    )
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {inner}
+    </Link>
+  )
+}
 
 export function Footer() {
   return (
-    <footer className="bg-background text-white border-t border-white/10 font-sans relative overflow-hidden depth-shadow-xl shadow-2xl shadow-black/60">
-      {/* Animated grain texture overlay */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
+    <footer className="relative overflow-hidden border-t border-[#d8aa67]/20 bg-background font-sans text-white">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8aa67]/45 to-transparent" />
 
-      {/* Top Glow Effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-48 bg-white/[0.06] blur-[120px] rounded-full pointer-events-none" />
-
-      {/* Subtle inner glow at top */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-      <div className="max-w-7xl mx-auto border-x border-white/10 relative z-10">
-        {/* Social Media Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 border-b border-white/10">
-          <a
-            href={SITE_CONFIG.links.soundcloud}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="relative">
-                <iconify-icon icon="solar:soundwave-linear" width="20" height="20" className="text-white group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <span className="text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">SoundCloud</span>
-            </div>
-            <iconify-icon
-              icon="solar:arrow-right-linear"
-              width="16"
-              height="16"
-              className="text-white relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </a>
-
-          <a
-            href={SITE_CONFIG.links.tiktok}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="relative">
-                <iconify-icon icon="solar:music-note-2-linear" width="20" height="20" className="text-white group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <span className="text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">TikTok</span>
-            </div>
-            <iconify-icon
-              icon="solar:arrow-right-linear"
-              width="16"
-              height="16"
-              className="text-white relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </a>
-
-          <a
-            href={SITE_CONFIG.links.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-between p-6 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="relative">
-                <iconify-icon icon="solar:camera-linear" width="18" height="18" className="text-white group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <span className="text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">Instagram</span>
-            </div>
-            <iconify-icon
-              icon="solar:arrow-right-linear"
-              width="16"
-              height="16"
-              className="text-white relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </a>
-
-          <a
-            href={SITE_CONFIG.links.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-between p-6 border-b md:border-b-0 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="relative">
-                <iconify-icon icon="solar:play-circle-linear" width="18" height="18" className="text-white group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <span className="text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">YouTube</span>
-            </div>
-            <iconify-icon
-              icon="solar:arrow-right-linear"
-              width="16"
-              height="16"
-              className="text-white relative z-10 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </a>
+      <div className="relative z-10 mx-auto max-w-7xl border-x border-[#d8aa67]/15">
+        {/* Social */}
+        <div className="grid grid-cols-1 border-b border-[#d8aa67]/15 md:grid-cols-4">
+          {SOCIAL.map((item, i) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group flex items-center justify-between px-6 py-5 transition-colors duration-300 hover:bg-[#d8aa67]/[0.04] md:px-7 ${
+                i < SOCIAL.length - 1
+                  ? 'border-b border-[#d8aa67]/15 md:border-b-0 md:border-r'
+                  : 'border-b border-[#d8aa67]/15 md:border-b-0'
+              }`}
+            >
+              <span className="flex items-center gap-3.5">
+                <iconify-icon
+                  icon={item.icon}
+                  width="18"
+                  height="18"
+                  className="text-[#d8c3a4] transition-transform duration-300 group-hover:scale-110"
+                />
+                <span className="text-sm tracking-wide text-[#d5c8b8] transition-colors duration-300 group-hover:text-[#ece3d7]">
+                  {item.label}
+                </span>
+              </span>
+              <iconify-icon
+                icon="solar:arrow-right-linear"
+                width="14"
+                height="14"
+                className="text-[#d8aa67]/55 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#d8aa67]"
+              />
+            </a>
+          ))}
         </div>
 
-        {/* Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 min-h-[300px]">
-          {/* Column 1: Explore */}
-          <div className="p-8 md:p-12 border-r border-white/10 border-b md:border-b-0 bg-gradient-to-b from-transparent to-white/[0.01]">
-            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-8">
-              Explore
-            </h4>
+        {/* Nav columns */}
+        <div className="grid grid-cols-2 border-b border-[#d8aa67]/15 md:grid-cols-4">
+          <div className="border-b border-r border-[#d8aa67]/15 p-8 md:border-b-0 md:p-10 lg:p-12">
+            <ColumnHeading>Explore</ColumnHeading>
             <ul className="space-y-4">
               {FOOTER_LINKS.explore.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group text-sm text-zinc-400 hover:text-white transition-all duration-300 block relative"
-                  >
-                    <span className="relative z-10 group-hover:translate-x-1 inline-block transition-transform duration-300">{link.label}</span>
-                    <span className="absolute left-0 bottom-0 h-px w-0 bg-white/30 group-hover:w-full transition-all duration-300" />
-                  </Link>
+                  <FooterNavLink href={link.href} label={link.label} />
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 2: Information */}
-          <div className="p-8 md:p-12 border-r border-white/10 border-b md:border-b-0 bg-gradient-to-b from-transparent to-white/[0.01]">
-            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-8">
-              Information
-            </h4>
+          <div className="border-b border-[#d8aa67]/15 p-8 md:border-b-0 md:border-r md:p-10 lg:p-12">
+            <ColumnHeading>About</ColumnHeading>
             <ul className="space-y-4">
-              {FOOTER_LINKS.information.map((link) => (
+              {FOOTER_LINKS.about.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group text-sm text-zinc-400 hover:text-white transition-all duration-300 block relative"
-                  >
-                    <span className="relative z-10 group-hover:translate-x-1 inline-block transition-transform duration-300">{link.label}</span>
-                    <span className="absolute left-0 bottom-0 h-px w-0 bg-white/30 group-hover:w-full transition-all duration-300" />
-                  </Link>
+                  <FooterNavLink href={link.href} label={link.label} />
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Legal */}
-          <div className="p-8 md:p-12 border-r border-white/10 border-b md:border-b-0 bg-gradient-to-b from-transparent to-white/[0.01]">
-            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-8">
-              Legal
-            </h4>
+          <div className="border-r border-[#d8aa67]/15 p-8 md:p-10 lg:p-12">
+            <ColumnHeading>Legal</ColumnHeading>
             <ul className="space-y-4">
               {FOOTER_LINKS.legal.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group text-sm text-zinc-400 hover:text-white transition-all duration-300 block relative"
-                  >
-                    <span className="relative z-10 group-hover:translate-x-1 inline-block transition-transform duration-300">{link.label}</span>
-                    <span className="absolute left-0 bottom-0 h-px w-0 bg-white/30 group-hover:w-full transition-all duration-300" />
-                  </Link>
+                  <FooterNavLink href={link.href} label={link.label} />
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Connect */}
-          <div className="p-8 md:p-12 bg-gradient-to-b from-transparent to-white/[0.01]">
-            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-8">
-              Connect
-            </h4>
-            <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
-              Stay informed about new releases and private offerings.
+          <div className="p-8 md:p-10 lg:p-12">
+            <ColumnHeading>Stay Close</ColumnHeading>
+            <p className="text-sm leading-relaxed text-[#b8a890]/85">
+              New releases.
+              <br />
+              Private offerings.
+              <br />
+              First access.
             </p>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="px-8 md:px-12 pb-24 pt-20 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12">
-          <div className="max-w-md">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl font-semibold tracking-tighter text-white">
-                ISIATA.
-              </span>
-            </div>
-            <p className="text-sm text-zinc-500 leading-relaxed max-w-xs font-medium">
-              Culture and innovation. Sound, objects, tools, and access.
-            </p>
+        {/* Brand mark */}
+        <div className="relative flex flex-col items-center overflow-hidden px-8 py-20 text-center md:py-28">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <img
+              src="/brand/overlays/footer-brand.png"
+              alt=""
+              className="h-full w-full object-cover object-center opacity-80 mix-blend-screen"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
           </div>
 
-          <EmailCapture source="footer" />
+          <div className="relative z-10 flex flex-col items-center">
+            <img
+              src={ISIATA_LOGO_URL}
+              alt=""
+              aria-hidden
+              className="-translate-y-5 mb-6 h-10 w-auto object-contain opacity-70 md:h-12"
+            />
+            <p className="translate-x-[5px] font-display text-4xl font-normal uppercase tracking-[0.42em] text-[#ece3d7] gradient-text-gold sm:text-5xl md:text-6xl md:tracking-[0.48em]">
+              ISIATA
+            </p>
+            <div className="mt-8 flex w-full max-w-md items-center gap-4">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d8aa67]/40" />
+              <p className="shrink-0 text-[10px] uppercase tracking-[0.32em] text-[#9a8b74]">
+                Music · Artifacts · Systems
+              </p>
+              <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#d8aa67]/40" />
+            </div>
+          </div>
         </div>
 
         {/* Copyright */}
-        <div className="px-8 md:px-12 pb-8 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-600">
-          <span>© {new Date().getFullYear()} ISIATA</span>
-          <img
-            src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png"
-            alt="ISIATA"
-            className="h-6 opacity-40"
-          />
-          <span>Made with care</span>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-[#d8aa67]/15 px-8 py-6 text-[10px] uppercase tracking-[0.22em] text-[#7a6f5f] md:flex-row md:px-12">
+          <span className="font-display tracking-[0.2em]">
+            © {new Date().getFullYear()} ISIATA
+          </span>
+          <span className="font-display tracking-[0.2em]">All Rights Reserved</span>
         </div>
       </div>
     </footer>

@@ -26,17 +26,17 @@ export default function ObjectsPage() {
     <>
       <JsonLd data={itemList} />
       {/* Page Header */}
-      <Container bordered className="pt-32 pb-16">
-        <Section reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <Container bordered className="relative min-h-[100svh] flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
+        <Section reveal className="relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
               <PageTitle
                 text="Garments"
-                className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12"
+                className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
                 speed={120}
               />
 
-              <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-zinc-300 leading-relaxed">
                 <p>
                   Artifacts of the process.
                 </p>
@@ -58,7 +58,7 @@ export default function ObjectsPage() {
             </div>
 
             {heroJacket && (
-              <div className="relative aspect-[3/4] max-w-md lg:max-w-none mx-auto lg:mx-0 w-full border border-white/10 bg-black overflow-hidden depth-shadow">
+              <div className="relative aspect-[3/4] w-full max-w-[min(100%,28rem)] max-h-[min(68svh,38rem)] mx-auto lg:mx-0 lg:ml-auto border border-white/10 bg-black overflow-hidden depth-shadow">
                 <img
                   src={heroJacket.image}
                   alt={heroJacket.title}
@@ -76,7 +76,7 @@ export default function ObjectsPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
             Signature Releases
           </p>
-          <h2 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold mb-4">
             They Might Be Mad
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
@@ -93,7 +93,7 @@ export default function ObjectsPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-6">
               Next drop
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-oswald uppercase tracking-tight text-white mb-6 leading-[1.05]">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-normal text-gold mb-6 leading-[1.05]">
               Get notified for more releases
             </h2>
             <p className="text-lg text-zinc-400 mb-12 leading-relaxed max-w-lg mx-auto">

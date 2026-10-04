@@ -21,7 +21,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className = '', showText =
                 className="w-8 h-8 lg:w-10 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg drop-shadow-md"
             />
             {showText && (
-                <span className="text-sm lg:text-base font-oswald uppercase tracking-widest text-white">
+                <span className="text-sm lg:text-base font-display uppercase tracking-widest text-white">
                     ISIATA
                 </span>
             )}

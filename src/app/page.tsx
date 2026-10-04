@@ -2,7 +2,7 @@
 
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { EmailCapture } from '@/components/forms/EmailCapture'
+import { StayCloseSection } from '@/components/home/StayCloseSection'
 import { TheyMightBeMadSection } from '@/components/sound/TheyMightBeMadSection'
 import { DrumBundleFeaturedSection } from '@/components/tools/DrumBundleFeaturedSection'
 import { getGarmentBySlug } from '@/lib/garments/catalog'
@@ -11,7 +11,7 @@ import { TWO_TALES, TWO_TALES_COVER } from '@/lib/sound/releases'
 const FEATURED_CARDS = [
   {
     href: '/sound',
-    title: 'Sound',
+    title: 'Music',
     desc: 'Releases, playlists, visual media',
     image: TWO_TALES_COVER,
     imageAlt: 'Two Tales',
@@ -44,8 +44,8 @@ export default function HomePage() {
             alt="ISIATA"
             className="w-full h-full object-cover object-[center_44%] lg:object-[center_52%]"
           />
-          {/* Bottom fade into page background */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+          {/* Soft fade into continuous page background */}
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/70 to-transparent" />
         </div>
 
         {/* Scroll indicator */}
@@ -56,28 +56,28 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-6 md:gap-8 group max-w-[min(100%-3rem,28rem)] pr-4"
           >
-            <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-white/15 depth-shadow">
+            <div className="relative aspect-square w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-white/15 bg-black depth-shadow">
               <img
                 src={TWO_TALES.cover}
                 alt={TWO_TALES.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-zinc-400 mb-0.5">Single</p>
-              <p className="font-oswald uppercase tracking-tight text-white text-lg md:text-xl truncate">
+              <p className="text-[10px] font-spaced uppercase tracking-wide text-zinc-400 mb-0.5">Single</p>
+              <p className="font-display uppercase tracking-normal text-gold text-lg md:text-xl truncate">
                 {TWO_TALES.title}
               </p>
               <p className="text-xs text-zinc-400 mt-0.5">{TWO_TALES.streamsLabel}</p>
             </div>
-            <span className="flex items-center justify-center w-10 h-10 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm shrink-0 group-hover:border-[#1DB954]/50 group-hover:bg-black/60 transition-colors">
-              <iconify-icon icon="mdi:spotify" width="20" height="20" className="text-[#1DB954]" />
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 group-hover:border-[#f0c681] group-hover:bg-[#b7792a]/10 group-hover:shadow-[0_0_28px_rgba(211,157,83,0.18)]">
+              <iconify-icon icon="mdi:spotify" width="18" height="18" className="text-[#f0dfc8]" />
             </span>
           </a>
 
           <div className="absolute bottom-12 right-6 md:right-10 is-visible aura-reveal">
             <div className="flex flex-col items-center gap-2">
-              <span className="text-xs text-zinc-400 uppercase tracking-widest">Scroll</span>
+              <span className="text-xs font-spaced text-zinc-400 uppercase tracking-wide">Scroll</span>
               <iconify-icon icon="solar:arrow-down-linear" width="20" height="20" className="text-zinc-400 animate-bounce" />
             </div>
           </div>
@@ -90,13 +90,13 @@ export default function HomePage() {
 
       {/* Featured Items */}
       <Section reveal>
-        <Container bordered className="py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <Container bordered className="relative py-24">
+          <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {FEATURED_CARDS.map((card) => (
               <a
                 key={card.href}
                 href={card.href}
-                className="group flashlight-card depth-shadow-lg hover-glow relative aspect-[4/5] overflow-hidden bg-surface-raised border border-white/10 flex flex-col hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/[0.03] transition-all duration-500 ease-out"
+                className="group flashlight-card hover-glow relative flex aspect-[4/5] flex-col overflow-hidden border border-[#d8aa67]/20 bg-transparent transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#d8aa67]/65"
                 onMouseMove={(e) => {
                   const el = e.currentTarget
                   const rect = el.getBoundingClientRect()
@@ -104,9 +104,16 @@ export default function HomePage() {
                   el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
                 }}
               >
-                <div className="absolute inset-0 opacity-[0.025] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-screen"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='a'%3E%3CfeTurbulence baseFrequency='.75' stitchTiles='stitch' type='fractalNoise'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.68 0 0 0 0 0.38 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E\")",
+                  }}
+                />
 
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(216,170,103,0.06)] via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
                 <div className="relative flex-[1] min-h-0 flex items-center justify-center p-3 md:p-4">
                   <img
@@ -117,7 +124,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative z-10 shrink-0 text-center px-6 pb-6 md:pb-8 pt-2">
-                  <h3 className="text-3xl md:text-4xl font-semibold text-white mb-3 group-hover:tracking-wider transition-all duration-500">
+                  <h3 className="gradient-text-gold mb-3 text-3xl font-display font-semibold uppercase transition-all duration-500 group-hover:tracking-wider md:text-4xl">
                     {card.title}
                   </h3>
                   <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">
@@ -125,34 +132,14 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </a>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* Mailing List */}
-      <Section reveal>
-        <Container bordered className="py-24">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-              Stay Close
-            </h2>
-            <p className="text-lg text-zinc-400 mb-4 leading-relaxed">
-              Releases don't follow a schedule.
-              <br />
-              Availability is intentional.
-            </p>
-            <p className="text-sm text-zinc-500 mb-8">
-              Join the list for early access and private releases.
-            </p>
-            <div className="flex justify-center">
-              <EmailCapture source="homepage" />
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <StayCloseSection />
     </>
   )
 }

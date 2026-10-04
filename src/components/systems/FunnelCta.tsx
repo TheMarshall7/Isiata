@@ -40,7 +40,7 @@ export function FunnelCta({
       )}
       <Link
         href={SYSTEMS_BOOKING_HREF}
-        className={`group cta-sheen inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-sm font-semibold hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ${accentGlow}`}
+        className={`group btn-primary ${accentGlow}`}
       >
         {label}
         <iconify-icon

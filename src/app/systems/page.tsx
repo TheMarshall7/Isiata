@@ -16,7 +16,7 @@ import { SYSTEMS_PAGE_COPY } from '@/lib/systems/page-content'
 export default function SystemsPage() {
   return (
     <SystemsLensProvider>
-      <Container bordered className="pt-32 pb-20">
+      <Container bordered className="pt-28 md:pt-32 pb-16 md:pb-20">
         <LivingSystemHero />
       </Container>
 

@@ -42,7 +42,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               key={link.href}
               href={link.href}
               onClick={onClose}
-              className="text-3xl font-medium text-white hover:text-zinc-400 transition-colors"
+              className="text-3xl font-medium text-white hover:text-gold-light transition-colors"
               style={{
                 animation: `reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both ${index * 50}ms`,
               }}
@@ -50,17 +50,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               {link.label}
             </Link>
           ))}
-
-          <Link
-            href="/contact/booking"
-            onClick={onClose}
-            className="mt-8 bg-white text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-zinc-200 transition-colors"
-            style={{
-              animation: `reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both ${NAV_LINKS.length * 50}ms`,
-            }}
-          >
-            Book
-          </Link>
         </nav>
       </div>
     </div>

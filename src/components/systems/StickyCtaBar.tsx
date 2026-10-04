@@ -44,7 +44,7 @@ export function StickyCtaBar({
           </p>
           <Link
             href={SYSTEMS_BOOKING_HREF}
-            className="shrink-0 inline-flex items-center gap-1.5 bg-white text-black px-4 py-2.5 rounded-full text-xs font-semibold hover:bg-zinc-200 transition-colors"
+            className="btn-primary shrink-0 min-h-10 px-5 text-[10px]"
           >
             {ctaLabel.replace('Book your ', '').replace('Book a ', '')}
             <iconify-icon icon="solar:arrow-right-linear" width="14" height="14" />

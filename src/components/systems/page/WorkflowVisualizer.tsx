@@ -12,7 +12,7 @@ export function WorkflowVisualizer() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         System visualizer
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         {lens.label} workflow
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">

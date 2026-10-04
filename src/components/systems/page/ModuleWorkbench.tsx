@@ -37,7 +37,7 @@ export function ModuleWorkbench() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         Build your system
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         The pieces inside the machine
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">
@@ -67,7 +67,7 @@ export function ModuleWorkbench() {
                   onClick={() => openModule(module.id)}
                   aria-expanded={isOpen}
                 >
-                  <p className="text-xs font-oswald uppercase tracking-widest text-white">{module.label}</p>
+                  <p className="text-xs font-display uppercase tracking-widest text-white">{module.label}</p>
                   <p className="text-[11px] text-zinc-500 mt-1 leading-relaxed">{module.lede}</p>
                 </button>
                 <button

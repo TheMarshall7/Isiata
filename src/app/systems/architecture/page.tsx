@@ -30,7 +30,7 @@ export default function SystemsArchitecturePage() {
         </p>
         <Link
           href={SYSTEMS_BOOKING_HREF}
-          className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+          className="btn-primary"
         >
           {SYSTEMS_MAP_CTA_LABEL}
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />

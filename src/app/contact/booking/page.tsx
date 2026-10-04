@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { CALENDAR_EMBED_URL } from '@/lib/constants'
+import { CALENDAR_EMBED_URL, ISIATA_LOGO_URL } from '@/lib/constants'
 import { CONTACT_HREF, CONTACT_INQUIRY_HREF } from '@/lib/contact/offerings'
 import { CalendarEmbed } from '@/components/booking/CalendarEmbed'
 import { buildPageMetadata } from '@/lib/seo/metadata'
@@ -55,7 +55,7 @@ export default function BookingPage() {
             <span className="text-xs text-zinc-400">Limited availability this month</span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-oswald uppercase tracking-tight text-white mb-4">
+          <h1 className="text-5xl md:text-6xl font-display uppercase tracking-normal text-gold mb-4">
             Secure Your Session
           </h1>
           <p className="text-lg text-zinc-400 max-w-2xl mb-8">
@@ -208,9 +208,9 @@ export default function BookingPage() {
       <Container bordered className="py-8">
         <div className="flex justify-center">
           <img
-            src="https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png"
+            src={ISIATA_LOGO_URL}
             alt="ISIATA"
-            className="h-8 opacity-40"
+            className="h-8 w-auto object-contain opacity-70"
           />
         </div>
       </Container>

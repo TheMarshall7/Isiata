@@ -62,7 +62,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <SectionEyebrow number="03" label="The problem" accentText={accent.text} />
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-12">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-12">
             Sound familiar?
           </h2>
           <AsymmetricPainGrid painPoints={funnel.painPoints} />
@@ -80,7 +80,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <SectionEyebrow number="04" label="What changes for you" accentText={accent.text} />
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4">
             Benefits and outcomes
           </h2>
           <p className="text-zinc-400 mb-12 max-w-2xl">
@@ -105,7 +105,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <SectionEyebrow number="05" label="Why not DIY?" accentText={accent.text} />
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-10">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-10">
             Link-in-bio vs ISIATA Systems
           </h2>
           <ComparisonTable rows={funnel.comparisonRows} accent={accent} />
@@ -128,7 +128,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
             <div className={`glow-orb top-0 left-1/2 -translate-x-1/2 w-72 h-72 ${accent.glow}`} aria-hidden />
             <div className="relative">
               <SectionEyebrow number="06" label="Your outcome" accentText={accent.text} className="justify-center" />
-              <p className="text-2xl md:text-3xl font-oswald uppercase tracking-tight gradient-text leading-snug">
+              <p className="text-2xl md:text-3xl font-display uppercase tracking-normal gradient-text leading-snug">
                 {tier.outcome}
               </p>
             </div>
@@ -144,7 +144,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <SectionEyebrow number="07" label="How it works" accentText={accent.text} />
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-12">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-12">
             From call to launch
           </h2>
           <ProcessSteps
@@ -167,7 +167,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
         <Section reveal>
           <div className="text-center mb-12">
             <SectionEyebrow number="08" label="Proof" accentText={accent.text} className="justify-center" />
-            <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white">
+            <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold">
               What artists are saying
             </h2>
           </div>
@@ -195,7 +195,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
       <Container bordered className="py-20 md:py-28">
         <Section reveal>
           <SectionEyebrow number="10" label="Questions" accentText={accent.text} />
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-12">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-12">
             Before you book
           </h2>
           <div className="max-w-3xl">
@@ -214,7 +214,7 @@ export function SystemFunnel({ tier, funnel }: SystemFunnelProps) {
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
             At a glance
           </p>
-          <h2 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-10">
+          <h2 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold mb-10">
             Compare tiers
           </h2>
           <TiersAtAGlance currentTierId={tier.id} />

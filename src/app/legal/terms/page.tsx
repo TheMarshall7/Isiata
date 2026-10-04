@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <Container bordered className="pt-44 pb-24">
       <Section reveal>
-        <h1 className="text-5xl md:text-6xl font-oswald uppercase tracking-tight text-white mb-12">
+        <h1 className="text-5xl md:text-6xl font-display uppercase tracking-normal text-gold mb-12">
           Terms of Use
         </h1>
         <div className="max-w-2xl space-y-8 text-zinc-400 leading-relaxed">

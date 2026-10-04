@@ -75,7 +75,7 @@ function AfterPanel() {
         <p className="text-[10px] uppercase tracking-widest text-zinc-500">still there · now routed through</p>
 
         <div className="rounded-lg border border-white/25 bg-white/[0.04] px-5 py-3">
-          <p className="text-sm font-oswald uppercase tracking-widest text-white">System</p>
+          <p className="text-sm font-display uppercase tracking-widest text-white">System</p>
         </div>
 
         <span className="h-5 w-px bg-white/20" aria-hidden />
@@ -122,7 +122,7 @@ export function BeforeAfterSlider() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         Scattered to connected
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         Before / After
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">

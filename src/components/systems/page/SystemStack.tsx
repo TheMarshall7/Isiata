@@ -32,7 +32,7 @@ export function SystemStack() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         How it is built
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         Your creative business, in layers
       </h2>
       <p className="text-sm text-zinc-500 mb-10 max-w-xl">
@@ -51,8 +51,8 @@ export function SystemStack() {
               }`}
             >
               <div className="flex items-baseline gap-4 mb-3">
-                <span className="text-[10px] font-oswald tracking-widest text-zinc-500">{layer.number}</span>
-                <h3 className="text-xl font-oswald uppercase tracking-tight text-white">{layer.title}</h3>
+                <span className="text-[10px] font-display tracking-widest text-zinc-500">{layer.number}</span>
+                <h3 className="text-xl font-display uppercase tracking-normal text-gold">{layer.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {layer.items.map((item) => (

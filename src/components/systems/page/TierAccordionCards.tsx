@@ -21,7 +21,7 @@ export function TierAccordionCards() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         The four system builds
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         There isn&apos;t one perfect system
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">
@@ -50,7 +50,7 @@ export function TierAccordionCards() {
                       {String(tier.tier).padStart(2, '0')}
                       {recommended ? ' · Recommended' : ''}
                     </p>
-                    <h3 className="text-2xl font-oswald uppercase tracking-tight text-white">{tier.name}</h3>
+                    <h3 className="text-2xl font-display uppercase tracking-normal text-gold">{tier.name}</h3>
                     <p className="text-sm text-zinc-500 italic mt-1">{tier.tagline}</p>
                   </div>
                   <div className="flex flex-wrap items-center gap-3 shrink-0">
@@ -104,7 +104,7 @@ export function TierAccordionCards() {
                       </ul>
                       <Link
                         href={`/systems/${tier.id}`}
-                        className="inline-flex items-center justify-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-xs font-semibold hover:bg-zinc-200 transition-colors"
+                        className="btn-primary min-h-10 px-5 text-[10px]"
                       >
                         {tier.ctaLabel}
                       </Link>

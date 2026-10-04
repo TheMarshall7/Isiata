@@ -1,5 +1,4 @@
-export const ISIATA_LOGO_URL =
-  'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67acbb51f52f42753175f9fe.png'
+export const ISIATA_LOGO_URL = '/brand/isiata-logo.png'
 
 const DEFAULT_SITE_URL = 'https://isiata.com'
 
@@ -20,25 +19,30 @@ export const SITE_CONFIG = {
   },
 }
 
-export const NAV_LINKS = [
-  { href: '/sound', label: 'Sound' },
-  { href: '/objects', label: 'Garments' },
+export const NAV_LINKS_LEFT = [
+  { href: '/sound', label: 'Music' },
   { href: '/tools', label: 'Tools' },
-  { href: '/systems', label: 'Systems' },
+]
+
+export const NAV_LINKS_RIGHT = [
+  { href: '/objects', label: 'Garments' },
   { href: '/contact', label: 'Contact' },
 ]
 
+/** Full nav list (mobile menu, etc.) — left then right for a stable order */
+export const NAV_LINKS = [...NAV_LINKS_LEFT, ...NAV_LINKS_RIGHT]
+
 export const FOOTER_LINKS = {
   explore: [
-    { href: '/sound', label: 'Sound' },
+    { href: '/sound', label: 'Music' },
     { href: '/objects', label: 'Garments' },
     { href: '/tools', label: 'Tools' },
     { href: '/systems', label: 'Systems' },
-    { href: '/contact', label: 'Contact' },
   ],
-  information: [
-    { href: '/about', label: 'About' },
+  about: [
+    { href: '/about', label: 'About Isiata' },
     { href: 'mailto:brianmarshallca@gmail.com', label: 'General Inquiry' },
+    { href: '/contact', label: 'Contact' },
   ],
   legal: [
     { href: '/legal/licensing', label: 'Licensing' },

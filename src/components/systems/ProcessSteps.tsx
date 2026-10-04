@@ -78,7 +78,7 @@ export function ProcessSteps({ steps, accent, tierIcon }: ProcessStepsProps) {
           <p className={`text-xs font-semibold uppercase tracking-widest ${accent.text} mb-3`}>
             Step {activeIndex + 1} of {steps.length}
           </p>
-          <h4 className="text-xl md:text-2xl font-oswald uppercase tracking-tight text-white mb-4">
+          <h4 className="text-xl md:text-2xl font-display uppercase tracking-normal text-gold mb-4">
             {activeStep.title}
           </h4>
           <p className="text-zinc-400 leading-relaxed">{activeStep.description}</p>

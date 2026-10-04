@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Oswald } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { SiteChrome } from '@/components/layout/SiteChrome'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -8,16 +8,55 @@ import { organizationSchema, webSiteSchema } from '@/lib/seo/json-ld'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { SEO_PAGES } from '@/lib/seo/pages'
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
+const isiata = localFont({
+  src: [
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-MediumItalic.woff2', weight: '500', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-BoldItalic.woff2', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-isiata',
   display: 'swap',
 })
 
-const oswald = Oswald({
-  subsets: ['latin'],
-  variable: '--font-oswald',
-  weight: ['300', '400', '500', '600', '700'],
+const isiataWide = localFont({
+  src: [
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-MediumItalic.woff2', weight: '500', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Wide-BoldItalic.woff2', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-isiata-wide',
+  display: 'swap',
+})
+
+const isiataSpaced = localFont({
+  src: [
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-MediumItalic.woff2', weight: '500', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Spaced-BoldItalic.woff2', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-isiata-spaced',
+  display: 'swap',
+})
+
+const isiataMono = localFont({
+  src: [
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-MediumItalic.woff2', weight: '500', style: 'italic' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../brand/Isiata Brand Folder/Isiata Font Package v2/Isiata-Mono-BoldItalic.woff2', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-isiata-mono',
   display: 'swap',
 })
 
@@ -65,17 +104,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${oswald.variable}`}>
+    <html
+      lang="en"
+      className={`${isiata.variable} ${isiataWide.variable} ${isiataSpaced.variable} ${isiataMono.variable}`}
+    >
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: 'document.documentElement.classList.add("js")',
@@ -86,7 +119,7 @@ export default function RootLayout({
           async
         />
       </head>
-      <body className="min-h-screen selection:bg-purple-500/30 relative overflow-x-hidden">
+      <body className="min-h-screen selection:bg-gold/30 relative overflow-x-hidden">
         <JsonLd data={[organizationSchema(), webSiteSchema()]} />
         <SiteChrome>{children}</SiteChrome>
       </body>

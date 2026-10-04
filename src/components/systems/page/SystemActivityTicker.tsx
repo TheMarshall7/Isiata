@@ -8,7 +8,7 @@ function ActivityStat({ value, label }: { value: string; label: string }) {
   const { ref, display } = useCountUp(value)
   return (
     <div className="rounded-lg border border-white/10 bg-surface-raised/40 p-5">
-      <p ref={ref} className="text-3xl font-oswald tracking-tight text-white tabular-nums">
+      <p ref={ref} className="text-3xl font-display tracking-normal text-white tabular-nums">
         {display}
       </p>
       <p className="text-[11px] uppercase tracking-widest text-zinc-500 mt-1">{label}</p>
@@ -22,7 +22,7 @@ export function SystemActivityTicker() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         Example system activity
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         Today
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">

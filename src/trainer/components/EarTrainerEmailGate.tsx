@@ -69,7 +69,7 @@ export const EarTrainerEmailGate: React.FC<EarTrainerEmailGateProps> = ({ onUnlo
             <p className="text-xs font-semibold uppercase tracking-widest text-orange-400/90 mb-3">
               Free · Ear Mastery
             </p>
-            <h1 className="text-4xl md:text-5xl font-oswald uppercase tracking-tight text-white leading-[0.95] mb-4">
+            <h1 className="text-4xl md:text-5xl font-display uppercase tracking-normal text-gold leading-[0.95] mb-4">
               Tune your ear.
               <span className="block text-zinc-400">Create without guessing.</span>
             </h1>

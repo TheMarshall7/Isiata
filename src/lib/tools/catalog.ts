@@ -66,6 +66,15 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     categoryLabel: 'Tool',
     price: 'Free',
   },
+  {
+    slug: 'isiata-systems',
+    href: '/systems',
+    title: 'ISIATA Systems',
+    description: 'Backend business infrastructure for artists and musicians — intake, delivery, and retention in one place.',
+    icon: 'solar:server-square-linear',
+    category: 'tools',
+    categoryLabel: 'System',
+  },
 ]
 
 export function getCatalogByCategory(category: ToolCategoryId): ToolCatalogItem[] {

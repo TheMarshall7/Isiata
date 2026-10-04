@@ -9,15 +9,21 @@
     --surface-raised: #111111;
     --surface-overlay: #161616;
     --cursor-size: 20px;
+    --gold-rgb: 236 227 215;
+    --energy-rgb: 217 119 43;
+    --isiata-ivory: #ece3d7;
+    --isiata-black: #020202;
+    --isiata-border: rgba(236, 227, 215, 0.28);
   }
 
   * {
     @apply border-border;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23000000'/%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E") 10 10, auto;
+    /* Teardrop cursor — angled ~11:00; gold outline tapers thin at tip, fuller at bulb */
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='28' viewBox='0 0 26 28'%3E%3Cg transform='rotate(-30 11 3)'%3E%3Cpath fill='%23d8aa67' fill-rule='evenodd' d='M11 2C11 2 3.75 10.7 3.75 16.25a7.25 7.25 0 1 0 14.5 0C18.25 10.7 11 2 11 2z M11 2.5C11 2.5 5.2 11.2 5.2 16.25a5.8 5.8 0 1 0 11.6 0C16.8 11.2 11 2.5 11 2.5z'/%3E%3Cpath fill='%23000000' d='M11 2.5C11 2.5 5.2 11.2 5.2 16.25a5.8 5.8 0 1 0 11.6 0C16.8 11.2 11 2.5 11 2.5z'/%3E%3C/g%3E%3C/svg%3E") 11 3, auto;
   }
 
   a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23000000'/%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ffffff'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='32' viewBox='0 0 30 32'%3E%3Cg transform='rotate(-30 13 3)'%3E%3Cpath fill='%23d8aa67' fill-rule='evenodd' d='M13 2C13 2 4.3 11.5 4.3 18a8.7 8.7 0 1 0 17.4 0C21.7 11.5 13 2 13 2z M13 2.55C13 2.55 5.9 12 5.9 18a7.1 7.1 0 1 0 14.2 0C20.1 12 13 2.55 13 2.55z'/%3E%3Cpath fill='%23000000' d='M13 2.55C13 2.55 5.9 12 5.9 18a7.1 7.1 0 1 0 14.2 0C20.1 12 13 2.55 13 2.55z'/%3E%3Ccircle cx='13' cy='18' r='2.5' fill='%23d8aa67'/%3E%3C/g%3E%3C/svg%3E") 13 3, pointer;
   }
 
   html, body {
@@ -26,20 +32,182 @@
 
   body {
     @apply bg-background text-white antialiased;
-    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-family: var(--font-isiata), system-ui, sans-serif;
   }
 
   ::selection {
-    @apply bg-purple-500/30;
+    @apply bg-gold/30;
   }
 }
 
 @layer utilities {
+  /* Artifact navigation */
+  .artifact-navbar {
+    background: transparent;
+    isolation: isolate;
+    box-shadow: none;
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    backdrop-filter: blur(24px) saturate(1.5);
+    transition:
+      background-color 500ms ease,
+      box-shadow 500ms ease,
+      backdrop-filter 500ms ease;
+  }
+
+  .artifact-navbar.is-scrolled {
+    background: rgba(5, 5, 5, 0.72);
+    -webkit-backdrop-filter: blur(22px) saturate(1.35);
+    backdrop-filter: blur(22px) saturate(1.35);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 8px 28px -8px rgba(0, 0, 0, 0.55);
+  }
+
+  .artifact-navbar::before {
+    content: '';
+    position: absolute;
+    z-index: 40;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      168deg,
+      rgba(92, 70, 38, 0.55) 0%,
+      rgba(168, 132, 72, 0.72) 18%,
+      rgba(112, 84, 44, 0.4) 42%,
+      rgba(214, 176, 112, 0.95) 68%,
+      rgba(244, 214, 156, 1) 82%,
+      rgba(120, 88, 42, 0.5) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  .artifact-navbar.is-scrolled::before {
+    opacity: 1;
+  }
+
+  .artifact-navbar-sheen {
+    position: absolute;
+    z-index: 41;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        90deg,
+        transparent 8%,
+        rgba(196, 154, 86, 0.0) 22%,
+        rgba(228, 196, 138, 0.85) 31%,
+        transparent 39%,
+        transparent 58%,
+        rgba(210, 168, 96, 0.55) 71%,
+        rgba(236, 208, 150, 0.9) 79%,
+        transparent 90%
+      ) bottom / 100% 1px no-repeat;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  .artifact-navbar.is-scrolled .artifact-navbar-sheen {
+    opacity: 1;
+  }
+
+  .artifact-nav-divider {
+    width: 1px;
+    height: 1.15rem;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(196, 158, 96, 0.7),
+      transparent
+    );
+  }
+
+  .artifact-nav-link {
+    position: relative;
+    flex: none;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: rgba(236, 227, 215, 0.62);
+    font-family: var(--font-isiata), system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+    transition: color 300ms ease, text-shadow 300ms ease;
+  }
+
+  .artifact-nav-link:hover,
+  .artifact-nav-link:focus-visible {
+    color: var(--isiata-ivory);
+    text-shadow: 0 0 8px rgba(236, 227, 215, 0.22);
+  }
+
+  .artifact-nav-link.is-active {
+    color: #f7f1e6;
+    text-shadow: 0 0 14px rgba(243, 231, 207, 0.42);
+  }
+
+  .artifact-nav-link:focus-visible {
+    outline: none;
+  }
+
+  .artifact-nav-active-mark {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    display: flex;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    pointer-events: none;
+  }
+
+  .artifact-nav-active-diamond {
+    width: 2.5px;
+    height: 2.5px;
+    transform: rotate(45deg);
+    background: #f3e7cf;
+    box-shadow: 0 0 4px rgba(236, 206, 146, 0.45);
+  }
+
+  .artifact-nav-active-line {
+    width: 12px;
+    height: 1px;
+    background: rgba(236, 206, 146, 0.7);
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .artifact-nav-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artifact-navbar {
+      transition: none;
+    }
+  }
+
   /* Globe Glow Effect */
   .globe-glow {
     background: radial-gradient(
       circle at center,
-      rgba(255, 255, 255, 0.15) 0%,
+      rgba(var(--gold-rgb), 0.12) 0%,
       transparent 70%
     );
   }
@@ -89,7 +257,7 @@
     inset: 0;
     background: radial-gradient(
       800px circle at var(--mouse-x) var(--mouse-y),
-      rgba(255, 255, 255, 0.06),
+      rgba(var(--gold-rgb), 0.08),
       transparent 40%
     );
     opacity: 0;
@@ -106,6 +274,38 @@
   /* Gradient Text */
   .gradient-text {
     @apply text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-zinc-500;
+  }
+
+  /* Gold gradient text — hero-level headings (brand cream #ece3d7) */
+  .gradient-text-gold {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(to bottom, #f7f2ea, #ece3d7, #d4c8b8);
+  }
+
+  /* Gold hairline border — cream only */
+  .gradient-border-energy {
+    position: relative;
+    background: transparent;
+  }
+
+  .gradient-border-energy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #d4c8b8 0%, #ece3d7 45%, #f7f2ea 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gold section divider */
+  .divider-gold {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/25 to-transparent;
   }
 
   /* White logo on dark UI — hides baked-in black from non-transparent PNG exports */
@@ -135,8 +335,8 @@
     box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0);
   }
   .hover-glow:hover {
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 1px 0 0 rgba(var(--gold-rgb), 0.08);
+    border-color: rgba(var(--gold-rgb), 0.25) !important;
   }
 
   /* Depth shadow for layered elements */
@@ -671,15 +871,13 @@
   }
 
   /* Ear trainer shared components */
+  /* Sitewide primary CTA — gold pill (matches Get the Bundle / Listen on Spotify) */
   .btn-primary {
-    @apply relative overflow-hidden rounded-full bg-white px-8 py-4 font-semibold text-black shadow-lg transition-all duration-300 hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.06),
-      0 8px 24px -6px rgba(0, 0, 0, 0.4);
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#d8aa67]/75 bg-black/20 px-7 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] backdrop-blur-sm transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10 hover:shadow-[0_0_28px_rgba(211,157,83,0.18)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .btn-secondary {
-    @apply rounded-full border border-white/10 bg-white/5 px-6 py-3 font-medium text-zinc-300 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#d8aa67]/40 bg-transparent px-7 text-[11px] font-medium uppercase tracking-[0.24em] text-[#d5c8b8] transition-all duration-300 hover:border-[#d8aa67]/75 hover:bg-[#b7792a]/10 hover:text-[#ece3d7] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .glass-card {
@@ -835,11 +1033,11 @@
   }
 
   .producer-toolbox .toolbox-btn-primary {
-    @apply rounded bg-white px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-zinc-200;
+    @apply btn-primary min-h-10 px-5 text-[10px];
   }
 
   .producer-toolbox .toolbox-btn-secondary {
-    @apply rounded border border-white/15 px-4 py-2 text-sm text-zinc-400 transition-colors hover:border-white/30 hover:text-white;
+    @apply btn-secondary min-h-10 px-5 text-[10px];
   }
 
   .producer-toolbox .toolbox-input {

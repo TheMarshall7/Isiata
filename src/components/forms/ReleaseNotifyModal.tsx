@@ -162,7 +162,7 @@ export function ReleaseNotifyModal({
               </div>
               <h2
                 id="release-notify-title"
-                className="font-oswald text-2xl uppercase tracking-tight text-white"
+                className="font-display text-2xl uppercase tracking-normal text-white"
               >
                 You&apos;re on the list.
               </h2>
@@ -184,7 +184,7 @@ export function ReleaseNotifyModal({
               </p>
               <h2
                 id="release-notify-title"
-                className="pr-8 font-oswald text-2xl uppercase leading-tight tracking-tight text-white sm:text-3xl"
+                className="pr-8 font-display text-2xl uppercase leading-tight tracking-normal text-white sm:text-3xl"
               >
                 {title}
               </h2>

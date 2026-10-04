@@ -106,7 +106,7 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
         {bpm} <span className="text-sm text-zinc-500">BPM</span>
       </div>
       <div className="flex gap-2 justify-center">
-        <button onClick={handleTap} className="bg-white text-black px-4 py-2 rounded text-sm font-medium hover:bg-zinc-200 transition-colors">
+        <button onClick={handleTap} className="btn-primary min-h-10 px-5 text-[10px]">
           Tap
         </button>
         <button onClick={reset} className="border border-white/10 text-zinc-400 px-4 py-2 rounded text-sm hover:text-white hover:border-white/20 transition-colors">
@@ -351,7 +351,7 @@ export function ProducerToolbox({ isOpen, onClose }: ProducerToolboxProps) {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+              <h2 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
                 Producer Toolbox
               </h2>
               <p className="text-sm text-zinc-500 mt-1">Click any value to copy</p>

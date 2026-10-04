@@ -46,7 +46,7 @@ export const InstrumentOnboarding: React.FC<InstrumentOnboardingProps> = ({
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fade-in">
             <div className="bg-surface-raised rounded-2xl border border-white/10 shadow-2xl max-w-2xl w-full p-8 animate-slide-up depth-shadow-lg">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-oswald uppercase tracking-tight text-white mb-3">
+                    <h2 className="text-3xl font-display uppercase tracking-normal text-gold mb-3">
                         Welcome to ISIATA
                     </h2>
                     <p className="text-zinc-400 text-lg">

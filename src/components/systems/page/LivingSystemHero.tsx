@@ -18,7 +18,7 @@ export function LivingSystemHero() {
         </p>
         <PageTitle
           text="Systems"
-          className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
+          className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
           speed={100}
         />
 
@@ -36,14 +36,14 @@ export function LivingSystemHero() {
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-12 md:mt-14">
         <SystemGraph />
         <p className="mt-4 text-[10px] uppercase tracking-widest text-zinc-600">
           Live path · {lens.label}
         </p>
       </div>
 
-      <div className="mt-16 pt-10 border-t border-white/10">
+      <div className="mt-14 md:mt-16 pt-10 border-t border-white/10">
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
           {SYSTEMS_PAGE_COPY.aroundHowYouWork.eyebrow}
         </p>

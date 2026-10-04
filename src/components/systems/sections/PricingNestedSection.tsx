@@ -23,7 +23,7 @@ export function PricingNestedSection({ tier, funnel }: PricingNestedSectionProps
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-2">
             What determines your investment
           </p>
-          <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight gradient-text mb-2">
+          <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal gradient-text mb-2">
             {tier.name}
           </h2>
           <p className="text-sm text-zinc-500 italic mb-8">{tier.tagline}</p>

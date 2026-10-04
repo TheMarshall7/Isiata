@@ -38,7 +38,7 @@ export function SystemInAction() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         System in action
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         Same CRM. Different business logic.
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">
@@ -67,7 +67,7 @@ export function SystemInAction() {
           {lens.fanProfile ? (
             <div>
               <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-4">Fan profile</p>
-              <h3 className="text-2xl font-oswald uppercase tracking-tight text-white mb-2">
+              <h3 className="text-2xl font-display uppercase tracking-normal text-gold mb-2">
                 {lens.fanProfile.name}
               </h3>
               <p className="text-xs text-zinc-500 mb-4">
@@ -87,7 +87,7 @@ export function SystemInAction() {
           ) : (
             <div>
               <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-4">Current state</p>
-              <p className="text-4xl font-oswald uppercase tracking-tight text-white">{currentState.label}</p>
+              <p className="text-4xl font-display uppercase tracking-normal text-gold">{currentState.label}</p>
             </div>
           )}
           <div className="mt-8">

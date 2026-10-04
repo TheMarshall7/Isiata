@@ -1,100 +1,139 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { AlbumCover } from '@/components/sound/AlbumCover'
 import { THEY_MIGHT_BE_MAD_EP } from '@/lib/sound/releases'
 
 export function TheyMightBeMadSection() {
   return (
     <Section reveal>
       <Container bordered className="py-24 md:py-32">
-        <div className="mb-12 md:mb-16 max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
-            Sound
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-oswald uppercase tracking-tight text-white leading-tight">
-            They Might Be Mad
-          </h2>
-          <p className="text-lg text-zinc-400 mt-4 leading-relaxed">
-            The EP. Out now on all platforms.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <AlbumCover
+              src={THEY_MIGHT_BE_MAD_EP.cover}
+              alt={THEY_MIGHT_BE_MAD_EP.displayTitle}
+            />
 
-        <div className="border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="aspect-square lg:aspect-auto overflow-hidden">
-              <img
-                src={THEY_MIGHT_BE_MAD_EP.cover}
-                alt={THEY_MIGHT_BE_MAD_EP.displayTitle}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="p-8 md:p-12 lg:p-14 flex flex-col">
-              <div className="flex flex-wrap items-center gap-3 mb-6">
-                <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1">
-                  {THEY_MIGHT_BE_MAD_EP.type}
-                </span>
-                <span className="text-xs text-zinc-600">{THEY_MIGHT_BE_MAD_EP.date}</span>
-                <span className="text-xs text-zinc-600">{THEY_MIGHT_BE_MAD_EP.runtime}</span>
-                <span className="text-xs text-red-400/80 border border-red-400/20 px-2 py-0.5">
-                  {THEY_MIGHT_BE_MAD_EP.advisory}
-                </span>
+            <div className="relative flex flex-col justify-center">
+              <div className="mb-5 flex items-center gap-4">
+                <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
+                <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
+                  Sound
+                </p>
+                <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-6">
+              <h2 className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
                 {THEY_MIGHT_BE_MAD_EP.displayTitle}
-              </h3>
+              </h2>
 
-              <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-8">
+              <p className="mt-4 font-spaced text-[10px] uppercase tracking-[0.38em] text-[#bca98e]">
+                {THEY_MIGHT_BE_MAD_EP.type} · {THEY_MIGHT_BE_MAD_EP.date}
+              </p>
+
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
                 {THEY_MIGHT_BE_MAD_EP.notes}
               </p>
 
-              <div className="flex flex-wrap gap-3 mb-10">
+              <div className="mt-8 grid grid-cols-3 border-y border-[#cfaa76]/22 py-5">
+                <div className="pr-4">
+                  <iconify-icon
+                    icon="solar:playlist-minimalistic-2-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                    {THEY_MIGHT_BE_MAD_EP.trackCount} Tracks
+                  </p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Full EP</p>
+                </div>
+                <div className="border-x border-[#cfaa76]/22 px-4">
+                  <iconify-icon
+                    icon="solar:clock-circle-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                    {THEY_MIGHT_BE_MAD_EP.runtime.replace(' minutes', ' Min')}
+                  </p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Runtime</p>
+                </div>
+                <div className="pl-4">
+                  <iconify-icon
+                    icon="solar:danger-triangle-linear"
+                    width="24"
+                    height="24"
+                    className="text-[#dfc094]"
+                  />
+                  <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">Explicit</p>
+                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">
+                    Select Tracks
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-7 flex max-w-md flex-col gap-4">
                 <a
                   href={THEY_MIGHT_BE_MAD_EP.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+                  className="group inline-flex min-h-12 w-full items-center justify-between rounded-full border border-[#d8aa67]/75 bg-black/20 px-7 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10 hover:shadow-[0_0_28px_rgba(211,157,83,0.18)]"
                 >
-                  <iconify-icon icon="mdi:spotify" width="18" height="18" />
-                  Spotify
+                  <span className="inline-flex items-center gap-3">
+                    <iconify-icon icon="mdi:spotify" width="18" height="18" />
+                    Listen on Spotify
+                  </span>
+                  <iconify-icon
+                    icon="solar:arrow-right-linear"
+                    width="18"
+                    height="18"
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </a>
-                <a
-                  href={THEY_MIGHT_BE_MAD_EP.appleMusic}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 rounded-full text-sm text-white transition-colors"
-                >
-                  <iconify-icon icon="mdi:apple" width="18" height="18" />
-                  Apple Music
-                </a>
-                <Link
-                  href={THEY_MIGHT_BE_MAD_EP.soundHref}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 rounded-full text-sm transition-colors"
-                >
-                  Full discography
-                  <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
-                </Link>
+
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+                  <a
+                    href={THEY_MIGHT_BE_MAD_EP.appleMusic}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex w-fit items-center gap-5 text-[10px] uppercase tracking-[0.22em] text-[#baa990] transition-colors hover:text-[#f1dfc5]"
+                  >
+                    <span>Apple Music</span>
+                    <span className="h-px w-16 bg-gradient-to-r from-[#b9925e] to-transparent transition-all duration-300 group-hover:w-24" />
+                  </a>
+                  <Link
+                    href={THEY_MIGHT_BE_MAD_EP.soundHref}
+                    className="group inline-flex w-fit items-center gap-5 text-[10px] uppercase tracking-[0.22em] text-[#baa990] transition-colors hover:text-[#f1dfc5]"
+                  >
+                    <span>Full discography</span>
+                    <span className="h-px w-16 bg-gradient-to-r from-[#b9925e] to-transparent transition-all duration-300 group-hover:w-24" />
+                  </Link>
+                </div>
               </div>
 
-              <div className="border-t border-white/5 pt-6 mt-auto">
+              <div className="mt-10 border-t border-[#cfa76f]/14 pt-6">
                 <ol className="space-y-3">
                   {THEY_MIGHT_BE_MAD_EP.tracks.map((track) => (
                     <li
                       key={track.number}
-                      className="flex items-baseline gap-4 text-sm text-zinc-400"
+                      className="flex items-baseline gap-4 text-[11px] uppercase tracking-[0.14em] text-[#c8b9a5]"
                     >
-                      <span className="text-zinc-600 w-4 shrink-0 tabular-nums">{track.number}</span>
-                      <span className="text-zinc-300">{track.title}</span>
+                      <span className="w-4 shrink-0 tabular-nums text-[#8d7b66]">
+                        {String(track.number).padStart(2, '0')}
+                      </span>
+                      <span className="text-[#eee3d5]">{track.title}</span>
                       {'featuring' in track && track.featuring && (
-                        <span className="text-zinc-600 text-xs">feat. {track.featuring}</span>
+                        <span className="normal-case tracking-normal text-[#8d7b66]">
+                          feat. {track.featuring}
+                        </span>
                       )}
                     </li>
                   ))}
                 </ol>
               </div>
             </div>
-          </div>
         </div>
       </Container>
     </Section>

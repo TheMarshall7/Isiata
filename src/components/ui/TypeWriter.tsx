@@ -75,7 +75,7 @@ export function TypeWriter({
       <span className="absolute inset-0">
         {displayedText}
         {cursor && !isComplete && (
-          <span className="inline-block w-[3px] h-[0.9em] bg-white ml-1 animate-pulse" />
+          <span className="inline-block w-[3px] h-[0.9em] bg-[#ece3d7] ml-1 animate-pulse" />
         )}
       </span>
     </span>

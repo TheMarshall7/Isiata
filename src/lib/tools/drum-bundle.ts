@@ -19,7 +19,7 @@ export const DRUM_BUNDLE_CHECKOUT_HREF = '/tools/checkout/order'
 export const DRUM_BUNDLE = {
   title: 'Tsukuyomi Drum Bundle',
   subtitle: 'Premium Archive',
-  image: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67b7ebca7c922f63503b66c7.png',
+  image: '/tools/tsukuyomi-drum-bundle/tsukuyomi-product-cropped.png',
   description:
     'A premium drum sample pack focused on high-quality, impactful drum sounds — designed for use in major DAWs (FL Studio, Ableton, Logic Pro, etc.).',
   format: 'High-quality 32-bit WAV files',

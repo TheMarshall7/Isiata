@@ -13,7 +13,7 @@ export function WhatHappensWhen() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         Automation without the brochure
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-8">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-8">
         What happens when...
       </h2>
 

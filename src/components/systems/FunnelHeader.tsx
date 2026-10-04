@@ -25,18 +25,14 @@ export function FunnelHeader() {
       >
         <Link
           href="/"
-          className="inline-flex items-center justify-center w-[100px] h-[40px] rounded text-xl font-oswald tracking-widest text-white"
+          className="inline-flex items-center justify-center w-[100px] h-[40px] rounded text-xl font-display tracking-widest text-white"
         >
           ISIATA
         </Link>
 
         <Link
           href={SYSTEMS_BOOKING_HREF}
-          className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 ${
-            scrolled
-              ? 'bg-white text-black hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98]'
-              : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98]'
-          }`}
+          className="btn-primary min-h-10 px-5 text-[10px]"
         >
           Book a call
         </Link>

@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
                                 alt="ISIATA"
                                 className="w-8 h-8 object-contain transition-all duration-300 group-hover:scale-105 drop-shadow-md"
                             />
-                            <span className="text-sm font-oswald uppercase tracking-widest text-white">ISIATA</span>
+                            <span className="text-sm font-display uppercase tracking-widest text-white">ISIATA</span>
                         </div>
                         <Link
                             href="/tools"

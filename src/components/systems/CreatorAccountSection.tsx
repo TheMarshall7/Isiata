@@ -41,7 +41,7 @@ export function CreatorAccountSection({ funnel }: CreatorAccountSectionProps) {
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
           What you are getting
         </p>
-        <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4 leading-tight">
+        <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 leading-tight">
           {funnel.accountHeadline}
         </h2>
         <p className="text-zinc-400 leading-relaxed mb-6">{funnel.accountSubheadline}</p>

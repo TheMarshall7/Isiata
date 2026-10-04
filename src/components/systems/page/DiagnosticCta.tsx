@@ -16,7 +16,7 @@ export function DiagnosticCta() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         Not sure which one you need?
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-3">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-3">
         Where is your system breaking?
       </h2>
       <p className="text-sm text-zinc-500 mb-8 max-w-xl">
@@ -52,7 +52,7 @@ export function DiagnosticCta() {
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <Link
           href={SYSTEMS_BOOKING_HREF}
-          className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+          className="btn-primary"
         >
           {SYSTEMS_MAP_CTA_LABEL}
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
@@ -76,7 +76,7 @@ export function ProcessAndRule() {
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
           {SYSTEMS_PAGE_COPY.process.eyebrow}
         </p>
-        <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-10">
+        <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-10">
           Map. Configure. Build. Test. Hand off.
         </h2>
         <ol className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -85,7 +85,7 @@ export function ProcessAndRule() {
               <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">
                 {String(index + 1).padStart(2, '0')}
               </p>
-              <h3 className="text-lg font-oswald uppercase tracking-tight text-white mb-2">{step.title}</h3>
+              <h3 className="text-lg font-display uppercase tracking-normal text-gold mb-2">{step.title}</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">{step.body}</p>
             </li>
           ))}
@@ -96,7 +96,7 @@ export function ProcessAndRule() {
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
           {SYSTEMS_PAGE_COPY.rule.eyebrow}
         </p>
-        <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4 max-w-3xl">
+        <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 max-w-3xl">
           {SYSTEMS_PAGE_COPY.rule.title}
         </h2>
         <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl">

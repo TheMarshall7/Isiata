@@ -36,10 +36,10 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
           </div>
 
           <div className="text-center lg:text-left">
-            <h3 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight gradient-text text-white mb-4">
+            <h3 className="text-3xl md:text-4xl font-display uppercase tracking-normal gradient-text text-white mb-4">
               Ready to produce?
             </h3>
-            <p className="text-xl md:text-2xl font-oswald uppercase tracking-tight text-white mb-1">
+            <p className="text-xl md:text-2xl font-display uppercase tracking-normal text-gold mb-1">
               {DRUM_BUNDLE.title}
             </p>
             <p className="text-sm text-zinc-500 font-normal tracking-wide mb-6">
@@ -48,13 +48,13 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
             <div className="flex items-baseline justify-center lg:justify-start gap-3 mb-8">
               <Price
                 amount={DRUM_BUNDLE_PRICE.amount}
-                className="text-3xl font-oswald font-semibold text-white"
+                className="text-3xl font-display font-semibold text-white"
               />
               <Price value={DRUM_BUNDLE_PRICE.original} className="text-sm text-zinc-600" strikethrough />
             </div>
             <Link
               href={DRUM_BUNDLE_CHECKOUT_HREF}
-              className="group cta-sheen inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-sm font-semibold hover:bg-zinc-200 hover:scale-[1.02] transition-all"
+              className="btn-primary"
             >
               Get the bundle
               <iconify-icon
@@ -89,7 +89,7 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
           <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1 w-fit mb-6">
             Sample Pack
           </span>
-          <h3 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-2">
+          <h3 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold mb-2">
             {DRUM_BUNDLE.title}
           </h3>
           <p className="text-sm text-zinc-500 uppercase tracking-widest mb-6">{DRUM_BUNDLE.subtitle}</p>
@@ -112,7 +112,7 @@ export function DrumBundlePurchaseCta({ variant = 'hero' }: DrumBundlePurchaseCt
           </div>
           <Link
             href={DRUM_BUNDLE_CHECKOUT_HREF}
-            className="group cta-sheen inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors w-fit"
+            className="btn-primary w-fit"
           >
             Get the bundle
             <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" className="group-hover:translate-x-0.5 transition-transform" />

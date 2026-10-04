@@ -84,7 +84,7 @@ export const Home: React.FC = () => {
                                 className="w-20 h-20 lg:w-24 lg:h-24 object-contain transition-all duration-300 group-hover:scale-105 drop-shadow-md"
                             />
                         </div>
-                        <h1 className="text-5xl lg:text-7xl xl:text-8xl font-oswald uppercase tracking-tight leading-[0.95] mb-6 text-white">
+                        <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display uppercase tracking-normal leading-[0.95] mb-6 text-gold">
                             <span className="block">Ear</span>
                             <span className="block">Mastery</span>
                         </h1>

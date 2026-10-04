@@ -29,7 +29,7 @@ export default function ContactInquiryPage() {
               height="56"
               className="text-white mx-auto mb-6"
             />
-            <h1 className="text-4xl md:text-5xl font-oswald uppercase tracking-tight text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-display uppercase tracking-normal text-gold mb-4">
               General inquiry
             </h1>
             <p className="text-lg text-zinc-400 leading-relaxed mb-10">
@@ -38,7 +38,7 @@ export default function ContactInquiryPage() {
             </p>
             <a
               href={CONTACT_INQUIRY_HREF}
-              className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
+              className="btn-primary"
             >
               Email {CONTACT_INQUIRY_EMAIL}
               <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" />

@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
-import { ISIATA_LOGO_URL } from '@/lib/constants'
 import {
   CONTACT_ALONGSIDE,
   CONTACT_BOOKING_HREF,
@@ -15,24 +14,24 @@ function OfferingCard({ offering }: { offering: ContactOffering }) {
   return (
     <Link
       href={offering.href}
-      className="group flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow p-10 lg:p-12 block h-full"
+      className="group flashlight-card hover-glow block h-full border border-[#d8aa67]/20 bg-transparent p-10 transition-all duration-300 hover:border-[#d8aa67]/65 lg:p-12"
     >
       <iconify-icon
         icon={offering.icon}
         width="48"
         height="48"
-        className="text-white mb-6 group-hover:scale-110 transition-transform duration-500"
+        className="mb-6 text-white transition-transform duration-500 group-hover:scale-110"
       />
-      <h3 className="text-2xl font-semibold text-white mb-6">{offering.title}</h3>
-      <div className="space-y-1 mb-6">
+      <h3 className="mb-6 text-2xl font-semibold text-white">{offering.title}</h3>
+      <div className="mb-6 space-y-1">
         {offering.lines.map((line) => (
-          <p key={line} className="text-zinc-400 leading-relaxed">
+          <p key={line} className="leading-relaxed text-zinc-400">
             {line}
           </p>
         ))}
       </div>
-      <p className="text-sm text-zinc-500 italic mb-8">{offering.tagline}</p>
-      <span className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:gap-3 transition-all duration-300">
+      <p className="mb-8 text-sm italic text-zinc-500">{offering.tagline}</p>
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all duration-300 group-hover:gap-3">
         {offering.cta}
         <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
       </span>
@@ -43,8 +42,8 @@ function OfferingCard({ offering }: { offering: ContactOffering }) {
 function SectionHeader({ label, description }: { label: string; description: string }) {
   return (
     <div className="mb-10 max-w-2xl">
-      <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">{label}</p>
-      <p className="text-lg text-zinc-400 leading-relaxed">{description}</p>
+      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{label}</p>
+      <p className="text-lg leading-relaxed text-zinc-400">{description}</p>
     </div>
   )
 }
@@ -52,17 +51,17 @@ function SectionHeader({ label, description }: { label: string; description: str
 export default function ContactPage() {
   return (
     <>
-      <Container bordered className="pt-32 pb-20">
-        <Section reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <Container bordered className="flex min-h-[100svh] flex-col justify-center pt-24 pb-12 md:pt-28 md:pb-16">
+        <Section reveal className="w-full">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
             <div>
               <PageTitle
                 text="Contact"
-                className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-8"
+                className="mb-8 font-display text-6xl uppercase leading-[0.9] tracking-normal text-gold md:text-7xl lg:text-[5.5rem]"
                 speed={120}
               />
 
-              <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-zinc-300 md:text-xl">
                 <p>Select what fits below, then book a call to get started.</p>
                 <p className="text-zinc-400">
                   Collaborative work and fully delivered services. Coaching, systems, and community.
@@ -70,42 +69,43 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  href={CONTACT_BOOKING_HREF}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors"
-                >
+              <div className="mt-8 flex flex-wrap gap-4 md:mt-10">
+                <Link href={CONTACT_BOOKING_HREF} className="btn-primary">
                   Book a call
-                  <iconify-icon icon="solar:calendar-linear" width="18" height="18" />
+                  <iconify-icon icon="solar:calendar-linear" width="16" height="16" />
                 </Link>
-                <a
-                  href={CONTACT_INQUIRY_HREF}
-                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-zinc-300 px-8 py-3 rounded-full text-sm font-medium hover:text-white hover:border-white/30 transition-colors"
-                >
+                <a href={CONTACT_INQUIRY_HREF} className="btn-secondary">
                   General inquiry
-                  <iconify-icon icon="solar:letter-linear" width="18" height="18" />
+                  <iconify-icon icon="solar:letter-linear" width="16" height="16" />
                 </a>
               </div>
             </div>
 
-            <div className="relative aspect-[3/4] max-w-md lg:max-w-none mx-auto lg:mx-0 w-full border border-white/10 bg-black overflow-hidden depth-shadow flex items-center justify-center p-12 sm:p-16">
+            <div className="relative mx-auto flex aspect-[3/4] w-full max-h-[min(68svh,38rem)] max-w-[min(100%,28rem)] items-center justify-center overflow-hidden border border-[#d8aa67]/25 bg-black p-10 sm:p-14 lg:mx-0 lg:ml-auto">
+              <div aria-hidden className="pointer-events-none absolute inset-0">
+                <img
+                  src="/brand/overlays/overlay-6.png"
+                  alt=""
+                  className="h-full w-full object-cover object-center opacity-90 mix-blend-screen"
+                />
+              </div>
               <img
-                src={ISIATA_LOGO_URL}
+                src="/brand/isiata-logo-contact.png"
                 alt="ISIATA"
-                className="w-full max-w-[180px] sm:max-w-[220px] h-auto object-contain"
+                className="relative z-10 h-auto w-full max-w-[160px] object-contain sm:max-w-[200px]"
               />
             </div>
           </div>
         </Section>
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="border-t border-[#d8aa67]/15 py-24">
         <Section reveal>
           <SectionHeader
             label="Alongside you"
             description="Collaborative work. You stay in the process."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {CONTACT_ALONGSIDE.map((offering) => (
               <OfferingCard key={offering.title} offering={offering} />
             ))}
@@ -113,13 +113,13 @@ export default function ContactPage() {
         </Section>
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="border-t border-[#d8aa67]/15 py-24">
         <Section reveal>
           <SectionHeader
             label="Fully delivered"
             description="We execute. You receive the finished result."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {CONTACT_DELIVERED.map((offering) => (
               <OfferingCard key={offering.title} offering={offering} />
             ))}
@@ -127,27 +127,27 @@ export default function ContactPage() {
         </Section>
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="border-t border-[#d8aa67]/15 py-24">
         <Section reveal>
-          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-8">
+          <p className="mb-8 text-xs font-semibold uppercase tracking-widest text-zinc-500">
             Coming soon
           </p>
 
           <Link
             href="/community"
-            className="group flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 p-8 sm:p-10 flashlight-card hover-depth hover-glow border border-white/10 bg-surface-raised depth-shadow"
+            className="group flashlight-card hover-glow flex flex-col items-start gap-6 border border-[#d8aa67]/20 bg-transparent p-8 transition-all duration-300 hover:border-[#d8aa67]/65 sm:flex-row sm:items-center sm:gap-8 sm:p-10"
           >
             <div className="flex-shrink-0">
               <iconify-icon
                 icon="solar:users-group-two-rounded-linear"
                 width="56"
                 height="56"
-                className="text-white group-hover:scale-110 transition-transform duration-500"
+                className="text-white transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-            <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-semibold text-white mb-2">Community</h2>
-              <p className="text-zinc-400 leading-relaxed">
+            <div className="min-w-0 flex-1">
+              <h2 className="mb-2 text-2xl font-semibold text-white">Community</h2>
+              <p className="leading-relaxed text-zinc-400">
                 A place for collaborators, supporters, and people who care about the work. Early
                 access, exclusive drops, and updates. Join the waitlist.
               </p>
@@ -157,7 +157,7 @@ export default function ContactPage() {
                 icon="solar:arrow-right-linear"
                 width="24"
                 height="24"
-                className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all duration-300"
+                className="text-zinc-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white"
               />
             </div>
           </Link>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
+import { AlbumCover } from '@/components/sound/AlbumCover'
 import { THEY_MIGHT_BE_MAD_EP, TWO_TALES, TWO_TALES_COVER } from '@/lib/sound/releases'
 
 const TABS = ['All', 'Discography', 'Live', 'Unreleased', 'Collaborations'] as const
@@ -49,64 +50,121 @@ function DiscographyContent() {
   return (
     <div className="space-y-16">
       {/* EP */}
-      <div className="border border-white/10 bg-surface-raised depth-shadow overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* Album Cover */}
-          <div className="aspect-square lg:aspect-auto overflow-hidden">
-            <img
-              src={EP.cover}
-              alt={EP.displayTitle}
-              className="w-full h-full object-cover"
-            />
-          </div>
+      <div className="overflow-hidden border border-[#cfaa76]/18 bg-[#080808]">
+        <div className="grid grid-cols-1 items-center lg:grid-cols-2">
+          <AlbumCover
+            src={EP.cover}
+            alt={EP.displayTitle}
+            padded={false}
+            className="m-6 sm:m-7 md:m-8"
+            goldBorderClassName="border-2 border-[#d8aa67]/70 shadow-[inset_0_0_14px_rgba(211,157,83,0.14)]"
+          />
 
-          {/* Info */}
-          <div className="p-8 md:p-12 flex flex-col">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1">
-                {EP.type}
-              </span>
-              <span className="text-xs text-zinc-600">{EP.date}</span>
-              <span className="text-xs text-zinc-600">{EP.runtime}</span>
-              <span className="text-xs text-red-400/80 border border-red-400/20 px-2 py-0.5">{EP.advisory}</span>
+          <div className="relative flex flex-col justify-center px-8 py-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
+            <div className="mb-5 flex items-center gap-4">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
+              <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
+                Sound
+              </p>
+              <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
             </div>
-            <h3 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white mb-6">
+
+            <h3 className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
               {EP.displayTitle}
             </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-8">
+
+            <p className="mt-4 font-spaced text-[10px] uppercase tracking-[0.38em] text-[#bca98e]">
+              {EP.type} · {EP.date}
+            </p>
+
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
               {EP.notes}
             </p>
 
-            {/* Streaming Links */}
-            <div className="flex gap-3 mb-8">
+            <div className="mt-8 grid grid-cols-3 border-y border-[#cfaa76]/22 py-5">
+              <div className="pr-4">
+                <iconify-icon
+                  icon="solar:playlist-minimalistic-2-linear"
+                  width="24"
+                  height="24"
+                  className="text-[#dfc094]"
+                />
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                  {EP.trackCount} Tracks
+                </p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Full EP</p>
+              </div>
+              <div className="border-x border-[#cfaa76]/22 px-4">
+                <iconify-icon
+                  icon="solar:clock-circle-linear"
+                  width="24"
+                  height="24"
+                  className="text-[#dfc094]"
+                />
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">
+                  {EP.runtime.replace(' minutes', ' Min')}
+                </p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Runtime</p>
+              </div>
+              <div className="pl-4">
+                <iconify-icon
+                  icon="solar:danger-triangle-linear"
+                  width="24"
+                  height="24"
+                  className="text-[#dfc094]"
+                />
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">Explicit</p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">
+                  Select Tracks
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-7 flex max-w-md flex-col gap-4">
               <a
                 href={EP.spotify}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                className="group inline-flex min-h-12 w-full items-center justify-between rounded-full border border-[#d8aa67]/75 bg-black/20 px-7 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10 hover:shadow-[0_0_28px_rgba(211,157,83,0.18)]"
               >
-                <iconify-icon icon="mdi:spotify" width="20" height="20" className="text-[#1DB954]" />
-                <span className="text-sm text-white">Spotify</span>
+                <span className="inline-flex items-center gap-3">
+                  <iconify-icon icon="mdi:spotify" width="18" height="18" />
+                  Listen on Spotify
+                </span>
+                <iconify-icon
+                  icon="solar:arrow-right-linear"
+                  width="18"
+                  height="18"
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </a>
+
               <a
                 href={EP.appleMusic}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                className="group inline-flex w-fit items-center gap-5 text-[10px] uppercase tracking-[0.22em] text-[#baa990] transition-colors hover:text-[#f1dfc5]"
               >
-                <iconify-icon icon="mdi:apple" width="20" height="20" className="text-white" />
-                <span className="text-sm text-white">Apple Music</span>
+                <span>Apple Music</span>
+                <span className="h-px w-16 bg-gradient-to-r from-[#b9925e] to-transparent transition-all duration-300 group-hover:w-24" />
               </a>
             </div>
 
-            <div className="border-t border-white/5 pt-6 mt-auto">
+            <div className="mt-10 border-t border-[#cfa76f]/14 pt-6">
               <ol className="space-y-3">
                 {EP.tracks.map((track) => (
-                  <li key={track.number} className="flex items-baseline gap-4">
-                    <span className="text-xs text-zinc-600 w-6 text-right shrink-0">{track.number}</span>
-                    <span className="text-sm text-zinc-300">{track.title}</span>
+                  <li
+                    key={track.number}
+                    className="flex items-baseline gap-4 text-[11px] uppercase tracking-[0.14em] text-[#c8b9a5]"
+                  >
+                    <span className="w-4 shrink-0 tabular-nums text-[#8d7b66]">
+                      {String(track.number).padStart(2, '0')}
+                    </span>
+                    <span className="text-[#eee3d5]">{track.title}</span>
                     {'featuring' in track && track.featuring && (
-                      <span className="text-xs text-zinc-600">ft. {track.featuring}</span>
+                      <span className="normal-case tracking-normal text-[#8d7b66]">
+                        feat. {track.featuring}
+                      </span>
                     )}
                   </li>
                 ))}
@@ -123,13 +181,7 @@ function DiscographyContent() {
           {SINGLES.map((single) => (
             <div key={single.title} className="group border border-white/10 bg-surface-raised depth-shadow overflow-hidden hover:border-white/20 transition-all duration-300">
               {/* Album Cover */}
-              <div className="aspect-square overflow-hidden">
-                <img
-                  src={single.cover}
-                  alt={single.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+              <AlbumCover src={single.cover} alt={single.title} />
 
               {/* Info */}
               <div className="p-6">
@@ -198,15 +250,15 @@ export default function SoundPage() {
   return (
     <>
       {/* Page Header */}
-      <Container bordered className="pt-32 pb-16">
-        <Section reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <Container bordered className="relative min-h-[100svh] flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
+        <Section reveal className="relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12">
+              <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
                 <TypeWriter text="The Sound" speed={100} />
               </h1>
 
-              <div className="max-w-2xl space-y-6 text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-zinc-300 leading-relaxed">
                 <p>
                   Sonic atmosphere you can step into.
                   <br />
@@ -221,15 +273,15 @@ export default function SoundPage() {
               </div>
             </div>
 
-            <div className="relative aspect-square max-w-md lg:max-w-none mx-auto lg:mx-0 w-full border border-white/10 overflow-hidden depth-shadow">
-              <img
-                src={TWO_TALES_COVER}
-                alt="Two Tales"
-                className="w-full h-full object-cover"
-              />
+            <AlbumCover
+              src={TWO_TALES_COVER}
+              alt="Two Tales"
+              goldFrame={false}
+              className="mx-auto w-full max-w-[min(100%,min(36rem,64svh))] border border-white/10 depth-shadow lg:mx-0 lg:ml-auto"
+            >
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 flex items-end justify-between gap-4">
                 <div>
-                  <p className="font-oswald uppercase tracking-tight text-white text-lg">{TWO_TALES.title}</p>
+                  <p className="font-display uppercase tracking-normal text-gold text-lg">{TWO_TALES.title}</p>
                   <p className="text-xs uppercase tracking-[0.16em] text-zinc-300 mt-1">{TWO_TALES.streamsLabel}</p>
                 </div>
                 <a
@@ -243,13 +295,13 @@ export default function SoundPage() {
                   <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#1DB954]" />
                 </a>
               </div>
-            </div>
+            </AlbumCover>
           </div>
         </Section>
       </Container>
 
       {/* Filter Bar */}
-      <Container bordered className="py-6 border-y border-white/10">
+      <Container bordered className="py-5 border-y border-white/10">
         <div className="flex gap-4 overflow-x-auto">
           {TABS.map((tab) => (
             <button

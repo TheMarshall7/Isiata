@@ -16,9 +16,9 @@ export default function ExplorePage() {
   return (
     <>
       {/* Page Header */}
-      <Container bordered className="pt-44 pb-16">
+      <Container bordered className="pt-32 md:pt-36 pb-12 md:pb-14">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white">
+          <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold">
             <TypeWriter text="Explore" speed={120} />
           </h1>
           <p className="text-lg text-zinc-400 mt-6 max-w-2xl">

@@ -14,7 +14,7 @@ export function CloserStaggerSection({ funnel }: CloserStaggerSectionProps) {
       <div className={`glow-orb top-0 left-1/2 -translate-x-1/2 w-72 h-72 ${accent.glow}`} aria-hidden />
 
       <div className="relative text-center">
-        <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight gradient-text mb-10">
+        <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal gradient-text mb-10">
           {funnel.closerHeadline}
         </h2>
 

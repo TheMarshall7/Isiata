@@ -201,7 +201,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
             />
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center border-r border-white/5 pointer-events-none">
-              <p className="font-oswald uppercase tracking-tight text-white text-2xl leading-none">
+              <p className="font-display uppercase tracking-normal text-gold text-2xl leading-none">
                 {producer.name}
               </p>
               <p className="text-xs text-zinc-500">{producer.handle}</p>
@@ -458,7 +458,7 @@ function FlStudioTemplates() {
               </div>
               <div className="p-6">
                 <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">{template.format}</p>
-                <h5 className="text-lg font-oswald uppercase tracking-tight gradient-text mb-3">{template.name}</h5>
+                <h5 className="text-lg font-display uppercase tracking-normal gradient-text mb-3">{template.name}</h5>
                 <p className={`text-sm text-zinc-400 leading-relaxed${template.highlights.length ? ' mb-4' : ''}`}>
                   {template.desc}
                 </p>
@@ -527,7 +527,7 @@ function LiveKit() {
           Currently {LIVE_KIT.version}
         </span>
       </div>
-      <h4 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
+      <h4 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4">
         {LIVE_KIT.title}
       </h4>
       <div className="mb-7 h-px w-10 bg-white/25" />
@@ -540,7 +540,7 @@ function LiveKit() {
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-600 mb-3">
               {String(index + 1).padStart(2, '0')}
             </p>
-            <p className="text-lg font-oswald uppercase tracking-tight text-white mb-2">{point.label}</p>
+            <p className="text-lg font-display uppercase tracking-normal text-gold mb-2">{point.label}</p>
             <p className="text-sm font-light text-zinc-500 leading-relaxed">{point.detail}</p>
           </div>
         ))}
@@ -666,7 +666,7 @@ function StarterSamples() {
               />
             </button>
             <div className="flex-1 min-w-0">
-              <p className="text-lg font-oswald uppercase tracking-tight gradient-text">{featured.name}</p>
+              <p className="text-lg font-display uppercase tracking-normal gradient-text">{featured.name}</p>
               <p className="text-[10px] uppercase tracking-[0.18em] text-orange-200/50 mt-1 mb-3">
                 {featured.bpm} BPM · {featured.key}
               </p>
@@ -717,7 +717,7 @@ function StarterSamples() {
                 <p className="text-[10px] uppercase tracking-widest text-orange-200/50 mb-1">
                   {sample.url ? 'Preview' : 'Included'}
                 </p>
-                <p className="text-sm font-oswald uppercase tracking-tight text-white mb-1">{sample.name}</p>
+                <p className="text-sm font-display uppercase tracking-normal text-gold mb-1">{sample.name}</p>
                 <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">
                   {sample.bpm} BPM · {sample.key}
                 </p>
@@ -821,7 +821,7 @@ export function TsukuyomiDrumBundleFunnel() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-white/[0.04] to-transparent">
-                    <span className="font-oswald text-2xl uppercase tracking-tight text-white/80 group-hover:text-white transition-colors">
+                    <span className="font-display text-2xl uppercase tracking-normal text-white/80 group-hover:text-white transition-colors">
                       {kit.name}
                     </span>
                   </div>
@@ -849,7 +849,7 @@ export function TsukuyomiDrumBundleFunnel() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">01</p>
-          <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+          <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
             Style & Intent
           </h4>
           <div className="mt-5 mb-7 h-px w-10 bg-white/25" />
@@ -868,7 +868,7 @@ export function TsukuyomiDrumBundleFunnel() {
         <div className="space-y-8">
           <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">02</p>
-            <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+            <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
               Licensing
             </h4>
             <div className="mt-5 mb-7 h-px w-10 bg-white/25" />
@@ -878,7 +878,7 @@ export function TsukuyomiDrumBundleFunnel() {
             <p className="text-sm font-light text-zinc-400 leading-[1.8] mb-6">
               Melody layers are royalty-free for up to
             </p>
-            <p className="font-oswald text-3xl uppercase tracking-tight text-white mb-2">1,000,000</p>
+            <p className="font-display text-3xl uppercase tracking-normal text-white mb-2">1,000,000</p>
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500 mb-6">
               Streams, or until a major placement is secured
             </p>
@@ -889,7 +889,7 @@ export function TsukuyomiDrumBundleFunnel() {
 
           <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">03</p>
-            <h4 className="text-2xl md:text-3xl font-oswald uppercase tracking-tight text-white">
+            <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
               Compatibility
             </h4>
             <div className="mt-5 mb-7 h-px w-10 bg-white/25" />

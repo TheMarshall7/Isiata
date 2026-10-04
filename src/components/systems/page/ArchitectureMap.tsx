@@ -19,7 +19,7 @@ export function ArchitectureMap() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         The machine
       </p>
-      <h1 className="text-5xl md:text-7xl font-oswald uppercase tracking-tight text-white mb-4">
+      <h1 className="text-5xl md:text-7xl font-display uppercase tracking-normal text-gold mb-4">
         Architecture
       </h1>
       <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl mb-10">
@@ -49,7 +49,7 @@ export function ArchitectureMap() {
                     <span className="text-[10px] uppercase tracking-widest text-zinc-500">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-2xl font-oswald uppercase tracking-tight text-white">
+                    <span className="text-2xl font-display uppercase tracking-normal text-gold">
                       {stage.title}
                     </span>
                   </div>

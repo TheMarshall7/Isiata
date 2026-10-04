@@ -5,9 +5,32 @@ import { analytics } from '@/lib/analytics'
 
 interface EmailCaptureProps {
   source: string
+  placeholder?: string
+  buttonLabel?: string
+  className?: string
+  /** Extra classes on the fused input/button shell */
+  shellClassName?: string
 }
 
-export function EmailCapture({ source }: EmailCaptureProps) {
+const fieldClass =
+  'min-h-12 w-full rounded-full border border-[#d8aa67]/75 bg-black/20 px-7 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] outline-none transition-all duration-300 placeholder:text-[#baa990] focus:border-[#f0c681] focus:bg-[#b7792a]/10 disabled:opacity-50'
+
+const fusedShellClass =
+  'group/shell flex min-h-12 w-full max-w-md items-stretch overflow-hidden rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 focus-within:border-[#f0c681] focus-within:bg-[#b7792a]/10'
+
+const fusedInputClass =
+  'min-w-0 flex-1 bg-transparent px-6 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] outline-none placeholder:text-[#baa990] disabled:opacity-50'
+
+const fusedButtonClass =
+  'group inline-flex shrink-0 items-center justify-center gap-2 border-l border-[#d8aa67]/40 bg-transparent px-5 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f0dfc8] transition-all duration-300 hover:bg-[#b7792a]/15 hover:text-[#f8ecd8] disabled:opacity-50 whitespace-nowrap'
+
+export function EmailCapture({
+  source,
+  placeholder = 'PRODUCER@EMAIL.COM',
+  buttonLabel = 'Subscribe',
+  className,
+  shellClassName,
+}: EmailCaptureProps) {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [showNameField, setShowNameField] = useState(false)
@@ -49,7 +72,7 @@ export function EmailCapture({ source }: EmailCaptureProps) {
       setEmail('')
       setName('')
       setShowNameField(false)
-    } catch (err) {
+    } catch {
       setError('Failed to subscribe. Please try again.')
     } finally {
       setLoading(false)
@@ -58,49 +81,55 @@ export function EmailCapture({ source }: EmailCaptureProps) {
 
   if (success) {
     return (
-      <div className="text-sm text-green-400">
+      <p className="text-[11px] uppercase tracking-[0.24em] text-[#d8c3a4]">
         Thank you for subscribing.
-      </div>
+      </p>
     )
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="w-full lg:w-auto flex flex-col gap-0">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className={`flex w-full flex-col gap-3 lg:w-auto ${className ?? ''}`}
+    >
       {showNameField && (
-        <div className="relative w-full md:w-80 mb-0">
+        <div className="w-full md:w-80">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Name"
+            placeholder="NAME"
             disabled={loading}
-            className="bg-white text-black text-xs font-mono font-medium placeholder:text-black/50 px-5 py-4 w-full outline-none transition-colors rounded-none disabled:opacity-50 border-b border-zinc-200"
+            className={fieldClass}
           />
         </div>
       )}
-      <div className="flex flex-col md:flex-row gap-0">
-        <div className="relative w-full md:w-80">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => setShowNameField(true)}
-            placeholder="PRODUCER@EMAIL.COM"
-            required
-            disabled={loading}
-            className="bg-white text-black text-xs font-mono font-medium placeholder:text-black/50 px-5 py-4 w-full h-full outline-none uppercase transition-colors rounded-none disabled:opacity-50"
-          />
-        </div>
-        <button
-          type="submit"
+      <div className={`${fusedShellClass}${shellClassName ? ` ${shellClassName}` : ''}`}>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => setShowNameField(true)}
+          placeholder={placeholder}
+          required
           disabled={loading}
-          className="bg-zinc-900 text-white text-[11px] tracking-wide font-semibold px-8 py-4 border border-zinc-800 hover:bg-zinc-800 transition-colors uppercase whitespace-nowrap disabled:opacity-50"
-        >
-          {loading ? 'Subscribing...' : 'Subscribe'}
+          className={fusedInputClass}
+        />
+        <button type="submit" disabled={loading} className={fusedButtonClass}>
+          {loading ? '...' : buttonLabel}
+          {!loading && (
+            <iconify-icon
+              icon="solar:arrow-right-linear"
+              width="14"
+              height="14"
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
+            />
+          )}
         </button>
       </div>
       {error && (
-        <p className="text-xs text-red-400 mt-2">{error}</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-red-400/90">{error}</p>
       )}
     </form>
   )

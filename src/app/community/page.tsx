@@ -12,14 +12,14 @@ export const metadata: Metadata = buildPageMetadata(SEO_PAGES.community)
 export default function CommunityPage() {
   return (
     <>
-      <Container bordered className="pt-32 pb-16">
+      <Container bordered className="pt-28 md:pt-32 pb-12 md:pb-14">
         <Section reveal>
           <PageTitle
             text="Community"
-            className="text-6xl md:text-7xl lg:text-8xl font-oswald uppercase tracking-tight leading-[0.9] text-white mb-12"
+            className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
             speed={120}
           />
-          <p className="text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
+          <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
             A place for collaborators, supporters, and people who care about the work. Coming soon.
           </p>
           <Link
@@ -39,7 +39,7 @@ export default function CommunityPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-6 transition-colors duration-300 hover:text-zinc-400">
               Notify me
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-oswald uppercase tracking-tight text-white mb-6 leading-[1.05] transition-all duration-300 hover:tracking-wide">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display uppercase tracking-normal text-gold mb-6 leading-[1.05] transition-all duration-300 hover:tracking-wide">
               Get notified when we open
             </h2>
             <p className="text-lg md:text-xl text-zinc-400 mb-12 leading-relaxed max-w-lg mx-auto transition-colors duration-300 hover:text-zinc-300">

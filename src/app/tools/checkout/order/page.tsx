@@ -31,7 +31,7 @@ export default function OrderPage() {
           <button
             type="button"
             onClick={handleLeaveClick}
-            className="absolute left-1/2 -translate-x-1/2 font-oswald text-xl tracking-widest text-white hover:text-zinc-300 transition-colors cursor-pointer"
+            className="absolute left-1/2 -translate-x-1/2 font-display text-xl tracking-widest text-white hover:text-zinc-300 transition-colors cursor-pointer"
           >
             ISIATA
           </button>

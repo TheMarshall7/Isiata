@@ -26,7 +26,7 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
         For artists, producers, and creatives · {tier.isScoped ? 'Custom' : `Tier ${tier.tier}`}
       </span>
 
-      <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-oswald uppercase tracking-tight gradient-text mb-5 leading-[0.95]">
+      <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-display uppercase tracking-normal gradient-text mb-5 leading-[0.95]">
         {funnel.heroHeadline}
       </h1>
 

@@ -22,12 +22,12 @@ export function SoundCard({ release }: SoundCardProps) {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
       }}
     >
-      <div className="relative aspect-square overflow-hidden bg-zinc-900 mb-4">
+      <div className="relative aspect-square overflow-hidden bg-black mb-4">
         <Image
           src={release.coverArt.url}
           alt={release.coverArt.alt}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain"
         />
         {release.status !== 'live' && (
           <div className="absolute top-4 right-4">

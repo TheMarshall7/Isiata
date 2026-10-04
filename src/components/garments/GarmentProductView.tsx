@@ -56,7 +56,7 @@ export function GarmentProductView({ product }: GarmentProductViewProps) {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4">
+            <h1 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4">
               {product.title}
             </h1>
 

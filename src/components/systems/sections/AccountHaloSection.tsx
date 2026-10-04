@@ -24,7 +24,7 @@ export function AccountHaloSection({ funnel }: AccountHaloSectionProps) {
     <div>
       <SectionEyebrow number="02" label="Your system" accentText={accent.text} />
 
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-4 leading-tight max-w-2xl">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 leading-tight max-w-2xl">
         {funnel.accountHeadline}
       </h2>
       <p className="text-zinc-400 leading-relaxed mb-12 max-w-2xl">{funnel.accountSubheadline}</p>

@@ -9,7 +9,7 @@ export function ManualVsSystem() {
       <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
         What stays with you
       </p>
-      <h2 className="text-3xl md:text-4xl font-oswald uppercase tracking-tight text-white mb-8">
+      <h2 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-8">
         Manual vs automated
       </h2>
 

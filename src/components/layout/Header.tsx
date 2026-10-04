@@ -1,18 +1,43 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { NAV_LINKS } from '@/lib/constants'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { NAV_LINKS_LEFT, NAV_LINKS_RIGHT } from '@/lib/constants'
 import { MobileMenu } from './MobileMenu'
+
+type NavItem = {
+  href: string
+  label: string
+}
+
+function NavLink({ item, active }: { item: NavItem; active: boolean }) {
+  return (
+    <Link
+      href={item.href}
+      aria-current={active ? 'page' : undefined}
+      className={`artifact-nav-link ${active ? 'is-active' : ''}`}
+    >
+      <span>{item.label}</span>
+      {active && (
+        <span aria-hidden className="artifact-nav-active-mark">
+          <span className="artifact-nav-active-diamond" />
+          <span className="artifact-nav-active-line" />
+        </span>
+      )}
+    </Link>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const isActive = (href: string) =>
+    pathname === href || Boolean(pathname?.startsWith(`${href}/`))
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
@@ -20,51 +45,50 @@ export function Header() {
 
   return (
     <>
-      <nav className="fixed flex z-50 px-4 top-6 right-0 left-0 justify-center">
-        <div className={`flex w-full max-w-4xl border rounded-full pt-2 pr-2 pb-2 pl-6 backdrop-blur-xl items-center justify-between transition-all duration-500 ${
-          scrolled
-            ? 'bg-black/80 border-white/10 depth-shadow-nav'
-            : 'bg-transparent border-white/0 shadow-none'
-        }`}>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-center w-[100px] h-[40px] bg-cover rounded text-xl font-oswald tracking-widest text-white"
-          >
-            ISIATA
-          </Link>
+      <nav
+        className="fixed z-50 top-5 md:top-6 inset-x-0 flex justify-center px-3 md:px-5"
+        aria-label="Primary navigation"
+      >
+        <div className={`artifact-navbar group relative h-[52px] md:h-[58px] w-[calc(100vw-1.5rem)] md:w-full max-w-5xl overflow-hidden rounded-full ${scrolled ? 'is-scrolled' : ''}`}>
+          <div aria-hidden className="artifact-navbar-sheen" />
 
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative hover:text-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white/60 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Left links — Music, Tools */}
+          <div className="relative z-20 hidden h-full grid-cols-2 md:grid">
+            <div className="flex items-center justify-end gap-6 lg:gap-10 pr-[7.5rem] lg:pr-[9.25rem] pl-8 lg:pl-12">
+              {NAV_LINKS_LEFT.map((link) => (
+                <NavLink key={link.href} item={link} active={isActive(link.href)} />
+              ))}
+            </div>
+
+            {/* Right links — Garments, Contact */}
+            <div className="flex items-center justify-start gap-5 lg:gap-8 pl-[7.5rem] lg:pl-[9.25rem] pr-8 lg:pr-12">
+              {NAV_LINKS_RIGHT.map((link) => (
+                <NavLink key={link.href} item={link} active={isActive(link.href)} />
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Absolute center keeps the wordmark mathematically centered. */}
+          <div className="absolute z-30 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 md:gap-7">
+            <span aria-hidden className="artifact-nav-divider" />
             <Link
-              href="/contact/booking"
-              className={`hidden md:block px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 ${
-                scrolled
-                  ? 'bg-white text-black hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98]'
-                  : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98]'
-              }`}
+              href="/"
+              className="inline-flex items-center justify-center whitespace-nowrap font-display font-normal text-xl tracking-[0.34em] text-[#ECE3D7]"
             >
-              Book
+              ISIATA
             </Link>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white p-2"
-              aria-label="Toggle menu"
-            >
-              <iconify-icon icon="solar:hamburger-menu-linear" width="24" height="24" />
-            </button>
+            <span aria-hidden className="artifact-nav-divider" />
           </div>
+
+          {/* Mobile menu trigger. */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="absolute z-30 right-4 top-1/2 -translate-y-1/2 p-2 text-[#ECE3D7] md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <iconify-icon icon="solar:hamburger-menu-linear" width="24" height="24" />
+          </button>
         </div>
       </nav>
 

@@ -122,7 +122,7 @@ function SectionHeading({
           {eyebrow}
         </span>
       </div>
-      <h2 className="text-3xl md:text-5xl font-oswald uppercase tracking-tight leading-[0.95] text-white">
+      <h2 className="text-3xl md:text-5xl font-display uppercase tracking-normal leading-[0.95] text-gold">
         {title}
       </h2>
       {children ? (
@@ -230,7 +230,7 @@ function DemoPanel() {
           <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.22em] text-orange-200/70">
             Pad layout
           </p>
-          <h2 className="font-oswald text-xl uppercase tracking-tight text-white sm:text-2xl">
+          <h2 className="font-display text-xl uppercase tracking-normal text-gold sm:text-2xl">
             The 16-pad grid, the way it ships.
           </h2>
         </div>
@@ -319,14 +319,14 @@ export function TsukuyomiDrumEngineLanding() {
                 {TSUKUYOMI_DRUM_ENGINE.version}
               </span>
             </div>
-            <h1 className="mb-5 font-oswald text-[2.7rem] uppercase leading-[0.86] tracking-tight text-white sm:text-[3.65rem] lg:text-[4.5rem]">
+            <h1 className="mb-5 font-display text-[2.7rem] uppercase leading-[0.86] tracking-normal text-gold sm:text-[3.65rem] lg:text-[4.5rem]">
               Tsukuyomi
               <br />
               <span className="text-orange-200/90">Drum Engine</span>
             </h1>
             <div className="mb-5 space-y-0.5">
               {TSUKUYOMI_DRUM_ENGINE.heroLines.map((line) => (
-                <p key={line} className="font-oswald text-lg uppercase tracking-tight text-zinc-200 sm:text-xl">
+                <p key={line} className="font-display text-lg uppercase tracking-normal text-zinc-200 sm:text-xl">
                   {line}
                 </p>
               ))}
@@ -370,7 +370,7 @@ export function TsukuyomiDrumEngineLanding() {
       </section>
 
       <section aria-label="Tsukuyomi Drum Engine demo video" className="mx-auto w-full max-w-5xl text-center">
-        <h2 className="mb-5 font-oswald text-2xl uppercase tracking-tight text-white sm:text-3xl">
+        <h2 className="mb-5 font-display text-2xl uppercase tracking-normal text-gold sm:text-3xl">
           See the whole drum workflow.
         </h2>
         <VideoSlot />
@@ -455,7 +455,7 @@ export function TsukuyomiDrumEngineLanding() {
               ['Build, customize, drag', 'Combine the parts, adjust the feel and rearrange without leaving the sequencer.'],
             ].map(([title, body]) => (
               <li key={title} className="border-l border-orange-300/30 pl-4">
-                <p className="font-oswald text-base uppercase tracking-tight text-white">{title}</p>
+                <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
                 <p className="mt-1 text-sm leading-relaxed text-zinc-500">{body}</p>
               </li>
             ))}
@@ -482,12 +482,12 @@ export function TsukuyomiDrumEngineLanding() {
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {TSUKUYOMI_HIT_CONTROLS.map((control) => (
                 <article key={control.title} className="border border-white/10 bg-surface-raised/60 p-4">
-                  <h3 className="mb-2 font-oswald text-base uppercase tracking-tight text-orange-200/90">{control.title}</h3>
+                  <h3 className="mb-2 font-display text-base uppercase tracking-normal text-orange-200/90">{control.title}</h3>
                   <p className="text-xs leading-relaxed text-zinc-400">{control.body}</p>
                 </article>
               ))}
             </div>
-            <p className="mt-6 text-center font-oswald text-lg uppercase tracking-tight text-zinc-300 lg:text-left">
+            <p className="mt-6 text-center font-display text-lg uppercase tracking-normal text-zinc-300 lg:text-left">
               The pattern stops being a grid. It starts behaving like a performance.
             </p>
           </div>
@@ -516,7 +516,7 @@ export function TsukuyomiDrumEngineLanding() {
           {TSUKUYOMI_SCENES.map((scene, index) => (
             <article key={scene.label} className="relative min-h-40 overflow-hidden border border-white/10 bg-gradient-to-b from-white/[0.045] to-transparent p-6">
               <span className="font-mono text-[10px] text-orange-200/70">{String(index + 1).padStart(2, '0')}</span>
-              <h3 className="mt-8 font-oswald text-xl uppercase tracking-tight text-white">{scene.label}</h3>
+              <h3 className="mt-8 font-display text-xl uppercase tracking-normal text-gold">{scene.label}</h3>
               <p className="mt-2 text-sm text-zinc-500">{scene.title}</p>
             </article>
           ))}
@@ -548,11 +548,11 @@ export function TsukuyomiDrumEngineLanding() {
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="border border-white/10 bg-surface-raised/60 p-6">
                 <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500">Sample length</p>
-                <p className="font-oswald text-3xl uppercase tracking-tight text-white">Up to 30 seconds</p>
+                <p className="font-display text-3xl uppercase tracking-normal text-gold">Up to 30 seconds</p>
               </div>
               <div className="border border-orange-300/20 bg-orange-300/[0.06] p-6">
                 <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-orange-200/70">The point</p>
-                <p className="font-oswald text-2xl uppercase tracking-tight text-orange-200/90">Happy accidents are part of the workflow.</p>
+                <p className="font-display text-2xl uppercase tracking-normal text-orange-200/90">Happy accidents are part of the workflow.</p>
               </div>
             </div>
           </div>
@@ -583,7 +583,7 @@ export function TsukuyomiDrumEngineLanding() {
                 ['Whole-kit balance', 'Keep the master simple or print a fully custom drum mix.'],
               ].map(([title, body]) => (
                 <li key={title} className="border-l border-orange-300/30 pl-4">
-                  <p className="font-oswald text-base uppercase tracking-tight text-white">{title}</p>
+                  <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
                   <p className="mt-1 text-sm leading-relaxed text-zinc-500">{body}</p>
                 </li>
               ))}
@@ -623,7 +623,7 @@ export function TsukuyomiDrumEngineLanding() {
                 ['Master or multitrack', 'Print the whole kit or print only the pieces that need attention.'],
               ].map(([title, body]) => (
                 <li key={title} className="border-l border-orange-300/30 pl-4">
-                  <p className="font-oswald text-base uppercase tracking-tight text-white">{title}</p>
+                  <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
                   <p className="mt-1 text-sm leading-relaxed text-zinc-500">{body}</p>
                 </li>
               ))}
@@ -650,7 +650,7 @@ export function TsukuyomiDrumEngineLanding() {
                 sizes="(max-width: 1024px) 86vw, (max-width: 1280px) 60vw, 33vw"
               />
               <div className="p-6 lg:p-8">
-                <h3 className="mb-4 font-oswald text-2xl uppercase tracking-tight text-white">{model.name}</h3>
+                <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">{model.name}</h3>
                 <p className="text-sm leading-relaxed text-zinc-400">{model.body}</p>
               </div>
             </article>
@@ -672,7 +672,7 @@ export function TsukuyomiDrumEngineLanding() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-5">
               {TSUKUYOMI_COMPRESSORS.map((compressor, index) => (
                 <div key={compressor} className="border border-white/10 bg-surface-raised/60 p-4 text-center">
-                  <p className="font-oswald text-lg uppercase tracking-tight text-orange-200/90">{compressor}</p>
+                  <p className="font-display text-lg uppercase tracking-normal text-orange-200/90">{compressor}</p>
                   <p className="mt-2 font-mono text-[10px] text-zinc-600">0{index + 1}</p>
                 </div>
               ))}
@@ -713,12 +713,12 @@ export function TsukuyomiDrumEngineLanding() {
           {TSUKUYOMI_PROCESS_STEPS.map(([number, title, body]) => (
             <article key={number} className="border border-white/10 bg-white/[0.025] p-5">
               <p className="mb-5 font-mono text-[10px] text-orange-200/70">{number}</p>
-              <h3 className="mb-3 font-oswald text-lg uppercase tracking-tight text-white">{title}</h3>
+              <h3 className="mb-3 font-display text-lg uppercase tracking-normal text-gold">{title}</h3>
               <p className="text-xs leading-relaxed text-zinc-500">{body}</p>
             </article>
           ))}
         </div>
-        <p className="mt-8 text-center font-oswald text-2xl uppercase tracking-tight text-white">Then make the music.</p>
+        <p className="mt-8 text-center font-display text-2xl uppercase tracking-normal text-gold">Then make the music.</p>
       </Section>
 
       <Section reveal>
@@ -740,12 +740,12 @@ export function TsukuyomiDrumEngineLanding() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <article className="border border-orange-300/20 bg-orange-300/[0.06] p-6 lg:p-8">
                 <p className="mb-5 font-mono text-3xl text-orange-200/90">.ISI</p>
-                <h3 className="mb-4 font-oswald text-2xl uppercase tracking-tight text-white">The complete kit.</h3>
+                <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">The complete kit.</h3>
                 <p className="text-sm leading-relaxed text-zinc-400">Samples, pads, sequencer, scenes, FX and routing.</p>
               </article>
               <article className="border border-white/10 bg-surface-raised/60 p-6 lg:p-8">
                 <p className="mb-5 font-mono text-3xl text-zinc-300">.ISIS</p>
-                <h3 className="mb-4 font-oswald text-2xl uppercase tracking-tight text-white">The rhythm.</h3>
+                <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">The rhythm.</h3>
                 <p className="text-sm leading-relaxed text-zinc-400">Pattern, scenes, tempo, meter and swing.</p>
               </article>
             </div>
@@ -768,7 +768,7 @@ export function TsukuyomiDrumEngineLanding() {
                 } ${index % 3 !== 2 ? 'lg:border-r' : ''} ${index % 2 === 0 ? 'sm:border-r' : ''} border-white/[0.08]`}
               >
                 <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-500">{label}</dt>
-                <dd className="mt-2 font-oswald text-xl uppercase tracking-tight text-zinc-200">{value}</dd>
+                <dd className="mt-2 font-display text-xl uppercase tracking-normal text-zinc-200">{value}</dd>
               </div>
             ))}
           </dl>
@@ -782,7 +782,7 @@ export function TsukuyomiDrumEngineLanding() {
         <div className="relative overflow-hidden rounded-lg gradient-border-tsukuyomi bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent p-8 depth-shadow-lg sm:p-12 lg:p-16">
           <div className="glow-orb left-1/2 top-0 h-96 w-96 -translate-x-1/2 bg-orange-500/10" aria-hidden />
           <div className="relative mx-auto max-w-3xl text-center">
-            <h2 className="mb-7 font-oswald text-4xl uppercase leading-[0.95] tracking-tight text-white md:text-6xl">
+            <h2 className="mb-7 font-display text-4xl uppercase leading-[0.95] tracking-normal text-gold md:text-6xl">
               Take your samples to a new level.
               <br />
               <span className="text-orange-200/90">This is where your drums happen.</span>

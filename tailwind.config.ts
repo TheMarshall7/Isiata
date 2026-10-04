@@ -15,12 +15,18 @@ const config: Config = {
         'surface-raised': '#111111',
         'surface-overlay': '#161616',
         border: 'rgba(255, 255, 255, 0.1)',
+        // Brand Core color roles
+        void: '#020202',
+        energy: { DEFAULT: '#D9772B', deep: '#9A4A16', light: '#F0A35E' }, // burnt orange / amber (Tsukuyomi)
+        gold: { DEFAULT: '#ece3d7', light: '#f7f2ea', deep: '#d4c8b8' }, // brand cream gold
+        ethereal: '#ece3d7',
       },
       fontFamily: {
-        sans: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
-        oswald: ['var(--font-oswald)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-isiata)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-isiata-wide)', 'system-ui', 'sans-serif'],
+        spaced: ['var(--font-isiata-spaced)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-isiata-mono)', 'ui-monospace', 'monospace'],
         geist: ['system-ui', 'sans-serif'],
-        mono: ['ui-monospace', 'monospace'],
       },
       animation: {
         'reveal': 'reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) both',
