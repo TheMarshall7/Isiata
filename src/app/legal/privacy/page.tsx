@@ -15,22 +15,22 @@ export default function PrivacyPage() {
         </h1>
         <div className="max-w-2xl space-y-8 text-zinc-400 leading-relaxed">
           <div>
-            <h2 className="text-lg font-semibold text-white mb-3">What We Collect</h2>
+            <h2 className="text-lg font-semibold text-gold mb-3">What We Collect</h2>
             <p>We collect information you provide directly: email addresses for newsletter subscriptions, names and messages through the contact form, and purchase information processed through our payment provider.</p>
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-white mb-3">How We Use It</h2>
+            <h2 className="text-lg font-semibold text-gold mb-3">How We Use It</h2>
             <p>Your information is used to deliver purchased products, send updates you opted into, and respond to inquiries. We do not sell or share your data with third parties for marketing purposes.</p>
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-white mb-3">Third-Party Services</h2>
+            <h2 className="text-lg font-semibold text-gold mb-3">Third-Party Services</h2>
             <p>We use third-party services for payment processing and email delivery. These services have their own privacy policies governing data handling.</p>
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-white mb-3">Your Rights</h2>
+            <h2 className="text-lg font-semibold text-gold mb-3">Your Rights</h2>
             <p>You can request deletion of your data or unsubscribe from communications at any time by contacting us directly.</p>
           </div>
-          <p className="text-xs text-zinc-600 pt-8 border-t border-white/10">
+          <p className="text-xs text-zinc-600 pt-8 border-t border-[#d8aa67]/15">
             This policy may be updated periodically. Last updated February 2026.
           </p>
         </div>

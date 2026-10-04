@@ -7,7 +7,7 @@ import { THEY_MIGHT_BE_MAD_EP } from '@/lib/sound/releases'
 export function TheyMightBeMadSection() {
   return (
     <Section reveal>
-      <Container bordered className="py-24 md:py-32">
+      <Container bordered className="border-t border-[#d8aa67]/15 py-24 md:py-32">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <AlbumCover
               src={THEY_MIGHT_BE_MAD_EP.cover}
@@ -35,7 +35,7 @@ export function TheyMightBeMadSection() {
                 {THEY_MIGHT_BE_MAD_EP.notes}
               </p>
 
-              <div className="mt-8 grid grid-cols-3 border-y border-[#cfaa76]/22 py-5">
+              <div className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
                 <div className="pr-4">
                   <iconify-icon
                     icon="solar:playlist-minimalistic-2-linear"
@@ -48,7 +48,7 @@ export function TheyMightBeMadSection() {
                   </p>
                   <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Full EP</p>
                 </div>
-                <div className="border-x border-[#cfaa76]/22 px-4">
+                <div className="border-x border-[#d8aa67]/25 px-4">
                   <iconify-icon
                     icon="solar:clock-circle-linear"
                     width="24"
@@ -113,7 +113,7 @@ export function TheyMightBeMadSection() {
                 </div>
               </div>
 
-              <div className="mt-10 border-t border-[#cfa76f]/14 pt-6">
+              <div className="mt-10 border-t border-[#d8aa67]/25 pt-6">
                 <ol className="space-y-3">
                   {THEY_MIGHT_BE_MAD_EP.tracks.map((track) => (
                     <li

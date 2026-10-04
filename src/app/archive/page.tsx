@@ -15,14 +15,14 @@ export default function ArchivePage() {
           <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold">
             Archive
           </h1>
-          <p className="text-lg text-zinc-400 mt-6 max-w-2xl">
+          <p className="text-lg text-[#d5c8b8] mt-6 max-w-2xl">
             Past releases, drops, and offerings
           </p>
         </Section>
       </Container>
 
       {/* Filter Bar */}
-      <Container bordered className="py-5 border-y border-white/10">
+      <Container bordered className="py-5 border-y border-[#d8aa67]/15">
         <div className="flex gap-4 overflow-x-auto">
           <button className="px-4 py-2 text-sm font-medium text-white bg-white/5 border border-white/10 whitespace-nowrap hover:bg-white/10 transition-colors">
             All

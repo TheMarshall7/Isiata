@@ -7,11 +7,11 @@ type AlbumCoverProps = {
   className?: string
   imgClassName?: string
   children?: ReactNode
-  /** Gold frame around the artwork (default). */
+  /** Gold outline on the outer black frame (default). */
   goldFrame?: boolean
   /** Black padded inset around the artwork (default). Set false for edge-to-edge cover. */
   padded?: boolean
-  /** Gold border opacity class, e.g. "border-[#d8aa67]/30". */
+  /** Gold border classes on the outer frame. */
   goldBorderClassName?: string
 }
 
@@ -24,7 +24,7 @@ export function AlbumCover({
   children,
   goldFrame = true,
   padded = true,
-  goldBorderClassName = 'border-[#d8aa67]/75 shadow-[inset_0_0_12px_rgba(211,157,83,0.12)]',
+  goldBorderClassName = 'border-[#d8aa67]/25',
 }: AlbumCoverProps) {
   const goldClasses = goldFrame
     ? cn('border', goldBorderClassName)
@@ -44,8 +44,14 @@ export function AlbumCover({
   }
 
   return (
-    <div className={cn('aspect-square w-full overflow-hidden bg-black p-4 sm:p-5 md:p-6', className)}>
-      <div className={cn('relative h-full w-full', goldClasses)}>
+    <div
+      className={cn(
+        'aspect-square w-full overflow-hidden bg-black p-4 sm:p-5 md:p-6',
+        goldClasses,
+        className
+      )}
+    >
+      <div className="relative h-full w-full">
         <img
           src={src}
           alt={alt}

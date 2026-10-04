@@ -20,50 +20,50 @@ export default function SystemsPage() {
         <LivingSystemHero />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <WorkflowVisualizer />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <ModuleWorkbench />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <BeforeAfterSlider />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <TierAccordionCards />
         <p className="mt-10 max-w-2xl text-sm text-zinc-500 leading-relaxed">
           {SYSTEMS_PAGE_COPY.combine.body}
         </p>
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <SystemInAction />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <SystemStack />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <ManualVsSystem />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <WhatHappensWhen />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <SystemActivityTicker />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <ProcessAndRule />
       </Container>
 
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <DiagnosticCta />
       </Container>
     </SystemsLensProvider>

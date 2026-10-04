@@ -26,11 +26,11 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
         For artists, producers, and creatives · {tier.isScoped ? 'Custom' : `Tier ${tier.tier}`}
       </span>
 
-      <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-display uppercase tracking-normal gradient-text mb-5 leading-[0.95]">
+      <h1 className="relative text-4xl md:text-5xl lg:text-[3.5rem] font-display uppercase tracking-normal gradient-text-gold mb-5 leading-[0.95]">
         {funnel.heroHeadline}
       </h1>
 
-      <p className="relative text-lg md:text-xl text-zinc-400 leading-relaxed mb-8 mx-auto max-w-2xl">
+      <p className="relative text-lg md:text-xl text-[#d5c8b8] leading-relaxed mb-8 mx-auto max-w-2xl">
         {funnel.heroSubheadline}
       </p>
 
@@ -63,16 +63,16 @@ export function FunnelHero({ tier, funnel }: FunnelHeroProps) {
           <img src={heroTestimonial.avatar} alt={heroTestimonial.name} className="w-full h-full object-cover" />
         </div>
         <div className="flex-1 text-center sm:text-left">
-          <p className="text-sm text-zinc-300 leading-relaxed italic mb-1">&ldquo;{heroTestimonial.quote}&rdquo;</p>
-          <p className="text-xs text-zinc-500">
-            <span className="text-white font-medium">{heroTestimonial.name}</span> · {heroTestimonial.role}
+          <p className="text-sm text-[#d5c8b8] leading-relaxed italic mb-1">&ldquo;{heroTestimonial.quote}&rdquo;</p>
+          <p className="text-xs text-[#b8a890]">
+            <span className="text-gold font-medium">{heroTestimonial.name}</span> · {heroTestimonial.role}
           </p>
         </div>
       </div>
 
       <ul className="relative space-y-3 text-left max-w-xl mx-auto">
         {funnel.heroBenefits.map((benefit) => (
-          <li key={benefit} className="flex items-start gap-3 text-sm text-zinc-300">
+          <li key={benefit} className="flex items-start gap-3 text-sm text-[#d5c8b8]">
             <iconify-icon
               icon="solar:check-circle-bold"
               width="18"

@@ -44,6 +44,11 @@ export default function HomePage() {
             alt="ISIATA"
             className="w-full h-full object-cover object-[center_44%] lg:object-[center_52%]"
           />
+          {/* Soft top vignette so cream nav stays readable over bright photo areas */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/55 via-black/25 to-transparent md:h-44"
+          />
           {/* Soft fade into continuous page background */}
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/70 to-transparent" />
         </div>
@@ -56,7 +61,7 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-6 md:gap-8 group max-w-[min(100%-3rem,28rem)] pr-4"
           >
-            <div className="relative aspect-square w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-white/15 bg-black depth-shadow">
+            <div className="relative aspect-square w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow">
               <img
                 src={TWO_TALES.cover}
                 alt={TWO_TALES.title}
@@ -64,21 +69,21 @@ export default function HomePage() {
               />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] font-spaced uppercase tracking-wide text-zinc-400 mb-0.5">Single</p>
+              <p className="text-[10px] font-spaced uppercase tracking-wide text-[#d5c8b8] mb-0.5">Single</p>
               <p className="font-display uppercase tracking-normal text-gold text-lg md:text-xl truncate">
                 {TWO_TALES.title}
               </p>
-              <p className="text-xs text-zinc-400 mt-0.5">{TWO_TALES.streamsLabel}</p>
+              <p className="text-xs text-[#d5c8b8] mt-0.5">{TWO_TALES.streamsLabel}</p>
             </div>
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 group-hover:border-[#f0c681] group-hover:bg-[#b7792a]/10 group-hover:shadow-[0_0_28px_rgba(211,157,83,0.18)]">
-              <iconify-icon icon="mdi:spotify" width="18" height="18" className="text-[#f0dfc8]" />
+              <iconify-icon icon="mdi:spotify" width="18" height="18" className="text-gold" />
             </span>
           </a>
 
           <div className="absolute bottom-12 right-6 md:right-10 is-visible aura-reveal">
             <div className="flex flex-col items-center gap-2">
-              <span className="text-xs font-spaced text-zinc-400 uppercase tracking-wide">Scroll</span>
-              <iconify-icon icon="solar:arrow-down-linear" width="20" height="20" className="text-zinc-400 animate-bounce" />
+              <span className="text-xs font-spaced text-[#d5c8b8] uppercase tracking-wide">Scroll</span>
+              <iconify-icon icon="solar:arrow-down-linear" width="20" height="20" className="text-[#d5c8b8] animate-bounce" />
             </div>
           </div>
         </div>
@@ -90,7 +95,7 @@ export default function HomePage() {
 
       {/* Featured Items */}
       <Section reveal>
-        <Container bordered className="relative py-24">
+        <Container bordered className="relative border-t border-[#d8aa67]/15 py-24">
           <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {FEATURED_CARDS.map((card) => (
               <a
@@ -124,7 +129,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative z-10 shrink-0 text-center px-6 pb-6 md:pb-8 pt-2">
-                  <h3 className="gradient-text-gold mb-3 text-3xl font-display font-semibold uppercase transition-all duration-500 group-hover:tracking-wider md:text-4xl">
+                  <h3 className="mb-3 text-3xl font-display font-normal uppercase tracking-normal text-[#ECE3D7] transition-all duration-500 group-hover:tracking-wider md:text-4xl">
                     {card.title}
                   </h3>
                   <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">

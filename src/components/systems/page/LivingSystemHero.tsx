@@ -22,16 +22,16 @@ export function LivingSystemHero() {
           speed={100}
         />
 
-        <div className="max-w-2xl space-y-5 text-base font-light text-zinc-400 leading-[1.8]">
+        <div className="max-w-2xl space-y-5 text-base font-light text-[#d5c8b8] leading-[1.8]">
           {SYSTEMS_PAGE_COPY.lede.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          <ul className="space-y-2 text-zinc-500">
+          <ul className="space-y-2 text-[#b8a890]">
             {SYSTEMS_PAGE_COPY.problems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="text-white font-medium">{SYSTEMS_PAGE_COPY.punch}</p>
+          <p className="text-gold font-medium">{SYSTEMS_PAGE_COPY.punch}</p>
           <p>{SYSTEMS_PAGE_COPY.closer}</p>
         </div>
       </div>
@@ -47,11 +47,11 @@ export function LivingSystemHero() {
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
           {SYSTEMS_PAGE_COPY.aroundHowYouWork.eyebrow}
         </p>
-        <div className="max-w-2xl space-y-4 text-base font-light text-zinc-400 leading-[1.8] mb-8">
+        <div className="max-w-2xl space-y-4 text-base font-light text-[#d5c8b8] leading-[1.8] mb-8">
           {SYSTEMS_PAGE_COPY.aroundHowYouWork.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          <p className="text-white font-medium">{SYSTEMS_PAGE_COPY.aroundHowYouWork.punch}</p>
+          <p className="text-gold font-medium">{SYSTEMS_PAGE_COPY.aroundHowYouWork.punch}</p>
           <p>{SYSTEMS_PAGE_COPY.aroundHowYouWork.closer}</p>
         </div>
         <LensSelector />

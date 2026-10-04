@@ -30,7 +30,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div className="relative z-10 h-full flex flex-col items-center justify-center p-8">
         <button
           onClick={onClose}
-          className="absolute top-8 right-8 text-white"
+          className="absolute top-8 right-8 text-gold"
           aria-label="Close menu"
         >
           <iconify-icon icon="solar:close-circle-linear" width="32" height="32" />

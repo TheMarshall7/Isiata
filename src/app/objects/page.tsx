@@ -36,7 +36,7 @@ export default function ObjectsPage() {
                 speed={120}
               />
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
                   Artifacts of the process.
                 </p>
@@ -49,7 +49,7 @@ export default function ObjectsPage() {
                   Built to make a statement.
                 </p>
 
-                <p className="text-zinc-400">
+                <p className="text-[#d5c8b8]">
                   Releases arrive in focused runs.
                   <br />
                   Once they're gone, they're archived.
@@ -58,7 +58,7 @@ export default function ObjectsPage() {
             </div>
 
             {heroJacket && (
-              <div className="relative aspect-[3/4] w-full max-w-[min(100%,28rem)] max-h-[min(68svh,38rem)] mx-auto lg:mx-0 lg:ml-auto border border-white/10 bg-black overflow-hidden depth-shadow">
+              <div className="relative aspect-[3/4] w-full max-w-[min(100%,28rem)] max-h-[min(68svh,38rem)] mx-auto overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0 lg:ml-auto">
                 <img
                   src={heroJacket.image}
                   alt={heroJacket.title}
@@ -87,7 +87,7 @@ export default function ObjectsPage() {
       </Container>
 
       {/* Notify for next drop */}
-      <Container bordered className="py-20 md:py-28 border-t border-white/10">
+      <Container bordered className="py-20 md:py-28 border-t border-[#d8aa67]/15">
         <Section reveal>
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-6">

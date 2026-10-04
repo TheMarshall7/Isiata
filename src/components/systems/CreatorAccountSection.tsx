@@ -63,7 +63,7 @@ export function CreatorAccountSection({ funnel }: CreatorAccountSectionProps) {
                   aria-expanded={isExpanded}
                 >
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 bg-black/30 shrink-0">
-                    <iconify-icon icon={feature.icon} width="20" height="20" className="text-white" />
+                    <iconify-icon icon={feature.icon} width="20" height="20" className="text-gold" />
                   </div>
                   <span className="text-sm font-medium text-white flex-1">{feature.title}</span>
                   <iconify-icon

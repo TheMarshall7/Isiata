@@ -19,12 +19,12 @@ export default function CommunityPage() {
             className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
             speed={120}
           />
-          <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
+          <p className="text-lg md:text-xl text-[#d5c8b8] mb-10 max-w-xl leading-relaxed">
             A place for collaborators, supporters, and people who care about the work. Coming soon.
           </p>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white tracking-wide transition-all duration-300"
+            className="group inline-flex items-center gap-2 text-sm text-[#b8a890] hover:text-gold tracking-wide transition-all duration-300"
           >
             <span className="group-hover:-translate-x-0.5 transition-transform duration-300">Back to Contact</span>
             <iconify-icon icon="solar:arrow-left-linear" width="20" height="20" className="group-hover:-translate-x-1 transition-transform duration-300" />
@@ -33,7 +33,7 @@ export default function CommunityPage() {
       </Container>
 
       {/* Get notified — highlighted signup */}
-      <Container bordered className="py-20 md:py-28 border-t border-white/10">
+      <Container bordered className="py-20 md:py-28 border-t border-[#d8aa67]/15">
         <Section reveal>
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-6 transition-colors duration-300 hover:text-zinc-400">

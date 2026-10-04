@@ -43,9 +43,9 @@
 @layer utilities {
   /* Artifact navigation */
   .artifact-navbar {
-    background: transparent;
+    background: rgba(5, 5, 5, 0.4);
     isolation: isolate;
-    box-shadow: none;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
     -webkit-backdrop-filter: blur(24px) saturate(1.5);
     backdrop-filter: blur(24px) saturate(1.5);
     transition:
@@ -282,6 +282,17 @@
     background-image: linear-gradient(to bottom, #f7f2ea, #ece3d7, #d4c8b8);
   }
 
+  /* Headlines / subheads: cream instead of pure white (matches header wordmark) */
+  h1.text-white,
+  h2.text-white,
+  h3.text-white,
+  h4.text-white,
+  h5.text-white,
+  h6.text-white,
+  .font-display.text-white {
+    color: var(--isiata-ivory);
+  }
+
   /* Gold hairline border — cream only */
   .gradient-border-energy {
     position: relative;
@@ -315,7 +326,7 @@
 
   /* Container with borders */
   .container-bordered {
-    @apply border-x border-white/10 max-w-7xl mx-auto;
+    @apply mx-auto max-w-7xl border-x border-[#d8aa67]/15;
   }
 
   /* Premium hover lift */
@@ -385,6 +396,11 @@
       0 0 0 1px rgba(255, 255, 255, 0.06),
       0 8px 24px -6px rgba(0, 0, 0, 0.4),
       0 20px 40px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Default site icons to brand cream; Tailwind text-* on the icon still wins */
+  iconify-icon {
+    color: var(--isiata-ivory);
   }
 
   /* Icon hover animations */

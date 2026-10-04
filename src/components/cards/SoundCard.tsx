@@ -14,7 +14,7 @@ export function SoundCard({ release }: SoundCardProps) {
   return (
     <Link
       href={`/sound/${release.slug}`}
-      className="group block flashlight-card depth-shadow hover-depth border border-white/10 rounded-lg overflow-hidden"
+      className="group block flashlight-card depth-shadow hover-depth border border-[#d8aa67]/25 rounded-lg overflow-hidden"
       onMouseMove={(e) => {
         const card = e.currentTarget
         const rect = card.getBoundingClientRect()
@@ -37,7 +37,7 @@ export function SoundCard({ release }: SoundCardProps) {
       </div>
 
       <div className="space-y-2 px-4 pb-4">
-        <h3 className="text-lg font-semibold text-white group-hover:text-zinc-300 transition-colors">
+        <h3 className="text-lg font-semibold text-gold group-hover:text-zinc-300 transition-colors">
           {release.title}
         </h3>
         <p className="text-sm text-zinc-400">{release.artist}</p>

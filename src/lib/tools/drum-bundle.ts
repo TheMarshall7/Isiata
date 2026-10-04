@@ -240,6 +240,7 @@ export const SAMPLE_PACKS = [
     title: DRUM_BUNDLE.title,
     description: '100+ premium drum sounds for modern production',
     image: DRUM_BUNDLE.image,
+    imageFit: 'contain' as const,
     price: DRUM_BUNDLE_PRICE.display,
     icon: 'solar:soundwave-linear',
   },

@@ -12,7 +12,7 @@ import {
 export function DrumBundleFeaturedSection() {
   return (
     <Section reveal>
-      <Container bordered className="relative py-24 md:py-32">
+      <Container bordered className="relative border-t border-[#d8aa67]/15 py-24 md:py-32">
         <div className="grid items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16 xl:gap-20">
           <div className="relative flex min-h-[20rem] items-center justify-center sm:min-h-[28rem] lg:min-h-0">
             <div
@@ -47,7 +47,7 @@ export function DrumBundleFeaturedSection() {
               A cinematic drum collection built for producers who want impact, texture, and atmosphere.
             </p>
 
-            <div className="mt-8 grid grid-cols-3 border-y border-[#cfaa76]/22 py-5">
+            <div className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
               <div className="pr-4">
                 <iconify-icon
                   icon="solar:soundwave-linear"
@@ -58,7 +58,7 @@ export function DrumBundleFeaturedSection() {
                 <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">100 Sounds</p>
                 <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Curated Kit</p>
               </div>
-              <div className="border-x border-[#cfaa76]/22 px-4">
+              <div className="border-x border-[#d8aa67]/25 px-4">
                 <iconify-icon
                   icon="solar:layers-minimalistic-linear"
                   width="24"
@@ -117,7 +117,7 @@ export function DrumBundleFeaturedSection() {
           </div>
         </div>
 
-        <div className="mt-14 flex items-end justify-between border-t border-[#cfa76f]/14 pt-4 text-[8px] uppercase tracking-[0.28em] text-[#8d7b66]">
+        <div className="mt-14 flex items-end justify-between border-t border-[#d8aa67]/25 pt-4 text-[8px] uppercase tracking-[0.28em] text-[#8d7b66]">
           <div>
             <p>Archive</p>
             <p className="mt-1 text-[#b89a72]">001</p>

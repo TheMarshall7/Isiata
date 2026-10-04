@@ -62,7 +62,7 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
           icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
           width="16"
           height="16"
-          className="text-white"
+          className="text-gold"
         />
         {/* Progress ring */}
         {isPlaying && (
@@ -217,7 +217,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2 bg-black/55 hover:bg-black/70 border-b border-white/15 transition-colors"
               >
-                <iconify-icon icon="mdi:instagram" width="18" height="18" className="text-white" />
+                <iconify-icon icon="mdi:instagram" width="18" height="18" className="text-gold" />
                 <span className="text-white text-sm font-medium">Instagram</span>
               </a>
               <a
@@ -226,7 +226,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2 bg-black/55 hover:bg-black/70 transition-colors"
               >
-                <iconify-icon icon="ic:baseline-tiktok" width="18" height="18" className="text-white" />
+                <iconify-icon icon="ic:baseline-tiktok" width="18" height="18" className="text-gold" />
                 <span className="text-white text-sm font-medium">TikTok</span>
               </a>
             </div>
@@ -299,7 +299,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                         className="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
                         aria-label="Previous track"
                       >
-                        <iconify-icon icon="solar:alt-arrow-left-linear" width="16" height="16" className="text-white" />
+                        <iconify-icon icon="solar:alt-arrow-left-linear" width="16" height="16" className="text-gold" />
                       </button>
                       <span className="text-xs text-zinc-400 tabular-nums font-medium min-w-[2.5rem] text-center">
                         {currentTrackIndex + 1} / {producer.songs.length}
@@ -310,7 +310,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                         className="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
                         aria-label="Next track"
                       >
-                        <iconify-icon icon="solar:alt-arrow-right-linear" width="16" height="16" className="text-white" />
+                        <iconify-icon icon="solar:alt-arrow-right-linear" width="16" height="16" className="text-gold" />
                       </button>
                     </span>
                   )}

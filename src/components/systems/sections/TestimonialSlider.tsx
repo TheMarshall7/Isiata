@@ -63,7 +63,7 @@ export function TestimonialSlider() {
           className="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white/5 disabled:opacity-30 transition-colors"
           aria-label="Previous testimonial"
         >
-          <iconify-icon icon="solar:alt-arrow-left-linear" width="18" height="18" className="text-white" />
+          <iconify-icon icon="solar:alt-arrow-left-linear" width="18" height="18" className="text-gold" />
         </button>
         <div className="flex gap-2">
           {FUNNEL_TESTIMONIALS.map((t, i) => (
@@ -85,7 +85,7 @@ export function TestimonialSlider() {
           className="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white/5 disabled:opacity-30 transition-colors"
           aria-label="Next testimonial"
         >
-          <iconify-icon icon="solar:alt-arrow-right-linear" width="18" height="18" className="text-white" />
+          <iconify-icon icon="solar:alt-arrow-right-linear" width="18" height="18" className="text-gold" />
         </button>
       </div>
     </div>

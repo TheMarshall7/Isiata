@@ -118,7 +118,7 @@ export default function BookingPage() {
                         icon={item.icon}
                         width="20"
                         height="20"
-                        className="text-white shrink-0 mt-0.5"
+                        className="text-gold shrink-0 mt-0.5"
                       />
                       <span className="text-sm text-zinc-400">{item.text}</span>
                     </li>
@@ -163,7 +163,7 @@ export default function BookingPage() {
                 <p className="text-sm text-zinc-400 mb-4">Have questions before booking?</p>
                 <a
                   href={CONTACT_INQUIRY_HREF}
-                  className="inline-flex items-center gap-2 text-sm text-white hover:text-zinc-300 transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-gold hover:text-[#d5c8b8] transition-colors"
                 >
                   Send an inquiry
                   <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
@@ -215,7 +215,7 @@ export default function BookingPage() {
         </div>
       </Container>
 
-      <Container bordered className="py-8 border-t border-white/10">
+      <Container bordered className="py-8 border-t border-[#d8aa67]/15">
         <div className="flex flex-wrap justify-center gap-8 text-center">
           <div className="flex items-center gap-2 text-sm text-zinc-500">
             <iconify-icon icon="solar:shield-check-linear" width="18" height="18" />

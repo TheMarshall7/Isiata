@@ -27,7 +27,7 @@ export default function ContactInquiryPage() {
               icon="solar:letter-linear"
               width="56"
               height="56"
-              className="text-white mx-auto mb-6"
+              className="text-gold mx-auto mb-6"
             />
             <h1 className="text-4xl md:text-5xl font-display uppercase tracking-normal text-gold mb-4">
               General inquiry

@@ -58,14 +58,14 @@ export default function ToolsPage() {
                 <TypeWriter text="The Tools" speed={100} />
               </h1>
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>Some tools are created out of necessity.</p>
                 <p>
                   Designed to support the work when nothing else felt right.
                   <br />
                   Used in real conditions. Kept only if they proved essential.
                 </p>
-                <p className="text-zinc-400">
+                <p className="text-[#d5c8b8]">
                   Available in small batches.
                   <br />
                   Quiet by design.
@@ -84,16 +84,16 @@ export default function ToolsPage() {
         </Section>
       </Container>
 
-      <Container bordered className="py-5 border-y border-white/10">
+      <Container bordered className="border-y border-[#d8aa67]/15 py-5">
         <div className="flex gap-4 overflow-x-auto">
           {TOOL_CATEGORIES.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`whitespace-nowrap px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'text-white bg-white/5 border border-white/10'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'border border-[#d8aa67]/40 bg-[#d8aa67]/10 text-[#ece3d7]'
+                  : 'text-zinc-400 hover:text-[#ece3d7]'
               }`}
             >
               {tab.label}
@@ -111,7 +111,7 @@ export default function ToolsPage() {
           <Section reveal>
             <Link
               href="/systems"
-              className="group block border border-white/10 bg-surface-raised depth-shadow p-8 md:p-10 transition-all duration-500 hover:border-white/20"
+              className="group block border border-[#d8aa67]/20 bg-transparent p-8 transition-all duration-500 hover:border-[#d8aa67]/65 md:p-10"
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div className="max-w-2xl">

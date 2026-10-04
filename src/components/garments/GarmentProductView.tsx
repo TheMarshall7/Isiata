@@ -64,11 +64,11 @@ export function GarmentProductView({ product }: GarmentProductViewProps) {
 
             <Link
               href={product.releaseHref}
-              className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors mb-8 group"
+              className="inline-flex items-center gap-2 text-sm text-[#d5c8b8] hover:text-gold transition-colors mb-8 group"
             >
               <iconify-icon icon="solar:music-library-2-linear" width="18" height="18" />
               <span>
-                From the <span className="text-white group-hover:underline">{product.releaseName}</span> EP
+                From the <span className="text-gold group-hover:underline">{product.releaseName}</span> EP
                 <span className="text-zinc-600"> · {product.releaseDate}</span>
               </span>
             </Link>

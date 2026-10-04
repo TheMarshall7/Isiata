@@ -20,9 +20,9 @@ function OfferingCard({ offering }: { offering: ContactOffering }) {
         icon={offering.icon}
         width="48"
         height="48"
-        className="mb-6 text-white transition-transform duration-500 group-hover:scale-110"
+        className="mb-6 text-gold transition-transform duration-500 group-hover:scale-110"
       />
-      <h3 className="mb-6 text-2xl font-semibold text-white">{offering.title}</h3>
+      <h3 className="mb-6 text-2xl font-semibold text-gold">{offering.title}</h3>
       <div className="mb-6 space-y-1">
         {offering.lines.map((line) => (
           <p key={line} className="leading-relaxed text-zinc-400">
@@ -31,7 +31,7 @@ function OfferingCard({ offering }: { offering: ContactOffering }) {
         ))}
       </div>
       <p className="mb-8 text-sm italic text-zinc-500">{offering.tagline}</p>
-      <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all duration-300 group-hover:gap-3">
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-all duration-300 group-hover:gap-3">
         {offering.cta}
         <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
       </span>
@@ -61,9 +61,9 @@ export default function ContactPage() {
                 speed={120}
               />
 
-              <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-zinc-300 md:text-xl">
+              <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-gold md:text-xl">
                 <p>Select what fits below, then book a call to get started.</p>
-                <p className="text-zinc-400">
+                <p className="text-[#d5c8b8]">
                   Collaborative work and fully delivered services. Coaching, systems, and community.
                   Not sure yet? Send a general inquiry.
                 </p>
@@ -142,11 +142,11 @@ export default function ContactPage() {
                 icon="solar:users-group-two-rounded-linear"
                 width="56"
                 height="56"
-                className="text-white transition-transform duration-500 group-hover:scale-110"
+                className="text-gold transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="min-w-0 flex-1">
-              <h2 className="mb-2 text-2xl font-semibold text-white">Community</h2>
+              <h2 className="mb-2 text-2xl font-semibold text-gold">Community</h2>
               <p className="leading-relaxed text-zinc-400">
                 A place for collaborators, supporters, and people who care about the work. Early
                 access, exclusive drops, and updates. Join the waitlist.
@@ -157,7 +157,7 @@ export default function ContactPage() {
                 icon="solar:arrow-right-linear"
                 width="24"
                 height="24"
-                className="text-zinc-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white"
+                className="text-zinc-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
               />
             </div>
           </Link>

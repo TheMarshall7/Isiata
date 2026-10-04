@@ -50,7 +50,7 @@ function DiscographyContent() {
   return (
     <div className="space-y-16">
       {/* EP */}
-      <div className="overflow-hidden border border-[#cfaa76]/18 bg-[#080808]">
+      <div className="overflow-hidden border border-[#d8aa67]/25 bg-[#080808]">
         <div className="grid grid-cols-1 items-center lg:grid-cols-2">
           <AlbumCover
             src={EP.cover}
@@ -81,7 +81,7 @@ function DiscographyContent() {
               {EP.notes}
             </p>
 
-            <div className="mt-8 grid grid-cols-3 border-y border-[#cfaa76]/22 py-5">
+            <div className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
               <div className="pr-4">
                 <iconify-icon
                   icon="solar:playlist-minimalistic-2-linear"
@@ -94,7 +94,7 @@ function DiscographyContent() {
                 </p>
                 <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Full EP</p>
               </div>
-              <div className="border-x border-[#cfaa76]/22 px-4">
+              <div className="border-x border-[#d8aa67]/25 px-4">
                 <iconify-icon
                   icon="solar:clock-circle-linear"
                   width="24"
@@ -150,7 +150,7 @@ function DiscographyContent() {
               </a>
             </div>
 
-            <div className="mt-10 border-t border-[#cfa76f]/14 pt-6">
+            <div className="mt-10 border-t border-[#d8aa67]/25 pt-6">
               <ol className="space-y-3">
                 {EP.tracks.map((track) => (
                   <li
@@ -179,14 +179,14 @@ function DiscographyContent() {
         <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-8">Singles</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {SINGLES.map((single) => (
-            <div key={single.title} className="group border border-white/10 bg-surface-raised depth-shadow overflow-hidden hover:border-white/20 transition-all duration-300">
+            <div key={single.title} className="group overflow-hidden border border-[#d8aa67]/20 bg-transparent transition-all duration-300 hover:border-[#d8aa67]/65">
               {/* Album Cover */}
               <AlbumCover src={single.cover} alt={single.title} />
 
               {/* Info */}
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-medium uppercase tracking-widest text-zinc-500 bg-white/5 border border-white/10 px-3 py-1">
+                  <span className="border border-[#d8aa67]/25 bg-[#d8aa67]/5 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#b8a890]">
                     {single.type}
                   </span>
                   <span className="text-xs text-zinc-600">{single.runtime}</span>
@@ -206,7 +206,7 @@ function DiscographyContent() {
                     href={single.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-full"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8aa67]/30 bg-black/20 transition-all duration-300 hover:border-[#d8aa67]/65 hover:bg-[#b7792a]/10"
                     title="Listen on Spotify"
                   >
                     <iconify-icon icon="mdi:spotify" width="20" height="20" className="text-[#1DB954]" />
@@ -215,10 +215,10 @@ function DiscographyContent() {
                     href={single.appleMusic}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-full"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8aa67]/30 bg-black/20 transition-all duration-300 hover:border-[#d8aa67]/65 hover:bg-[#b7792a]/10"
                     title="Listen on Apple Music"
                   >
-                    <iconify-icon icon="mdi:apple" width="20" height="20" className="text-white" />
+                    <iconify-icon icon="mdi:apple" width="20" height="20" className="text-gold" />
                   </a>
                 </div>
               </div>
@@ -258,14 +258,14 @@ export default function SoundPage() {
                 <TypeWriter text="The Sound" speed={100} />
               </h1>
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-zinc-300 leading-relaxed">
+              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
                   Sonic atmosphere you can step into.
                   <br />
                   Moments that hold attention.
                 </p>
 
-                <p className="text-zinc-400">
+                <p className="text-[#d5c8b8]">
                   Unlocking frequency, the key to the world.
                   <br />
                   Listen closely.
@@ -276,23 +276,22 @@ export default function SoundPage() {
             <AlbumCover
               src={TWO_TALES_COVER}
               alt="Two Tales"
-              goldFrame={false}
-              className="mx-auto w-full max-w-[min(100%,min(36rem,64svh))] border border-white/10 depth-shadow lg:mx-0 lg:ml-auto"
+              className="mx-auto w-full max-w-[min(100%,min(36rem,64svh))] depth-shadow lg:mx-0 lg:ml-auto"
             >
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 flex items-end justify-between gap-4">
                 <div>
                   <p className="font-display uppercase tracking-normal text-gold text-lg">{TWO_TALES.title}</p>
-                  <p className="text-xs uppercase tracking-[0.16em] text-zinc-300 mt-1">{TWO_TALES.streamsLabel}</p>
+                  <p className="text-xs uppercase tracking-[0.16em] text-[#d5c8b8] mt-1">{TWO_TALES.streamsLabel}</p>
                 </div>
                 <a
                   href={TWO_TALES.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-11 h-11 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm hover:border-[#1DB954]/50 transition-colors shrink-0"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10"
                   title="Listen on Spotify"
                   aria-label="Listen to Two Tales on Spotify"
                 >
-                  <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#1DB954]" />
+                  <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#f0dfc8]" />
                 </a>
               </div>
             </AlbumCover>
@@ -301,7 +300,7 @@ export default function SoundPage() {
       </Container>
 
       {/* Filter Bar */}
-      <Container bordered className="py-5 border-y border-white/10">
+      <Container bordered className="py-5 border-y border-[#d8aa67]/15">
         <div className="flex gap-4 overflow-x-auto">
           {TABS.map((tab) => (
             <button
@@ -309,7 +308,7 @@ export default function SoundPage() {
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
                 activeTab === tab
-                  ? 'text-white bg-white/5 border border-white/10'
+                  ? 'border border-[#d8aa67]/40 bg-[#d8aa67]/10 text-[#ece3d7]'
                   : 'text-zinc-400 hover:text-white'
               }`}
             >

@@ -73,7 +73,7 @@ export function ProcessSteps({ steps, accent, tierIcon }: ProcessStepsProps) {
         </div>
         <div className="relative h-full p-8 flex flex-col justify-center">
           <div className={`w-16 h-16 rounded-2xl border ${accent.border} bg-white/[0.05] flex items-center justify-center mb-6 transition-transform duration-300 scale-100`}>
-            <iconify-icon icon={tierIcon} width="32" height="32" className="text-white" />
+            <iconify-icon icon={tierIcon} width="32" height="32" className="text-gold" />
           </div>
           <p className={`text-xs font-semibold uppercase tracking-widest ${accent.text} mb-3`}>
             Step {activeIndex + 1} of {steps.length}

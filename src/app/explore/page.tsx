@@ -21,7 +21,7 @@ export default function ExplorePage() {
           <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold">
             <TypeWriter text="Explore" speed={120} />
           </h1>
-          <p className="text-lg text-zinc-400 mt-6 max-w-2xl">
+          <p className="text-lg text-[#d5c8b8] mt-6 max-w-2xl">
             Discover across sound, objects, tools, and access
           </p>
         </Section>
@@ -56,13 +56,13 @@ export default function ExplorePage() {
                     icon={cat.icon}
                     width="72"
                     height="72"
-                    className="relative z-10 text-white opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                    className="relative z-10 text-gold opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                   />
                 </div>
 
                 {/* Text content at bottom */}
                 <div className="relative z-10 mt-auto">
-                  <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3 group-hover:tracking-wide transition-all duration-500">
+                  <h2 className="text-3xl md:text-4xl font-semibold text-gold mb-3 group-hover:tracking-wide transition-all duration-500">
                     {cat.title}
                   </h2>
                   <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors duration-500">{cat.desc}</p>

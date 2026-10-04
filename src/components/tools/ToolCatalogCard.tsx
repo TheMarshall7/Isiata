@@ -13,7 +13,7 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
   return (
     <Link
       href={item.href}
-      className="group flashlight-card hover-glow border border-white/10 bg-surface-raised depth-shadow overflow-hidden transition-all duration-500 hover:border-white/20"
+      className="group flashlight-card hover-glow overflow-hidden border border-[#d8aa67]/20 bg-transparent transition-all duration-500 hover:border-[#d8aa67]/65"
       onMouseMove={(e) => {
         const el = e.currentTarget
         const rect = el.getBoundingClientRect()
@@ -40,19 +40,19 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
               icon={item.icon}
               width="72"
               height="72"
-              className="text-white/40 group-hover:text-white/70 group-hover:scale-110 transition-all duration-500"
+              className="text-gold/40 group-hover:text-gold/70 group-hover:scale-110 transition-all duration-500"
             />
           </div>
         )}
-        <div className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center border border-white/10 rounded bg-black/60 backdrop-blur-sm">
-          <iconify-icon icon={item.icon} width="20" height="20" className="text-white" />
+        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded border border-[#d8aa67]/25 bg-black/60 backdrop-blur-sm">
+          <iconify-icon icon={item.icon} width="20" height="20" className="text-[#f0dfc8]" />
         </div>
       </div>
       <div className="p-6">
         <p className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-2">
           {item.categoryLabel}
         </p>
-        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-zinc-200 transition-colors">
+        <h3 className="text-lg font-semibold text-gold mb-2 group-hover:text-zinc-200 transition-colors">
           {item.title}
         </h3>
         <p className="text-sm text-zinc-500 mb-4">{item.description}</p>
@@ -66,7 +66,7 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
             icon="solar:arrow-right-linear"
             width="18"
             height="18"
-            className="text-zinc-600 group-hover:text-white group-hover:translate-x-1 transition-all"
+            className="text-zinc-600 group-hover:text-gold group-hover:translate-x-1 transition-all"
           />
         </div>
       </div>

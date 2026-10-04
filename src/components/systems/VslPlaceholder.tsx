@@ -69,7 +69,7 @@ export function VslPlaceholder({ posterSrc, title, accent, videoSrc, vslEmbedUrl
             icon={hasVideo ? 'solar:play-bold' : 'solar:videocamera-record-linear'}
             width="36"
             height="36"
-            className="text-white ml-1"
+            className="text-gold ml-1"
           />
           {hasVideo && (
             <div

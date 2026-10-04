@@ -24,7 +24,7 @@ export default function SystemsArchitecturePage() {
       <Container bordered className="pb-20">
         <ArchitectureMap />
       </Container>
-      <Container bordered className="py-24 border-t border-white/10">
+      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
         <p className="text-sm text-zinc-500 mb-6 max-w-xl">
           Want this mapped onto your actual business instead of a diagram?
         </p>

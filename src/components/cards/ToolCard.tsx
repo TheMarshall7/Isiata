@@ -13,7 +13,7 @@ export function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="group block flashlight-card depth-shadow hover-depth border border-white/10 rounded-lg overflow-hidden"
+      className="group block flashlight-card depth-shadow hover-depth border border-[#d8aa67]/25 rounded-lg overflow-hidden"
       onMouseMove={(e) => {
         const card = e.currentTarget
         const rect = card.getBoundingClientRect()
@@ -45,14 +45,14 @@ export function ToolCard({ tool }: ToolCardProps) {
       </div>
 
       <div className="space-y-2 px-4 pb-4">
-        <h3 className="text-lg font-semibold text-white group-hover:text-zinc-300 transition-colors">
+        <h3 className="text-lg font-semibold text-gold group-hover:text-zinc-300 transition-colors">
           {tool.title}
         </h3>
         <div className="flex gap-2 flex-wrap">
           {tool.format.slice(0, 3).map((format) => (
             <span
               key={format}
-              className="text-xs text-zinc-400 border border-white/10 px-2 py-0.5"
+              className="text-xs text-zinc-400 border border-[#d8aa67]/25 px-2 py-0.5"
             >
               {format}
             </span>

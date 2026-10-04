@@ -353,7 +353,7 @@ export default function ToolboxPage() {
               className="text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-normal leading-[0.9] text-gold mb-6 md:mb-8"
               speed={80}
             />
-            <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed mb-5">
+            <p className="text-xl md:text-2xl text-gold leading-relaxed mb-5">
               BPM, keys, delay, and reverb. Built for the session.
             </p>
             <p className="text-base md:text-lg text-zinc-500 leading-relaxed">

@@ -19,7 +19,7 @@ export function Container({
       className={cn(
         'mx-auto px-6',
         maxWidths[maxWidth],
-        bordered && 'border-x border-white/10',
+        bordered && 'border-x border-[#d8aa67]/15',
         className
       )}
     >

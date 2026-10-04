@@ -85,7 +85,7 @@ export function TierAccordionCards() {
                               icon="solar:check-circle-linear"
                               width="16"
                               height="16"
-                              className="mt-0.5 shrink-0 text-white/70"
+                              className="mt-0.5 shrink-0 text-gold/70"
                             />
                             {feature}
                           </li>
