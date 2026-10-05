@@ -18,7 +18,7 @@ export function LivingSystemHero() {
         </p>
         <PageTitle
           text="Systems"
-          className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
+          className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold"
           speed={100}
         />
 

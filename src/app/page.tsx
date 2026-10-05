@@ -69,7 +69,7 @@ export default function HomePage() {
             href={TWO_TALES.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-rise absolute bottom-20 left-6 md:bottom-24 md:left-10 flex items-center gap-6 md:gap-8 group max-w-[min(100%-3rem,28rem)] pr-4"
+            className="hero-rise absolute inset-x-4 bottom-6 flex items-center gap-3 group md:inset-x-auto md:bottom-24 md:left-10 md:max-w-[28rem] md:gap-8 md:pr-4"
           >
             <div className="relative aspect-square w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow">
               <img
@@ -89,7 +89,7 @@ export default function HomePage() {
             </span>
           </a>
 
-          <div className="hero-rise-late absolute bottom-12 right-6 md:right-10">
+          <div className="hero-rise-late absolute bottom-28 left-1/2 -translate-x-1/2 md:bottom-12 md:left-auto md:right-10 md:translate-x-0">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs font-spaced text-gold uppercase tracking-wide">Scroll</span>
               <span className="scroll-float inline-flex" aria-hidden>
@@ -124,22 +124,22 @@ export default function HomePage() {
             <img
               src="/brand/overlays/molten-gold-marble-frame.png"
               alt=""
-              className="h-full w-full object-cover object-center opacity-80 mix-blend-screen"
+              className="h-full w-full object-fill opacity-80 mix-blend-screen"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
           </div>
-          <div className="relative flex flex-col items-center overflow-hidden px-8 py-20 text-center md:py-28">
+          <div className="relative flex flex-col items-center px-4 py-16 text-center sm:px-8 sm:py-20 md:py-28">
 
-            <div className="relative z-10 flex flex-col items-center">
+            <div className="relative z-10 flex w-full flex-col items-center">
               <p
-                className="text-shine-in max-w-4xl font-display text-3xl font-normal uppercase leading-[1.15] tracking-[0.18em] text-[#ece3d7] gradient-text-gold sm:text-4xl md:text-5xl md:tracking-[0.22em]"
+                className="text-shine-in max-w-full font-display text-2xl font-normal uppercase leading-[1.15] tracking-[0.08em] text-[#ece3d7] gradient-text-gold sm:text-4xl sm:tracking-[0.18em] md:text-5xl md:tracking-[0.22em]"
                 style={{ '--shine-delay': '0.25s' } as CSSProperties}
               >
                 Transforming
               </p>
-              <div className="mt-8 flex w-full max-w-3xl items-center gap-4">
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d8aa67]/40" />
-                <p className="shrink-0 text-[10px] uppercase tracking-[0.28em] text-[#9a8b74] sm:tracking-[0.32em]">
+              <div className="mt-8 flex w-full max-w-3xl items-center gap-3 sm:gap-4">
+                <span className="h-px min-w-4 flex-1 bg-gradient-to-r from-transparent to-[#d8aa67]/40" />
+                <p className="min-w-0 text-center text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[#9a8b74] sm:shrink-0 sm:tracking-[0.32em]">
                   <span
                     className="text-shine-in"
                     style={{ '--shine-delay': '1.05s' } as CSSProperties}

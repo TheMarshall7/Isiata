@@ -43,6 +43,15 @@
 }
 
 @layer utilities {
+  /* Display heroes stay inside the column on small screens */
+  .page-hero-title {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2rem, 9vw, 5.5rem);
+    line-height: 0.9;
+    overflow-wrap: break-word;
+  }
+
   /* Artifact navigation */
   .artifact-navbar {
     background: transparent;

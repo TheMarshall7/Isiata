@@ -287,7 +287,7 @@ export default function ToolboxPage() {
               </p>
               <PageTitle
                 text="Producer Toolbox"
-                className="mb-6 font-display text-5xl uppercase leading-[0.9] tracking-normal text-gold md:mb-8 md:text-6xl lg:text-7xl"
+                className="page-hero-title mb-6 font-display uppercase tracking-normal text-gold md:mb-8"
                 speed={80}
               />
               <p className="mb-5 text-xl leading-relaxed text-gold md:text-2xl">

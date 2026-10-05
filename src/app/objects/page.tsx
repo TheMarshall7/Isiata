@@ -30,11 +30,11 @@ export default function ObjectsPage() {
       <Container bordered className="relative min-h-[100svh] flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
         <Section reveal className="relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div>
+            <div className="min-w-0">
               <div data-reveal style={{ '--d': 0 } as CSSProperties}>
                 <PageTitle
                   text="Garments"
-                  className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
+                  className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold"
                   speed={120}
                 />
               </div>

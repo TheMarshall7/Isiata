@@ -1,8 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { NAV_LINKS } from '@/lib/constants'
+import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants'
 import { useEffect } from 'react'
+
+const SOCIAL = [
+  { href: SITE_CONFIG.links.soundcloud, label: 'SoundCloud', icon: 'mdi:soundcloud' },
+  { href: SITE_CONFIG.links.tiktok, label: 'TikTok', icon: 'ic:baseline-tiktok' },
+  { href: SITE_CONFIG.links.instagram, label: 'Instagram', icon: 'mdi:instagram' },
+  { href: SITE_CONFIG.links.youtube, label: 'YouTube', icon: 'mdi:youtube' },
+] as const
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -51,6 +58,21 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </Link>
           ))}
         </nav>
+
+        <div className="mt-14 flex items-center gap-7">
+          {SOCIAL.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.label}
+              className="text-[#d5c8b8] transition-colors hover:text-[#ece3d7]"
+            >
+              <iconify-icon icon={item.icon} width="26" height="26" />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   )

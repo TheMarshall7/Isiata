@@ -19,6 +19,7 @@ export function useParallax({ factor = 0.28, invert = false }: UseParallaxOption
     if (reduced) return
     // Real phones/tablets only — keep desktop/laptop trackpads working
     if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return
+    if (window.matchMedia('(max-width: 767px)').matches) return
 
     const el = ref.current
     if (!el) return

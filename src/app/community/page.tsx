@@ -16,7 +16,7 @@ export default function CommunityPage() {
         <Section reveal>
           <PageTitle
             text="Community"
-            className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
+            className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold"
             speed={120}
           />
           <p className="text-lg md:text-xl text-[#d5c8b8] mb-10 max-w-xl leading-relaxed">

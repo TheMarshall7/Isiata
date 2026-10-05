@@ -55,11 +55,11 @@ export default function ContactPage() {
       <Container bordered className="flex min-h-[100svh] flex-col justify-center pt-24 pb-12 md:pt-28 md:pb-16">
         <Section reveal className="w-full">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
-            <div>
+            <div className="min-w-0">
               <div data-reveal style={{ '--d': 0 } as CSSProperties}>
                 <PageTitle
                   text="Contact"
-                  className="mb-8 font-display text-6xl uppercase leading-[0.9] tracking-normal text-gold md:text-7xl lg:text-[5.5rem]"
+                  className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold"
                   speed={120}
                 />
               </div>

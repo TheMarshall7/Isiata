@@ -34,7 +34,7 @@ export function TheyMightBeMadSection() {
                 <span className="reveal-rail reveal-rail-right h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
               </div>
 
-              <h2 data-reveal style={{ '--d': 1 } as CSSProperties} className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
+              <h2 data-reveal style={{ '--d': 1 } as CSSProperties} className="max-w-full font-display text-3xl font-normal uppercase leading-[0.94] tracking-[0.04em] text-[#f3ede3] sm:text-5xl sm:tracking-[0.06em] lg:text-[2.75rem] xl:text-[3.25rem]">
                 <TypeWriter text={THEY_MIGHT_BE_MAD_EP.displayTitle} speed={80} />
               </h2>
 

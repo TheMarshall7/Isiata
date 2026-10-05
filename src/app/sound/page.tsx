@@ -61,12 +61,11 @@ function DiscographyContent() {
         className="overflow-hidden border border-[#d8aa67]/25 bg-[#080808]"
       >
         <div className="grid grid-cols-1 items-center lg:grid-cols-2">
-          <div ref={mediaRef} className="will-change-transform">
+          <div ref={mediaRef} className="mx-auto w-full max-w-xl px-6 py-6 will-change-transform sm:px-7 sm:py-7 md:px-8 md:py-8">
             <AlbumCover
               src={EP.cover}
               alt={EP.displayTitle}
               padded={false}
-              className="m-6 sm:m-7 md:m-8"
               goldBorderClassName="border-2 border-[#d8aa67]/70 shadow-[inset_0_0_14px_rgba(211,157,83,0.14)]"
             />
           </div>
@@ -83,7 +82,7 @@ function DiscographyContent() {
               <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
             </div>
 
-            <h3 className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
+            <h3 className="max-w-full font-display text-3xl font-normal uppercase leading-[0.94] tracking-[0.04em] text-[#f3ede3] sm:text-5xl sm:tracking-[0.06em] lg:text-[2.75rem] xl:text-[3.25rem]">
               {EP.displayTitle}
             </h3>
 
@@ -269,8 +268,8 @@ export default function SoundPage() {
       <Container bordered className="relative min-h-[100svh] overflow-hidden flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
         <Section reveal className="relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div ref={copyRef} className="will-change-transform">
-              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
+            <div ref={copyRef} className="min-w-0 will-change-transform">
+              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold">
                 <TypeWriter text="The Sound" speed={100} />
               </h1>
 

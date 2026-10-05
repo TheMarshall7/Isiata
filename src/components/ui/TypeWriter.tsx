@@ -70,9 +70,9 @@ export function TypeWriter({
   }, [hasStarted, text, speed, delay, onComplete])
 
   return (
-    <span ref={elementRef} className={`${className} relative inline-block`}>
-      <span className="invisible">{text}</span>
-      <span className="absolute inset-0">
+    <span ref={elementRef} className={`${className} relative block w-full max-w-full min-w-0`}>
+      <span className="invisible block whitespace-normal">{text}</span>
+      <span className="absolute inset-0 whitespace-normal">
         {displayedText}
         {cursor && !isComplete && (
           <span className="inline-block w-[3px] h-[0.9em] bg-[#ece3d7] ml-1 animate-pulse" />

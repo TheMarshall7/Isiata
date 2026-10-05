@@ -12,7 +12,7 @@ export default function ArchivePage() {
       {/* Page Header */}
       <Container bordered className="pt-28 md:pt-32 pb-12 md:pb-14">
         <Section reveal>
-          <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold">
+          <h1 className="page-hero-title font-display uppercase tracking-normal text-gold">
             Archive
           </h1>
           <p className="text-lg text-[#d5c8b8] mt-6 max-w-2xl">

@@ -54,8 +54,8 @@ export default function ToolsPage() {
       <Container bordered className="min-h-[100svh] flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
         <Section reveal className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div>
-              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
+            <div className="min-w-0">
+              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold">
                 <TypeWriter text="The Tools" speed={100} />
               </h1>
 

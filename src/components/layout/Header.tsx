@@ -50,7 +50,7 @@ export function Header() {
         aria-label="Primary navigation"
       >
         <div
-          className={`artifact-navbar group relative h-[52px] md:h-[58px] w-[calc(100vw-1.5rem)] md:w-full max-w-5xl overflow-hidden rounded-full ${isHome ? 'is-home-hero' : ''} ${scrolled ? 'is-scrolled' : ''}`}
+          className={`artifact-navbar group relative h-[52px] md:h-[58px] w-full max-w-5xl overflow-hidden rounded-full ${isHome ? 'is-home-hero' : ''} ${scrolled ? 'is-scrolled' : ''}`}
         >
           <div aria-hidden className="artifact-navbar-sheen" />
 
@@ -71,11 +71,11 @@ export function Header() {
           </div>
 
           {/* Absolute center keeps the wordmark mathematically centered. */}
-          <div className="absolute z-30 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 md:gap-7">
+          <div className="absolute z-30 left-1/2 top-[calc(50%+2px)] flex -translate-x-1/2 -translate-y-1/2 items-center gap-5 md:top-1/2 md:gap-7">
             <span aria-hidden className="artifact-nav-divider" />
             <Link
               href="/"
-              className="inline-flex items-center justify-center whitespace-nowrap font-display font-normal text-xl tracking-[0.34em] text-[#ECE3D7]"
+              className="inline-flex items-center justify-center whitespace-nowrap font-display font-normal text-xl leading-none tracking-[0.34em] text-[#ECE3D7]"
             >
               ISIATA
             </Link>
@@ -85,7 +85,7 @@ export function Header() {
           {/* Mobile menu trigger. */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="absolute z-30 right-4 top-1/2 -translate-y-1/2 p-2 text-[#ECE3D7] md:hidden"
+            className="absolute z-30 right-4 top-[calc(50%+2px)] flex h-10 w-10 -translate-y-1/2 items-center justify-center text-[#ECE3D7] md:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
