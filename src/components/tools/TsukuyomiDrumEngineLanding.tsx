@@ -122,7 +122,7 @@ function SectionHeading({
           {eyebrow}
         </span>
       </div>
-      <h2 className="text-3xl md:text-5xl font-display uppercase tracking-normal leading-[0.95] text-gold">
+      <h2 className="font-sans text-3xl font-normal uppercase leading-[1.05] tracking-normal text-gold md:text-5xl">
         {title}
       </h2>
       {children ? (
@@ -309,8 +309,8 @@ export function TsukuyomiDrumEngineLanding() {
       <section className="relative min-w-0 max-w-full overflow-hidden rounded-lg gradient-border-tsukuyomi bg-gradient-to-br from-white/[0.06] via-surface-raised/90 to-black/40 p-5 depth-shadow-lg sm:p-7 lg:p-8">
         <div className="glow-orb -left-24 -top-24 h-96 w-96 bg-orange-500/15" aria-hidden />
         <div className="glow-orb -bottom-32 right-0 h-96 w-96 bg-amber-200/5" aria-hidden />
-        <div className="relative grid min-w-0 grid-cols-1 items-center gap-7 lg:grid-cols-[0.84fr_1.16fr] lg:gap-8">
-          <div className="min-w-0">
+        <div className="relative grid min-w-0 grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
+          <div className="relative z-10 min-w-0 overflow-hidden">
             <div className="mb-5 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-600">
                 {TSUKUYOMI_DRUM_ENGINE.label}
@@ -319,14 +319,14 @@ export function TsukuyomiDrumEngineLanding() {
                 {TSUKUYOMI_DRUM_ENGINE.version}
               </span>
             </div>
-            <h1 className="mb-5 font-display text-[2.7rem] uppercase leading-[0.86] tracking-normal text-gold sm:text-[3.65rem] lg:text-[4.5rem]">
+            <h1 className="mb-5 max-w-full font-sans text-[2.4rem] font-normal uppercase leading-[1.02] tracking-normal text-gold sm:text-[3.25rem] lg:text-[3.75rem]">
               Tsukuyomi
               <br />
               <span className="text-orange-200/90">Drum Engine</span>
             </h1>
-            <div className="mb-5 space-y-0.5">
+            <div className="mb-5 space-y-1">
               {TSUKUYOMI_DRUM_ENGINE.heroLines.map((line) => (
-                <p key={line} className="font-display text-lg uppercase tracking-normal text-zinc-200 sm:text-xl">
+                <p key={line} className="font-sans text-lg font-normal uppercase tracking-normal text-zinc-200 sm:text-xl">
                   {line}
                 </p>
               ))}
@@ -355,7 +355,7 @@ export function TsukuyomiDrumEngineLanding() {
               {TSUKUYOMI_DRUM_ENGINE.formatLine}
             </p>
           </div>
-          <div className="min-w-0">
+          <div className="relative z-0 min-w-0">
             <ProductScreenshot
               file="Main UI - Tsukyomi Drum Engine.png"
               alt="Tsukuyomi Drum Engine main instrument interface with pads, controls, and sequencer"
@@ -370,7 +370,7 @@ export function TsukuyomiDrumEngineLanding() {
       </section>
 
       <section aria-label="Tsukuyomi Drum Engine demo video" className="mx-auto w-full max-w-5xl text-center">
-        <h2 className="mb-5 font-display text-2xl uppercase tracking-normal text-gold sm:text-3xl">
+        <h2 className="mb-5 font-sans text-2xl font-normal uppercase tracking-normal text-gold sm:text-3xl">
           See the whole drum workflow.
         </h2>
         <VideoSlot />
@@ -718,7 +718,7 @@ export function TsukuyomiDrumEngineLanding() {
             </article>
           ))}
         </div>
-        <p className="mt-8 text-center font-display text-2xl uppercase tracking-normal text-gold">Then make the music.</p>
+        <p className="mt-8 text-center font-sans text-2xl font-normal uppercase tracking-normal text-gold">Then make the music.</p>
       </Section>
 
       <Section reveal>
@@ -782,7 +782,7 @@ export function TsukuyomiDrumEngineLanding() {
         <div className="relative overflow-hidden rounded-lg gradient-border-tsukuyomi bg-gradient-to-br from-white/[0.06] via-surface-raised/80 to-transparent p-8 depth-shadow-lg sm:p-12 lg:p-16">
           <div className="glow-orb left-1/2 top-0 h-96 w-96 -translate-x-1/2 bg-orange-500/10" aria-hidden />
           <div className="relative mx-auto max-w-3xl text-center">
-            <h2 className="mb-7 font-display text-4xl uppercase leading-[0.95] tracking-normal text-gold md:text-6xl">
+            <h2 className="mb-7 font-sans text-4xl font-normal uppercase leading-[0.95] tracking-normal text-gold md:text-6xl">
               Take your samples to a new level.
               <br />
               <span className="text-orange-200/90">This is where your drums happen.</span>

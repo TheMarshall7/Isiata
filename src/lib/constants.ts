@@ -4,7 +4,8 @@ const DEFAULT_SITE_URL = 'https://isiata.com'
 
 export const SITE_CONFIG = {
   name: 'ISIATA',
-  description: 'Culture and innovation. Sound, objects, tools, and access.',
+  description:
+    'Create and transform. Music, garments, tools, and systems from one creative universe.',
   url: (process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || DEFAULT_SITE_URL).replace(
     /\/$/,
     ''

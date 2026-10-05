@@ -9,7 +9,7 @@ export function organizationSchema() {
     url: siteUrl,
     logo: ISIATA_LOGO_URL,
     description:
-      'Creative studio spanning sound, garments, production tools, and private access. Culture and innovation.',
+      'An artist led creative universe. Music, garments, tools, and systems that transform the unseen into something you can feel.',
     sameAs: Object.values(SITE_CONFIG.links),
   }
 }

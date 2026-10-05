@@ -1,5 +1,5 @@
 export const SYSTEMS_PAGE_COPY = {
-  eyebrow: 'The infrastructure behind the creative work.',
+  eyebrow: 'Structure for the work in the physical world.',
   lede: [
     'You make the music. You build the brand. You work with clients. You teach. You perform. You sell things.',
     'The problem is everything around it.',
@@ -13,7 +13,7 @@ export const SYSTEMS_PAGE_COPY = {
   ],
   punch: "That's what the system is for.",
   closer:
-    'I build the digital infrastructure that connects the creative work to the business around it.',
+    'I build the structure that holds the creative work so it can move through the world without falling apart.',
   aroundHowYouWork: {
     eyebrow: 'Built around how you actually work',
     body: [

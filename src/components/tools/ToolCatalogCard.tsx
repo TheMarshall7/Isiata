@@ -8,12 +8,14 @@ interface ToolCatalogCardProps {
 }
 
 export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
-  const isContained = item.imageFit === 'contain'
+  const fit = item.imageFit ?? 'cover'
+  const isWide = fit === 'wide'
+  const isContained = fit === 'contain'
 
   return (
     <Link
       href={item.href}
-      className="group flashlight-card hover-glow overflow-hidden border border-[#d8aa67]/20 bg-transparent transition-all duration-500 hover:border-[#d8aa67]/65"
+      className="group flashlight-card hover-glow hover-depth overflow-hidden border border-[#d8aa67]/25 bg-transparent"
       onMouseMove={(e) => {
         const el = e.currentTarget
         const rect = el.getBoundingClientRect()
@@ -22,16 +24,20 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
       }}
     >
       <div
-        className={`relative overflow-hidden bg-black/40 ${
-          isContained ? 'aspect-[16/10]' : 'aspect-square'
+        className={`hover-zoom relative overflow-hidden bg-black/40 ${
+          isWide ? 'aspect-[16/10]' : 'aspect-[5/4]'
         }`}
       >
         {item.image ? (
           <img
             src={item.image}
             alt={item.title}
-            className={`h-full w-full group-hover:scale-105 transition-transform duration-500 ${
-              isContained ? 'object-contain p-2' : 'object-cover'
+            className={`h-full w-full object-center ${
+              isContained
+                ? 'object-contain p-6 sm:p-8'
+                : isWide
+                  ? 'object-contain p-2'
+                  : 'object-cover'
             }`}
           />
         ) : (
@@ -40,13 +46,15 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
               icon={item.icon}
               width="72"
               height="72"
-              className="text-gold/40 group-hover:text-gold/70 group-hover:scale-110 transition-all duration-500"
+              className="icon-hover-drift text-gold/40 group-hover:text-gold/70"
             />
           </div>
         )}
-        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded border border-[#d8aa67]/25 bg-black/60 backdrop-blur-sm">
-          <iconify-icon icon={item.icon} width="20" height="20" className="text-[#f0dfc8]" />
-        </div>
+        {isWide ? (
+          <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded border border-[#d8aa67]/25 bg-black/60 backdrop-blur-sm">
+            <iconify-icon icon={item.icon} width="20" height="20" className="text-[#f0dfc8]" />
+          </div>
+        ) : null}
       </div>
       <div className="p-6">
         <p className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-2">
@@ -55,7 +63,7 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
         <h3 className="text-lg font-semibold text-gold mb-2 group-hover:text-zinc-200 transition-colors">
           {item.title}
         </h3>
-        <p className="text-sm text-zinc-500 mb-4">{item.description}</p>
+        <p className="mb-4 text-base leading-relaxed text-zinc-400">{item.description}</p>
         <div className="flex items-center justify-between">
           {item.price ? (
             <span className="text-sm font-medium text-white">{item.price}</span>

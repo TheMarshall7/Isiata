@@ -9,47 +9,28 @@ export const metadata: Metadata = buildPageMetadata(SEO_PAGES.about)
 export default function AboutPage() {
   return (
     <>
-      {/* The World */}
+      {/* The Universe */}
       <Container bordered className="pt-32 pb-24">
-        <Section reveal>
-          <h2 className="text-2xl font-semibold text-gold mb-12">The World</h2>
+        <Section reveal className="text-center">
+          <h2 className="text-2xl font-semibold text-gold mb-12 tracking-wide">The Universe</h2>
 
-          <div className="max-w-3xl space-y-8 text-xl text-gold leading-relaxed">
+          <div className="mx-auto max-w-2xl space-y-10 text-lg sm:text-xl text-gold/90 leading-[1.75]">
             <p>
-              ISIATA is a studio without a single medium.
+              Isiata is a creator who was taught what reality was supposed to be,
+              but refused to accept that the surface was the whole story.
             </p>
 
             <p>
-              Sound, objects, and systems live here side by side.
-              <br />
-              Each piece is shaped by restraint, clarity, and taste.
+              As he searches through music, consciousness, technology, and the unseen,
+              he discovers a world far larger than he imagined. The deeper he goes,
+              the more he must confront the danger of becoming controlled by the very
+              forces he sought to escape.
             </p>
 
             <p>
-              Nothing exists to fill space.
-              <br />
-              Everything earns its place.
-            </p>
-          </div>
-        </Section>
-      </Container>
-
-      {/* The Work */}
-      <Container bordered className="py-24 border-t border-[#d8aa67]/15">
-        <Section reveal>
-          <h2 className="text-2xl font-semibold text-gold mb-12">The Work</h2>
-
-          <div className="max-w-3xl space-y-8 text-xl text-gold leading-relaxed">
-            <p>
-              The work moves across forms.
-              <br />
-              Music. Garments. Tools. Editions.
-            </p>
-
-            <p>
-              What connects them is not category, but point of view.
-              <br />
-              Quiet confidence. Considered choices. Weight without excess.
+              His journey is not about becoming all knowing, but becoming more conscious,
+              transforming what he discovers into art, and helping others question what
+              they believe is possible.
             </p>
           </div>
         </Section>
@@ -60,9 +41,9 @@ export default function AboutPage() {
         <Section reveal>
           <div className="max-w-2xl mx-auto text-center space-y-4">
             <p className="text-zinc-500 text-sm uppercase tracking-widest">
-              Culture and innovation.
+              Create and transform.
               <br />
-              Form follows intention.
+              Transform the unseen into something you can feel.
             </p>
           </div>
         </Section>

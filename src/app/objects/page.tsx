@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -30,15 +31,19 @@ export default function ObjectsPage() {
         <Section reveal className="relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
-              <PageTitle
-                text="Garments"
-                className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
-                speed={120}
-              />
+              <div data-reveal style={{ '--d': 0 } as CSSProperties}>
+                <PageTitle
+                  text="Garments"
+                  className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8"
+                  speed={120}
+                />
+              </div>
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
+              <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
                   Artifacts of the process.
+                  <br />
+                  The character, made physical.
                 </p>
 
                 <p>
@@ -58,11 +63,14 @@ export default function ObjectsPage() {
             </div>
 
             {heroJacket && (
-              <div className="relative aspect-[3/4] w-full max-w-[min(100%,28rem)] max-h-[min(68svh,38rem)] mx-auto overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0 lg:ml-auto">
+              <div
+                style={{ '--d': 1 } as CSSProperties}
+                className="reveal-media relative aspect-[3/4] w-full max-w-[min(100%,28rem)] max-h-[min(68svh,38rem)] mx-auto overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0 lg:ml-auto"
+              >
                 <img
                   src={heroJacket.image}
                   alt={heroJacket.title}
-                  className="w-full h-full object-contain"
+                  className="reveal-media-img w-full h-full object-contain"
                 />
               </div>
             )}
@@ -88,26 +96,29 @@ export default function ObjectsPage() {
 
       {/* Notify for next drop */}
       <Section reveal>
-        <Container bordered className="border-t border-[#d8aa67]/15 py-24 md:py-32">
+        <Container bordered className="rule-draw border-t border-[#d8aa67]/15 py-24 md:py-32">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[min(100%,28rem)] overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0">
+            <div
+              style={{ '--d': 1 } as CSSProperties}
+              className="reveal-media relative mx-auto aspect-[3/4] w-full max-w-[min(100%,28rem)] overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow lg:mx-0"
+            >
               {heroJacket ? (
                 <img
                   src={heroJacket.image}
                   alt=""
                   aria-hidden
-                  className="h-full w-full object-cover object-center opacity-55"
+                  className="reveal-media-img h-full w-full object-cover object-center opacity-100"
                 />
               ) : null}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
               />
               <img
                 src="/brand/overlays/overlay-6.png"
                 alt=""
                 aria-hidden
-                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-screen"
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80 mix-blend-screen"
               />
               <div className="absolute inset-x-0 bottom-0 z-10 p-6 sm:p-8">
                 <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
@@ -120,28 +131,28 @@ export default function ObjectsPage() {
             </div>
 
             <div className="relative flex flex-col justify-center">
-              <div className="mb-5 flex items-center gap-4">
-                <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
+              <div data-reveal style={{ '--d': 0 } as CSSProperties} className="mb-5 flex items-center gap-4">
+                <span className="reveal-rail reveal-rail-left h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
                 <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
                   Garments
                 </p>
-                <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
+                <span className="reveal-rail reveal-rail-right h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
               </div>
 
-              <h2 className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
+              <h2 data-reveal style={{ '--d': 1 } as CSSProperties} className="max-w-lg font-display text-4xl font-normal uppercase leading-[0.94] tracking-[0.06em] text-[#f3ede3] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
                 Get notified
               </h2>
 
-              <p className="mt-4 font-spaced text-[10px] uppercase tracking-[0.38em] text-[#bca98e]">
+              <p data-reveal style={{ '--d': 2 } as CSSProperties} className="mt-4 font-spaced text-[10px] uppercase tracking-[0.38em] text-[#bca98e]">
                 Early access · Future releases
               </p>
 
-              <p className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
+              <p data-reveal style={{ '--d': 3 } as CSSProperties} className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
                 Join the list to hear about the next garment drop and future ISIATA releases first.
                 Focused runs. No noise.
               </p>
 
-              <div className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
+              <div data-reveal style={{ '--d': 4 } as CSSProperties} className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
                 <div className="pr-4">
                   <iconify-icon
                     icon="solar:bell-bing-linear"
@@ -186,7 +197,7 @@ export default function ObjectsPage() {
                 </div>
               </div>
 
-              <div className="mt-8 max-w-md">
+              <div data-reveal style={{ '--d': 5 } as CSSProperties} className="mt-8 max-w-md">
                 <EmailCapture
                   source="garments"
                   placeholder="EMAIL"
@@ -197,7 +208,7 @@ export default function ObjectsPage() {
             </div>
           </div>
 
-          <div className="mt-14 flex items-end justify-between border-t border-[#d8aa67]/25 pt-4 text-[8px] uppercase tracking-[0.28em] text-[#8d7b66]">
+          <div data-reveal style={{ '--d': 6 } as CSSProperties} className="mt-14 flex items-end justify-between border-t border-[#d8aa67]/25 pt-4 text-[8px] uppercase tracking-[0.28em] text-[#8d7b66]">
             <div>
               <p>List</p>
               <p className="mt-1 text-[#b89a72]">Private</p>

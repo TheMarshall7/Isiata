@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -20,7 +21,7 @@ function OfferingCard({ offering }: { offering: ContactOffering }) {
         icon={offering.icon}
         width="48"
         height="48"
-        className="mb-6 text-gold transition-transform duration-500 group-hover:scale-110"
+        className="icon-hover-drift mb-6 text-gold"
       />
       <h3 className="mb-6 text-2xl font-semibold text-gold">{offering.title}</h3>
       <div className="mb-6 space-y-1">
@@ -55,13 +56,15 @@ export default function ContactPage() {
         <Section reveal className="w-full">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
             <div>
-              <PageTitle
-                text="Contact"
-                className="mb-8 font-display text-6xl uppercase leading-[0.9] tracking-normal text-gold md:text-7xl lg:text-[5.5rem]"
-                speed={120}
-              />
+              <div data-reveal style={{ '--d': 0 } as CSSProperties}>
+                <PageTitle
+                  text="Contact"
+                  className="mb-8 font-display text-6xl uppercase leading-[0.9] tracking-normal text-gold md:text-7xl lg:text-[5.5rem]"
+                  speed={120}
+                />
+              </div>
 
-              <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-gold md:text-xl">
+              <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg leading-relaxed text-gold md:text-xl">
                 <p>Select what fits below, then book a call to get started.</p>
                 <p className="text-[#d5c8b8]">
                   Collaborative work and fully delivered services. Coaching, systems, and community.
@@ -69,7 +72,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-4 md:mt-10">
+              <div data-reveal style={{ '--d': 3 } as CSSProperties} className="mt-8 flex flex-wrap gap-4 md:mt-10">
                 <Link href={CONTACT_BOOKING_HREF} className="btn-primary">
                   Book a call
                   <iconify-icon icon="solar:calendar-linear" width="16" height="16" />
@@ -81,18 +84,21 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="relative mx-auto flex aspect-[3/4] w-full max-h-[min(68svh,38rem)] max-w-[min(100%,28rem)] items-center justify-center overflow-hidden border border-[#d8aa67]/25 bg-black p-10 sm:p-14 lg:mx-0 lg:ml-auto">
+            <div
+              style={{ '--d': 1 } as CSSProperties}
+              className="reveal-media relative mx-auto flex aspect-[3/4] w-full max-h-[min(68svh,38rem)] max-w-[min(100%,28rem)] items-center justify-center overflow-hidden border border-[#d8aa67]/25 bg-black p-10 sm:p-14 lg:mx-0 lg:ml-auto"
+            >
               <div aria-hidden className="pointer-events-none absolute inset-0">
                 <img
                   src="/brand/overlays/overlay-6.png"
                   alt=""
-                  className="h-full w-full object-cover object-center opacity-90 mix-blend-screen"
+                  className="reveal-media-img h-full w-full object-cover object-center opacity-90 mix-blend-screen"
                 />
               </div>
               <img
                 src="/brand/isiata-logo-contact.png"
                 alt="ISIATA"
-                className="relative z-10 h-auto w-full max-w-[160px] object-contain sm:max-w-[200px]"
+                className="relative z-10 h-auto w-full max-w-[200px] object-contain sm:max-w-[260px]"
               />
             </div>
           </div>
@@ -142,7 +148,7 @@ export default function ContactPage() {
                 icon="solar:users-group-two-rounded-linear"
                 width="56"
                 height="56"
-                className="text-gold transition-transform duration-500 group-hover:scale-110"
+                className="icon-hover-drift text-gold"
               />
             </div>
             <div className="min-w-0 flex-1">

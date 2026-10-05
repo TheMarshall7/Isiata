@@ -22,7 +22,7 @@ export function SoundCard({ release }: SoundCardProps) {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
       }}
     >
-      <div className="relative aspect-square overflow-hidden bg-black mb-4">
+      <div className="hover-zoom relative aspect-square overflow-hidden bg-black mb-4">
         <Image
           src={release.coverArt.url}
           alt={release.coverArt.alt}

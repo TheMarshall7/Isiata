@@ -12,6 +12,7 @@ import { InstrumentOnboarding } from '../components/InstrumentOnboarding';
 import { AudioEnableBanner } from '../components/AudioEnableBanner';
 import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
 import { PageShell } from '../components/PageShell';
+import { TrainerOverlayTextures } from '../components/TrainerOverlayTextures';
 import { EarTrainerEmailGate } from '../components/EarTrainerEmailGate';
 import { hasEarTrainerAccess } from '../lib/access';
 import { trainerLogoSrc } from '../lib/logo';
@@ -67,43 +68,44 @@ export const Home: React.FC = () => {
     }
 
     return (
-        <PageShell className="ear-trainer-home">
+        <PageShell className="ear-trainer-home" ambientOrbs={false}>
             <InstrumentOnboarding onSelectInstrument={handleInstrumentChange} />
 
-            <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
+            <TrainerOverlayTextures />
+
+            <div className="absolute top-6 left-4 z-50 lg:top-8 lg:left-8">
                 <BrandLogo />
             </div>
 
-            <div className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-0 overflow-y-auto p-4 lg:p-8 pt-24 lg:pt-8 pb-6">
-                <div className="w-full max-w-5xl mx-auto">
-                    <div className="text-center mb-12 lg:mb-16 animate-fade-in-up">
-                        <div className="inline-flex items-center justify-center mb-8 group">
+            <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center overflow-y-auto p-4 pb-6 pt-24 lg:p-8 lg:pt-8">
+                <div className="relative mb-10 w-full max-w-5xl animate-fade-in-up">
+                    <div className="mb-10 text-center lg:mb-12">
+                        <div className="mb-8 inline-flex items-center justify-center group">
                             <img
                                 src={trainerLogoSrc}
                                 alt="ISIATA"
-                                className="w-20 h-20 lg:w-24 lg:h-24 object-contain transition-all duration-300 group-hover:scale-105 drop-shadow-md"
+                                className="h-20 w-20 object-contain drop-shadow-md transition-all duration-300 group-hover:scale-105 lg:h-24 lg:w-24"
                             />
                         </div>
-                        <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display uppercase tracking-normal leading-[0.95] mb-6 text-gold">
+                        <h1 className="mb-6 font-display text-5xl uppercase leading-[0.95] tracking-normal text-gold lg:text-7xl xl:text-8xl">
                             <span className="block">Ear</span>
                             <span className="block">Mastery</span>
                         </h1>
-                        <p className="text-lg lg:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-zinc-400 lg:text-xl">
                             Tune your ear to create with intention. Hear intervals, chords, and
                             progressions clearly, then carry that clarity into everything you make.
                         </p>
                     </div>
 
-                    {/* iOS Silent Mode Warning - Shows immediately for iOS users */}
                     <div className="mb-4">
                         <IOSSilentModeWarning />
                     </div>
-
-                    {/* Audio Enable Banner */}
-                    <div className="mb-6">
+                    <div className="mb-2">
                         <AudioEnableBanner />
                     </div>
+                </div>
 
+                <div className="relative z-10 mx-auto w-full max-w-5xl">
                     {/* Daily Challenges */}
                     <div className="mb-8">
                         <DailyChallenges challenges={dailyChallenges} />

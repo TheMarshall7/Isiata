@@ -12,11 +12,11 @@ export function GarmentCard({ item }: GarmentCardProps) {
       href={`/objects/${item.slug}`}
       className="group block flashlight-card depth-shadow hover-depth border border-[#d8aa67]/25 rounded-lg overflow-hidden"
     >
-      <div className="relative aspect-[3/4] flex items-center justify-center bg-black">
+      <div className="hover-zoom relative aspect-[3/4] flex items-center justify-center bg-black">
         <img
           src={item.image}
           alt={item.title}
-          className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+          className="max-w-full max-h-full object-contain"
         />
         <div className="absolute top-4 right-4">
           <Badge status={item.status} />

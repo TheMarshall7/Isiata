@@ -238,7 +238,7 @@ export const SAMPLE_PACKS = [
     slug: DRUM_BUNDLE_SLUG,
     href: DRUM_BUNDLE_HREF,
     title: DRUM_BUNDLE.title,
-    description: '100+ premium drum sounds for modern production',
+    description: 'An artifact of rhythm. Drum sounds shaped for transmission, not filler.',
     image: DRUM_BUNDLE.image,
     imageFit: 'contain' as const,
     price: DRUM_BUNDLE_PRICE.display,

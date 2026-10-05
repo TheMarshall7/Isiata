@@ -12,10 +12,17 @@ function TrainerOrangeOrbs() {
   );
 }
 
-/** Main site background plus Ear Mastery orange orbs. */
-export const TrainerAmbientBackground: React.FC = () => (
+type TrainerAmbientBackgroundProps = {
+  /** Soft glow orbs. Off when full-bleed overlays handle atmosphere. */
+  orbs?: boolean
+}
+
+/** Main site background plus optional Ear Mastery glow orbs. */
+export const TrainerAmbientBackground: React.FC<TrainerAmbientBackgroundProps> = ({
+  orbs = true,
+}) => (
   <>
     <BackgroundEffects />
-    <TrainerOrangeOrbs />
+    {orbs ? <TrainerOrangeOrbs /> : null}
   </>
 );

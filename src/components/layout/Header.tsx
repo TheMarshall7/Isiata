@@ -22,7 +22,6 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
       {active && (
         <span aria-hidden className="artifact-nav-active-mark">
           <span className="artifact-nav-active-diamond" />
-          <span className="artifact-nav-active-line" />
         </span>
       )}
     </Link>

@@ -1,5 +1,6 @@
 'use client'
 
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
@@ -54,14 +55,14 @@ export default function ToolsPage() {
         <Section reveal className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
-              <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
+              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
                 <TypeWriter text="The Tools" speed={100} />
               </h1>
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
-                <p>Some tools are created out of necessity.</p>
+              <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
+                <p>Artifacts for creation and perception.</p>
                 <p>
-                  Designed to support the work when nothing else felt right.
+                  Built when the work needed something that did not exist.
                   <br />
                   Used in real conditions. Kept only if they proved essential.
                 </p>
@@ -73,11 +74,14 @@ export default function ToolsPage() {
               </div>
             </div>
 
-            <div className="relative w-full max-w-[min(100%,36rem)] max-h-[min(64svh,36rem)] mx-auto lg:mx-0 lg:ml-auto flex items-center justify-center bg-transparent">
+            <div
+              style={{ '--d': 1 } as CSSProperties}
+              className="reveal-media relative w-full max-w-[min(100%,36rem)] max-h-[min(64svh,36rem)] mx-auto lg:mx-0 lg:ml-auto flex items-center justify-center overflow-hidden bg-transparent"
+            >
               <img
                 src="/tools/sample-packs-hero.png"
                 alt="ISIATA sample packs"
-                className="w-full h-full max-h-[min(64svh,36rem)] object-contain bg-transparent"
+                className="reveal-media-img w-full h-full max-h-[min(64svh,36rem)] object-contain bg-transparent"
               />
             </div>
           </div>
@@ -122,8 +126,7 @@ export default function ToolsPage() {
                     ISIATA Systems
                   </h2>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    Backend business infrastructure for artists and musicians — intake, delivery, and
-                    retention without the patchwork stack.
+                    Structure that holds the work. Intake, delivery, and retention in one place.
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-sm text-zinc-400 group-hover:text-white transition-colors shrink-0">

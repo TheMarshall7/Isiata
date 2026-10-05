@@ -22,7 +22,8 @@ export type ToolCatalogItem = {
   title: string
   description: string
   image?: string
-  imageFit?: 'cover' | 'contain'
+  /** cover = fill crop; contain = full art in frame; wide = UI screenshots */
+  imageFit?: 'cover' | 'contain' | 'wide'
   price?: string
   icon: string
   category: Exclude<ToolCategoryId, 'all'>
@@ -39,9 +40,9 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: TSUKUYOMI_DRUM_ENGINE_SLUG,
     href: TSUKUYOMI_DRUM_ENGINE_HREF,
     title: TSUKUYOMI_DRUM_ENGINE.title,
-    description: 'A 16-pad drum instrument for loading, sequencing, shaping, mixing, and finishing drum tracks.',
+    description: 'An artifact for turning raw sound into a finished drum track. Load, shape, mix, and finish.',
     image: TSUKUYOMI_MAIN_UI_IMAGE,
-    imageFit: 'contain',
+    imageFit: 'wide',
     icon: 'solar:music-note-2-linear',
     category: 'plugins',
     categoryLabel: 'Plugin',
@@ -50,7 +51,9 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: 'producer-toolbox',
     href: '/tools/toolbox',
     title: 'Producer Toolbox',
-    description: 'BPM control, key & scale finder, delay calculator, reverb times, unit converter',
+    description: 'Knowledge for the work. Tempo, key, delay, reverb, and units, kept close.',
+    image: '/brand/producer-toolbox.png',
+    imageFit: 'contain',
     icon: 'solar:tuning-2-linear',
     category: 'tools',
     categoryLabel: 'Tool',
@@ -60,7 +63,9 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: 'ear-trainer',
     href: '/tools/training/ear-trainer',
     title: 'Ear Mastery',
-    description: 'Intervals, chords, scales, perfect pitch, gamified ear training',
+    description: 'Train perception. Intervals, chords, scales, and pitch, practiced until hearing changes.',
+    image: '/brand/ear-mastery-icon.png',
+    imageFit: 'contain',
     icon: 'solar:headphones-round-sound-linear',
     category: 'tools',
     categoryLabel: 'Tool',
@@ -70,7 +75,9 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: 'isiata-systems',
     href: '/systems',
     title: 'ISIATA Systems',
-    description: 'Backend business infrastructure for artists and musicians — intake, delivery, and retention in one place.',
+    description: 'Structure that holds the work. Intake, delivery, and retention in one place.',
+    image: '/brand/isiata-systems-icon.png',
+    imageFit: 'contain',
     icon: 'solar:server-square-linear',
     category: 'tools',
     categoryLabel: 'System',

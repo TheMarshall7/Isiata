@@ -21,13 +21,13 @@ export function ToolCard({ tool }: ToolCardProps) {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
       }}
     >
-      <div className="relative aspect-square overflow-hidden bg-zinc-900 mb-4 flex items-center justify-center">
+      <div className="hover-zoom relative aspect-square overflow-hidden bg-zinc-900 mb-4 flex items-center justify-center">
         {tool.previewMedia[0] ? (
           <Image
             src={tool.previewMedia[0].url}
             alt={tool.previewMedia[0].alt}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover"
           />
         ) : (
           <iconify-icon

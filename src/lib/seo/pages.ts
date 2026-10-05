@@ -4,9 +4,9 @@ import { ISIATA_LOGO_URL } from '@/lib/constants'
 /** SEO-optimized meta copy per route (not visible on page). */
 export const SEO_PAGES = {
   home: {
-    title: 'Culture and Innovation — Sound, Garments, Tools & Systems',
+    title: 'Create and Transform — Music, Garments, Tools & Systems',
     description:
-      'ISIATA is a creative studio for sound releases, limited garments, producer tools, and backend systems for artists. Culture and innovation.',
+      'Isiata is a visionary creator building a multidisciplinary universe. Music, garments, tools, and systems that change how people experience reality.',
     path: '/',
     keywords: [
       'ISIATA',
@@ -14,27 +14,27 @@ export const SEO_PAGES = {
       'sample packs',
       'limited garments',
       'artist business systems',
-      'creative studio',
+      'creative universe',
     ],
   },
   sound: {
     title: 'Sound — Music Releases, EPs & Discography',
     description:
-      'Explore ISIATA music releases including the THEY MIGHT BE MAD EP, singles, and visual media. Hip-hop and electronic sound from a creative studio.',
+      'Music from Isiata meant to change how you feel. Releases including the THEY MIGHT BE MAD EP, singles, and visual media.',
     path: '/sound',
     keywords: ['ISIATA music', 'THEY MIGHT BE MAD', 'hip hop EP', 'music releases', 'discography'],
   },
   objects: {
     title: 'Garments — Limited Fashion Drops & Archive',
     description:
-      'ISIATA limited garment drops tied to sound releases. Champion tees, jackets, and archived fashion objects. Small runs, intentional design.',
+      'Garments as artifacts of the Isiata universe. Limited runs worn as character, then archived.',
     path: '/objects',
     keywords: ['ISIATA garments', 'limited fashion drops', 'streetwear', 'Champion tee', 'archive'],
   },
   tools: {
     title: 'Tools — Producer Sample Packs & Free Training',
     description:
-      'Production tools for beat makers: premium drum sample packs, free ear training, and the Producer Toolbox. Built for FL Studio, Ableton, and Logic.',
+      'Artifacts for creation and perception: sample packs, Ear Mastery, the Producer Toolbox, and Tsukuyomi. Built to change how you hear and make.',
     path: '/tools',
     keywords: [
       'producer tools',
@@ -97,7 +97,7 @@ export const SEO_PAGES = {
   systems: {
     title: 'Systems — Backend Business Infrastructure for Artists',
     description:
-      'Backend business systems for artists, producers, and creatives. Booking, revenue, client automation, and growth infrastructure.',
+      'Structure that holds the creative work in the physical world. Booking, delivery, and retention for artists and producers.',
     path: '/systems',
     image: ISIATA_LOGO_URL,
     keywords: [
@@ -151,9 +151,9 @@ export const SEO_PAGES = {
   explore: {
     title: 'Explore — Sound, Garments, Tools & Systems',
     description:
-      'Browse ISIATA across sound releases, limited garments, producer tools, and artist business systems. One studio, multiple disciplines.',
+      'Enter the Isiata universe across music, garments, tools, and systems. Different manifestations of one creative philosophy.',
     path: '/explore',
-    keywords: ['explore ISIATA', 'creative studio catalog'],
+    keywords: ['explore ISIATA', 'creative universe'],
   },
   community: {
     title: 'Community — Join the ISIATA Mailing List',
@@ -163,11 +163,11 @@ export const SEO_PAGES = {
     keywords: ['ISIATA newsletter', 'music community', 'drop notifications'],
   },
   about: {
-    title: 'About — Culture, Innovation & Creative Studio',
+    title: 'About — The Universe',
     description:
-      'ISIATA is a creative studio spanning sound, garments, production tools, and systems for artists. Culture and innovation, intentionally built.',
+      'Isiata searches beyond the surface of reality and transforms what he discovers into music, art, technology, and experience. Create and transform.',
     path: '/about',
-    keywords: ['about ISIATA', 'creative studio', 'music and fashion'],
+    keywords: ['about ISIATA', 'creative universe', 'music and fashion'],
   },
   archive: {
     title: 'Archive — Past Releases & Sold-Out Drops',

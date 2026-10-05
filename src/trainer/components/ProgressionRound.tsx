@@ -17,6 +17,7 @@ import { recordAnswer, updateBestStreak, loadStats, saveStats } from '../logic/s
 import { checkAchievements, loadAchievements, type Achievement } from '../logic/achievements';
 import { updateChallengeProgress, getDailyChallenges } from '../logic/dailyChallenges';
 import { Footer } from './Footer';
+import { TrainerOverlayTextures } from './TrainerOverlayTextures';
 import {
     generateProgressionQuestion,
     validateProgressionStep,
@@ -596,11 +597,7 @@ export const ProgressionRound: React.FC<ProgressionRoundProps> = ({
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
-            {/* Background gradient */}
-            <div className="fixed inset-0 -z-0">
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full top-1/4 left-1/4 blur-3xl"></div>
-                <div className="absolute translate-x-1/2 translate-y-1/2 animate-pulse-glow from-orange-500/10 via-white/5 to-transparent opacity-50 w-[500px] h-[500px] rounded-full bottom-1/4 right-1/4 blur-3xl"></div>
-            </div>
+            <TrainerOverlayTextures />
 
             <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1 min-h-0 overflow-y-auto">
                 <div className="w-full max-w-4xl px-4 flex justify-between items-center mb-8 relative z-50">

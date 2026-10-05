@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { FOOTER_LINKS, ISIATA_LOGO_URL, SITE_CONFIG } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
 const SOCIAL = [
   {
@@ -43,11 +45,11 @@ function ColumnHeading({ children }: { children: React.ReactNode }) {
 function FooterNavLink({ href, label }: { href: string; label: string }) {
   const external = href.startsWith('mailto:') || href.startsWith('http')
   const className =
-    'group relative inline-block text-sm text-[#b8a890]/90 transition-colors duration-300 hover:text-[#ece3d7]'
+    'lux-link group relative inline-block text-sm text-[#b8a890]/90 transition-colors hover:text-[#ece3d7]'
 
   const inner = (
     <>
-      <span className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">
+      <span className="lux-link inline-block transition-transform group-hover:translate-x-0.5">
         {label}
       </span>
       <span className="absolute bottom-0 left-0 h-px w-0 bg-[#d8aa67]/50 transition-all duration-300 group-hover:w-full" />
@@ -70,6 +72,32 @@ function FooterNavLink({ href, label }: { href: string; label: string }) {
 }
 
 export function Footer() {
+  const brandRef = useRef<HTMLDivElement>(null)
+  const [brandVisible, setBrandVisible] = useState(false)
+
+  useEffect(() => {
+    const el = brandRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBrandVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        // Only fire once the mark sits well inside the viewport — not while
+        // Stay Close / footer columns are still the focus.
+        threshold: 0.45,
+        rootMargin: '-18% 0px -18% 0px',
+      }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <footer className="relative overflow-hidden border-t border-[#d8aa67]/20 bg-background font-sans text-white">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8aa67]/45 to-transparent" />
@@ -94,9 +122,9 @@ export function Footer() {
                   icon={item.icon}
                   width="18"
                   height="18"
-                  className="text-[#d8c3a4] transition-transform duration-300 group-hover:scale-110"
+                  className="icon-hover-drift text-[#d8c3a4]"
                 />
-                <span className="text-sm tracking-wide text-[#d5c8b8] transition-colors duration-300 group-hover:text-[#ece3d7]">
+                <span className="lux-link text-sm tracking-wide text-[#d5c8b8] transition-colors group-hover:text-[#ece3d7]">
                   {item.label}
                 </span>
               </span>
@@ -104,7 +132,7 @@ export function Footer() {
                 icon="solar:arrow-right-linear"
                 width="14"
                 height="14"
-                className="text-[#d8aa67]/55 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#d8aa67]"
+                className="icon-hover-drift text-[#d8aa67]/55 transition-colors group-hover:text-[#d8aa67]"
               />
             </a>
           ))}
@@ -158,7 +186,13 @@ export function Footer() {
         </div>
 
         {/* Brand mark */}
-        <div className="relative flex flex-col items-center overflow-hidden px-8 py-20 text-center md:py-28">
+        <div
+          ref={brandRef}
+          className={cn(
+            'footer-brand-reveal relative flex flex-col items-center overflow-hidden px-8 py-20 text-center md:py-28',
+            brandVisible && 'is-visible'
+          )}
+        >
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <img
               src="/brand/overlays/footer-brand.png"
@@ -175,13 +209,27 @@ export function Footer() {
               aria-hidden
               className="-translate-y-5 mb-6 h-10 w-auto object-contain opacity-70 md:h-12"
             />
-            <p className="translate-x-[5px] font-display text-4xl font-normal uppercase tracking-[0.42em] text-[#ece3d7] gradient-text-gold sm:text-5xl md:text-6xl md:tracking-[0.48em]">
+            <p
+              className="text-shine-in translate-x-[5px] font-display text-4xl font-normal uppercase tracking-[0.42em] text-[#ece3d7] gradient-text-gold sm:text-5xl md:text-6xl md:tracking-[0.48em]"
+              style={{ '--shine-delay': '0.25s' } as CSSProperties}
+            >
               ISIATA
             </p>
             <div className="mt-8 flex w-full max-w-md items-center gap-4">
               <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d8aa67]/40" />
               <p className="shrink-0 text-[10px] uppercase tracking-[0.32em] text-[#9a8b74]">
-                Music · Artifacts · Systems
+                {(['Music', 'Artifacts', 'Systems'] as const).map((word, i) => {
+                  const delay = `${1.05 + i * 0.48}s`
+                  return (
+                    <span
+                      key={word}
+                      className="text-shine-in"
+                      style={{ '--shine-delay': delay } as CSSProperties}
+                    >
+                      {i > 0 ? ` · ${word}` : word}
+                    </span>
+                  )
+                })}
               </p>
               <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#d8aa67]/40" />
             </div>

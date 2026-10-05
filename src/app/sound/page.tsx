@@ -1,11 +1,14 @@
 'use client'
 
+import type { CSSProperties } from 'react'
 import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
 import { AlbumCover } from '@/components/sound/AlbumCover'
+import { StayCloseSection } from '@/components/home/StayCloseSection'
 import { THEY_MIGHT_BE_MAD_EP, TWO_TALES, TWO_TALES_COVER } from '@/lib/sound/releases'
+import { useParallax } from '@/hooks/useParallax'
 
 const TABS = ['All', 'Discography', 'Live', 'Unreleased', 'Collaborations'] as const
 type Tab = typeof TABS[number]
@@ -47,20 +50,31 @@ const SINGLES = [
 const EP = THEY_MIGHT_BE_MAD_EP
 
 function DiscographyContent() {
+  const mediaRef = useParallax({ factor: 0.26 })
+  const copyRef = useParallax({ factor: 0.12, invert: true })
+
   return (
     <div className="space-y-16">
       {/* EP */}
-      <div className="overflow-hidden border border-[#d8aa67]/25 bg-[#080808]">
+      <div
+        data-parallax-root
+        className="overflow-hidden border border-[#d8aa67]/25 bg-[#080808]"
+      >
         <div className="grid grid-cols-1 items-center lg:grid-cols-2">
-          <AlbumCover
-            src={EP.cover}
-            alt={EP.displayTitle}
-            padded={false}
-            className="m-6 sm:m-7 md:m-8"
-            goldBorderClassName="border-2 border-[#d8aa67]/70 shadow-[inset_0_0_14px_rgba(211,157,83,0.14)]"
-          />
+          <div ref={mediaRef} className="will-change-transform">
+            <AlbumCover
+              src={EP.cover}
+              alt={EP.displayTitle}
+              padded={false}
+              className="m-6 sm:m-7 md:m-8"
+              goldBorderClassName="border-2 border-[#d8aa67]/70 shadow-[inset_0_0_14px_rgba(211,157,83,0.14)]"
+            />
+          </div>
 
-          <div className="relative flex flex-col justify-center px-8 py-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
+          <div
+            ref={copyRef}
+            className="relative flex flex-col justify-center px-8 py-10 will-change-transform md:px-12 md:py-14 lg:px-14 lg:py-16"
+          >
             <div className="mb-5 flex items-center gap-4">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
               <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
@@ -246,23 +260,25 @@ function ComingSoon() {
 
 export default function SoundPage() {
   const [activeTab, setActiveTab] = useState<Tab>('All')
+  const mediaRef = useParallax({ factor: 0.26 })
+  const copyRef = useParallax({ factor: 0.12, invert: true })
 
   return (
     <>
       {/* Page Header */}
-      <Container bordered className="relative min-h-[100svh] flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
+      <Container bordered className="relative min-h-[100svh] overflow-hidden flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
         <Section reveal className="relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div>
-              <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
+            <div ref={copyRef} className="will-change-transform">
+              <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="text-6xl md:text-7xl lg:text-[5.5rem] font-display uppercase tracking-normal leading-[0.9] text-gold mb-8">
                 <TypeWriter text="The Sound" speed={100} />
               </h1>
 
-              <div className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
+              <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
-                  Sonic atmosphere you can step into.
+                  Music that changes the state.
                   <br />
-                  Moments that hold attention.
+                  Not background. A transmission.
                 </p>
 
                 <p className="text-[#d5c8b8]">
@@ -273,28 +289,31 @@ export default function SoundPage() {
               </div>
             </div>
 
-            <AlbumCover
-              src={TWO_TALES_COVER}
-              alt="Two Tales"
-              className="mx-auto w-full max-w-[min(100%,min(36rem,64svh))] depth-shadow lg:mx-0 lg:ml-auto"
-            >
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 flex items-end justify-between gap-4">
-                <div>
-                  <p className="font-display uppercase tracking-normal text-gold text-lg">{TWO_TALES.title}</p>
-                  <p className="text-xs uppercase tracking-[0.16em] text-[#d5c8b8] mt-1">{TWO_TALES.streamsLabel}</p>
+            <div ref={mediaRef} className="will-change-transform">
+              <AlbumCover
+                src={TWO_TALES_COVER}
+                alt="Two Tales"
+                reveal
+                className="mx-auto w-full max-w-[min(100%,min(36rem,64svh))] depth-shadow lg:mx-0 lg:ml-auto"
+              >
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 flex items-end justify-between gap-4">
+                  <div>
+                    <p className="font-display uppercase tracking-normal text-gold text-lg">{TWO_TALES.title}</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-[#d5c8b8] mt-1">{TWO_TALES.streamsLabel}</p>
+                  </div>
+                  <a
+                    href={TWO_TALES.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10"
+                    title="Listen on Spotify"
+                    aria-label="Listen to Two Tales on Spotify"
+                  >
+                    <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#f0dfc8]" />
+                  </a>
                 </div>
-                <a
-                  href={TWO_TALES.spotify}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#d8aa67]/75 bg-black/20 transition-all duration-300 hover:border-[#f0c681] hover:bg-[#b7792a]/10"
-                  title="Listen on Spotify"
-                  aria-label="Listen to Two Tales on Spotify"
-                >
-                  <iconify-icon icon="mdi:spotify" width="22" height="22" className="text-[#f0dfc8]" />
-                </a>
-              </div>
-            </AlbumCover>
+              </AlbumCover>
+            </div>
           </div>
         </Section>
       </Container>
@@ -328,6 +347,8 @@ export default function SoundPage() {
           )}
         </Section>
       </Container>
+
+      <StayCloseSection />
     </>
   )
 }

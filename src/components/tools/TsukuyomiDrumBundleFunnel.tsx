@@ -52,17 +52,17 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
       <button
         onClick={togglePlay}
         disabled={!url}
-        className={`relative w-10 h-10 flex items-center justify-center border rounded-full transition-all duration-300 ${
+        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
           url
-            ? 'border-white/20 hover:border-white/40 hover:bg-white/5'
-            : 'border-white/10 opacity-40 cursor-not-allowed'
+            ? 'bg-[#d8aa67] text-black hover:bg-[#f0c681]'
+            : 'border border-[#d8aa67]/20 bg-[#d8aa67]/10 text-[#d8aa67]/40 opacity-40 cursor-not-allowed'
         }`}
       >
         <iconify-icon
           icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
           width="16"
           height="16"
-          className="text-gold"
+          className="relative z-10"
         />
         {/* Progress ring */}
         {isPlaying && (
@@ -72,7 +72,7 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
               cy="20"
               r="18"
               fill="none"
-              stroke="rgba(255,255,255,0.1)"
+              stroke="rgba(216,170,103,0.25)"
               strokeWidth="2"
             />
             <circle
@@ -80,7 +80,7 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
               cy="20"
               r="18"
               fill="none"
-              stroke="rgba(255,255,255,0.5)"
+              stroke="rgba(247,230,192,0.95)"
               strokeWidth="2"
               strokeDasharray={`${progress * 1.13} 113`}
               className="transition-all duration-100"
@@ -102,8 +102,8 @@ function AudioPreview({ name, category, url }: { name: string; category: string;
             key={i}
             className={`w-[3px] rounded-full transition-all duration-300 ${
               isPlaying && progress > (i / BAR_COUNT) * 100
-                ? 'bg-white/60'
-                : 'bg-white/20'
+                ? 'bg-[#d8aa67]'
+                : 'bg-[#d8aa67]/25'
             }`}
             style={{ height: `${height}px` }}
           />
@@ -279,7 +279,7 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
             <div className="flex items-center gap-4">
               <button
                 onClick={togglePlay}
-                className="w-14 h-14 flex items-center justify-center bg-white text-black rounded-full hover:bg-zinc-200 transition-colors shrink-0"
+                className="w-14 h-14 flex shrink-0 items-center justify-center rounded-full bg-[#d8aa67] text-black transition-colors hover:bg-[#f0c681]"
               >
                 <iconify-icon
                   icon={isPlaying ? 'solar:pause-bold' : 'solar:play-bold'}
@@ -292,42 +292,37 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                 <div className="flex items-center gap-3 w-full mb-2">
                   <p className="text-sm text-zinc-400 truncate flex-1 min-w-0 mr-0">{currentSong.title}</p>
                   {hasMultipleSongs && (
-                    <span className="flex items-center gap-2 shrink-0 ml-auto">
+                    <span className="ml-auto flex shrink-0 items-center gap-2">
                       <button
                         type="button"
                         onClick={() => goToTrack(currentTrackIndex - 1)}
-                        className="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-[#d8aa67]/35 bg-[#d8aa67]/[0.06] transition-all duration-200 hover:border-[#d8aa67]/70 hover:bg-[#d8aa67]/15"
                         aria-label="Previous track"
                       >
-                        <iconify-icon icon="solar:alt-arrow-left-linear" width="16" height="16" className="text-gold" />
+                        <iconify-icon icon="solar:alt-arrow-left-linear" width="16" height="16" className="text-[#d8aa67]" />
                       </button>
-                      <span className="text-xs text-zinc-400 tabular-nums font-medium min-w-[2.5rem] text-center">
+                      <span className="min-w-[2.5rem] text-center text-xs font-medium tabular-nums text-[#d8aa67]/80">
                         {currentTrackIndex + 1} / {producer.songs.length}
                       </span>
                       <button
                         type="button"
                         onClick={() => goToTrack(currentTrackIndex + 1)}
-                        className="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-[#d8aa67]/35 bg-[#d8aa67]/[0.06] transition-all duration-200 hover:border-[#d8aa67]/70 hover:bg-[#d8aa67]/15"
                         aria-label="Next track"
                       >
-                        <iconify-icon icon="solar:alt-arrow-right-linear" width="16" height="16" className="text-gold" />
+                        <iconify-icon icon="solar:alt-arrow-right-linear" width="16" height="16" className="text-[#d8aa67]" />
                       </button>
                     </span>
                   )}
                 </div>
-                {/* Progress bar */}
-                <div
-                  className="h-2 bg-white/10 rounded-full cursor-pointer group"
-                  onClick={handleSeek}
-                >
+                {/* Progress bar — gold ink stroke toward the tip */}
+                <div className="progress-ink-track group" onClick={handleSeek}>
                   <div
-                    className="h-full bg-white rounded-full relative"
+                    className="progress-ink-fill"
                     style={{ width: `${progress}%` }}
-                  >
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
+                  />
                 </div>
-                <div className="flex justify-between text-xs text-zinc-600 mt-1">
+                <div className="mt-1 flex justify-between text-xs tabular-nums text-[#d8aa67]/70">
                   <span>{formatTime(currentTime)}</span>
                   <span>{formatTime(duration)}</span>
                 </div>
@@ -340,8 +335,8 @@ function FeaturedProducerCard({ producer }: { producer: FeaturedProducer }) {
                         onClick={() => goToTrack(i)}
                         className={`rounded-full transition-all duration-300 ease-out ${
                           i === currentTrackIndex
-                            ? 'w-6 h-2 bg-white shadow-[0_0_8px_rgba(255,255,255,0.4)]'
-                            : 'w-2 h-2 bg-white/40 hover:bg-white/60 hover:scale-110'
+                            ? 'h-2 w-6 bg-[#d8aa67] shadow-[0_0_10px_rgba(216,170,103,0.55)]'
+                            : 'h-2 w-2 bg-[#d8aa67]/35 hover:scale-110 hover:bg-[#d8aa67]/65'
                         }`}
                         aria-label={`Track ${i + 1}`}
                       />
@@ -516,32 +511,47 @@ function FlStudioTemplates() {
 
 function LiveKit() {
   return (
-    <div className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 md:p-12 overflow-hidden">
-      <div className="flex items-center gap-3 mb-6">
+    <div className="relative overflow-hidden rounded-lg border border-[#d8aa67]/25 bg-gradient-to-b from-[#d8aa67]/[0.08] via-black/40 to-transparent p-8 depth-shadow md:p-12">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 left-1/4 h-56 w-56 rounded-full bg-[#d8aa67]/10 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8aa67]/55 to-transparent"
+      />
+
+      <div className="relative mb-6 flex flex-wrap items-center gap-3">
         <span className="relative flex h-2 w-2" aria-hidden>
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400/70" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d8aa67]/70" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-[#d8aa67]" />
         </span>
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">Live Kit</p>
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-300 border border-white/15 px-2 py-0.5 rounded">
+        <p className="font-spaced text-[10px] uppercase tracking-[0.28em] text-[#d8c3a4]">Live Kit</p>
+        <span className="rounded-full border border-[#d8aa67]/40 bg-[#d8aa67]/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-[#f0dfc8]">
           Currently {LIVE_KIT.version}
         </span>
       </div>
-      <h4 className="text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4">
+
+      <h4 className="relative mb-4 font-display text-3xl font-normal uppercase tracking-normal text-[#f3ede3] md:text-4xl">
         {LIVE_KIT.title}
       </h4>
-      <div className="mb-7 h-px w-10 bg-white/25" />
-      <p className="text-base font-light text-zinc-400 leading-[1.8] max-w-2xl mb-10">
+      <div className="relative mb-7 flex w-full max-w-[10rem] items-center gap-3">
+        <span className="h-px flex-1 bg-gradient-to-r from-[#d8aa67]/70 to-transparent" />
+        <span className="h-1 w-1 rotate-45 bg-[#d8aa67]/80" />
+      </div>
+      <p className="relative mb-10 max-w-2xl text-base font-light leading-[1.8] text-[#d5c8b8]/85">
         {LIVE_KIT.lede}
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
+      <div className="relative grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10">
         {LIVE_KIT.points.map((point, index) => (
           <div key={point.label}>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-600 mb-3">
+            <p className="mb-3 font-spaced text-[10px] uppercase tracking-[0.28em] text-[#d8aa67]/65">
               {String(index + 1).padStart(2, '0')}
             </p>
-            <p className="text-lg font-display uppercase tracking-normal text-gold mb-2">{point.label}</p>
-            <p className="text-sm font-light text-zinc-500 leading-relaxed">{point.detail}</p>
+            <p className="mb-2 font-display text-lg font-normal uppercase tracking-normal text-[#f0dfc8]">
+              {point.label}
+            </p>
+            <p className="text-sm font-light leading-relaxed text-[#b8a890]/85">{point.detail}</p>
           </div>
         ))}
       </div>
@@ -847,7 +857,7 @@ export function TsukuyomiDrumBundleFunnel() {
 
       {/* Specs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+        <article className="relative overflow-hidden rounded-lg border border-[#d8aa67]/25 p-8 lg:p-10">
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">01</p>
           <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
             Style & Intent
@@ -866,7 +876,7 @@ export function TsukuyomiDrumBundleFunnel() {
         </article>
 
         <div className="space-y-8">
-          <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+          <article className="relative overflow-hidden rounded-lg border border-[#d8aa67]/25 p-8 lg:p-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">02</p>
             <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
               Licensing
@@ -887,7 +897,7 @@ export function TsukuyomiDrumBundleFunnel() {
             </p>
           </article>
 
-          <article className="relative rounded-lg gradient-border bg-gradient-to-b from-white/[0.035] to-transparent p-8 lg:p-10">
+          <article className="relative overflow-hidden rounded-lg border border-[#d8aa67]/25 p-8 lg:p-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500 mb-3">03</p>
             <h4 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold">
               Compatibility

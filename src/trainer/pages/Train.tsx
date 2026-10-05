@@ -38,6 +38,7 @@ import { AudioEnableBanner } from '../components/AudioEnableBanner';
 import { IOSSilentModeWarning } from '../components/IOSSilentModeWarning';
 import { ModeHeader } from '../components/ModeHeader';
 import { TrainerAmbientBackground } from '../components/TrainerAmbientBackground';
+import { TrainerOverlayTextures } from '../components/TrainerOverlayTextures';
 import { hasEarTrainerAccess } from '../lib/access';
 
 // Calculate combo multiplier based on streak
@@ -489,7 +490,8 @@ export const Train: React.FC = () => {
 
     return (
         <div className="h-dvh max-h-dvh bg-background text-white relative flex flex-col overflow-hidden trainer-play-shell">
-            <TrainerAmbientBackground />
+            <TrainerAmbientBackground orbs={false} />
+            <TrainerOverlayTextures />
 
             {/* Top Left: logo + back button grouped */}
             <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-50 flex items-center gap-2">

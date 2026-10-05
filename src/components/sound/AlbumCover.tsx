@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 type AlbumCoverProps = {
@@ -13,6 +13,8 @@ type AlbumCoverProps = {
   padded?: boolean
   /** Gold border classes on the outer frame. */
   goldBorderClassName?: string
+  /** Unveil the frame when its parent section becomes visible. */
+  reveal?: boolean
 }
 
 /** Square album art frame — never crops the cover. */
@@ -25,18 +27,30 @@ export function AlbumCover({
   goldFrame = true,
   padded = true,
   goldBorderClassName = 'border-[#d8aa67]/25',
+  reveal = false,
 }: AlbumCoverProps) {
   const goldClasses = goldFrame
     ? cn('border', goldBorderClassName)
     : 'border border-transparent'
+  const revealProps = reveal
+    ? { style: { '--d': 1 } as CSSProperties }
+    : {}
 
   if (!padded) {
     return (
-      <div className={cn('relative aspect-square w-full overflow-hidden bg-black', goldClasses, className)}>
+      <div
+        {...revealProps}
+        className={cn(
+          'relative aspect-square w-full overflow-hidden bg-black',
+          reveal && 'reveal-media',
+          goldClasses,
+          className
+        )}
+      >
         <img
           src={src}
           alt={alt}
-          className={cn('h-full w-full object-contain', imgClassName)}
+          className={cn('reveal-media-img h-full w-full object-contain', imgClassName)}
         />
         {children}
       </div>
@@ -45,8 +59,10 @@ export function AlbumCover({
 
   return (
     <div
+      {...revealProps}
       className={cn(
         'aspect-square w-full overflow-hidden bg-black p-4 sm:p-5 md:p-6',
+        reveal && 'reveal-media',
         goldClasses,
         className
       )}
@@ -55,7 +71,7 @@ export function AlbumCover({
         <img
           src={src}
           alt={alt}
-          className={cn('h-full w-full object-contain', imgClassName)}
+          className={cn('reveal-media-img h-full w-full object-contain', imgClassName)}
         />
         {children}
       </div>

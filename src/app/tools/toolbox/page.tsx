@@ -1,73 +1,23 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, type CSSProperties } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
-
-// ─── Music Theory Data ───────────────────────────────────────────────
-
-const ALL_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-const MAJOR_INTERVALS = [0, 2, 4, 5, 7, 9, 11]
-const MINOR_INTERVALS = [0, 2, 3, 5, 7, 8, 10]
-
-const FLAT_MAP: Record<string, string> = {
-  'C#': 'Db', 'D#': 'Eb', 'F#': 'Gb', 'G#': 'Ab', 'A#': 'Bb',
-}
-
-// Minor keys that traditionally use flats in their key signature
-const FLAT_MINOR_KEYS = ['D', 'G', 'C', 'F', 'A#', 'D#', 'G#'] as const
-
-const NOTE_FRACTIONS = [
-  { label: '1/1', value: 1 },
-  { label: '1/2', value: 1 / 2 },
-  { label: '1/4', value: 1 / 4 },
-  { label: '1/8', value: 1 / 8 },
-  { label: '1/16', value: 1 / 16 },
-  { label: '1/32', value: 1 / 32 },
-  { label: '1/64', value: 1 / 64 },
-  { label: '1/128', value: 1 / 128 },
-]
-
-const REVERB_SPACES = [
-  { key: 'stadium', label: 'Stadium', sub: '4 bars', beats: 16 },
-  { key: 'hall', label: 'Hall', sub: '2 bars', beats: 8 },
-  { key: 'large-room', label: 'Large Room', sub: '1 bar', beats: 4 },
-  { key: 'small-room', label: 'Small Room', sub: '1/2 note', beats: 2 },
-  { key: 'tight', label: 'Tight Ambience', sub: '1/4 note', beats: 1 },
-]
-
-// ─── Helpers ─────────────────────────────────────────────────────────
-
-function getScaleNotes(root: string, isMajor: boolean) {
-  const rootIndex = ALL_NOTES.indexOf(root)
-  const intervals = isMajor ? MAJOR_INTERVALS : MINOR_INTERVALS
-  // Only use flats for minor keys that traditionally have flat key signatures
-  const useFlats = !isMajor && FLAT_MINOR_KEYS.includes(root as typeof FLAT_MINOR_KEYS[number])
-
-  return intervals.map((interval, i) => {
-    const noteIndex = (rootIndex + interval) % 12
-    const note = ALL_NOTES[noteIndex]
-    if (useFlats && i > 0 && FLAT_MAP[note]) return FLAT_MAP[note]
-    return note
-  })
-}
-
-function getScaleChords(notes: string[], isMajor: boolean) {
-  const romanMajor = ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii\u00B0']
-  const romanMinor = ['i', 'ii\u00B0', '\u266DIII', 'iv', 'V', '\u266DVI', '\u266DVII']
-  const qualMajor = ['maj', 'min', 'min', 'maj', 'maj', 'min', 'dim']
-  const qualMinor = ['min', 'dim', 'maj', 'min', 'maj', 'maj', 'maj']
-
-  const numerals = isMajor ? romanMajor : romanMinor
-  const qualities = isMajor ? qualMajor : qualMinor
-
-  return notes.map((note, i) => ({
-    numeral: numerals[i],
-    name: `${note}${qualities[i]}`,
-  }))
-}
+import {
+  ALL_NOTES,
+  NOTE_FRACTIONS,
+  REVERB_SPACES,
+  bpmFromTapIntervals,
+  clampBpm,
+  convertTiming,
+  delayRow,
+  getScaleChords,
+  getScaleNotes,
+  reverbTimes,
+  type ConvertUnit,
+} from '@/lib/tools/producer-toolbox-math'
 
 // ─── Sub-Components ──────────────────────────────────────────────────
 
@@ -100,14 +50,17 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
     if (tapTimesRef.current.length > 4) tapTimesRef.current.shift()
     if (tapTimesRef.current.length >= 2) {
       const times = tapTimesRef.current
-      let total = 0
-      for (let i = 1; i < times.length; i++) total += times[i] - times[i - 1]
-      const avg = total / (times.length - 1)
-      setBpm(Math.round(60000 / avg))
+      const intervals: number[] = []
+      for (let i = 1; i < times.length; i++) intervals.push(times[i] - times[i - 1])
+      const next = bpmFromTapIntervals(intervals)
+      if (next != null) setBpm(next)
     }
   }, [setBpm])
 
-  const reset = () => { tapTimesRef.current = []; setBpm(140) }
+  const reset = () => {
+    tapTimesRef.current = []
+    setBpm(140)
+  }
 
   return (
     <div className="toolbox-panel">
@@ -125,7 +78,7 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
         <input
           type="number"
           value={bpm}
-          onChange={(e) => setBpm(Math.max(20, Math.min(999, parseInt(e.target.value) || 140)))}
+          onChange={(e) => setBpm(clampBpm(parseInt(e.target.value, 10) || 140))}
           className="toolbox-input text-sm px-3 py-2 w-20 text-center"
         />
       </div>
@@ -159,7 +112,11 @@ function KeyScale() {
           onChange={(e) => setRoot(e.target.value)}
           className="toolbox-input text-sm px-3 py-2"
         >
-          {ALL_NOTES.map((n) => <option key={n} value={n}>{n}</option>)}
+          {ALL_NOTES.map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -188,22 +145,10 @@ function KeyScale() {
 
 function Converter({ bpm }: { bpm: number }) {
   const [value, setValue] = useState('')
-  const [unit, setUnit] = useState('hz')
+  const [unit, setUnit] = useState<ConvertUnit>('hz')
 
   const v = parseFloat(value) || 0
-  const results = { hz: 0, ms: 0, beats: 0, seconds: 0 }
-  if (v > 0) {
-    switch (unit) {
-      case 'hz':
-        results.hz = v; results.ms = 1000 / v; results.beats = (1 / v) * (bpm / 60); results.seconds = 1 / v; break
-      case 'ms':
-        results.hz = 1000 / v; results.ms = v; results.beats = v * bpm / 60000; results.seconds = v / 1000; break
-      case 'beats':
-        results.hz = bpm / (60 * v); results.ms = v * 60000 / bpm; results.beats = v; results.seconds = v * 60 / bpm; break
-      case 'seconds':
-        results.hz = 1 / v; results.ms = v * 1000; results.beats = v * bpm / 60; results.seconds = v; break
-    }
-  }
+  const results = convertTiming(v, unit, bpm)
 
   return (
     <div className="toolbox-panel">
@@ -218,7 +163,7 @@ function Converter({ bpm }: { bpm: number }) {
         />
         <select
           value={unit}
-          onChange={(e) => setUnit(e.target.value)}
+          onChange={(e) => setUnit(e.target.value as ConvertUnit)}
           className="toolbox-input text-sm px-3 py-2"
         >
           <option value="hz">Hz</option>
@@ -242,8 +187,6 @@ function Converter({ bpm }: { bpm: number }) {
 // ─── Reverb Calculator ───────────────────────────────────────────────
 
 function ReverbCalculator({ bpm }: { bpm: number }) {
-  const msPerBeat = 60000 / bpm
-
   return (
     <div className="toolbox-panel">
       <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-4">Reverb Time Calculator</h3>
@@ -259,9 +202,7 @@ function ReverbCalculator({ bpm }: { bpm: number }) {
           </thead>
           <tbody>
             {REVERB_SPACES.map((space) => {
-              const total = space.beats * msPerBeat
-              const preDelay = total * 0.015
-              const decay = total - preDelay
+              const { total, preDelay, decay } = reverbTimes(space.beats, bpm)
               return (
                 <tr key={space.key} className="border-b border-white/5">
                   <td className="py-2.5 pr-4">
@@ -300,12 +241,7 @@ function DelayTable({ bpm }: { bpm: number }) {
           </thead>
           <tbody>
             {NOTE_FRACTIONS.map((note) => {
-              // Convert whole-note fraction to beats in 4/4 time, then to ms
-              const beats = note.value * 4
-              const ms = beats * (60000 / bpm)
-              const dotted = ms * 1.5
-              const triplet = ms * (2 / 3)
-              const hz = 1000 / ms
+              const { ms, dotted, triplet, hz } = delayRow(note.value, bpm)
               return (
                 <tr key={note.label} className="border-b border-white/5">
                   <td className="py-2.5 pr-4 text-zinc-300 font-medium">{note.label}</td>
@@ -344,21 +280,35 @@ export default function ToolboxPage() {
       {/* Page Header */}
       <Container bordered className="py-16 md:py-20">
         <Section reveal>
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
-              Tools
-            </p>
-            <PageTitle
-              text="Producer Toolbox"
-              className="text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-normal leading-[0.9] text-gold mb-6 md:mb-8"
-              speed={80}
-            />
-            <p className="text-xl md:text-2xl text-gold leading-relaxed mb-5">
-              BPM, keys, delay, and reverb. Built for the session.
-            </p>
-            <p className="text-base md:text-lg text-zinc-500 leading-relaxed">
-              Tap tempo, find scales, convert units, and copy any value straight into your DAW.
-            </p>
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div className="min-w-0 max-w-2xl">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                Tools
+              </p>
+              <PageTitle
+                text="Producer Toolbox"
+                className="mb-6 font-display text-5xl uppercase leading-[0.9] tracking-normal text-gold md:mb-8 md:text-6xl lg:text-7xl"
+                speed={80}
+              />
+              <p className="mb-5 text-xl leading-relaxed text-gold md:text-2xl">
+                BPM, keys, delay, and reverb. Built for the session.
+              </p>
+              <p className="text-base leading-relaxed text-zinc-500 md:text-lg">
+                Tap tempo, find scales, convert units, and copy any value straight into your DAW.
+              </p>
+            </div>
+
+            <div
+              data-reveal
+              style={{ '--d': 1 } as CSSProperties}
+              className="relative mx-auto w-full max-w-[min(100%,24rem)] lg:max-w-[26rem] lg:justify-self-end"
+            >
+              <img
+                src="/brand/producer-toolbox.png"
+                alt="Producer Toolbox"
+                className="h-auto w-full object-contain drop-shadow-[0_0_40px_rgba(216,170,103,0.18)]"
+              />
+            </div>
           </div>
         </Section>
       </Container>

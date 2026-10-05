@@ -21,12 +21,12 @@ export function ObjectCard({ drop }: ObjectCardProps) {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
       }}
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-zinc-900 mb-4">
+      <div className="hover-zoom relative aspect-[3/4] overflow-hidden bg-zinc-900 mb-4">
         <Image
           src={drop.images[0].url}
           alt={drop.images[0].alt}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover"
         />
         {drop.status !== 'live' && (
           <div className="absolute top-4 right-4">
