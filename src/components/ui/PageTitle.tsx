@@ -10,8 +10,10 @@ interface PageTitleProps {
 
 export function PageTitle({ text, className = '', speed = 100 }: PageTitleProps) {
   return (
-    <h1 className={className}>
-      <TypeWriter text={text} speed={speed} />
-    </h1>
+    <div className="page-hero-frame">
+      <h1 className={className}>
+        <TypeWriter text={text} speed={speed} />
+      </h1>
+    </div>
   )
 }

@@ -4,14 +4,20 @@ import { SectionProps } from '@/types'
 import { cn } from '@/lib/utils'
 import { useLayoutEffect, useRef, useState } from 'react'
 
-const VIEWPORT_BUFFER = 320
+const DEFAULT_REVEAL_MARGIN = 80
 
-function isNearViewport(el: HTMLElement) {
+function isNearViewport(el: HTMLElement, margin: number) {
   const rect = el.getBoundingClientRect()
-  return rect.top < window.innerHeight + VIEWPORT_BUFFER && rect.bottom > -VIEWPORT_BUFFER
+  return rect.top < window.innerHeight + margin && rect.bottom > -margin
 }
 
-export function Section({ children, className, reveal = false }: SectionProps) {
+export function Section({
+  children,
+  className,
+  reveal = false,
+  revealMargin = DEFAULT_REVEAL_MARGIN,
+  revealThreshold = 0,
+}: SectionProps) {
   const ref = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -23,12 +29,9 @@ export function Section({ children, className, reveal = false }: SectionProps) {
 
     const markVisible = () => setIsVisible(true)
 
-    // Safety net for slow layouts or observer edge cases
-    const fallback = window.setTimeout(markVisible, 400)
-
-    if (isNearViewport(el)) {
+    if (isNearViewport(el, revealMargin)) {
       markVisible()
-      return () => window.clearTimeout(fallback)
+      return
     }
 
     const observer = new IntersectionObserver(
@@ -39,19 +42,17 @@ export function Section({ children, className, reveal = false }: SectionProps) {
         }
       },
       {
-        // Trigger well before content scrolls into view
-        rootMargin: `${VIEWPORT_BUFFER}px 0px ${VIEWPORT_BUFFER}px 0px`,
-        threshold: 0,
+        rootMargin: `${revealMargin}px 0px ${revealMargin}px 0px`,
+        threshold: revealThreshold,
       }
     )
 
     observer.observe(el)
 
     return () => {
-      window.clearTimeout(fallback)
       observer.unobserve(el)
     }
-  }, [reveal])
+  }, [reveal, revealMargin, revealThreshold])
 
   return (
     <section

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
 type UseParallaxOptions = {
@@ -8,10 +8,12 @@ type UseParallaxOptions = {
   factor?: number
   /** Invert direction (foreground layers often use this). */
   invert?: boolean
+  /** Keep the moving layer inside this element's vertical edges. */
+  boundsRef?: RefObject<HTMLElement | null>
 }
 
 /** Scroll parallax. Off for reduced motion and true touch-only devices. */
-export function useParallax({ factor = 0.28, invert = false }: UseParallaxOptions = {}) {
+export function useParallax({ factor = 0.28, invert = false, boundsRef }: UseParallaxOptions = {}) {
   const ref = useRef<HTMLDivElement>(null)
   const reduced = usePrefersReducedMotion()
 
@@ -35,7 +37,20 @@ export function useParallax({ factor = 0.28, invert = false }: UseParallaxOption
       // How far the section has moved up the viewport
       const traveled = -rect.top
       if (rect.bottom < 0 || rect.top > window.innerHeight) return
-      const y = traveled * factor * (invert ? -1 : 1)
+      let y = traveled * factor * (invert ? -1 : 1)
+
+      const bounds = boundsRef?.current
+      if (bounds) {
+        const previous = el.style.transform
+        el.style.transform = 'none'
+        const elRect = el.getBoundingClientRect()
+        const boundsRect = bounds.getBoundingClientRect()
+        el.style.transform = previous
+        const minY = boundsRect.top - elRect.top
+        const maxY = boundsRect.bottom - elRect.bottom
+        if (maxY >= minY) y = Math.min(maxY, Math.max(minY, y))
+      }
+
       el.style.transform = `translate3d(0, ${y}px, 0)`
     }
 
@@ -53,7 +68,7 @@ export function useParallax({ factor = 0.28, invert = false }: UseParallaxOption
       window.removeEventListener('resize', onScroll)
       el.style.transform = ''
     }
-  }, [factor, invert, reduced])
+  }, [factor, invert, reduced, boundsRef])
 
   return ref
 }

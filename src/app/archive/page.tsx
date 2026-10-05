@@ -12,9 +12,11 @@ export default function ArchivePage() {
       {/* Page Header */}
       <Container bordered className="pt-28 md:pt-32 pb-12 md:pb-14">
         <Section reveal>
-          <h1 className="page-hero-title font-display uppercase tracking-normal text-gold">
-            Archive
-          </h1>
+          <div className="page-hero-frame">
+            <h1 className="page-hero-title font-display uppercase tracking-normal text-gold">
+              Archive
+            </h1>
+          </div>
           <p className="text-lg text-[#d5c8b8] mt-6 max-w-2xl">
             Past releases, drops, and offerings
           </p>

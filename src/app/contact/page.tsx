@@ -54,7 +54,7 @@ export default function ContactPage() {
     <>
       <Container bordered className="flex min-h-[100svh] flex-col justify-center pt-24 pb-12 md:pt-28 md:pb-16">
         <Section reveal className="w-full">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="hero-pair">
             <div className="min-w-0">
               <div data-reveal style={{ '--d': 0 } as CSSProperties}>
                 <PageTitle

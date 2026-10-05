@@ -43,13 +43,37 @@
 }
 
 @layer utilities {
-  /* Display heroes stay inside the column on small screens */
+  /* Column beside a hero image. The title sizes from this width, not the window. */
+  .page-hero-frame {
+    container-type: inline-size;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-pair {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  /* Display heroes scale with the column so a word never crosses the picture */
   .page-hero-title {
     width: 100%;
     max-width: 100%;
-    font-size: clamp(2rem, 9vw, 5.5rem);
-    line-height: 0.9;
-    overflow-wrap: break-word;
+    font-size: clamp(1.65rem, 8.4cqi, 4.5rem);
+    line-height: 0.95;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
   }
 
   /* Artifact navigation */
@@ -1174,56 +1198,33 @@
 }
 
 @layer components {
-  /* Overlay scrollbar: fixed gutter, thumb fades in. Marquise / stressed diamond. */
-  ::-webkit-scrollbar {
-    width: 11px;
-    height: 11px;
+  /* Hide native scrollbar when the custom jewel thumb is active */
+  html.jewel-scrollbar {
+    scrollbar-width: none;
   }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
+  html.jewel-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 
-  ::-webkit-scrollbar-corner {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: transparent;
-    border: none;
+  .jewel-scroll-thumb {
     border-radius: 0;
+    /* Long pointed tips — reads as a stretched diamond / jewel */
     clip-path: polygon(
-      50% 0%,
-      86% 14%,
-      100% 50%,
-      86% 86%,
+      50% 0,
+      100% 42px,
+      100% calc(100% - 42px),
       50% 100%,
-      14% 86%,
-      0% 50%,
-      14% 14%
+      0 calc(100% - 42px),
+      0 42px
     );
-    transition: background 0.25s ease;
   }
 
-  html.scrollbar-visible ::-webkit-scrollbar-thumb {
-    background: rgba(216, 170, 103, 0.28);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(216, 170, 103, 0.42);
-  }
-
-  ::-webkit-scrollbar-thumb:active {
-    background: rgba(216, 170, 103, 0.55);
-  }
-
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-  }
-
-  html.scrollbar-visible {
-    scrollbar-color: rgba(216, 170, 103, 0.35) transparent;
+  @media (prefers-reduced-motion: reduce) {
+    .jewel-scroll-thumb {
+      transition: none;
+    }
   }
 
   /* Ear trainer shared components */

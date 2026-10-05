@@ -1,7 +1,6 @@
 'use client'
 
-import type { CSSProperties } from 'react'
-import { useState } from 'react'
+import { useRef, useState, type CSSProperties } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
@@ -50,8 +49,8 @@ const SINGLES = [
 const EP = THEY_MIGHT_BE_MAD_EP
 
 function DiscographyContent() {
-  const mediaRef = useParallax({ factor: 0.26 })
-  const copyRef = useParallax({ factor: 0.12, invert: true })
+  const boundsRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useParallax({ factor: 0.18, boundsRef })
 
   return (
     <div className="space-y-16">
@@ -60,7 +59,7 @@ function DiscographyContent() {
         data-parallax-root
         className="overflow-hidden border border-[#d8aa67]/25 bg-[#080808]"
       >
-        <div className="grid grid-cols-1 items-center lg:grid-cols-2">
+        <div ref={boundsRef} className="grid grid-cols-1 items-center lg:grid-cols-2">
           <div ref={mediaRef} className="mx-auto w-full max-w-xl px-6 py-6 will-change-transform sm:px-7 sm:py-7 md:px-8 md:py-8">
             <AlbumCover
               src={EP.cover}
@@ -70,10 +69,7 @@ function DiscographyContent() {
             />
           </div>
 
-          <div
-            ref={copyRef}
-            className="relative flex flex-col justify-center px-8 py-10 will-change-transform md:px-12 md:py-14 lg:px-14 lg:py-16"
-          >
+          <div className="relative flex flex-col justify-center px-8 py-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
             <div className="mb-5 flex items-center gap-4">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
               <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
@@ -267,8 +263,8 @@ export default function SoundPage() {
       {/* Page Header */}
       <Container bordered className="relative min-h-[100svh] overflow-hidden flex flex-col justify-center pt-24 md:pt-28 pb-12 md:pb-16">
         <Section reveal className="relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div ref={copyRef} className="min-w-0 will-change-transform">
+          <div className="hero-pair">
+            <div ref={copyRef} className="page-hero-frame will-change-transform">
               <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold">
                 <TypeWriter text="The Sound" speed={100} />
               </h1>

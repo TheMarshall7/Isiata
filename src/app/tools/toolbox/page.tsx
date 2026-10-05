@@ -280,8 +280,8 @@ export default function ToolboxPage() {
       {/* Page Header */}
       <Container bordered className="py-16 md:py-20">
         <Section reveal>
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="min-w-0 max-w-2xl">
+          <div className="hero-pair lg:gap-14">
+            <div className="page-hero-frame max-w-2xl">
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">
                 Tools
               </p>

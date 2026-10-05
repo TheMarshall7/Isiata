@@ -32,7 +32,7 @@ export function TypeWriter({
           setHasStarted(true)
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.35, rootMargin: '0px' }
     )
 
     if (elementRef.current) {
@@ -71,8 +71,8 @@ export function TypeWriter({
 
   return (
     <span ref={elementRef} className={`${className} relative block w-full max-w-full min-w-0`}>
-      <span className="invisible block whitespace-normal">{text}</span>
-      <span className="absolute inset-0 whitespace-normal">
+      <span className="invisible block whitespace-normal [word-break:keep-all] [overflow-wrap:normal]">{text}</span>
+      <span className="absolute inset-0 whitespace-normal [word-break:keep-all] [overflow-wrap:normal]">
         {displayedText}
         {cursor && !isComplete && (
           <span className="inline-block w-[3px] h-[0.9em] bg-[#ece3d7] ml-1 animate-pulse" />

@@ -1,6 +1,6 @@
 'use client'
 
-import type { CSSProperties } from 'react'
+import { useRef, type CSSProperties } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -10,13 +10,13 @@ import { THEY_MIGHT_BE_MAD_EP } from '@/lib/sound/releases'
 import { useParallax } from '@/hooks/useParallax'
 
 export function TheyMightBeMadSection() {
-  const mediaRef = useParallax({ factor: 0.28 })
-  const copyRef = useParallax({ factor: 0.12, invert: true })
+  const boundsRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useParallax({ factor: 0.18, boundsRef })
 
   return (
     <Section reveal className="overflow-hidden">
       <Container bordered className="rule-draw border-t border-[#d8aa67]/15 py-24 md:py-32">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div ref={boundsRef} className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div ref={mediaRef} className="will-change-transform">
               <AlbumCover
                 src={THEY_MIGHT_BE_MAD_EP.cover}
@@ -25,7 +25,7 @@ export function TheyMightBeMadSection() {
               />
             </div>
 
-            <div ref={copyRef} className="relative flex flex-col justify-center will-change-transform">
+            <div className="relative flex flex-col justify-center">
               <div data-reveal style={{ '--d': 0 } as CSSProperties} className="mb-5 flex items-center gap-4">
                 <span className="reveal-rail reveal-rail-left h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
                 <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">

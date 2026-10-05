@@ -36,4 +36,8 @@ export interface SectionProps {
   children: React.ReactNode
   className?: string
   reveal?: boolean
+  /** Extra px beyond the viewport that can trigger reveal. Default 80. Use 0 to wait until on screen. */
+  revealMargin?: number
+  /** Portion of the section that must be visible before reveal. Default 0. */
+  revealThreshold?: number
 }

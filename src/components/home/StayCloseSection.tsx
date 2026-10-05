@@ -14,6 +14,8 @@ export function StayCloseSection() {
   return (
     <Section
       reveal
+      revealMargin={0}
+      revealThreshold={0.35}
       className="rule-draw relative w-full overflow-hidden border-t border-[#d8aa67]/20 py-28 md:py-36"
     >
       <div

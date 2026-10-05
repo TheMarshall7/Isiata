@@ -18,9 +18,11 @@ export default function ExplorePage() {
       {/* Page Header */}
       <Container bordered className="pt-32 md:pt-36 pb-12 md:pb-14">
         <Section reveal>
-          <h1 className="page-hero-title min-w-0 font-display uppercase tracking-normal text-gold">
-            <TypeWriter text="Explore" speed={120} />
-          </h1>
+          <div className="page-hero-frame">
+            <h1 className="page-hero-title font-display uppercase tracking-normal text-gold">
+              <TypeWriter text="Explore" speed={120} />
+            </h1>
+          </div>
           <p className="text-lg text-[#d5c8b8] mt-6 max-w-2xl">
             Discover across sound, objects, tools, and access
           </p>
