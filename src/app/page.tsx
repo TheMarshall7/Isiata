@@ -119,16 +119,16 @@ export default function HomePage() {
       <TheyMightBeMadSection />
 
       <Section reveal>
-        <Container bordered className="relative overflow-hidden border-t border-[#d8aa67]/15">
+        <Container bordered className="relative overflow-hidden border-t border-[#d8aa67]/15 px-0">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <img
+              src="/brand/overlays/molten-gold-marble-frame.png"
+              alt=""
+              className="h-full w-full object-cover object-center opacity-80 mix-blend-screen"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+          </div>
           <div className="relative flex flex-col items-center overflow-hidden px-8 py-20 text-center md:py-28">
-            <div aria-hidden className="pointer-events-none absolute inset-0">
-              <img
-                src="/brand/overlays/molten-gold-marble-frame.png"
-                alt=""
-                className="h-full w-full object-cover object-center opacity-80 mix-blend-screen"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
-            </div>
 
             <div className="relative z-10 flex flex-col items-center">
               <p
