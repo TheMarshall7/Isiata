@@ -65,11 +65,12 @@ export default function HomePage() {
 
         {/* Foreground — drifts opposite the photo for depth */}
         <div ref={heroFgRef} className="relative z-10 h-full will-change-transform">
+          <div className="absolute inset-x-4 bottom-6 flex items-center gap-3 md:contents">
           <a
             href={TWO_TALES.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-rise absolute inset-x-4 bottom-6 flex items-center gap-3 group md:inset-x-auto md:bottom-24 md:left-10 md:max-w-[28rem] md:gap-8 md:pr-4"
+            className="hero-rise flex min-w-0 flex-1 items-center gap-3 group md:absolute md:inset-x-auto md:bottom-24 md:left-10 md:max-w-[28rem] md:flex-none md:gap-8 md:pr-4"
           >
             <div className="relative aspect-square w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden border border-[#d8aa67]/25 bg-black depth-shadow">
               <img
@@ -89,7 +90,7 @@ export default function HomePage() {
             </span>
           </a>
 
-          <div className="hero-rise-late absolute bottom-28 left-1/2 -translate-x-1/2 md:bottom-12 md:left-auto md:right-10 md:translate-x-0">
+          <div className="hero-rise-late shrink-0 md:absolute md:bottom-12 md:right-10">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs font-spaced text-gold uppercase tracking-wide">Scroll</span>
               <span className="scroll-float inline-flex" aria-hidden>
@@ -110,6 +111,7 @@ export default function HomePage() {
                 </svg>
               </span>
             </div>
+          </div>
           </div>
         </div>
       </section>

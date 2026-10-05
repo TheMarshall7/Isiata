@@ -150,6 +150,29 @@
     );
   }
 
+  @keyframes wordmark-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      text-shadow: 0 0 0 transparent;
+    }
+    50% {
+      transform: scale(1.045);
+      text-shadow: 0 0 18px rgba(216, 170, 103, 0.38);
+    }
+  }
+
+  .artifact-wordmark:hover {
+    color: #f6efe4;
+    animation: wordmark-breathe 2.6s var(--ease-lux, ease) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artifact-wordmark:hover {
+      animation: none;
+    }
+  }
+
   .artifact-nav-link {
     position: relative;
     flex: none;
@@ -1151,10 +1174,10 @@
 }
 
 @layer components {
-  /* Overlay scrollbar: fixed gutter width, only thumb fades in (no layout shift) */
+  /* Overlay scrollbar: fixed gutter, thumb fades in. Marquise / stressed diamond. */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 11px;
+    height: 11px;
   }
 
   ::-webkit-scrollbar-track {
@@ -1167,28 +1190,31 @@
 
   ::-webkit-scrollbar-thumb {
     background: transparent;
-    border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    border: none;
+    border-radius: 0;
+    clip-path: polygon(
+      50% 0%,
+      86% 14%,
+      100% 50%,
+      86% 86%,
+      50% 100%,
+      14% 86%,
+      0% 50%,
+      14% 14%
+    );
     transition: background 0.25s ease;
   }
 
   html.scrollbar-visible ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.14);
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    background: rgba(216, 170, 103, 0.28);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    background: rgba(216, 170, 103, 0.42);
   }
 
   ::-webkit-scrollbar-thumb:active {
-    background: rgba(255, 255, 255, 0.26);
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    background: rgba(216, 170, 103, 0.55);
   }
 
   html {
@@ -1197,7 +1223,7 @@
   }
 
   html.scrollbar-visible {
-    scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+    scrollbar-color: rgba(216, 170, 103, 0.35) transparent;
   }
 
   /* Ear trainer shared components */

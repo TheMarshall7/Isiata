@@ -75,7 +75,7 @@ export function Header() {
             <span aria-hidden className="artifact-nav-divider" />
             <Link
               href="/"
-              className="inline-flex items-center justify-center whitespace-nowrap font-display font-normal text-xl leading-none tracking-[0.34em] text-[#ECE3D7]"
+              className="artifact-wordmark inline-flex items-center justify-center whitespace-nowrap font-display font-normal text-xl leading-none tracking-[0.34em] text-[#ECE3D7]"
             >
               ISIATA
             </Link>
