@@ -1222,9 +1222,33 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .jewel-scroll-thumb {
+    .jewel-scroll-thumb,
+    .jewel-scroll-thumb-x {
       transition: none;
     }
+  }
+
+  /* Hide native bar; JewelHScroll draws the pointed gold thumb */
+  .jewel-h-scroll {
+    scrollbar-width: none;
+  }
+
+  .jewel-h-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  /* Horizontal jewel: tapers to a point on left and right */
+  .jewel-scroll-thumb-x {
+    border-radius: 0;
+    clip-path: polygon(
+      0 50%,
+      32px 0,
+      calc(100% - 32px) 0,
+      100% 50%,
+      calc(100% - 32px) 100%,
+      32px 100%
+    );
   }
 
   /* Ear trainer shared components */

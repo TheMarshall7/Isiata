@@ -40,7 +40,7 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: TSUKUYOMI_DRUM_ENGINE_SLUG,
     href: TSUKUYOMI_DRUM_ENGINE_HREF,
     title: TSUKUYOMI_DRUM_ENGINE.title,
-    description: 'An artifact for turning raw sound into a finished drum track. Load, shape, mix, and finish.',
+    description: 'Sixteen pads to a finished drum track. Load, shape, mix, and print in one window.',
     image: TSUKUYOMI_MAIN_UI_IMAGE,
     imageFit: 'wide',
     icon: 'solar:music-note-2-linear',

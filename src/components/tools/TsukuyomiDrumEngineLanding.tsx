@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Section } from '@/components/ui/Section'
+import { JewelHScroll } from '@/components/ui/JewelHScroll'
 import { ReleaseNotifyModal } from '@/components/forms/ReleaseNotifyModal'
 import { DRUM_BUNDLE_HREF } from '@/lib/tools/drum-bundle'
 import {
@@ -155,10 +156,10 @@ function VideoSlot() {
             <iconify-icon icon="solar:play-bold" width="24" height="24" />
           </div>
           <p className="relative font-mono text-[10px] uppercase tracking-[0.22em] text-orange-200/75">
-            Demo video slot
+            Walkthrough coming soon
           </p>
           <p className="relative mt-3 max-w-sm text-sm text-zinc-400">
-            The main Tsukuyomi walkthrough will land here.
+            Pads, sequencer, mix, and finish. One take through the whole instrument.
           </p>
         </div>
       )}
@@ -231,7 +232,7 @@ function DemoPanel() {
             Pad layout
           </p>
           <h2 className="font-display text-xl uppercase tracking-normal text-gold sm:text-2xl">
-            The 16-pad grid, the way it ships.
+            Sixteen pads. One grid. Ready to hit.
           </h2>
         </div>
         <button
@@ -371,23 +372,23 @@ export function TsukuyomiDrumEngineLanding() {
 
       <section aria-label="Tsukuyomi Drum Engine demo video" className="mx-auto w-full max-w-5xl text-center">
         <h2 className="mb-5 font-sans text-2xl font-normal uppercase tracking-normal text-gold sm:text-3xl">
-          See the whole drum workflow.
+          Watch drums get finished.
         </h2>
         <VideoSlot />
         <p className="mt-5 text-sm leading-relaxed text-zinc-500">
-          One instrument. One window. From the first hit to finished drums.
+          One instrument. One window. First hit to printed drums.
         </p>
       </section>
 
       <Section reveal>
         <div className="grid min-w-0 grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch md:max-w-[1100px] md:gap-8">
           <div className="min-w-0">
-            <SectionHeading eyebrow="The problem" title="Your drums shouldn&apos;t need five plugins.">
+            <SectionHeading eyebrow="The problem" title="Your drums should not need five plugins.">
               <p>
-                A sampler for the sounds. A sequencer for the pattern. Another plugin for compression, another for saturation, another for space. Somewhere between the third window and the fourth, the idea you had five minutes ago is gone.
+                Sampler. Sequencer. Compressor. Saturation. Space. By the time the fourth window opens, the idea you had is already gone.
               </p>
               <p className="mt-4 text-zinc-200">
-                Tsukuyomi keeps the whole process in one place: <strong>pads, sequencer, sound design, mixer, effects and mastering in a single window.</strong>
+                Tsukuyomi keeps the whole chain in one place: <strong>pads, sequencer, sound design, mixer, effects, and finish. One window.</strong>
               </p>
             </SectionHeading>
           </div>
@@ -411,12 +412,12 @@ export function TsukuyomiDrumEngineLanding() {
           <div className="lg:pt-2">
             <SectionHeading eyebrow="Play it" title="Load a kit. Start making noise.">
               <p>
-                Hit pads with a MIDI controller, your keyboard or the on-screen grid. Layers respond to velocity, choke groups keep hats behaving, and 32 voices leave room for fast rolls.
+                Hit pads from a MIDI controller, your keyboard, or the on screen grid. Velocity opens the layers, choke groups keep the hats honest, and 32 voices leave room for the rolls.
               </p>
             </SectionHeading>
             <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">Build the sound</p>
             <p className="max-w-xl text-base leading-relaxed text-zinc-300">
-              Every pad holds three sample layers you can stack, cycle, randomize or map to velocity. Shape each one with a full envelope, filter, drive, pitch, reverse and pan. You&apos;re not picking a drum, you&apos;re building one.
+              Every pad holds three layers. Stack them, cycle them, randomize them, or map them to velocity. Envelope, filter, drive, pitch, reverse, pan. You are not picking a drum. You are building one.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {['3 layers / pad', '32 voices', 'Choke groups', 'Velocity response'].map((item) => (
@@ -433,9 +434,9 @@ export function TsukuyomiDrumEngineLanding() {
       </Section>
 
       <Section reveal>
-        <SectionHeading eyebrow="Sequence it" title="Build the rhythm directly inside Tsukuyomi.">
+        <SectionHeading eyebrow="Sequence it" title="Write the rhythm where you hear it.">
           <p>
-            Program in 4/4, 3/4, 5/4, 6/8, 7/8 and 2/4, then shape swing, groove and Euclidean fills until the pattern moves the way you want.
+            Program in 4/4, 3/4, 5/4, 6/8, 7/8, and 2/4. Then swing it, groove it, and pull Euclidean fills until the pattern moves like a person played it.
           </p>
         </SectionHeading>
         <div className="grid grid-cols-1 items-center gap-7 lg:grid-cols-[1.1fr_0.9fr]">
@@ -449,10 +450,10 @@ export function TsukuyomiDrumEngineLanding() {
           />
           <ul className="space-y-3">
             {[
-              ['Drag whole beats', 'Move complete patterns into the groove, then keep shaping them.'],
-              ['Drag individual pieces', 'Place single kicks, snares, hats and percussion exactly where they belong.'],
-              ['Start from categorized presets', 'Browse by style, pull in a starting point and make it your own.'],
-              ['Build, customize, drag', 'Combine the parts, adjust the feel and rearrange without leaving the sequencer.'],
+              ['Drag whole beats', 'Drop a full pattern into the groove, then keep carving.'],
+              ['Drag individual pieces', 'Place kicks, snares, hats, and percussion exactly where they belong.'],
+              ['Start from presets', 'Browse by style, grab a starting point, and make it yours.'],
+              ['Stay in the sequencer', 'Combine, reshape, rearrange. No window hopping.'],
             ].map(([title, body]) => (
               <li key={title} className="border-l border-orange-300/30 pl-4">
                 <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
@@ -476,7 +477,7 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Make every hit matter" title="A pattern should feel human.">
               <p>
-                A pattern shouldn&apos;t sound mechanical just because you drew it with a mouse. Select any step and shape what happens inside that hit.
+                Drawing with a mouse does not mean it has to sound like one. Select any step and shape what happens inside the hit.
               </p>
             </SectionHeading>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -488,7 +489,7 @@ export function TsukuyomiDrumEngineLanding() {
               ))}
             </div>
             <p className="mt-6 text-center font-display text-lg uppercase tracking-normal text-zinc-300 lg:text-left">
-              The pattern stops being a grid. It starts behaving like a performance.
+              The grid stops sounding like a grid. It starts sounding like a performance.
             </p>
           </div>
         </div>
@@ -499,7 +500,7 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Four scenes, one track" title="Build a track, not just a loop.">
               <p>
-                Build a groove, a stripped-back verse, a variation and a fill. Launch them by hand or chain them. Scenes switch on the downbeat of the next loop, so your drums evolve without stopping the music.
+                Groove. Verse. Variation. Fill. Launch them by hand or chain them. Scenes flip on the next downbeat, so the drums evolve without the music stopping.
               </p>
             </SectionHeading>
           </div>
@@ -528,7 +529,7 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Your kit" title="Your kit. Your rules.">
               <p>
-                Start with the factory library, then drag in your own WAV, AIFF or FLAC files. Swap the kick, layer the hats, lock the sounds you love and randomize the rest. Happy accidents are part of the workflow.
+                Start with the factory library, then drag in your own WAV, AIFF, or FLAC. Swap the kick. Layer the hats. Lock what you love. Randomize the rest. Accidents count as process.
               </p>
               <p className="mt-4 text-sm text-zinc-500">
                 Prefer raw samples? Explore the{' '}
@@ -552,7 +553,7 @@ export function TsukuyomiDrumEngineLanding() {
               </div>
               <div className="border border-orange-300/20 bg-orange-300/[0.06] p-6">
                 <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-orange-200/70">The point</p>
-                <p className="font-display text-2xl uppercase tracking-normal text-orange-200/90">Happy accidents are part of the workflow.</p>
+                <p className="font-display text-2xl uppercase tracking-normal text-orange-200/90">Accidents count as process.</p>
               </div>
             </div>
           </div>
@@ -573,14 +574,14 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Then mix the kit" title="Every pad. Every move. Your mix.">
               <p>
-                Shape all 16 pads independently, then bring the kit together through the master bus.
+                Shape all sixteen pads on their own, then pull the kit together on the master bus.
               </p>
             </SectionHeading>
             <ul className="space-y-3">
               {[
-                ['Independent channel control', 'Set volume, pan, mute and solo on every pad.'],
-                ['Shared effects', 'Send each channel to delay, reverb, chorus or parallel compression.'],
-                ['Whole-kit balance', 'Keep the master simple or print a fully custom drum mix.'],
+                ['Independent channels', 'Volume, pan, mute, and solo on every pad.'],
+                ['Shared effects', 'Send each channel to delay, reverb, chorus, or parallel compression.'],
+                ['Whole kit balance', 'Keep the master clean, or print a fully custom drum mix.'],
               ].map(([title, body]) => (
                 <li key={title} className="border-l border-orange-300/30 pl-4">
                   <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
@@ -613,14 +614,14 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Routing" title="One piece. One channel. No compromises.">
               <p>
-                Send every piece directly to its own channel in your DAW, or keep the full kit together when the mix calls for it.
+                Send every piece to its own DAW channel, or keep the full kit together when the mix asks for it.
               </p>
             </SectionHeading>
             <ul className="space-y-3">
               {[
-                ['Direct per-piece channels', 'Kick, snare, hats and percussion each reach the DAW on their own track.'],
-                ['Independent processing', 'Shape, compress and automate every drum piece without the rest of the kit.'],
-                ['Master or multitrack', 'Print the whole kit or print only the pieces that need attention.'],
+                ['Direct per piece outs', 'Kick, snare, hats, and percussion each hit the DAW on their own track.'],
+                ['Independent processing', 'Shape, compress, and automate one drum without touching the rest.'],
+                ['Master or multitrack', 'Print the whole kit, or only the pieces that need work.'],
               ].map(([title, body]) => (
                 <li key={title} className="border-l border-orange-300/30 pl-4">
                   <p className="font-display text-base uppercase tracking-normal text-gold">{title}</p>
@@ -635,10 +636,10 @@ export function TsukuyomiDrumEngineLanding() {
       <Section reveal>
         <SectionHeading eyebrow="ISI AUDIO Architectural Models" title="Three original EQ characters.">
           <p>
-            Switch on Analog and choose an architectural model built to give the kit its own character.
+            Flip on Analog and pick a model built to give the kit a voice, not a preset smile.
           </p>
         </SectionHeading>
-        <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
+        <JewelHScroll className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
           {TSUKUYOMI_ANALOG_MODELS.map((model) => (
             <article key={model.name} className="min-w-[86%] snap-center overflow-hidden rounded-lg border border-white/10 bg-surface-raised/70 depth-shadow sm:min-w-[60%] lg:min-w-0">
               <ProductScreenshot
@@ -655,7 +656,7 @@ export function TsukuyomiDrumEngineLanding() {
               </div>
             </article>
           ))}
-        </div>
+        </JewelHScroll>
       </Section>
 
       <Section reveal>
@@ -663,17 +664,22 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Compress the right drums" title="Not the whole kit.">
               <p>
-                Give the kick more weight, crush the snare and keep the hats dry. Three parallel slots let each piece move on its own terms.
+                Weight the kick. Crush the snare. Leave the hats dry. Three parallel slots. Each piece moves on its own terms.
               </p>
               <p className="mt-4 text-zinc-200">
-                Every pad feeds each compressor independently, then blends back against the dry kit.
+                Every pad feeds each compressor on its own, then blends back against the dry kit.
               </p>
             </SectionHeading>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-1">
               {TSUKUYOMI_COMPRESSORS.map((compressor, index) => (
-                <div key={compressor} className="border border-white/10 bg-surface-raised/60 p-4 text-center">
-                  <p className="font-display text-lg uppercase tracking-normal text-orange-200/90">{compressor}</p>
-                  <p className="mt-2 font-mono text-[10px] text-zinc-600">0{index + 1}</p>
+                <div key={compressor.name} className="border border-white/10 bg-surface-raised/60 p-4">
+                  <div className={`flex items-baseline justify-between gap-3 ${compressor.body ? 'mb-2' : ''}`}>
+                    <p className="font-display text-lg uppercase tracking-normal text-orange-200/90">{compressor.name}</p>
+                    <p className="font-mono text-[10px] text-zinc-600">0{index + 1}</p>
+                  </div>
+                  {compressor.body ? (
+                    <p className="text-xs leading-relaxed text-zinc-500">{compressor.body}</p>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -692,12 +698,12 @@ export function TsukuyomiDrumEngineLanding() {
       <Section reveal>
         <SectionHeading eyebrow="Finish the drums" title="The last stage is part of the instrument.">
           <p>
-            Shape the kit, add the character you need and finish the track with Impact, three-band EQ, serial compression, saturation, lo-fi, 8-bit, volume and stereo metering built into the instrument.
+            Character and print, built in: Impact, three band EQ, serial compression, saturation, lofi, 8 bit, volume, and stereo metering. No extra plugins required to leave.
           </p>
         </SectionHeading>
         <ProductScreenshot
           file="Mix and Master - Tsukyomi Drum Engine.png"
-          alt="Tsukuyomi Drum Engine Mix and Master strip with impact, EQ, compression, saturation, Lo-fi, 8-bit, volume and meter controls"
+          alt="Tsukuyomi Drum Engine Mix and Master strip with impact, EQ, compression, saturation, lofi, 8 bit, volume and meter controls"
           width={2514}
           height={276}
           className="w-full"
@@ -707,7 +713,7 @@ export function TsukuyomiDrumEngineLanding() {
 
       <Section reveal>
         <SectionHeading eyebrow="From idea to drum track" title="Seven steps. Keep the momentum.">
-          <p>Build a kit, shape the sounds, program the groove and finish it without leaving the instrument.</p>
+          <p>Build the kit. Shape the sounds. Program the groove. Finish it without leaving the instrument.</p>
         </SectionHeading>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {TSUKUYOMI_PROCESS_STEPS.map(([number, title, body]) => (
@@ -734,30 +740,30 @@ export function TsukuyomiDrumEngineLanding() {
           <div>
             <SectionHeading eyebrow="Works with your DAW" title="Keep the workflow yours.">
               <p>
-                Tsukuyomi follows your host&apos;s tempo and timeline, and runs on its own clock when the DAW stops. Drag MIDI out (a full pattern or a single lane), automate what you need, and save your work as:
+                Tsukuyomi locks to your host tempo and timeline, and keeps its own clock when the DAW stops. Drag MIDI out (full pattern or a single lane), automate what matters, and save as:
               </p>
             </SectionHeading>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <article className="border border-orange-300/20 bg-orange-300/[0.06] p-6 lg:p-8">
                 <p className="mb-5 font-mono text-3xl text-orange-200/90">.ISI</p>
                 <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">The complete kit.</h3>
-                <p className="text-sm leading-relaxed text-zinc-400">Samples, pads, sequencer, scenes, FX and routing.</p>
+                <p className="text-sm leading-relaxed text-zinc-400">Samples, pads, sequencer, scenes, FX, and routing.</p>
               </article>
               <article className="border border-white/10 bg-surface-raised/60 p-6 lg:p-8">
                 <p className="mb-5 font-mono text-3xl text-zinc-300">.ISIS</p>
                 <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">The rhythm.</h3>
-                <p className="text-sm leading-relaxed text-zinc-400">Pattern, scenes, tempo, meter and swing.</p>
+                <p className="text-sm leading-relaxed text-zinc-400">Pattern, scenes, tempo, meter, and swing.</p>
               </article>
             </div>
             <div className="mt-6 border border-white/10 p-5 text-sm leading-relaxed text-zinc-300">
-              <span className="font-semibold text-white">Available now:</span> VST3 and Standalone. An AU version is in the works.
+              <span className="font-semibold text-white">Available now:</span> VST3 and Standalone. AU is on the way.
             </div>
           </div>
         </div>
       </Section>
 
       <Section reveal>
-        <SectionHeading eyebrow="Specs" title="The details, without the clutter." />
+        <SectionHeading eyebrow="Specs" title="The facts. No brochure fog." />
         <div className="overflow-hidden border border-white/10">
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {TSUKUYOMI_SPECS.map(([label, value], index) => (
@@ -774,7 +780,7 @@ export function TsukuyomiDrumEngineLanding() {
           </dl>
         </div>
         <div className="mt-4 border border-white/10 p-4 text-sm leading-relaxed text-zinc-500">
-          <span className="font-semibold text-zinc-300">System requirements:</span> Final OS and host compatibility details will be published before release. AU support is planned for a future version.
+          <span className="font-semibold text-zinc-300">System requirements:</span> Final OS and host details publish before release. AU lands in a later version.
         </div>
       </Section>
 
@@ -783,9 +789,9 @@ export function TsukuyomiDrumEngineLanding() {
           <div className="glow-orb left-1/2 top-0 h-96 w-96 -translate-x-1/2 bg-orange-500/10" aria-hidden />
           <div className="relative mx-auto max-w-3xl text-center">
             <h2 className="mb-7 font-sans text-4xl font-normal uppercase leading-[0.95] tracking-normal text-gold md:text-6xl">
-              Take your samples to a new level.
+              Stop assembling a drum chain.
               <br />
-              <span className="text-orange-200/90">This is where your drums happen.</span>
+              <span className="text-orange-200/90">Start finishing drums.</span>
             </h2>
             <div className="mb-8 flex flex-wrap justify-center gap-3">
               <button
