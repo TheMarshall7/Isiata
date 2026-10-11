@@ -91,6 +91,60 @@ export const TSUKUYOMI_COMPRESSORS = [
   },
 ] as const
 
+export const TSUKUYOMI_GROOVE_CATEGORIES = [
+  'Hip Hop',
+  'R&B',
+  'Pop',
+  'Rock',
+  'Metal',
+  'Jazz',
+  'Latin',
+  'Reggae',
+  'Afrobeat',
+  'Afrobeats',
+  'Amapiano',
+  'Second Line',
+  'Dembow',
+  'Cumbia',
+  'Tango',
+  'Flamenco',
+  'Indian',
+  'African',
+  'Arab',
+  'Chinese',
+  'Japanese',
+  'Custom',
+] as const
+
+/** Named grooves inside the Hip Hop category (sample of one category's depth). */
+export const TSUKUYOMI_HIP_HOP_GROOVES = [
+  'Jersey Club Classic',
+  'Baltimore Club Classic',
+  'New Jack Swing Pocket',
+  'Dusty Boom Bap',
+  'G Funk Pocket',
+  'Miami Bass Classic',
+  'Memphis Raw',
+  'Early Trap',
+  'Trap Triplet',
+  'Detroit Bounce',
+  'Chicago Juke',
+  'West Coast Bounce',
+] as const
+
+export const TSUKUYOMI_PRESET_LIBRARIES = [
+  {
+    label: 'Groove library',
+    title: 'Categories packed with named grooves.',
+    body: 'Pick a category, then open the grooves inside it. Hip Hop alone holds Jersey Club, Baltimore Club, Memphis Raw, Boom Bap, New Jack Swing, Trap, and more. Load one into the sequencer, reshape it, then drag the whole beat or a single lane straight into your song.',
+  },
+  {
+    label: 'Kit library',
+    title: 'Acoustic to trap in one move.',
+    body: 'Switch kits without rebuilding the map. Jump from acoustic to trap to other kit types and keep writing on the same grid.',
+  },
+] as const
+
 export const TSUKUYOMI_PROCESS_STEPS = [
   ['01', 'LOAD', 'Factory kit or your own samples.'],
   ['02', 'LOCK', 'Keep what works. Randomize what doesn’t.'],

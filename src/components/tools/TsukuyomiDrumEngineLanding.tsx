@@ -14,6 +14,9 @@ import {
   TSUKUYOMI_DEMO_VIDEO_URL,
   TSUKUYOMI_DRUM_ENGINE,
   TSUKUYOMI_HIT_CONTROLS,
+  TSUKUYOMI_GROOVE_CATEGORIES,
+  TSUKUYOMI_HIP_HOP_GROOVES,
+  TSUKUYOMI_PRESET_LIBRARIES,
   TSUKUYOMI_PROCESS_STEPS,
   TSUKUYOMI_SCENES,
   TSUKUYOMI_SPECS,
@@ -461,6 +464,62 @@ export function TsukuyomiDrumEngineLanding() {
               </li>
             ))}
           </ul>
+        </div>
+      </Section>
+
+      <Section reveal>
+        <SectionHeading eyebrow="Preset libraries" title="Fill the grid. Change the kit.">
+          <p>
+            The sequencer opens onto a groove library by category. Open Hip Hop and you get Jersey Club, Baltimore Club, Memphis Raw, and a deep stack of regional pockets. Every other category works the same way. Load a groove, carve it, drag it into the song. The kit library swaps the whole sound map when the track needs a different world.
+          </p>
+        </SectionHeading>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {TSUKUYOMI_PRESET_LIBRARIES.map((library) => (
+            <article
+              key={library.label}
+              className="border border-white/10 bg-gradient-to-b from-white/[0.045] to-transparent p-6 lg:p-8"
+            >
+              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-orange-200/70">
+                {library.label}
+              </p>
+              <h3 className="mb-4 font-display text-2xl uppercase tracking-normal text-gold">
+                {library.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-zinc-400">{library.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-8">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">Categories</p>
+          <div className="flex flex-wrap gap-2">
+            {TSUKUYOMI_GROOVE_CATEGORIES.map((tag) => (
+              <span
+                key={tag}
+                className={
+                  tag === 'Hip Hop'
+                    ? 'border border-orange-300/35 bg-orange-300/[0.08] px-3 py-2 text-xs text-orange-100'
+                    : 'border border-white/10 px-3 py-2 text-xs text-zinc-400'
+                }
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mt-6">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+            Inside Hip Hop
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {TSUKUYOMI_HIP_HOP_GROOVES.map((preset) => (
+              <span
+                key={preset}
+                className="border border-orange-300/20 bg-orange-300/[0.04] px-3 py-2 text-xs text-orange-100/80"
+              >
+                {preset}
+              </span>
+            ))}
+          </div>
         </div>
       </Section>
 
