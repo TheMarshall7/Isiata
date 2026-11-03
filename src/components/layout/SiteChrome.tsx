@@ -23,7 +23,10 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   const isCheckoutOrder = pathname?.startsWith(CHECKOUT_ORDER_PREFIX)
   const isFunnel = isSystemsFunnel(pathname)
 
-  if (isTrainer || isCheckoutOrder) {
+  // Unreleased campaign has its own chrome and no links to the rest of the site
+  const isUnlisted = pathname?.startsWith('/fne-preview')
+
+  if (isTrainer || isCheckoutOrder || isUnlisted) {
     return <>{children}</>
   }
 
