@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllGarmentSlugs } from '@/lib/garments/catalog'
 import { getAllTierSlugs } from '@/lib/systems/funnel-content'
 import { siteUrl } from '@/lib/seo/site'
+import { PLUGINS } from '@/lib/tools/plugins'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteUrl
@@ -49,6 +50,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/tools/plugins`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    ...PLUGINS.filter((p) => !p.href).map((p) => ({
+      url: `${baseUrl}/tools/plugins/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
     {
       url: `${baseUrl}/tools/toolbox`,
       lastModified: new Date(),

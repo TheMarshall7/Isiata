@@ -1,4 +1,5 @@
 import { SAMPLE_PACKS } from './drum-bundle'
+import { PLUGINS_HREF } from './plugins'
 import {
   TSUKUYOMI_DRUM_ENGINE,
   TSUKUYOMI_DRUM_ENGINE_HREF,
@@ -46,6 +47,17 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     icon: 'solar:music-note-2-linear',
     category: 'plugins',
     categoryLabel: 'Plugin',
+  },
+  {
+    slug: 'isiata-plugins',
+    href: PLUGINS_HREF,
+    title: 'Isiata Plugins',
+    description:
+      'Twenty-one plugins from one engine: drums, sound design, effects, analog EQ colour, and five compressors. Singles and bundles.',
+    icon: 'solar:widget-5-linear',
+    category: 'plugins',
+    categoryLabel: 'Plugin Line',
+    price: 'From $19',
   },
   {
     slug: 'producer-toolbox',

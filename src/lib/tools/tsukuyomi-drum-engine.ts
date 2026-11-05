@@ -19,7 +19,7 @@ export const TSUKUYOMI_DRUM_ENGINE = {
   description:
     'Sixteen pads. A sequencer that breathes. Mix, character, and finish, all in one window. Load a sound, build a groove, leave with a drum track.',
   heroLines: ['Make the beat.', 'Shape the kit.', 'Finish the drums.'],
-  formatLine: 'VST3 · Standalone · AU coming soon',
+  formatLine: 'VST3 · AU · AAX · Standalone',
 } as const
 
 export const TSUKUYOMI_DEMO_VIDEO_URL = ''
@@ -160,7 +160,7 @@ export const TSUKUYOMI_SPECS = [
   ['Polyphony', '32 voices'],
   ['Scenes', 'A to D'],
   ['Samples', 'WAV, AIFF, FLAC, up to 30 s'],
-  ['Outputs', '22 stereo'],
-  ['Formats', 'VST3, Standalone (AU coming soon)'],
+  ['Outputs', '25 stereo'],
+  ['Formats', 'Windows: VST3, Standalone. macOS: VST3, AU, Standalone. AAX for Pro Tools.'],
 ] as const
 
