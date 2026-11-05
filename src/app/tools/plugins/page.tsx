@@ -1,5 +1,5 @@
 import { Container } from '@/components/ui/Container'
-import { BundleBanner, PluginShop } from '@/components/tools/PluginCards'
+import { BundleBanner, PluginShop, SubscriptionBanner } from '@/components/tools/PluginCards'
 import { PLUGIN_PRICE_NOTE, PLUGIN_SHARED_FACTS } from '@/lib/tools/plugins'
 
 export default function PluginsPage() {
@@ -22,6 +22,10 @@ export default function PluginsPage() {
 
       <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
         <PluginShop />
+      </Container>
+
+      <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
+        <SubscriptionBanner />
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 pb-24 pt-12">

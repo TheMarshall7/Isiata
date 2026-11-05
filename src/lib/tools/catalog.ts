@@ -42,7 +42,7 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     href: TSUKUYOMI_DRUM_ENGINE_HREF,
     title: TSUKUYOMI_DRUM_ENGINE.title,
     description: 'Sixteen pads to a finished drum track. Load, shape, mix, and print in one window.',
-    image: TSUKUYOMI_MAIN_UI_IMAGE,
+    image: getPlugin(TSUKUYOMI_DRUM_ENGINE_SLUG)?.image?.src ?? TSUKUYOMI_MAIN_UI_IMAGE,
     imageFit: 'wide',
     icon: 'solar:music-note-2-linear',
     category: 'plugins',

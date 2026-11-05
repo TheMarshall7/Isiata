@@ -86,7 +86,10 @@ export default function PluginPage({ params }: { params: Params }) {
       </div>
 
       {plugin.image ? (
-        <figure className="mb-14 overflow-hidden border border-[#d8aa67]/25 bg-black/40">
+        <figure
+          className="mb-14 overflow-hidden border border-[#d8aa67]/25 bg-black/40"
+          style={{ maxWidth: plugin.image.width }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={plugin.image.src}

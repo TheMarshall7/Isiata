@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { JewelHScroll } from '@/components/ui/JewelHScroll'
 import { Price } from '@/components/ui/Price'
 import {
   PLUGINS,
@@ -11,7 +12,10 @@ import {
   PluginGroupId,
   PluginSpec,
   bundleHref,
+  ISI_CREATE_SUBSCRIPTION,
+  SUBSCRIPTION_HREF,
   getBundlePlugins,
+  getSubscriptionPlugins,
   pluginHref,
 } from '@/lib/tools/plugins'
 
@@ -32,7 +36,7 @@ export function PluginCard({ plugin }: { plugin: PluginSpec }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-black/40">
         {plugin.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={plugin.image.src} alt={plugin.name} className="h-full w-full object-contain object-center p-2" />
+          <img src={plugin.image.src} alt={plugin.name} className="h-full w-full object-contain object-center p-4" />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.04] via-transparent to-white/[0.02]">
             <iconify-icon
@@ -139,7 +143,7 @@ export function PluginShop() {
 
   return (
     <div>
-      <div className="mb-10 flex gap-3 overflow-x-auto pb-1">
+      <JewelHScroll thin wrapperClassName="mb-14" className="flex gap-3 overflow-x-auto pb-2">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -154,7 +158,7 @@ export function PluginShop() {
             {tab.label}
           </button>
         ))}
-      </div>
+      </JewelHScroll>
 
       {filter === 'all' ? (
         <div className="space-y-16">
@@ -171,5 +175,37 @@ export function PluginShop() {
         <PluginGrid plugins={filtered} />
       )}
     </div>
+  )
+}
+
+export function SubscriptionBanner() {
+  const count = getSubscriptionPlugins().length
+  return (
+    <Link
+      href={SUBSCRIPTION_HREF}
+      className="group flashlight-card hover-glow flex flex-col gap-8 border border-[#d8aa67]/40 bg-transparent p-8 md:flex-row md:items-center md:justify-between md:p-10"
+      onMouseMove={trackMouse}
+    >
+      <div className="max-w-2xl">
+        <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">Subscription</p>
+        <h2 className="mb-3 font-display text-2xl uppercase tracking-normal text-gold md:text-4xl">
+          {ISI_CREATE_SUBSCRIPTION.name}
+        </h2>
+        <p className="text-sm leading-relaxed text-zinc-400 md:text-base">
+          {ISI_CREATE_SUBSCRIPTION.tagline} All {count} plugins, including the Tsukuyomi Drum Engine.
+        </p>
+      </div>
+      <div className="flex shrink-0 items-center gap-6">
+        <span className="text-4xl text-white">
+          <Price value={ISI_CREATE_SUBSCRIPTION.price} />
+        </span>
+        <iconify-icon
+          icon="solar:arrow-right-linear"
+          width="22"
+          height="22"
+          className="text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-gold"
+        />
+      </div>
+    </Link>
   )
 }

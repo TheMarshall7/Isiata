@@ -1,4 +1,4 @@
-import { TSUKUYOMI_DRUM_ENGINE_HREF, TSUKUYOMI_IMAGE_ROOT } from './tsukuyomi-drum-engine'
+import { TSUKUYOMI_DRUM_ENGINE_HREF } from './tsukuyomi-drum-engine'
 
 export const PLUGINS_HREF = '/tools/plugins'
 export const PLUGIN_BUNDLES_HREF = `${PLUGINS_HREF}/bundles`
@@ -40,13 +40,46 @@ export type PluginSpec = {
   icon: string
 }
 
-const shot = (file: string, width: number, height: number) => ({
-  src: `${TSUKUYOMI_IMAGE_ROOT}/${file}`,
-  width,
-  height,
-})
+/** Product screenshots in /public/Plugin Screenshots, named after each plugin. */
+const SCREENSHOT_SIZES: Record<string, [number, number]> = {
+  'IA2A': [780, 520],
+  'IPI': [880, 560],
+  'ISI 76': [780, 520],
+  'ISI Pandora': [1060, 560],
+  'Icarus': [780, 520],
+  'Iseve 1095': [880, 560],
+  'Isheen': [780, 520],
+  'IsiTech': [880, 560],
+  'Isibox': [780, 520],
+  'Tsukuyomi 8 Bit': [380, 440],
+  'Tsukuyomi Chorus': [760, 440],
+  'Tsukuyomi Comp': [860, 440],
+  'Tsukuyomi Delay': [760, 520],
+  'Tsukuyomi Drum Engine': [1628, 1036],
+  'Tsukuyomi FX': [900, 640],
+  'Tsukuyomi Flanger': [760, 440],
+  'Tsukuyomi Lo-Fi': [380, 440],
+  'Tsukuyomi Phaser': [760, 440],
+  'Tsukuyomi Reverb': [760, 520],
+  'Tsukuyomi Soft Clip': [760, 440],
+  'Tsukuyomi Sound': [900, 640],
+  'Tsukuyomi Stutter': [760, 520],
+}
 
-export const PLUGINS: PluginSpec[] = [
+function withScreenshot(plugin: PluginSpec): PluginSpec {
+  const size = SCREENSHOT_SIZES[plugin.name]
+  if (!size) return plugin
+  return {
+    ...plugin,
+    image: {
+      src: encodeURI(`/Plugin Screenshots/${plugin.name}.png`),
+      width: size[0],
+      height: size[1],
+    },
+  }
+}
+
+const PLUGIN_DEFS: PluginSpec[] = [
   /* ───────────── Instruments ───────────── */
   {
     slug: 'tsukuyomi-drum-engine',
@@ -65,7 +98,6 @@ export const PLUGINS: PluginSpec[] = [
     code: 'Tsuk',
     dawCategory: 'Instrument',
     href: TSUKUYOMI_DRUM_ENGINE_HREF,
-    image: shot('Main UI - Tsukyomi Drum Engine.png', 1280, 780),
     icon: 'solar:music-note-2-linear',
   },
   {
@@ -353,7 +385,6 @@ export const PLUGINS: PluginSpec[] = [
       { label: 'Oversampling and Auto Gain', body: 'Up to 4x oversampling for clean harmonics, and level matching so you judge it by ear, not loudness.' },
     ],
     whoFor: 'Producers who want warmth, grit and presence on drums, bass, vocals and buses, from subtle glue to heavy distortion.',
-    image: { src: '/plugins/isi-pandora.png', width: 1060, height: 560 },
     icon: 'solar:fire-linear',
   },
 
@@ -380,7 +411,6 @@ export const PLUGINS: PluginSpec[] = [
     target: 'Iseve',
     code: 'Isev',
     dawCategory: 'Fx, EQ',
-    image: shot('Iseve 1095 Compressor - Tsukyomi Drum Engine.png', 1172, 640),
     icon: 'solar:tuning-square-2-linear',
   },
   {
@@ -403,7 +433,6 @@ export const PLUGINS: PluginSpec[] = [
     target: 'IPI',
     code: 'IpiA',
     dawCategory: 'Fx, EQ',
-    image: shot('IPI Compressor - Tsukyomi Drum Engine.png', 1182, 646),
     icon: 'solar:equalizer-minimalistic-linear',
   },
   {
@@ -426,7 +455,6 @@ export const PLUGINS: PluginSpec[] = [
     target: 'IsiTech',
     code: 'Istc',
     dawCategory: 'Fx, EQ',
-    image: shot('Isitech Compressor - Tsukyomi Drum Engine.png', 1176, 644),
     icon: 'solar:sort-vertical-linear',
   },
 
@@ -534,6 +562,8 @@ export const PLUGINS: PluginSpec[] = [
   },
 ]
 
+export const PLUGINS: PluginSpec[] = PLUGIN_DEFS.map(withScreenshot)
+
 export type PluginBundle = {
   slug: string
   name: string
@@ -598,6 +628,20 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     icon: 'solar:crown-linear',
   },
 ]
+
+export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
+
+export const ISI_CREATE_SUBSCRIPTION = {
+  name: 'Isi Access',
+  price: '$9/month',
+  tagline: 'Every Isiata plugin for $9 a month.',
+  description:
+    'One low monthly price opens up the whole Isiata plugin catalog: the Tsukuyomi Drum Engine, sound design, effects, saturation, analog EQ and compressors.',
+} as const
+
+export function getSubscriptionPlugins(): PluginSpec[] {
+  return PLUGINS
+}
 
 export const PLUGIN_SHARED_FACTS = [
   {

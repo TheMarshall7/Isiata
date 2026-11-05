@@ -10,13 +10,17 @@ const MIN_THUMB = 84
 type JewelHScrollProps = {
   children: ReactNode
   className?: string
+  /** Classes for the outer wrapper (use for spacing around scroller + bar) */
+  wrapperClassName?: string
+  /** Slimmer, sleeker thumb */
+  thin?: boolean
 }
 
 /**
  * Horizontal overflow with a gold jewel thumb (pointed left/right tips).
  * Native scrollbar thumbs ignore clip-path, so this draws a real element.
  */
-export function JewelHScroll({ children, className }: JewelHScrollProps) {
+export function JewelHScroll({ children, className, wrapperClassName, thin = false }: JewelHScrollProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const thumbRef = useRef<HTMLDivElement>(null)
   const isScrollingRef = useRef(false)
@@ -147,7 +151,7 @@ export function JewelHScroll({ children, className }: JewelHScrollProps) {
   }, [metrics.needed])
 
   return (
-    <div className="relative">
+    <div className={cn('relative', wrapperClassName)}>
       <div ref={scrollerRef} className={cn('jewel-h-scroll', className)}>
         {children}
       </div>
@@ -155,15 +159,17 @@ export function JewelHScroll({ children, className }: JewelHScrollProps) {
         <div
           aria-hidden
           className={cn(
-            'pointer-events-none relative z-[1] mt-2 transition-opacity duration-300',
+            'pointer-events-none relative z-[1] transition-opacity duration-300',
+            thin ? 'mt-1' : 'mt-2',
             visible ? 'opacity-100' : 'opacity-40'
           )}
-          style={{ height: TRACK_HEIGHT }}
+          style={{ height: thin ? 8 : TRACK_HEIGHT }}
         >
           <div
             ref={thumbRef}
             className={cn(
-              'jewel-scroll-thumb-x pointer-events-auto absolute top-1/2 h-[7px] -translate-y-1/2 cursor-pointer',
+              'jewel-scroll-thumb-x pointer-events-auto absolute top-1/2 -translate-y-1/2 cursor-pointer',
+              thin ? 'h-[3px]' : 'h-[7px]',
               'bg-[rgba(216,170,103,0.48)] transition-[background-color,box-shadow] duration-200',
               'hover:bg-[rgba(216,170,103,0.72)] hover:shadow-[0_0_12px_rgba(216,170,103,0.28)]'
             )}

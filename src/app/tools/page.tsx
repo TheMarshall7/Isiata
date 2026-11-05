@@ -3,6 +3,7 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { JewelHScroll } from '@/components/ui/JewelHScroll'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
@@ -97,7 +98,7 @@ export default function ToolsPage() {
       </Container>
 
       <Container bordered className="border-y border-[#d8aa67]/15 py-5">
-        <div className="flex gap-4 overflow-x-auto">
+        <JewelHScroll thin className="flex gap-4 overflow-x-auto pb-2">
           {TOOL_CATEGORIES.map((tab) => (
             <button
               key={tab.id}
@@ -111,7 +112,7 @@ export default function ToolsPage() {
               {tab.label}
             </button>
           ))}
-        </div>
+        </JewelHScroll>
       </Container>
 
       <Container bordered className="py-24">

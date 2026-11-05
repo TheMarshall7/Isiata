@@ -62,6 +62,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
+    {
+      url: `${baseUrl}/tools/plugins/subscription`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    },
     ...PLUGIN_BUNDLES.map((b) => ({
       url: `${baseUrl}/tools/plugins/bundles/${b.slug}`,
       lastModified: new Date(),
