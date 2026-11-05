@@ -154,3 +154,93 @@ export function getScaleChords(notes: string[], isMajor: boolean) {
     name: `${note}${qualities[i]}`,
   }))
 }
+
+// ─── Pitch & frequency ───────────────────────────────────────────────
+
+const NOTE_NAMES_SHARP = ALL_NOTES
+
+export function midiToFreq(midi: number, a4 = 440): number {
+  return a4 * Math.pow(2, (midi - 69) / 12)
+}
+
+export function freqToMidi(freq: number, a4 = 440): number {
+  return 69 + 12 * Math.log2(freq / a4)
+}
+
+export function midiToName(midi: number): string {
+  const n = Math.round(midi)
+  return `${NOTE_NAMES_SHARP[((n % 12) + 12) % 12]}${Math.floor(n / 12) - 1}`
+}
+
+/** Nearest equal-tempered note for a frequency, with cents offset (-50…+50). */
+export function nearestNote(freq: number, a4 = 440) {
+  if (!(freq > 0) || !(a4 > 0)) return null
+  const exact = freqToMidi(freq, a4)
+  const midi = Math.round(exact)
+  return { midi, name: midiToName(midi), cents: (exact - midi) * 100, snapped: midiToFreq(midi, a4) }
+}
+
+export type PitchUnit = 'semitones' | 'cents' | 'ratio' | 'speed'
+
+/** Convert any pitch-shift expression into all the others. Speed is a percentage (100 = unchanged). */
+export function convertPitch(value: number, unit: PitchUnit) {
+  let semitones: number
+  switch (unit) {
+    case 'semitones':
+      semitones = value
+      break
+    case 'cents':
+      semitones = value / 100
+      break
+    case 'ratio':
+      semitones = value > 0 ? 12 * Math.log2(value) : NaN
+      break
+    case 'speed':
+      semitones = value > 0 ? 12 * Math.log2(value / 100) : NaN
+      break
+  }
+  if (!Number.isFinite(semitones)) return null
+  const ratio = Math.pow(2, semitones / 12)
+  return { semitones, cents: semitones * 100, ratio, speed: ratio * 100 }
+}
+
+// ─── Loudness targets ────────────────────────────────────────────────
+
+export type LoudnessTarget = {
+  key: string
+  platform: string
+  lufs: number | null
+  truePeak: number
+  note: string
+}
+
+/** Commonly published/practiced delivery targets (integrated LUFS, true-peak dBTP). */
+export const LOUDNESS_TARGETS: LoudnessTarget[] = [
+  { key: 'spotify', platform: 'Spotify', lufs: -14, truePeak: -1, note: 'Normal mode. Louder masters are turned down.' },
+  { key: 'apple', platform: 'Apple Music', lufs: -16, truePeak: -1, note: 'Sound Check reference level.' },
+  { key: 'youtube', platform: 'YouTube', lufs: -14, truePeak: -1, note: 'Louder uploads are attenuated, quieter are not boosted.' },
+  { key: 'tidal', platform: 'Tidal', lufs: -14, truePeak: -1, note: 'Normalized playback.' },
+  { key: 'amazon', platform: 'Amazon Music', lufs: -14, truePeak: -2, note: 'Normalization on by default.' },
+  { key: 'soundcloud', platform: 'SoundCloud', lufs: -14, truePeak: -1, note: 'Guideline only; no hard normalization.' },
+  { key: 'ebu', platform: 'Broadcast (EBU R128)', lufs: -23, truePeak: -1, note: 'European TV and radio, ±0.5 LU.' },
+  { key: 'club', platform: 'Club / DJ master', lufs: -8, truePeak: -0.3, note: 'Loud and dense. Leaves little headroom for codecs.' },
+]
+
+/** Gain change a platform will apply to reach its target, given the track's integrated LUFS. */
+export function loudnessGain(trackLufs: number, targetLufs: number): number {
+  return targetLufs - trackLufs
+}
+
+// ─── File size ───────────────────────────────────────────────────────
+
+export function wavSizeBytes(seconds: number, sampleRate: number, bitDepth: number, channels: number): number {
+  return Math.max(0, seconds) * sampleRate * (bitDepth / 8) * channels
+}
+
+export function formatBytes(bytes: number): string {
+  if (!(bytes > 0)) return '0 MB'
+  const units = ['B', 'KB', 'MB', 'GB', 'TB']
+  const i = Math.min(units.length - 1, Math.floor(Math.log(bytes) / Math.log(1024)))
+  const v = bytes / Math.pow(1024, i)
+  return `${v.toFixed(v >= 100 ? 0 : v >= 10 ? 1 : 2)} ${units[i]}`
+}
