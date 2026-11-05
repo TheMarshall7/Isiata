@@ -62,13 +62,13 @@ const isiataMono = localFont({
 
 const homeSeo = buildPageMetadata({
   ...SEO_PAGES.home,
-  title: 'ISIATA — Create and Transform',
+  title: 'ISIATA — Music, Plugins, Garments & Systems',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'ISIATA — Create and Transform | Music, Garments, Tools & Systems',
+    default: 'ISIATA — Music, Plugins, Garments & Systems',
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: homeSeo.description,

@@ -4,13 +4,15 @@ import { ISIATA_LOGO_URL } from '@/lib/constants'
 /** SEO-optimized meta copy per route (not visible on page). */
 export const SEO_PAGES = {
   home: {
-    title: 'Create and Transform — Music, Garments, Tools & Systems',
+    title: 'Music, Plugins, Garments & Systems',
     description:
-      'Isiata is a visionary creator building a multidisciplinary universe. Music, garments, tools, and systems that change how people experience reality.',
+      'Isiata is a creative universe. Original music, Tsukuyomi drum plugins and effects, producer tools, limited garments, and business systems for artists.',
     path: '/',
     keywords: [
       'ISIATA',
       'music producer',
+      'VST3 plugins',
+      'Tsukuyomi Drum Engine',
       'sample packs',
       'limited garments',
       'artist business systems',
@@ -32,12 +34,14 @@ export const SEO_PAGES = {
     keywords: ['ISIATA garments', 'limited fashion drops', 'streetwear', 'Champion tee', 'archive'],
   },
   tools: {
-    title: 'Tools — Producer Sample Packs & Free Training',
+    title: 'Tools — Plugins, Sample Packs & Free Training',
     description:
-      'Artifacts for creation and perception: sample packs, Ear Mastery, the Producer Toolbox, and Tsukuyomi. Built to change how you hear and make.',
+      'Plugins, sample packs, and free tools for producers: the Tsukuyomi Drum Engine, effects, analog EQ, compressors, Ear Mastery, and the Producer Toolbox.',
     path: '/tools',
     keywords: [
       'producer tools',
+      'VST3 plugins',
+      'drum plugin',
       'drum sample pack',
       'ear training',
       'music production',
@@ -165,7 +169,7 @@ export const SEO_PAGES = {
   about: {
     title: 'About — The Universe',
     description:
-      'Isiata searches beyond the surface of reality and transforms what he discovers into music, art, technology, and experience. Create and transform.',
+      'Isiata searches beyond the surface of reality and transforms what he discovers into music, art, technology, and experience.',
     path: '/about',
     keywords: ['about ISIATA', 'creative universe', 'music and fashion'],
   },
