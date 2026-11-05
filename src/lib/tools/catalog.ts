@@ -1,5 +1,5 @@
 import { SAMPLE_PACKS } from './drum-bundle'
-import { PLUGINS_HREF } from './plugins'
+import { FEATURED_PLUGIN_SLUGS, getPlugin, pluginHref } from './plugins'
 import {
   TSUKUYOMI_DRUM_ENGINE,
   TSUKUYOMI_DRUM_ENGINE_HREF,
@@ -46,19 +46,24 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     imageFit: 'wide',
     icon: 'solar:music-note-2-linear',
     category: 'plugins',
-    categoryLabel: 'Plugin',
+    categoryLabel: 'Drum instrument',
+    price: '$129',
   },
-  {
-    slug: 'isiata-plugins',
-    href: PLUGINS_HREF,
-    title: 'Isiata Plugins',
-    description:
-      'Twenty-one plugins from one engine: drums, sound design, effects, analog EQ colour, and five compressors. Singles and bundles.',
-    icon: 'solar:widget-5-linear',
-    category: 'plugins',
-    categoryLabel: 'Plugin Line',
-    price: 'From $19',
-  },
+  ...FEATURED_PLUGIN_SLUGS.filter((slug) => slug !== TSUKUYOMI_DRUM_ENGINE_SLUG).map((slug) => {
+    const plugin = getPlugin(slug)!
+    return {
+      slug: plugin.slug,
+      href: pluginHref(plugin),
+      title: plugin.name,
+      description: plugin.hero,
+      image: plugin.image?.src,
+      imageFit: (plugin.image ? 'wide' : 'cover') as 'wide' | 'cover',
+      icon: plugin.icon,
+      category: 'plugins' as const,
+      categoryLabel: plugin.kind,
+      price: plugin.price,
+    }
+  }),
   {
     slug: 'producer-toolbox',
     href: '/tools/toolbox',

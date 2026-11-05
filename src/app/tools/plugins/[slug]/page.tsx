@@ -14,6 +14,8 @@ import {
   PLUGINS_HREF,
   PLUGIN_BUNDLES,
   PLUGIN_SHARED_FACTS,
+  bundleHref,
+  getBundlePlugins,
   getPlugin,
 } from '@/lib/tools/plugins'
 
@@ -46,13 +48,7 @@ export default function PluginPage({ params }: { params: Params }) {
   const related = detailPlugins()
     .filter((p) => p.group === plugin.group && p.slug !== plugin.slug)
     .slice(0, 3)
-  const bundles = PLUGIN_BUNDLES.filter(
-    (b) =>
-      b.slug === 'everything' ||
-      (b.slug === 'tsukuyomi-complete' && ['instrument', 'tab', 'effect'].includes(plugin.group)) ||
-      (b.slug === 'analog-collection' && plugin.group === 'analog') ||
-      (b.slug === 'compressor-collection' && plugin.group === 'compressor')
-  )
+  const bundles = PLUGIN_BUNDLES.filter((b) => getBundlePlugins(b).some((p) => p.slug === plugin.slug))
   const formats = PLUGIN_SHARED_FACTS[0].body
 
   return (
@@ -108,16 +104,13 @@ export default function PluginPage({ params }: { params: Params }) {
             {p}
           </p>
         ))}
-        {plugin.character ? (
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold/80">Character: {plugin.character}</p>
-        ) : null}
       </div>
 
-      {plugin.controls.length > 0 ? (
+      {plugin.features.length > 0 ? (
         <section className="mb-14">
-          <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-zinc-600">Controls</h2>
+          <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-zinc-600">What is inside</h2>
           <dl className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-2">
-            {plugin.controls.map((c) => (
+            {plugin.features.map((c) => (
               <div key={c.label} className="border-t border-[#d8aa67]/15 pt-4">
                 <dt className="mb-1 text-sm font-medium text-[#f0dfc8]">{c.label}</dt>
                 <dd className="text-sm leading-relaxed text-zinc-400">{c.body}</dd>
@@ -131,7 +124,7 @@ export default function PluginPage({ params }: { params: Params }) {
         <section className="mb-14 grid gap-10 md:grid-cols-2">
           {plugin.notes?.length ? (
             <div>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-zinc-600">Notes</h2>
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-zinc-600">Good to know</h2>
               <ul className="space-y-2 text-sm leading-relaxed text-zinc-400">
                 {plugin.notes.map((n) => (
                   <li key={n}>{n}</li>
@@ -156,10 +149,8 @@ export default function PluginPage({ params }: { params: Params }) {
             <dd className="mt-1 text-zinc-300">{formats}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">Plugin ID</dt>
-            <dd className="mt-1 text-zinc-300">
-              {plugin.target} · {plugin.code} · {plugin.dawCategory}
-            </dd>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">Install</dt>
+            <dd className="mt-1 text-zinc-300">{PLUGIN_SHARED_FACTS[1].body}</dd>
           </div>
         </dl>
       </section>
@@ -171,7 +162,7 @@ export default function PluginPage({ params }: { params: Params }) {
             {bundles.map((b) => (
               <Link
                 key={b.slug}
-                href={PLUGINS_HREF}
+                href={bundleHref(b)}
                 className="border border-[#d8aa67]/30 px-4 py-3 text-sm text-zinc-300 transition-colors hover:border-[#d8aa67]/70 hover:text-white"
               >
                 {b.name} · <Price value={b.launchPrice} />

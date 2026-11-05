@@ -1,35 +1,16 @@
 import { TSUKUYOMI_DRUM_ENGINE_HREF, TSUKUYOMI_IMAGE_ROOT } from './tsukuyomi-drum-engine'
 
 export const PLUGINS_HREF = '/tools/plugins'
+export const PLUGIN_BUNDLES_HREF = `${PLUGINS_HREF}/bundles`
 
 export type PluginGroupId = 'instrument' | 'tab' | 'effect' | 'analog' | 'compressor'
 
-export const PLUGIN_GROUPS: { id: PluginGroupId; label: string; blurb: string }[] = [
-  {
-    id: 'instrument',
-    label: 'The instrument',
-    blurb: 'The drum engine and its sound-design tab, each on its own.',
-  },
-  {
-    id: 'tab',
-    label: 'Tab plugins',
-    blurb: 'Whole tabs of the drum engine, lifted onto any track or bus.',
-  },
-  {
-    id: 'effect',
-    label: 'Tsukuyomi effects',
-    blurb: 'One effect, one plugin. The same plates and timing as the drum engine.',
-  },
-  {
-    id: 'analog',
-    label: 'Analog colour',
-    blurb: 'Console and program EQ models with drive, noise and vinyl.',
-  },
-  {
-    id: 'compressor',
-    label: 'Compressors',
-    blurb: 'Five characters, one slot each, with a built in parallel mix.',
-  },
+export const PLUGIN_GROUPS: { id: PluginGroupId; label: string }[] = [
+  { id: 'instrument', label: 'Instruments' },
+  { id: 'tab', label: 'Multi-effects' },
+  { id: 'effect', label: 'Effects' },
+  { id: 'analog', label: 'Analog EQ' },
+  { id: 'compressor', label: 'Compressors' },
 ]
 
 export type PluginSpec = {
@@ -42,18 +23,16 @@ export type PluginSpec = {
   price: string
   hero: string
   short: string
-  /** One or two paragraphs of "what it does" */
   about: string[]
-  controls: { label: string; body: string }[]
+  /** What's inside: label + selling copy */
+  features: { label: string; body: string }[]
   notes?: string[]
-  /** Character line for analog and compressor models */
-  character?: string
   whoFor?: string
-  /** Plugin code and category, for support pages and DAW lookup */
+  /** Plugin ID info, kept for support/DAW lookup */
   target: string
   code: string
   dawCategory: string
-  /** Optional faceplate screenshot, served from /public */
+  /** Product image, served from /public */
   image?: { src: string; width: number; height: number }
   /** Optional link out for products that already have their own page */
   href?: string
@@ -66,23 +45,21 @@ const shot = (file: string, width: number, height: number) => ({
   height,
 })
 
-const SYNC_TIMES = '1/8, 1/4, 1/2 or 1 beat, then 1, 2, 4 or 8 bars'
-
 export const PLUGINS: PluginSpec[] = [
-  /* ───────────── The instrument ───────────── */
+  /* ───────────── Instruments ───────────── */
   {
     slug: 'tsukuyomi-drum-engine',
     name: 'Tsukuyomi Drum Engine',
     group: 'instrument',
-    kind: 'Instrument · Drum engine',
+    kind: 'Drum instrument',
     price: '$129',
     hero: 'Write the beat. Design the kit. Mix it in the same window.',
     short:
-      'A 16-pad drum instrument with a step sequencer that follows your DAW, per-pad sound design, kit FX, analog colour, a parallel compressor rack, and a master section that finishes the kit.',
+      'Sixteen pads, a sequencer that follows your DAW, kit effects, analog colour, a parallel compressor rack and a master section that finishes the drums.',
     about: [
-      'Sixteen pads, a sequencer that locks to the host, and a full mix section in one window. Load the factory library or your own WAV, AIFF or FLAC files, program a groove, shape each pad, then mix and master the kit without leaving it.',
+      'Load the factory library or your own samples, program a groove, shape every pad, then mix and master the kit without leaving the plugin.',
     ],
-    controls: [],
+    features: [],
     target: 'Tsukuyomi',
     code: 'Tsuk',
     dawCategory: 'Instrument',
@@ -94,70 +71,54 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-sound',
     name: 'Tsukuyomi Sound',
     group: 'instrument',
-    kind: 'Instrument · One-shot sampler',
+    kind: 'One-shot sampler',
     price: '$39',
-    hero: 'The SOUND tab, on its own. One sample, one hit, your own sound design.',
+    hero: 'One sample. Total control.',
     short:
-      'A one-shot sample instrument for your own drums. Shape a sample with the same envelope, filter, drive and pitch controls as a Tsukuyomi pad, then play it from MIDI or export the edited hit as a WAV.',
+      'Bring your own kick, snare or one-shot and sculpt it into something that is yours. Shape the tone, tune it, drive it, then play it from MIDI or print the finished hit as a WAV.',
     about: [
-      'Tsukuyomi Sound is the drum engine’s SOUND tab as a standalone instrument. One voice path, one sample, no layers, sends or routing. The sample is saved inside the session, so the project opens with the sound intact.',
-      'Load with the file button or by dropping a file on the window. It accepts WAV, AIFF, FLAC, OGG and MP3, up to 60 seconds.',
+      'Drop any sample onto the window and start shaping. The sound is saved inside your session, so the project always opens exactly the way you left it.',
     ],
-    controls: [
-      { label: 'Waveform', body: 'Click to audition. Drag the START and END markers to trim. Drop an audio file anywhere on the window to load it.' },
-      { label: 'Envelope', body: 'Attack, Decay, Sustain, Release.' },
-      { label: 'Filter', body: 'Cutoff, Resonance, filter type, and 12 or 24 dB steepness. Velocity to filter.' },
-      { label: 'Pitch', body: 'Pitch and Fine. Pitch can keep the sample length or change speed with pitch.' },
-      { label: 'Character', body: 'Drive. Velocity to amplitude.' },
-      { label: 'Output', body: 'Level, Pan, phase invert, and Reverse.' },
-      { label: 'EQ and sweep', body: 'Low, mid and high EQ, and sweep, the same as the pad EQ on a Tsukuyomi pad.' },
-      { label: 'Playback', body: 'One Shot, Key Track, and Choke.' },
+    features: [
+      { label: 'Trim and audition', body: 'See the waveform, set your start and end, and hear the hit before you commit.' },
+      { label: 'Shape the attack and tail', body: 'A full envelope turns a soft sample into a snap, or a snap into a bloom.' },
+      { label: 'Filter that moves with your playing', body: 'Choose 12 or 24 dB slopes and let velocity open the filter on harder hits.' },
+      { label: 'Tune it', body: 'Pitch and fine tune, with the choice of keeping the length or letting it speed up and slow down.' },
+      { label: 'Drive and EQ', body: 'Add weight and grit, then carve the low, mid and high end.' },
+      { label: 'Play it your way', body: 'One-shot, key tracking across the keyboard, and choke for hi-hat style cutting.' },
+      { label: 'Print the result', body: 'Export the edited hit as a 24-bit WAV, ready for any sampler or kit.' },
     ],
-    notes: [
-      'One Shot (on by default): a note plays through the whole sample. Off, note-off releases it through the envelope.',
-      'Key Track transposes the sample across the keyboard from its root note.',
-      'Choke: a new hit cuts the previous one, like a closed hi-hat over an open one.',
-      'Export renders the edited hit at full velocity to a 24-bit WAV file.',
-    ],
-    whoFor:
-      'Producers with their own kick, snare or one-shot library who want the Tsukuyomi shaping tools on a single sound. Works as a sampler on an instrument track.',
+    notes: ['Loads WAV, AIFF, FLAC, OGG and MP3.'],
+    whoFor: 'Producers with their own kick, snare or one-shot library who want to turn single sounds into signature ones.',
     target: 'TsukuyomiSound',
     code: 'TsSd',
     dawCategory: 'Instrument',
     icon: 'solar:soundwave-linear',
   },
 
-  /* ───────────── Tab plugins ───────────── */
+  /* ───────────── Multi-effects ───────────── */
   {
     slug: 'tsukuyomi-fx',
     name: 'Tsukuyomi FX',
     group: 'tab',
-    kind: 'Insert FX · Full FX tab',
+    kind: 'Multi-effect',
     price: '$59',
-    hero: 'The whole FX tab as one insert.',
+    hero: 'Every effect. One insert.',
     short:
-      'Delay, reverb, stutter, chorus, phaser, flanger and soft clip, plus the three analog colour models and the master LO-FI and 8 BIT, on a single plugin.',
+      'Delay, reverb, stutter, chorus, phaser, flanger and soft clip, plus three analog colour stages and lo-fi and 8-bit crush, all on a single plugin for any track or bus.',
     about: [
-      'Put it on any track or bus. Every effect in the Tsukuyomi FX tab is here, with the same plates, parameters and timing. Tempo comes from the host when it reports one. Otherwise it runs from its own Tempo setting, so synced effects keep moving.',
+      'Instead of stacking seven plugins, drop one on a drum bus, a vocal or a whole mix and reach for whatever the moment needs. Every effect follows the tempo of your session.',
     ],
-    controls: [
-      { label: 'Delay · TS-D1 Echo', body: 'Mix, feedback, time (synced or free milliseconds), tone and width.' },
-      { label: 'Reverb · TS-R2 Space', body: 'Room, Custom impulse, or ISIVerb drum reverbs. Mix, size, damping, width, pre-delay, length, and low and high cuts.' },
-      { label: 'Stutter · TS-S8 Repeat', body: 'Repeats a slice of the input in time. 1/32 to 1/2 note, or 1 or 2 bars. Probability, conditions, decay, repeats, reverse.' },
-      { label: 'Chorus · TS-C1 Ensemble', body: 'Mix, rate and depth.' },
-      { label: 'Phaser · TS-P4 Phase', body: 'Amount, sweep (synced or free), depth, feedback and centre frequency.' },
-      { label: 'Flanger · TS-F2 Jet', body: 'Amount, sweep (synced or free), depth, feedback and delay.' },
-      { label: 'Soft Clip · TS-K1', body: 'Threshold, knee shape (tanh, cubic or parabolic), knee width, output and anti-aliasing.' },
-      { label: 'Analog colour', body: 'Iseve 1095, IPI and IsiTech, each with its own face and controls.' },
-      { label: 'Master', body: 'LO-FI and 8 BIT, one knob each.' },
+    features: [
+      { label: 'Echo', body: 'Tempo-synced or free delays with tone and stereo width.' },
+      { label: 'Space', body: 'Rooms, your own impulse responses, and drum-ready plates, halls and gated tails.' },
+      { label: 'Repeat', body: 'Tempo-locked stutters with probability, fills and reverse.' },
+      { label: 'Motion', body: 'Chorus, phaser and flanger for width, sweep and jet.' },
+      { label: 'Soft clip', body: 'Round off the peaks and keep the punch.' },
+      { label: 'Analog colour', body: 'Iseve 1095, IPI and IsiTech EQ stages with their own character.' },
+      { label: 'Lo-Fi and 8 Bit', body: 'One knob each for worn tape and crunchy digital grit.' },
     ],
-    notes: [
-      'Effects at zero are off.',
-      `Synced times are ${SYNC_TIMES}.`,
-      'Reports a tail to the host so bounces and freezes include the ring-out.',
-    ],
-    whoFor:
-      'Anyone who wants the drum engine’s effect and colour set on a mix bus, a send, or a drum group.',
+    whoFor: 'Anyone who wants a full effects rack on a bus, a send, or a drum group without the plugin pile.',
     target: 'TsukuyomiFX',
     code: 'TsFx',
     dawCategory: 'Fx',
@@ -167,52 +128,45 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-comp',
     name: 'Tsukuyomi Comp',
     group: 'tab',
-    kind: 'Insert FX · Parallel compressor rack',
+    kind: 'Parallel compressor rack',
     price: '$49',
-    hero: 'The COMP tab as a parallel compressor rack.',
+    hero: 'Three compressors. One blend.',
     short:
-      'Three compressor slots blended in parallel, each with its own type, mix and output, with oversampling. Every slot hears the full input.',
+      'Run three different compressors side by side and blend them against the dry signal. Pick the character for each slot and build the punch, glue and grab you want.',
     about: [
-      'Three slots run side by side, each one of five types: Isheen, Isibox, Icarus, ISI 76 or IA2A. Each slot has its own on switch, oversampling switch, mix and output level. The rack output is blended with the dry input.',
+      'Every slot hears the full signal, so you can stack a fast grab with a slow glue and a harmonic push, then dial in how much of it sits under the original. Latency is aligned for you, so parallel mixing stays clean.',
     ],
-    controls: [
-      { label: 'Per slot', body: 'Type, on / bypass, and the faceplate controls for that type, opened from the rack.' },
-      { label: 'Rack', body: 'Mix (how much of the summed slots sits against the dry input), Output, and Oversampling.' },
-      { label: 'Routing', body: 'Each slot hears the input directly, with no per-pad sends.' },
-      { label: 'Isheen', body: 'Harmonic colour compressor. Velvet or Bite before compression, presence, and Rage.' },
-      { label: 'Isibox', body: 'Feedback variable-mu style. Thickness versus transient.' },
-      { label: 'Icarus', body: 'Morphing tube style. Aggressive, Dense or Smooth.' },
-      { label: 'ISI 76', body: 'Fast FET grab. Ratios 4, 8, 12, 20, and ALL.' },
-      { label: 'IA2A', body: 'Slow optical glue. Peak Reduction and Gain.' },
+    features: [
+      { label: 'Isheen', body: 'Harmonic colour compression with Velvet or Bite, presence and Rage.' },
+      { label: 'Isibox', body: 'Variable-mu thickness with punch you can trade against weight.' },
+      { label: 'Icarus', body: 'Tube-style smash that moves from aggressive to dense to smooth.' },
+      { label: 'ISI 76', body: 'Fast FET grab with ratios up to all-buttons-in.' },
+      { label: 'IA2A', body: 'Slow optical glue that levels without fuss.' },
+      { label: 'Per-slot control', body: 'Each slot has its own mix, output and oversampling.' },
     ],
-    notes: [
-      'Oversampling adds latency. The plugin reports it to the host and delays the dry signal to match, so parallel compression does not comb.',
-    ],
-    whoFor: 'Producers who want parallel drum compression with several characters on one insert.',
+    whoFor: 'Producers who want serious parallel compression with several characters on one insert.',
     target: 'TsukuyomiComp',
     code: 'TsCp',
     dawCategory: 'Fx, Dynamics',
     icon: 'solar:equalizer-linear',
   },
 
-  /* ───────────── Tsukuyomi effects ───────────── */
+  /* ───────────── Effects ───────────── */
   {
     slug: 'tsukuyomi-delay',
     name: 'Tsukuyomi Delay',
     group: 'effect',
-    kind: 'Effect · Delay, Echo',
+    kind: 'Delay',
     price: '$29',
-    hero: 'TS-D1 Echo. A drum-engine delay on its own.',
-    short: 'The Tsukuyomi delay with mix, feedback, time, tone and width. Synced or free time.',
-    about: ['The delay from the drum engine, as its own plugin. It exposes the delay’s own controls, plus tempo when synced.'],
-    controls: [
-      { label: 'Mix', body: 'Wet level. Starts at 30%.' },
-      { label: 'Feedback', body: 'How many repeats.' },
-      { label: 'Time', body: 'Tempo-synced note values or free milliseconds.' },
-      { label: 'Tone', body: 'Darkens the repeats.' },
-      { label: 'Width', body: 'Stereo spread.' },
+    hero: 'Echoes with character.',
+    short: 'A tempo-synced or free-running echo that sits in the mix instead of cluttering it. Darken the repeats, widen the image and let the tails ring out.',
+    about: ['Fast slapbacks, wide dotted echoes, long dark tails. Dial it in and it stays out of the way until you need it.'],
+    features: [
+      { label: 'Synced or free time', body: 'Lock to note values or set any time in milliseconds.' },
+      { label: 'Tone', body: 'Roll off the highs so repeats sit behind the source.' },
+      { label: 'Width', body: 'Spread the echoes across the stereo field.' },
+      { label: 'Feedback', body: 'From a single slap to a long, evolving trail.' },
     ],
-    notes: ['Reports a 10-second tail.'],
     target: 'TsukuyomiDelay',
     code: 'TsDl',
     dawCategory: 'Fx, Delay',
@@ -222,23 +176,20 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-reverb',
     name: 'Tsukuyomi Reverb',
     group: 'effect',
-    kind: 'Effect · Reverb',
+    kind: 'Reverb',
     price: '$39',
-    hero: 'TS-R2 Space. Drum reverbs and impulse reverbs in one plugin.',
-    short:
-      'The kit reverb as a plugin, with three types: the algorithmic Room, your own impulse responses (Custom), and ISIVerb drum reverbs that ship with the plugin.',
+    hero: 'Rooms, plates and gated tails.',
+    short: 'Three kinds of reverb in one plugin: a natural room, your own impulse responses, and a set of drum-ready plates, halls and gated tails.',
     about: [
-      'Room is the original algorithmic reverb. Custom loads one impulse response from your IR folder. ISIVerb is a set of algorithmic drum reverbs that ship with the plugin: rooms, plates, halls and gated tails.',
-      'Drop WAV, AIFF or FLAC files into %APPDATA%\\Isiata\\Tsukuyomi\\IR on Windows or ~/Library/Application Support/Isiata/Tsukuyomi/IR on macOS. Every file appears under Custom, and files in subfolders keep the folder name. Reopen the plugin after adding files. The plugin does not include impulse files, and ISIVerb does not use this folder.',
+      'Make a snare feel huge, put a vocal in a real space, or load your favourite impulse responses and shape them. Set the length free or lock it to the tempo.',
     ],
-    controls: [
-      { label: 'Core', body: 'Mix (starts at 30%), Size, Damp, Width, Pre-delay.' },
-      { label: 'Length', body: 'Free up to 16 seconds, or synced to 1, 2 or 4 beats, or 1, 2, 4 or 8 bars. PRESET keeps the reverb’s own length.' },
-      { label: 'Pre-delay sync', body: '1/32 to 1 beat.' },
-      { label: 'Custom', body: 'IR level (−24 to +12 dB) and low and high cuts.' },
-      { label: 'ISIVerb', body: 'Pre-delay and low and high cuts.' },
+    features: [
+      { label: 'Room', body: 'A smooth, natural space with size, damping and width.' },
+      { label: 'ISIVerb', body: 'Drum-ready rooms, plates, halls and gated tails, built in.' },
+      { label: 'Your impulses', body: 'Drop WAV, AIFF or FLAC files into your IR folder and they appear in the plugin.' },
+      { label: 'Tempo-synced length', body: 'Lock the tail to beats or bars, or leave it free up to 16 seconds.' },
+      { label: 'Pre-delay and filters', body: 'Keep the front of the sound clear and the low end clean.' },
     ],
-    notes: ['Reports a 10-second tail.'],
     target: 'TsukuyomiReverb',
     code: 'TsRv',
     dawCategory: 'Fx, Reverb',
@@ -248,17 +199,16 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-chorus',
     name: 'Tsukuyomi Chorus',
     group: 'effect',
-    kind: 'Effect · Modulation',
+    kind: 'Chorus',
     price: '$29',
-    hero: 'TS-C1 Ensemble. A wide, moving chorus for drums.',
-    short: 'A chorus with mix, rate and depth. Full mix and full depth gives a wide chorus. Half depth is the original widen.',
-    about: ['The drum engine’s chorus as its own plugin. Three controls, no menu diving.'],
-    controls: [
-      { label: 'Mix', body: 'Starts at 50%.' },
-      { label: 'Rate', body: 'Modulation speed in Hz.' },
-      { label: 'Depth', body: 'Modulation amount.' },
+    hero: 'Wide and moving.',
+    short: 'A chorus that goes from a subtle widen to a lush, swirling ensemble with three simple controls.',
+    about: ['Turn it up for width on drums, shimmer on keys, or movement on a bass that needs to breathe.'],
+    features: [
+      { label: 'Mix', body: 'Blend in as much movement as the sound needs.' },
+      { label: 'Rate', body: 'From a slow drift to a fast shimmer.' },
+      { label: 'Depth', body: 'Half for a gentle widen, full for a big, wide chorus.' },
     ],
-    notes: ['Reports a 0.5-second tail.'],
     target: 'TsukuyomiChorus',
     code: 'TsCh',
     dawCategory: 'Fx, Modulation',
@@ -268,17 +218,16 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-phaser',
     name: 'Tsukuyomi Phaser',
     group: 'effect',
-    kind: 'Effect · Modulation',
+    kind: 'Phaser',
     price: '$29',
-    hero: 'TS-P4 Phase. A mid-range sweep that can lock to your tempo.',
-    short: 'A phaser that sweeps the mid range. Sync to the tempo or run free, from 20 milliseconds to 16 seconds.',
-    about: ['Sweeps the mid range and can lock to the host tempo. Alt-click the time menu to return to 1 bar.'],
-    controls: [
-      { label: 'Amount', body: 'Starts at 50%.' },
-      { label: 'Sweep', body: `Synced (${SYNC_TIMES}) or free in milliseconds.` },
-      { label: 'Depth, Feedback, Centre', body: 'Shape how far, how resonant, and where in the spectrum it sweeps.' },
+    hero: 'A sweep that locks to your tempo.',
+    short: 'A mid-range phaser that moves in time with your track, or runs free from fast wobble to a sweep that takes sixteen seconds.',
+    about: ['Put slow motion into pads and guitars, or lock a sweep to the bar so a loop breathes with the song.'],
+    features: [
+      { label: 'Synced or free sweep', body: 'From eighth-note movement to eight-bar sweeps, or any time in between.' },
+      { label: 'Depth and feedback', body: 'Gentle swirl or deep, resonant phase.' },
+      { label: 'Centre frequency', body: 'Choose where in the spectrum the sweep lives.' },
     ],
-    notes: ['Reports a 0.5-second tail.'],
     target: 'TsukuyomiPhaser',
     code: 'TsPh',
     dawCategory: 'Fx, Modulation',
@@ -288,17 +237,16 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-flanger',
     name: 'Tsukuyomi Flanger',
     group: 'effect',
-    kind: 'Effect · Modulation',
+    kind: 'Flanger',
     price: '$29',
-    hero: 'TS-F2 Jet. Short, metallic sweeps.',
-    short: 'A flanger tighter than chorus. Synced or free, with depth, feedback and delay controls.',
-    about: ['Short, metallic sweeps that lock to tempo or run free.'],
-    controls: [
-      { label: 'Amount', body: 'Starts at 50%.' },
-      { label: 'Sweep', body: 'The same synced bar times as the phaser, or free in Hz.' },
-      { label: 'Depth, Feedback, Delay', body: 'Sweep range, resonance, and the base delay.' },
+    hero: 'Short, metallic sweeps.',
+    short: 'A tight, jet-like flanger that is sharper than a chorus and locks to tempo when you want it to.',
+    about: ['Add a whoosh to a fill, a sweep to a break, or a constant metallic edge to hats and loops.'],
+    features: [
+      { label: 'Synced or free sweep', body: 'Lock the sweep to the bar or set it by rate.' },
+      { label: 'Depth and feedback', body: 'From subtle comb to full jet engine.' },
+      { label: 'Delay', body: 'Move the centre of the effect to change its colour.' },
     ],
-    notes: ['Reports a 0.5-second tail.'],
     target: 'TsukuyomiFlanger',
     code: 'TsFl',
     dawCategory: 'Fx, Modulation',
@@ -308,20 +256,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-stutter',
     name: 'Tsukuyomi Stutter',
     group: 'effect',
-    kind: 'Effect · Delay',
+    kind: 'Stutter',
     price: '$29',
-    hero: 'TS-S8 Repeat. Tempo-locked stutters for drums.',
-    short: 'Repeats a slice of the input in time with the tempo. Choose where it happens in the bar, how often, and how it decays.',
-    about: ['The stutter alone. Delay and reverb are not included.'],
-    controls: [
-      { label: 'Amount', body: 'Starts at 50%. Off at zero.' },
-      { label: 'Time', body: '1/32 to 1/2 note, then 1 or 2 bars.' },
-      { label: 'When', body: 'Where in the bar the repeat starts.' },
-      { label: 'Probability and Condition', body: 'Always, every 2, 3 or 4 loops, or fill.' },
-      { label: 'Decay and Repeats', body: 'How the repeats fade and how many there are.' },
-      { label: 'Reverse', body: 'Plays the repeated slice backwards.' },
+    hero: 'Tempo-locked repeats on demand.',
+    short: 'Grab a slice of the sound and repeat it in time. Choose where in the bar it hits, how often, and how it fades.',
+    about: ['Glitch a drum loop, chop a vocal tail, or add a fill that never repeats the same way twice.'],
+    features: [
+      { label: 'Time', body: 'From thirty-second notes up to two bars.' },
+      { label: 'Probability and conditions', body: 'Always, every second, third or fourth loop, or only on fills.' },
+      { label: 'Decay and repeats', body: 'Control how many repeats land and how fast they fade.' },
+      { label: 'Reverse', body: 'Flip the repeated slice for a pulling-back effect.' },
     ],
-    notes: ['Reports a 10-second tail.'],
     target: 'TsukuyomiStutter',
     code: 'TsSt',
     dawCategory: 'Fx, Delay',
@@ -331,19 +276,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-soft-clip',
     name: 'Tsukuyomi Soft Clip',
     group: 'effect',
-    kind: 'Effect · Distortion',
+    kind: 'Soft clipper',
     price: '$29',
-    hero: 'TS-K1 Soft Clip. Round off the peaks and keep the drive.',
-    short: 'A soft clipper with a threshold, three knee shapes, adjustable knee width, output level, and anti-aliasing.',
-    about: ['Turn Amount up to lower the threshold and round off what is above it.'],
-    controls: [
-      { label: 'Amount', body: 'Starts at 30%.' },
-      { label: 'Knee', body: 'tanh, cubic or parabolic.' },
-      { label: 'Knee width', body: 'How gradually the clip begins.' },
-      { label: 'Output', body: 'Level after clipping.' },
-      { label: 'Anti-alias', body: 'Keeps the added harmonics clean.' },
+    hero: 'Round off the peaks. Keep the punch.',
+    short: 'A clean, controllable soft clipper that adds loudness and weight without turning the transients to mush.',
+    about: ['Drive drums harder, tame a rogue peak, or push a mix bus a little louder with a clip that stays musical.'],
+    features: [
+      { label: 'Three knee shapes', body: 'Tanh, cubic or parabolic, each with its own feel.' },
+      { label: 'Adjustable knee', body: 'Choose how gently or sharply the clipping begins.' },
+      { label: 'Anti-aliasing', body: 'Keeps the added harmonics clean and free of digital fizz.' },
+      { label: 'Output', body: 'Level match before and after to hear what the clip is really doing.' },
     ],
-    notes: ['No tail.'],
     target: 'TsukuyomiSoftClip',
     code: 'TsCl',
     dawCategory: 'Fx, Distortion',
@@ -353,13 +296,14 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-lo-fi',
     name: 'Tsukuyomi Lo-Fi',
     group: 'effect',
-    kind: 'Effect · Distortion, one knob',
+    kind: 'Lo-fi',
     price: '$19',
-    hero: 'One knob. Worn tape, dull top, sample hold.',
-    short: 'The master LO-FI from the Mix / Master section as its own plugin. Turn the knob to age the sound.',
-    about: ['One knob, taken straight from the drum engine’s master section.'],
-    controls: [{ label: 'Amount', body: 'Starts at 50%.' }],
-    notes: ['No tail.'],
+    hero: 'Age anything with one knob.',
+    short: 'Worn tape, a dull top end and the grit of a sample hold. Turn it up and the sound gets older.',
+    about: ['Dirty up a drum loop, push a sample into a dusty memory, or give a clean track some history.'],
+    features: [
+      { label: 'One knob', body: 'Everything you need, nothing you have to tweak.' },
+    ],
     target: 'TsukuyomiLoFi',
     code: 'TsLf',
     dawCategory: 'Fx, Distortion',
@@ -369,35 +313,40 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'tsukuyomi-8-bit',
     name: 'Tsukuyomi 8 Bit',
     group: 'effect',
-    kind: 'Effect · Distortion, one knob',
+    kind: 'Bit crusher',
     price: '$19',
-    hero: 'One knob. Bit depth and sample-rate crush.',
-    short: 'The master 8 BIT from the Mix / Master section as its own plugin. Low-bit crunch for sampler and game textures.',
-    about: ['One knob, taken straight from the drum engine’s master section.'],
-    controls: [{ label: 'Amount', body: 'Starts at 50%.' }],
-    notes: ['No tail.'],
+    hero: 'Crush it down to crunch.',
+    short: 'Bit depth and sample rate reduction on a single knob, for low-bit crunch and game-console grit.',
+    about: ['Turn a clean drum hit into a crunchy chip-tune hit, or add a gritty edge to a sampler layer.'],
+    features: [
+      { label: 'One knob', body: 'Bit depth and sample rate crush together, from a hint of grit to pure noise.' },
+    ],
     target: 'TsukuyomiBit',
     code: 'Ts8b',
     dawCategory: 'Fx, Distortion',
     icon: 'solar:gameboy-linear',
   },
 
-  /* ───────────── Analog colour ───────────── */
+  /* ───────────── Analog EQ ───────────── */
   {
     slug: 'iseve-1095',
     name: 'Iseve 1095',
     group: 'analog',
-    kind: 'Analog colour · EQ',
+    kind: 'Console EQ',
     price: '$39',
-    hero: 'Console EQ with analog colour.',
+    hero: 'Console weight for any track.',
     short:
-      'Neve-style console EQ with high, mid and low bands, a high-pass filter, and drive, input, output, noise, vinyl and blend controls.',
-    about: ['The Iseve 1095 analog model on its own. The inserted analog stage is on by default.'],
-    controls: [
-      { label: 'EQ', body: 'High, mid and low; high-pass filter; EQ in and out; polarity.' },
-      { label: 'Colour', body: 'Drive, colour, input, output, blend, noise and vinyl.' },
+      'Thick, warm, dimensional EQ with a console-style stage behind it. Three bands, a high-pass filter, and drive, noise and vinyl for extra character.',
+    about: [
+      'Put it across a drum bus, a vocal or a mix and the sound gets wider and heavier. The analog stage is on from the first moment you open it.',
     ],
-    character: 'Thick, warm and dimensional.',
+    features: [
+      { label: 'Three-band EQ', body: 'High, mid and low bands with a high-pass filter for clean low end.' },
+      { label: 'Drive and colour', body: 'Push the stage for warmth, weight and harmonics.' },
+      { label: 'Noise and vinyl', body: 'Add the texture of old gear when the track needs it.' },
+      { label: 'Blend', body: 'Mix the coloured signal against the original.' },
+    ],
+    notes: ['Modeled on the behaviour of classic console gear. Not a claimed clone of specific hardware.'],
     target: 'Iseve',
     code: 'Isev',
     dawCategory: 'Fx, EQ',
@@ -408,20 +357,19 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'ipi',
     name: 'IPI',
     group: 'analog',
-    kind: 'Analog colour · EQ',
+    kind: 'Parametric and graphic EQ',
     price: '$39',
-    hero: 'Punchy, forward EQ with graphic EQ mode.',
+    hero: 'Punchy, forward, aggressive.',
     short:
-      'Preamp grit into a three-band parametric EQ plus a 10-band graphic EQ, with shelves and a filter.',
-    about: ['The IPI analog model on its own.'],
-    controls: [
-      { label: 'Preamp', body: 'Grit and input.' },
-      { label: 'Parametric EQ', body: 'Three bands.' },
-      { label: 'Graphic EQ', body: '10 bands from 31 Hz to 16 kHz.' },
-      { label: 'Shelves and filter', body: 'With independent EQ and GEQ power.' },
-      { label: 'Colour', body: 'Output, blend, noise and vinyl.' },
+      'Preamp grit into a three-band parametric EQ and a ten-band graphic EQ. Surgical when you need it, forceful when you do not.',
+    about: ['Dig into a problem with the parametric bands, then shape the whole curve on the graphic side. The preamp adds the bite that makes it feel alive.'],
+    features: [
+      { label: 'Preamp grit', body: 'Add attitude before the EQ ever touches the signal.' },
+      { label: 'Parametric EQ', body: 'Three bands for precise cuts and boosts.' },
+      { label: 'Graphic EQ', body: 'Ten bands from 31 Hz to 16 kHz for fast, broad shaping.' },
+      { label: 'Shelves and filter', body: 'Clean up the extremes and open up the top.' },
     ],
-    character: 'Punchy, forward and aggressive.',
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IPI',
     code: 'IpiA',
     dawCategory: 'Fx, EQ',
@@ -432,19 +380,19 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'isitech',
     name: 'IsiTech',
     group: 'analog',
-    kind: 'Analog colour · EQ',
+    kind: 'Program EQ',
     price: '$39',
-    hero: 'Boost-and-cut program EQ.',
+    hero: 'Boost and cut. Big but tight.',
     short:
-      'Passive-style program EQ with low and high boost, attenuate and frequency controls, high bandwidth, and a high-cut selector.',
-    about: ['The IsiTech analog model on its own. Boost and cut together for the classic big-but-tight low end.'],
-    controls: [
-      { label: 'Low', body: 'Boost, attenuate, and frequency.' },
-      { label: 'High', body: 'Boost, attenuate, frequency, and bandwidth.' },
-      { label: 'High cut', body: 'Selector.' },
-      { label: 'Colour', body: 'Drive, input, output, blend, noise and vinyl.' },
+      'A passive-style program EQ for low-end force and open highs. Boost and cut at the same frequency and the bottom gets big without getting soft.',
+    about: ['Smooth, polished and generous. It is the EQ you reach for when a kick, a bass or a mix bus needs to feel bigger without losing control.'],
+    features: [
+      { label: 'Low boost and attenuate', body: 'Stack both at the same frequency for a full, controlled low end.' },
+      { label: 'High boost and bandwidth', body: 'Open the top with a width you choose.' },
+      { label: 'High cut', body: 'Soften harsh top end with a simple selector.' },
+      { label: 'Drive and colour', body: 'Add warmth, noise and vinyl as needed.' },
     ],
-    character: 'Smooth, big and polished.',
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IsiTech',
     code: 'Istc',
     dawCategory: 'Fx, EQ',
@@ -457,17 +405,18 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'isheen',
     name: 'Isheen',
     group: 'compressor',
-    kind: 'Compressor · Character',
+    kind: 'Colour compressor',
     price: '$29',
-    hero: 'A harmonic colour compressor.',
-    short: 'Velvet or Bite before compression, presence, Rage, and a MIX control for parallel blend.',
-    about: ['The Isheen compressor on one slot.'],
-    controls: [
-      { label: 'Core', body: 'On, OS (oversampling), MIX, OUT.' },
-      { label: 'Velvet or Bite', body: 'Pre-compression colour.' },
-      { label: 'Presence and Rage', body: 'Add top-end bite and push the character.' },
+    hero: 'Compression with a shine.',
+    short: 'A harmonic colour compressor. Choose Velvet or Bite before it squeezes, add presence, and push it with Rage.',
+    about: ['For sounds that need to be controlled and exciting at the same time. Use it as an insert, or blend it in for parallel shine.'],
+    features: [
+      { label: 'Velvet or Bite', body: 'Pick the colour the signal gets before compression.' },
+      { label: 'Presence', body: 'Lift the top and bring the sound forward.' },
+      { label: 'Rage', body: 'Push it hard when the track needs attitude.' },
+      { label: 'Mix', body: 'Blend with the dry signal for parallel compression, latency aligned.' },
     ],
-    notes: ['MIX at 100% is an insert. Lower it to blend the compressed signal with the dry, latency-aligned signal.'],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IsiTop',
     code: 'ITop',
     dawCategory: 'Fx, Dynamics',
@@ -477,16 +426,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'isibox',
     name: 'Isibox',
     group: 'compressor',
-    kind: 'Compressor · Variable-mu',
+    kind: 'Variable-mu compressor',
     price: '$29',
-    hero: 'Punch from a variable-mu style compressor.',
-    short: 'A feedback variable-mu style design that trades thickness against transient.',
-    about: ['The Isibox compressor on one slot.'],
-    controls: [
-      { label: 'Core', body: 'On, OS, MIX, OUT.' },
-      { label: 'Thickness versus transient', body: 'Decide how much body and how much snap survives.' },
+    hero: 'Thickness with punch.',
+    short: 'A feedback variable-mu style compressor that lets you trade weight for snap with a single move.',
+    about: ['Beefy on drums, glue on a bus, and still lively when you want the transients to speak.'],
+    features: [
+      { label: 'Thickness versus transient', body: 'Decide how much body and how much bite survives.' },
+      { label: 'Mix', body: 'Blend with the dry signal for parallel punch, latency aligned.' },
+      { label: 'Oversampling', body: 'Cleaner high end when you push it.' },
     ],
-    notes: ['MIX at 100% is an insert. Lower it for parallel punch.'],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IsiPunch',
     code: 'IPun',
     dawCategory: 'Fx, Dynamics',
@@ -496,16 +446,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'icarus',
     name: 'Icarus',
     group: 'compressor',
-    kind: 'Compressor · Tube, Smash',
+    kind: 'Tube compressor',
     price: '$29',
-    hero: 'Smash and tube drive, from aggressive to smooth.',
-    short: 'A morphing tube-style design with Aggressive, Dense and Smooth characters and impact.',
-    about: ['The Icarus compressor on one slot.'],
-    controls: [
-      { label: 'Core', body: 'On, OS, MIX, OUT.' },
-      { label: 'Character', body: 'Aggressive, Dense or Smooth, with character and compression controls.' },
+    hero: 'Smash it, or let it glow.',
+    short: 'A tube-style compressor that morphs between Aggressive, Dense and Smooth, with the impact to flatten a drum bus or the grace to polish a vocal.',
+    about: ['One compressor with three personalities. Pick the character, push the drive, and blend it in to taste.'],
+    features: [
+      { label: 'Aggressive, Dense, Smooth', body: 'Three characters, from raw to polished.' },
+      { label: 'Impact', body: 'Add weight and presence to the hit.' },
+      { label: 'Mix', body: 'Blend with the dry signal for parallel smash, latency aligned.' },
     ],
-    notes: ['MIX at 100% is an insert. Lower it for parallel smash.'],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IsiSmash',
     code: 'ISma',
     dawCategory: 'Fx, Dynamics',
@@ -515,16 +466,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'isi-76',
     name: 'ISI 76',
     group: 'compressor',
-    kind: 'Compressor · FET',
+    kind: 'FET compressor',
     price: '$29',
-    hero: 'A fast FET grab with ratio buttons.',
-    short: 'A fast FET compressor with ratio buttons 4, 8, 12, 20 and ALL.',
-    about: ['The ISI 76 compressor on one slot.'],
-    controls: [
-      { label: 'Core', body: 'On, OS, MIX, OUT.' },
-      { label: 'Ratio', body: '4, 8, 12, 20 or ALL.' },
+    hero: 'A fast grab with ratio buttons.',
+    short: 'A fast FET compressor with 4, 8, 12, 20 and all-buttons-in ratios. Snappy, forward and exciting on drums, bass and vocals.',
+    about: ['Catch transients, add excitement and bring a sound right to the front of the mix.'],
+    features: [
+      { label: 'Ratio buttons', body: '4, 8, 12, 20 or ALL for everything from gentle to violent.' },
+      { label: 'Fast response', body: 'Grabs the hit instantly and lets the body bloom.' },
+      { label: 'Mix', body: 'Blend with the dry signal for parallel grab, latency aligned.' },
     ],
-    notes: ['MIX at 100% is an insert. Lower it for parallel grab.'],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'Isi76',
     code: 'I76a',
     dawCategory: 'Fx, Dynamics',
@@ -534,16 +486,17 @@ export const PLUGINS: PluginSpec[] = [
     slug: 'ia2a',
     name: 'IA2A',
     group: 'compressor',
-    kind: 'Compressor · Optical',
+    kind: 'Optical compressor',
     price: '$29',
-    hero: 'Slow optical glue.',
-    short: 'A slow optical leveller with Peak Reduction and Gain.',
-    about: ['The IA2A compressor on one slot.'],
-    controls: [
-      { label: 'Core', body: 'On, OS, MIX, OUT.' },
-      { label: 'Peak Reduction and Gain', body: 'How much it levels, and how much level you take back.' },
+    hero: 'Slow, smooth glue.',
+    short: 'A slow optical leveller that evens out a performance and holds a track together without drawing attention to itself.',
+    about: ['Two controls and a lot of feel. Ideal for vocals, bass, and any sound that just needs to sit.'],
+    features: [
+      { label: 'Peak Reduction', body: 'Decide how much it levels.' },
+      { label: 'Gain', body: 'Take the level back and enjoy the glue.' },
+      { label: 'Mix', body: 'Blend with the dry signal for parallel glue, latency aligned.' },
     ],
-    notes: ['MIX at 100% is an insert. Lower it for parallel glue.'],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
     target: 'IsiIA2A',
     code: 'IIA2',
     dawCategory: 'Fx, Dynamics',
@@ -555,54 +508,64 @@ export type PluginBundle = {
   slug: string
   name: string
   tagline: string
+  description: string
   launchPrice: string
   regularPrice: string
-  includes: string[]
+  /** Which plugins are in it */
+  groups?: PluginGroupId[]
+  all?: boolean
+  extras?: string[]
   badge?: string
+  icon: string
 }
-
-const EFFECT_NAMES = PLUGINS.filter((p) => p.group === 'effect').map((p) => p.name)
 
 export const PLUGIN_BUNDLES: PluginBundle[] = [
   {
     slug: 'tsukuyomi-complete',
     name: 'Tsukuyomi Complete',
     tagline: 'A complete drum production environment.',
+    description:
+      'The drum instrument, the sound designer, the full effects rack, the parallel compressor rack and every single Tsukuyomi effect. Everything you need to write, shape, colour and finish drums, in one purchase.',
     launchPrice: '$149',
     regularPrice: '$249',
-    includes: [
-      'Tsukuyomi Drum Engine',
-      'Tsukuyomi Sound',
-      'Tsukuyomi FX',
-      'Tsukuyomi Comp',
-      `All ${EFFECT_NAMES.length} individual Tsukuyomi effects`,
-    ],
+    extras: ['tsukuyomi-drum-engine', 'tsukuyomi-sound', 'tsukuyomi-fx', 'tsukuyomi-comp'],
+    groups: ['effect'],
     badge: 'Flagship',
+    icon: 'solar:music-note-2-linear',
   },
   {
     slug: 'analog-collection',
     name: 'Isiata Analog Collection',
-    tagline: 'Three console and program EQ models.',
+    tagline: 'Three EQs with real weight.',
+    description:
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ. Three different ways to shape a sound, each with its own character.',
     launchPrice: '$79',
     regularPrice: '$117',
-    includes: ['Iseve 1095', 'IPI', 'IsiTech'],
+    groups: ['analog'],
+    icon: 'solar:equalizer-minimalistic-linear',
   },
   {
     slug: 'compressor-collection',
     name: 'Isiata Compressor Collection',
-    tagline: 'Five compressor characters, each on its own slot.',
+    tagline: 'Five compressors. Five personalities.',
+    description:
+      'Colour, variable-mu thickness, tube smash, FET grab and optical glue. Everything from gentle levelling to full-on parallel destruction.',
     launchPrice: '$79',
     regularPrice: '$145',
-    includes: ['Isheen', 'Isibox', 'Icarus', 'ISI 76', 'IA2A'],
+    groups: ['compressor'],
+    icon: 'solar:layers-minimalistic-linear',
   },
   {
     slug: 'everything',
     name: 'Isiata Everything Bundle',
-    tagline: 'All 21 plugins, including future qualifying updates to these products.',
+    tagline: 'The entire Isiata plugin catalog.',
+    description:
+      'Every plugin we make, including future qualifying updates to these products. The best way to own the lot.',
     launchPrice: '$199',
     regularPrice: '$399',
-    includes: ['All 21 plugins'],
+    all: true,
     badge: 'Best overall value',
+    icon: 'solar:crown-linear',
   },
 ]
 
@@ -612,27 +575,33 @@ export const PLUGIN_SHARED_FACTS = [
     body: 'Windows: VST3 and Standalone. macOS: VST3, AU and Standalone. The Tsukuyomi Drum Engine also ships AAX for Pro Tools.',
   },
   {
-    label: 'Same engine, same sound',
-    body: 'The plugins reuse the drum engine’s DSP and panels. A setting sounds the same in a plugin as on a Tsukuyomi pad.',
-  },
-  {
-    label: 'Architectural models',
-    body: 'The analog and compressor models are built from the behaviour of classic gear. They are not claimed clones of specific hardware.',
-  },
-  {
     label: 'Install',
     body: 'Every plugin ships as its own folder and zip, plus a bundle with Install All and Uninstall All.',
   },
-  {
-    label: 'Made by',
-    body: 'Isiata. Created by Brian Marshall.',
-  },
+  { label: 'Made by', body: 'Isiata. Created by Brian Marshall.' },
 ] as const
 
 export const PLUGIN_PRICE_NOTE = 'Prices in USD.'
 
 export function getPlugin(slug: string): PluginSpec | undefined {
   return PLUGINS.find((p) => p.slug === slug)
+}
+
+export function getBundle(slug: string): PluginBundle | undefined {
+  return PLUGIN_BUNDLES.find((b) => b.slug === slug)
+}
+
+export function getBundlePlugins(bundle: PluginBundle): PluginSpec[] {
+  if (bundle.all) return PLUGINS
+  const extras = (bundle.extras ?? [])
+    .map((slug) => getPlugin(slug))
+    .filter((p): p is PluginSpec => Boolean(p))
+  const grouped = PLUGINS.filter((p) => bundle.groups?.includes(p.group) && !bundle.extras?.includes(p.slug))
+  return [...extras, ...grouped]
+}
+
+export function bundleHref(bundle: PluginBundle): string {
+  return `${PLUGIN_BUNDLES_HREF}/${bundle.slug}`
 }
 
 export function pluginHref(plugin: PluginSpec): string {
@@ -644,3 +613,13 @@ export function getPluginsByGroup(group: PluginGroupId): PluginSpec[] {
 }
 
 export const PLUGIN_COUNT = PLUGINS.length
+
+/** Plugins surfaced on the main Tools page before "See all". */
+export const FEATURED_PLUGIN_SLUGS = [
+  'tsukuyomi-drum-engine',
+  'tsukuyomi-sound',
+  'tsukuyomi-fx',
+  'iseve-1095',
+  'isheen',
+  'tsukuyomi-reverb',
+] as const

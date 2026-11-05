@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { ISIATA_LOGO_URL } from '@/lib/constants'
-import { PLUGIN_COUNT } from '@/lib/tools/plugins'
 
 export const metadata: Metadata = buildPageMetadata({
-  title: `Isiata Plugins | ${PLUGIN_COUNT} Drum, Effect, EQ and Compressor Plugins`,
+  title: 'Plugins | Drums, Effects, EQ and Compressors',
   description:
     'The Isiata plugin line: the Tsukuyomi Drum Engine, Tsukuyomi Sound, tab plugins, single effects, analog EQ colour and five compressors. VST3, AU and Standalone.',
   path: '/tools/plugins',

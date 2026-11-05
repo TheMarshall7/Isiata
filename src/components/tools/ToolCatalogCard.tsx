@@ -85,9 +85,10 @@ export function ToolCatalogCard({ item }: ToolCatalogCardProps) {
 interface ToolCatalogGridProps {
   items: ToolCatalogItem[]
   title?: string
+  seeAll?: { href: string; label: string }
 }
 
-export function ToolCatalogGrid({ items, title }: ToolCatalogGridProps) {
+export function ToolCatalogGrid({ items, title, seeAll }: ToolCatalogGridProps) {
   return (
     <div>
       {title && (
@@ -98,6 +99,17 @@ export function ToolCatalogGrid({ items, title }: ToolCatalogGridProps) {
           <ToolCatalogCard key={item.slug} item={item} />
         ))}
       </div>
+      {seeAll && (
+        <div className="mt-8">
+          <Link
+            href={seeAll.href}
+            className="inline-flex items-center gap-2 border border-[#d8aa67]/40 px-6 py-3 text-sm font-medium text-[#ece3d7] transition-colors hover:border-[#d8aa67]/75 hover:bg-[#d8aa67]/10"
+          >
+            {seeAll.label}
+            <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" />
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

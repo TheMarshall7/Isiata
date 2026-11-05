@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { TypeWriter } from '@/components/ui/TypeWriter'
+import { PLUGINS_HREF } from '@/lib/tools/plugins'
 import { ToolCatalogGrid } from '@/components/tools/ToolCatalogCard'
 import {
   TOOL_CATEGORIES,
@@ -13,6 +14,8 @@ import {
   getCatalogByCategory,
   getCatalogGroups,
 } from '@/lib/tools/catalog'
+
+const PLUGINS_SEE_ALL = { href: PLUGINS_HREF, label: 'See all plugins' }
 
 function ComingSoon() {
   return (
@@ -34,7 +37,12 @@ function CatalogContent({ activeTab }: { activeTab: ToolCategoryId }) {
     return (
       <div className="space-y-16">
         {groups.map((group) => (
-          <ToolCatalogGrid key={group.category} title={group.label} items={group.items} />
+          <ToolCatalogGrid
+            key={group.category}
+            title={group.label}
+            items={group.items}
+            seeAll={group.category === 'plugins' ? PLUGINS_SEE_ALL : undefined}
+          />
         ))}
       </div>
     )
@@ -43,7 +51,7 @@ function CatalogContent({ activeTab }: { activeTab: ToolCategoryId }) {
   const items = getCatalogByCategory(activeTab)
   if (items.length === 0) return <ComingSoon />
 
-  return <ToolCatalogGrid items={items} />
+  return <ToolCatalogGrid items={items} seeAll={activeTab === 'plugins' ? PLUGINS_SEE_ALL : undefined} />
 }
 
 export default function ToolsPage() {

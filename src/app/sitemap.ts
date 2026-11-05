@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllGarmentSlugs } from '@/lib/garments/catalog'
 import { getAllTierSlugs } from '@/lib/systems/funnel-content'
 import { siteUrl } from '@/lib/seo/site'
-import { PLUGINS } from '@/lib/tools/plugins'
+import { PLUGINS, PLUGIN_BUNDLES } from '@/lib/tools/plugins'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteUrl
@@ -61,6 +61,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+    })),
+    ...PLUGIN_BUNDLES.map((b) => ({
+      url: `${baseUrl}/tools/plugins/bundles/${b.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
     })),
     {
       url: `${baseUrl}/tools/toolbox`,
