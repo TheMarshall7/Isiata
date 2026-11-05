@@ -3,12 +3,13 @@ import { TSUKUYOMI_DRUM_ENGINE_HREF, TSUKUYOMI_IMAGE_ROOT } from './tsukuyomi-dr
 export const PLUGINS_HREF = '/tools/plugins'
 export const PLUGIN_BUNDLES_HREF = `${PLUGINS_HREF}/bundles`
 
-export type PluginGroupId = 'instrument' | 'tab' | 'effect' | 'analog' | 'compressor'
+export type PluginGroupId = 'instrument' | 'tab' | 'effect' | 'saturation' | 'analog' | 'compressor'
 
 export const PLUGIN_GROUPS: { id: PluginGroupId; label: string }[] = [
   { id: 'instrument', label: 'Instruments' },
   { id: 'tab', label: 'Multi-effects' },
   { id: 'effect', label: 'Effects' },
+  { id: 'saturation', label: 'Saturation' },
   { id: 'analog', label: 'Analog EQ' },
   { id: 'compressor', label: 'Compressors' },
 ]
@@ -29,9 +30,9 @@ export type PluginSpec = {
   notes?: string[]
   whoFor?: string
   /** Plugin ID info, kept for support/DAW lookup */
-  target: string
-  code: string
-  dawCategory: string
+  target?: string
+  code?: string
+  dawCategory?: string
   /** Product image, served from /public */
   image?: { src: string; width: number; height: number }
   /** Optional link out for products that already have their own page */
@@ -327,6 +328,35 @@ export const PLUGINS: PluginSpec[] = [
     icon: 'solar:gameboy-linear',
   },
 
+  /* ───────────── Saturation ───────────── */
+  {
+    slug: 'isi-pandora',
+    name: 'ISI Pandora',
+    group: 'saturation',
+    kind: 'Dual tube saturator',
+    price: '$39',
+    hero: 'Two tubes. Endless heat.',
+    short:
+      'A dual tube saturator that takes a sound from a warm glow to a full-blown burn. Stack a pentode and a triode, pick where the heat lands, and finish with a touch of air.',
+    about: [
+      'Pandora gives you two tube stages that work together. Drive the pentode for bite and edge, lean on the triode for body and richness, and watch the Heat meter show you exactly how hard you are pushing. It works on a single drum hit, a bass, a vocal or a whole mix.',
+    ],
+    features: [
+      { label: 'Pentode and Triode', body: 'Two distinct tube voices that you can run on their own or push together.' },
+      { label: 'Saturation', body: 'A dedicated drive stage ahead of the tubes for extra weight and harmonics.' },
+      { label: 'Sat Freq', body: 'Aim the saturation at the lows, the highs, or the whole signal.' },
+      { label: 'Heat meter', body: 'See the heat building on the way in and out, so you know what the tubes are doing.' },
+      { label: 'Style', body: 'Switch the character between Tube and the Iseve, IPI and IsiTech flavours.' },
+      { label: 'Air', body: 'Add open, silky top end after the saturation, without making it harsh.' },
+      { label: 'Tight and Mix', body: 'Keep the low end controlled, and blend in as much or as little as you want.' },
+      { label: 'Stereo, Mid or Side', body: 'Saturate the whole image, the centre, or just the sides.' },
+      { label: 'Oversampling and Auto Gain', body: 'Up to 4x oversampling for clean harmonics, and level matching so you judge it by ear, not loudness.' },
+    ],
+    whoFor: 'Producers who want warmth, grit and presence on drums, bass, vocals and buses, from subtle glue to heavy distortion.',
+    image: { src: '/plugins/isi-pandora.png', width: 1060, height: 560 },
+    icon: 'solar:fire-linear',
+  },
+
   /* ───────────── Analog EQ ───────────── */
   {
     slug: 'iseve-1095',
@@ -619,7 +649,7 @@ export const FEATURED_PLUGIN_SLUGS = [
   'tsukuyomi-drum-engine',
   'tsukuyomi-sound',
   'tsukuyomi-fx',
+  'isi-pandora',
   'iseve-1095',
   'isheen',
-  'tsukuyomi-reverb',
 ] as const
