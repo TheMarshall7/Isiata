@@ -50,7 +50,7 @@ export const getLockedModes = (isPremium: boolean): GameMode[] => {
 
     const allModes: GameMode[] = [
         'interval', 'chord', 'progression', 'scale',
-        'keyFinder', 'numberSystem', 'melody', 'tempo'
+        'keyFinder', 'numberSystem', 'melody', 'tempo', 'frequency'
     ];
 
     return allModes.filter(mode => !FEATURES.FREE_MODES.includes(mode));

@@ -27,24 +27,24 @@ export const ResourceFilters: React.FC<ResourceFiltersProps> = ({
     return (
         <div className="flex flex-col sm:flex-row gap-4 mb-6 px-4 lg:px-0">
             {showIntervalToggle && (
-                <div className="flex items-center gap-2 bg-surface-raised/50 backdrop-blur-sm rounded-lg p-2 border border-white/10">
-                    <span className="text-sm font-medium text-zinc-300 px-2">Direction:</span>
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-black/40 p-1 backdrop-blur-sm">
+                    <span className="et-label px-3">Direction:</span>
                     <button
                         onClick={() => onIntervalDirectionChange('asc')}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                             intervalDirection === 'asc'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'text-zinc-400 hover:bg-white/[0.05] hover:text-white'
                         }`}
                     >
                         Ascending
                     </button>
                     <button
                         onClick={() => onIntervalDirectionChange('desc')}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                             intervalDirection === 'desc'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'text-zinc-400 hover:bg-white/[0.05] hover:text-white'
                         }`}
                     >
                         Descending
@@ -53,12 +53,12 @@ export const ResourceFilters: React.FC<ResourceFiltersProps> = ({
             )}
 
             {showDifficultyFilter && (
-                <div className="flex items-center gap-2 bg-surface-raised/50 backdrop-blur-sm rounded-lg p-2 border border-white/10">
-                    <span className="text-sm font-medium text-zinc-300 px-2">Difficulty:</span>
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-black/40 p-1 backdrop-blur-sm">
+                    <span className="et-label px-3">Difficulty:</span>
                     <select
                         value={difficultyFilter}
                         onChange={(e) => onDifficultyFilterChange(e.target.value as Difficulty | 'all')}
-                        className="px-4 py-2 rounded-lg text-sm font-medium bg-surface-raised border border-white/10 text-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="rounded-full bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-200 [&>option]:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-[#d8aa67]/60"
                     >
                         <option value="all">All</option>
                         <option value="easy">Easy</option>
@@ -75,7 +75,7 @@ export const ResourceFilters: React.FC<ResourceFiltersProps> = ({
                         placeholder="Search..."
                         value={searchQuery}
                         onChange={(e) => onSearchChange(e.target.value)}
-                        className="w-full px-4 py-2 rounded-lg text-sm bg-surface-raised/50 backdrop-blur-sm border border-white/10 text-zinc-300 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full rounded-full px-5 py-2.5 text-sm bg-black/40 backdrop-blur-sm border border-white/[0.07] text-zinc-300 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#d8aa67]/60"
                     />
                 </div>
             )}

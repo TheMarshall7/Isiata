@@ -11,7 +11,7 @@ export const Paywall: React.FC<PaywallProps> = ({ visible, onUnlock }) => {
     return (
         <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4">
             <div className="bg-surface-raised rounded-2xl border border-white/10 p-8 max-w-sm w-full text-center depth-shadow-lg animate-fade-in">
-                <div className="w-16 h-16 bg-orange-500/15 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#d8aa67]/15 rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>

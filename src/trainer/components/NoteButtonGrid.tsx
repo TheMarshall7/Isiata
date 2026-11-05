@@ -18,7 +18,7 @@ export const NoteButtonGrid: React.FC<NoteButtonGridProps> = ({
     return (
         <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full max-w-2xl mx-auto p-4">
             {notes.map((note) => {
-                let statusClass = "bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-orange-500 hover:text-orange-400 hover:bg-white/10 shadow-sm";
+                let statusClass = "bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-[#d8aa67] hover:text-[#f0c681] hover:bg-white/10 shadow-sm";
 
                 if (selectedNote === note) {
                     if (correctNote === note) {
@@ -26,7 +26,7 @@ export const NoteButtonGrid: React.FC<NoteButtonGridProps> = ({
                     } else if (correctNote !== null) {
                         statusClass = "bg-gradient-to-br from-red-50 to-red-100/50 border-2 border-red-300 text-red-600 shadow-md";
                     } else {
-                        statusClass = "bg-white/10 border-2 border-orange-500 text-orange-400 font-semibold shadow-md";
+                        statusClass = "bg-white/10 border-2 border-[#d8aa67] text-[#f0c681] font-semibold shadow-md";
                     }
                 }
 

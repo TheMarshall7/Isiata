@@ -39,10 +39,10 @@ export const DegreeGrid: React.FC<DegreeGridProps> = ({
         
         if (isSelected && degree === lastSelected) {
             // Most recently selected
-            return 'bg-gradient-to-br from-white to-zinc-300 border-2 border-orange-500 text-black font-bold shadow-lg shadow-white/10';
+            return 'bg-gradient-to-br from-white to-zinc-300 border-2 border-[#d8aa67] text-black font-bold shadow-lg shadow-white/10';
         }
 
-        return 'bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-orange-500 hover:text-orange-400 hover:bg-white/10 shadow-sm';
+        return 'bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-[#d8aa67] hover:text-[#f0c681] hover:bg-white/10 shadow-sm';
     };
 
     return (

@@ -1,5 +1,14 @@
 import React from 'react';
+import { Check, Flame, Gauge, Star, Target } from 'lucide-react';
 import type { DailyChallenge } from '../logic/dailyChallenges';
+
+const TYPE_ICON = {
+    questions: Target,
+    streak: Flame,
+    perfect: Star,
+    time: Gauge,
+    difficulty: Gauge,
+} as const;
 
 interface DailyChallengeProps {
     challenge: DailyChallenge;
@@ -7,51 +16,53 @@ interface DailyChallengeProps {
 }
 
 export const DailyChallengeCard: React.FC<DailyChallengeProps> = ({ challenge, index }) => {
-    const percentage = Math.min(100, (challenge.progress / challenge.target) * 100);
-    
+    const pct = Math.min(100, (challenge.progress / challenge.target) * 100);
+    const Icon = TYPE_ICON[challenge.type] ?? Target;
+    const size = 40;
+    const r = 17;
+    const c = 2 * Math.PI * r;
+
     return (
-        <div 
-            className={`glass-card transition-all duration-300 cursor-pointer group ${
-                challenge.completed 
-                    ? 'border-green-300/50 bg-gradient-to-br from-green-50/50 to-green-100/30' 
-                    : 'border-white/20'
-            } hover:scale-[1.02] hover:shadow-xl hover:-translate-y-1 animate-fade-in-up`}
-            style={{
-                animationDelay: `${index * 100}ms`,
-                animationFillMode: 'both'
-            }}
+        <div
+            className={`et-anim-rise flex items-center gap-3 rounded-xl border p-3 transition-colors duration-300 ${
+                challenge.completed ? 'border-green-500/30 bg-green-950/20' : 'border-white/[0.07] bg-white/[0.02] hover:border-[#d8aa67]/30'
+            }`}
+            style={{ animationDelay: `${index * 70}ms` }}
         >
-            <div className="flex items-start justify-between mb-3">
-                <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors duration-300">
-                            {challenge.description}
-                        </span>
-                        {challenge.completed && (
-                            <div className="flex items-center justify-center w-5 h-5 rounded-full bg-green-500 text-white text-xs font-bold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
-                                ✓
-                            </div>
-                        )}
-                    </div>
-                    <div className="text-xs text-zinc-500 font-medium group-hover:text-zinc-400 transition-colors duration-300">
-                        {challenge.progress} / {challenge.target}
-                    </div>
-                </div>
-                <div className="text-right">
-                    <div className="text-sm font-bold text-zinc-300 bg-white/5 border border-white/10 px-3 py-1 rounded-full group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300">
-                        +{challenge.reward.xp} XP
-                    </div>
-                </div>
+            <div className="relative shrink-0" style={{ width: size, height: size }}>
+                <svg width={size} height={size} className="-rotate-90">
+                    <circle cx={20} cy={20} r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={2.5} />
+                    <circle
+                        cx={20}
+                        cy={20}
+                        r={r}
+                        fill="none"
+                        stroke={challenge.completed ? '#4ade80' : '#d8aa67'}
+                        strokeWidth={2.5}
+                        strokeLinecap="round"
+                        strokeDasharray={c}
+                        strokeDashoffset={c * (1 - pct / 100)}
+                        style={{ transition: 'stroke-dashoffset 0.8s ease' }}
+                    />
+                </svg>
+                <span className="absolute inset-0 flex items-center justify-center">
+                    {challenge.completed ? (
+                        <Check className="h-4 w-4 text-green-400" strokeWidth={3} />
+                    ) : (
+                        <Icon className="h-4 w-4 text-[#d8aa67]" strokeWidth={1.75} />
+                    )}
+                </span>
             </div>
-            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/20 group-hover:bg-white/10 transition-colors duration-300">
-                <div
-                    className={`h-full transition-all duration-500 group-hover:shadow-lg ${
-                        challenge.completed 
-                            ? 'bg-gradient-to-r from-green-400 to-green-600 shadow-lg shadow-green-500/30 group-hover:shadow-green-500/50' 
-                            : 'brand-progress-fill shadow-lg shadow-white/5 group-hover:shadow-white/10'
-                    }`}
-                    style={{ width: `${percentage}%` }}
-                />
+            <div className="min-w-0 flex-1">
+                <div className={`text-xs font-medium leading-snug ${challenge.completed ? 'text-zinc-500 line-through decoration-zinc-600' : 'text-zinc-200'}`}>
+                    {challenge.description}
+                </div>
+                <div className="mt-1 flex items-center gap-2 text-[10px] tabular-nums">
+                    <span className="text-zinc-500">
+                        {challenge.progress}/{challenge.target}
+                    </span>
+                    <span className={challenge.completed ? 'text-green-400/80' : 'text-[#f0c681]'}>+{challenge.reward.xp} XP</span>
+                </div>
             </div>
         </div>
     );
@@ -63,18 +74,22 @@ interface DailyChallengesProps {
 
 export const DailyChallenges: React.FC<DailyChallengesProps> = ({ challenges }) => {
     if (challenges.length === 0) return null;
-    
-    const completedCount = challenges.filter(c => c.completed).length;
-    
+    const completedCount = challenges.filter((c) => c.completed).length;
+
     return (
-        <div className="glass-card mb-6 lg:mb-8 animate-fade-in-up">
-            <div className="flex justify-between items-center mb-6">
-                <h3 className="text-lg lg:text-xl font-bold text-white">Daily Challenges</h3>
-                <span className="text-xs lg:text-sm text-zinc-500 font-medium bg-surface-raised/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                    {completedCount} / {challenges.length} completed
+        <div>
+            <div className="mb-3 flex items-center justify-between">
+                <h3 className="et-label">Today&apos;s challenges</h3>
+                <span className="flex items-center gap-1.5">
+                    {challenges.map((c) => (
+                        <span key={c.id} className={`h-1.5 w-4 rounded-full ${c.completed ? 'bg-green-400' : 'bg-white/10'}`} />
+                    ))}
+                    <span className="ml-1 text-[10px] tabular-nums text-zinc-500">
+                        {completedCount}/{challenges.length}
+                    </span>
                 </span>
             </div>
-            <div className="space-y-4">
+            <div className="grid gap-2 sm:grid-cols-3">
                 {challenges.map((challenge, index) => (
                     <DailyChallengeCard key={challenge.id} challenge={challenge} index={index} />
                 ))}

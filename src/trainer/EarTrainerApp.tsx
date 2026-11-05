@@ -13,6 +13,7 @@ import { PlatinumGift } from './pages/PlatinumGift'
 import { PaymentSuccess } from './pages/PaymentSuccess'
 import { PaymentCancel } from './pages/PaymentCancel'
 import { DebugConsole } from './components/DebugConsole'
+import { ScrollbarVisibility } from '@/components/layout/ScrollbarVisibility'
 import { audioEngine } from './audio/audioEngine'
 import { attachGlobalAudioUnlock, setupVisibilityResumeHandler } from './audio/unlockAudio'
 
@@ -41,8 +42,48 @@ export default function EarTrainerApp() {
     setupAudio()
   }, [])
 
+  // When a Next bar appears, scroll just far enough that it sits in its natural
+  // place below the answers, so nothing it shares the screen with is covered.
+  useEffect(() => {
+    const reveal = (bar: HTMLElement) => {
+      const host = bar.parentElement
+      if (!host) return
+      const hostBottom = host.getBoundingClientRect().bottom + window.scrollY
+      const target = hostBottom - window.innerHeight
+      if (target > window.scrollY + 4) window.scrollTo({ top: target, behavior: 'smooth' })
+    }
+    const mo = new MutationObserver((records) => {
+      for (const r of records) {
+        r.addedNodes.forEach((n) => {
+          if (!(n instanceof HTMLElement)) return
+          const bar = n.classList.contains('trainer-next-bar') ? n : n.querySelector<HTMLElement>('.trainer-next-bar')
+          if (bar) setTimeout(() => reveal(bar), 60)
+        })
+      }
+    })
+    mo.observe(document.body, { childList: true, subtree: true })
+    return () => mo.disconnect()
+  }, [])
+
+  // Enter advances to the next question in every mode (clicks the bottom bar's button).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || e.repeat) return
+      const t = e.target as HTMLElement | null
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return
+      const btn = document.querySelector<HTMLButtonElement>('.trainer-next-bar button:not([disabled])')
+      if (btn) {
+        e.preventDefault()
+        btn.click()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   return (
     <div className="ear-trainer min-h-screen">
+    <ScrollbarVisibility />
     <BrowserRouter basename={BASE_PATH}>
       <GameProvider>
         <Routes>

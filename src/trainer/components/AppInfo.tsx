@@ -23,7 +23,7 @@ export const AppInfo: React.FC = () => {
             
             {isHovered && (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-surface-raised backdrop-blur-2xl rounded-2xl border border-white/10 depth-shadow-lg z-50 pointer-events-none animate-in fade-in slide-in-from-bottom-2 duration-200">
-                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-orange-500/40 to-transparent rounded-t-2xl"></div>
+                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-[#f0c681]/40 to-transparent rounded-t-2xl"></div>
                     
                     <div className="absolute top-3 right-3 z-10">
                         <img 

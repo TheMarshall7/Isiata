@@ -66,7 +66,7 @@ export const EarTrainerEmailGate: React.FC<EarTrainerEmailGateProps> = ({ onUnlo
               alt="ISIATA"
               className="w-16 h-16 mx-auto mb-6 object-contain opacity-90"
             />
-            <p className="text-xs font-semibold uppercase tracking-widest text-orange-400/90 mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#f0c681]/90 mb-3">
               Free · Ear Mastery
             </p>
             <h1 className="text-4xl md:text-5xl font-display uppercase tracking-normal text-gold leading-[0.95] mb-4">
@@ -83,7 +83,7 @@ export const EarTrainerEmailGate: React.FC<EarTrainerEmailGateProps> = ({ onUnlo
             <ul className="space-y-4">
               {BENEFITS.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3 text-sm text-zinc-300 leading-relaxed">
-                  <span className="text-orange-400 mt-0.5 shrink-0">✓</span>
+                  <span className="text-[#f0c681] mt-0.5 shrink-0">✓</span>
                   {benefit}
                 </li>
               ))}

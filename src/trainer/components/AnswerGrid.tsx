@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Check, X } from 'lucide-react';
 
 interface Option {
     id: string;
     name: string;
+    /** Optional secondary label shown at the right of the tile. */
+    hint?: string;
 }
 
 interface AnswerGridProps {
@@ -14,6 +17,7 @@ interface AnswerGridProps {
     compact?: boolean;
 }
 
+/** Answer tiles with number-key shortcuts (1–9) and dark-theme result states. */
 export const AnswerGrid: React.FC<AnswerGridProps> = ({
     options,
     onSelect,
@@ -22,25 +26,36 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
     selectedId,
     compact = false,
 }) => {
+    useEffect(() => {
+        if (disabled) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.metaKey || e.ctrlKey || e.altKey) return;
+            const t = e.target as HTMLElement | null;
+            if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+            const n = parseInt(e.key, 10);
+            if (n >= 1 && n <= Math.min(9, options.length)) {
+                e.preventDefault();
+                onSelect(options[n - 1].id);
+            }
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [disabled, options, onSelect]);
+
+    const answered = Boolean(selectedId && correctId);
+    const cols = options.length > 6 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2';
+
     return (
-        <div className={`grid grid-cols-2 w-full max-w-xl mx-auto ${compact ? 'gap-2 p-1' : 'gap-4 max-w-2xl p-4 md:grid-cols-2'}`}>
-            {options.map((option) => {
-                let statusClass = "bg-surface-raised/80 backdrop-blur-sm border-2 border-white/20 text-zinc-300 hover:border-orange-500 hover:text-orange-400 hover:bg-white/10 shadow-sm";
-
-                if (selectedId === option.id) {
-                    if (correctId === option.id) {
-                        statusClass = "bg-gradient-to-br from-green-50 to-green-100/50 border-2 border-green-400 text-green-700 font-bold shadow-lg shadow-green-500/20";
-                    } else if (correctId !== null) {
-                        statusClass = "bg-gradient-to-br from-red-50 to-red-100/50 border-2 border-red-300 text-red-600 shadow-md";
-                    } else {
-                        // Selected but not validated yet (immediate feedback usually comes with validation)
-                        statusClass = "bg-white/10 border-2 border-orange-500 text-orange-400 font-semibold shadow-md";
-                    }
-                }
-
-                // Show correct answer if wrong one was picked
-                if (selectedId && correctId === option.id && selectedId !== option.id) {
-                    statusClass = "bg-gradient-to-br from-green-50 to-green-100/50 border-2 border-green-300 text-green-700 shadow-md";
+        <div className={`grid ${cols} w-full mx-auto ${compact ? 'max-w-xl gap-2 sm:gap-2.5' : 'max-w-2xl gap-3 p-1'}`}>
+            {options.map((option, i) => {
+                const isSelected = selectedId === option.id;
+                const isCorrect = correctId === option.id;
+                let state = '';
+                if (answered) {
+                    if (isSelected && isCorrect) state = 'is-correct';
+                    else if (isSelected) state = 'is-wrong';
+                    else if (isCorrect) state = 'is-reveal';
+                    else state = 'is-dim';
                 }
 
                 return (
@@ -48,15 +63,22 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                         key={option.id}
                         onClick={() => onSelect(option.id)}
                         disabled={disabled}
-                        className={`
-              rounded-xl font-medium transition-all duration-300
-              ${compact ? 'h-11 sm:h-12 text-sm' : 'h-16 lg:h-20 rounded-2xl text-base lg:text-lg'}
-              ${statusClass}
-              disabled:cursor-not-allowed disabled:transform-none
-              active:scale-95 hover:scale-105
-            `}
+                        className={`et-answer ${state} ${compact ? 'h-12 sm:h-[3.25rem] text-sm' : 'h-14 lg:h-16 text-sm lg:text-base'}`}
                     >
-                        {option.name}
+                        {i < 9 && (
+                            <span className={`et-keycap shrink-0 ${state ? 'opacity-0' : ''}`} aria-hidden>
+                                {i + 1}
+                            </span>
+                        )}
+                        <span className="flex-1 truncate">{option.name}</span>
+                        {option.hint && !state && (
+                            <span className="shrink-0 text-[10px] tabular-nums tracking-wide text-zinc-500">{option.hint}</span>
+                        )}
+                        {state === 'is-correct' || state === 'is-reveal' ? (
+                            <Check className="h-4 w-4 shrink-0 text-green-400" strokeWidth={2.5} />
+                        ) : state === 'is-wrong' ? (
+                            <X className="h-4 w-4 shrink-0 text-red-400" strokeWidth={2.5} />
+                        ) : null}
                     </button>
                 );
             })}

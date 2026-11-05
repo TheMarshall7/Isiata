@@ -82,28 +82,33 @@ export const AchievementToast: React.FC<AchievementToastProps> = ({ achievement,
     const isPlatinumGift = achievement.id === 'mystery_platinum_gift';
 
     return (
-        <div 
-            className="fixed top-4 right-4 z-40 animate-slide-in-right pointer-events-auto cursor-pointer"
+        <div
+            className="fixed left-1/2 top-16 z-[65] w-[min(92vw,380px)] -translate-x-1/2 cursor-pointer sm:left-auto sm:right-5 sm:top-5 sm:translate-x-0 animate-fade-in"
             onClick={handleDismiss}
+            role="status"
         >
-            <div className={`text-white p-4 rounded-xl shadow-2xl max-w-sm ${
-                isPlatinumGift 
-                    ? 'bg-gradient-to-r from-yellow-400 via-orange-500 to-zinc-400 animate-pulse border-2 border-yellow-300' 
-                    : 'bg-gradient-to-r from-yellow-400 to-orange-500/50'
-            }`}>
-                <div className="flex items-center gap-3">
-                    <div className="flex-shrink-0">
+            <div
+                className={`et-hairline overflow-hidden rounded-2xl bg-[#0b0a09]/95 p-3.5 shadow-[0_20px_60px_-15px_rgba(216,170,103,0.45)] backdrop-blur-md ${isPlatinumGift ? 'ring-1 ring-[#f0c681]/60' : ''}`}
+                data-active="true"
+            >
+                <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#d8aa67]/15 blur-2xl" />
+                <div className="relative flex items-center gap-3.5">
+                    <div
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full [&_svg]:!h-6 [&_svg]:!w-6 [&_svg]:!text-[#1a1208]"
+                        style={{
+                            background: 'radial-gradient(circle at 30% 25%, #fff1d6 0%, #f0c681 25%, #d8aa67 55%, #6b4e2a 100%)',
+                            boxShadow: '0 0 24px -4px rgba(240,198,129,0.6)',
+                        }}
+                    >
                         {getAchievementIcon(achievement)}
                     </div>
-                    <div className="flex-1">
-                        <div className="font-bold text-lg">
-                            {isPlatinumGift ? '🎉 SPECIAL ACHIEVEMENT UNLOCKED! 🎉' : 'Achievement Unlocked!'}
+                    <div className="min-w-0 flex-1">
+                        <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#a89a85]">
+                            {isPlatinumGift ? 'Special achievement' : 'Achievement unlocked'}
                         </div>
-                        <div className="text-sm opacity-90 font-semibold">{achievement.name}</div>
-                        <div className="text-xs opacity-75 mt-1">{achievement.description}</div>
-                        <div className="text-xs opacity-60 mt-1">
-                            {isPlatinumGift ? 'Tap to claim 25% off the drum bundle!' : 'Tap to dismiss'}
-                        </div>
+                        <div className="et-gold-text mt-0.5 truncate font-display text-base uppercase tracking-[0.08em]">{achievement.name}</div>
+                        <div className="mt-0.5 text-xs text-zinc-400">{achievement.description}</div>
+                        {isPlatinumGift && <div className="mt-1 text-[11px] text-[#f0c681]">Tap to claim 25% off the drum bundle</div>}
                     </div>
                 </div>
             </div>

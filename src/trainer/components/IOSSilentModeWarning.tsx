@@ -33,12 +33,12 @@ export const IOSSilentModeWarning: React.FC = () => {
     }
 
     return (
-        <div className="bg-red-50 border border-red-200 rounded-md px-3 py-2 mb-3 text-xs text-red-800 flex items-center gap-2">
-            <span className="font-semibold">iPhone:</span>
+        <div className="mx-auto mb-3 flex w-full max-w-xl items-center gap-2 rounded-xl border border-[#d8aa67]/25 bg-[#0b0a09]/90 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
+            <span className="font-semibold text-[#f0c681]">iPhone:</span>
             <span>Turn off vibrate/silent mode to hear sound.</span>
             <button
                 onClick={handleDismiss}
-                className="ml-auto text-red-600 hover:text-red-700"
+                className="ml-auto text-zinc-500 hover:text-zinc-200"
                 aria-label="Dismiss"
             >
                 ✕

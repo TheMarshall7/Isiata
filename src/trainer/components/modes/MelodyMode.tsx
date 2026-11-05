@@ -256,7 +256,7 @@ export const MelodyMode: React.FC<MelodyModeProps> = ({
                 <BrandLogo showText={false} />
             </div>
 
-            <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1 min-h-0 overflow-y-auto">
+            <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1">
                 <div className="w-full max-w-4xl px-4 flex justify-between items-center mb-4 relative z-50 pl-20 lg:pl-24">
                     <button 
                         onClick={(e) => {
@@ -328,7 +328,7 @@ export const MelodyMode: React.FC<MelodyModeProps> = ({
                 </div>
 
                 {checking && (
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-6 flex flex-col items-center animate-slide-up pb-8 max-h-[80vh] overflow-y-auto">
+                    <div className="trainer-next-bar p-6 flex flex-col items-center animate-slide-up pb-8 max-h-[80vh] overflow-y-auto">
                         <div className="w-full max-w-md space-y-4">
                             <Feedback 
                                 correct={wrongAtStep === null} 

@@ -10,11 +10,11 @@ interface PaywallModalProps {
 export const PaywallModal: React.FC<PaywallModalProps> = ({ onClose, onUpgrade }) => {
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-            <div className="bg-surface-raised rounded border border-white/10-2xl shadow-2xl max-w-md w-full p-8 relative animate-slide-up">
+            <div className="glass-card !p-8 rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-slide-up">
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/5 transition-colors"
+                    className="absolute top-4 right-4 z-[2] p-2 rounded-full hover:bg-white/5 transition-colors"
                     aria-label="Close"
                 >
                     <X size={20} className="text-zinc-500" />
@@ -22,8 +22,8 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ onClose, onUpgrade }
 
                 {/* Lock Icon */}
                 <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-white to-zinc-300 flex items-center justify-center shadow-lg">
-                        <Lock size={32} className="text-white" />
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#f0c681] to-[#6b4e2a] flex items-center justify-center shadow-lg shadow-[#d8aa67]/30">
+                        <Lock size={28} className="text-[#1a1208]" />
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ onClose, onUpgrade }
                 <div className="space-y-3 mb-8">
                     <div className="flex items-start gap-3">
                         <div className="mt-0.5">
-                            <Check size={20} className="text-orange-500" />
+                            <Check size={20} className="text-[#f0c681]" />
                         </div>
                         <div>
                             <p className="font-medium text-white">All 8 Training Modes</p>
@@ -50,7 +50,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ onClose, onUpgrade }
                     </div>
                     <div className="flex items-start gap-3">
                         <div className="mt-0.5">
-                            <Check size={20} className="text-orange-500" />
+                            <Check size={20} className="text-[#f0c681]" />
                         </div>
                         <div>
                             <p className="font-medium text-white">Unlimited Training</p>
@@ -59,7 +59,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ onClose, onUpgrade }
                     </div>
                     <div className="flex items-start gap-3">
                         <div className="mt-0.5">
-                            <Check size={20} className="text-orange-500" />
+                            <Check size={20} className="text-[#f0c681]" />
                         </div>
                         <div>
                             <p className="font-medium text-white">Lifetime Access</p>

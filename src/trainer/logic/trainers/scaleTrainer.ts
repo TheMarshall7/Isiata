@@ -62,14 +62,14 @@ export const generateScaleQuestion = (difficulty: Difficulty): ScaleQuestion => 
 
     // Generate multiple choice options
     // Start with correct answer, then add random distractors from same difficulty
-    const options = [target];
-    while (options.length < 4 && options.length < possibleScales.length) {
-        const random = possibleScales[Math.floor(Math.random() * possibleScales.length)];
-        // Avoid duplicates
-        if (!options.find(o => o.id === random.id)) {
-            options.push(random);
-        }
-    }
+    // Always offer 4 choices: distractors from the same difficulty first,
+    // then from the rest of the library if that tier is too small.
+    const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
+    const pool = [
+        ...shuffle(possibleScales.filter(s => s.id !== target.id)),
+        ...shuffle(scalesConfig.scales.filter(s => s.difficulty !== difficulty)),
+    ];
+    const options = [target, ...pool.slice(0, 3)];
 
     // Shuffle options so correct answer isn't always first
     const shuffledOptions = options

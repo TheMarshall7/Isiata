@@ -83,7 +83,7 @@ export const Stats: React.FC = () => {
                 </button>
             </div>
 
-            <div className="relative z-10 pt-20 pb-8 lg:py-12 px-4 flex-1 min-h-0 overflow-y-auto">
+            <div className="relative z-10 pt-20 pb-8 lg:py-12 px-4 flex-1">
                 <div className="max-w-5xl mx-auto">
                     {/* Header */}
                     <div className="flex items-center justify-center lg:justify-between mb-8 lg:mb-12">
@@ -162,8 +162,8 @@ export const Stats: React.FC = () => {
                                     })()}
                                 </div>
                             </div>
-                            <div className="group flex items-center gap-2 text-sm text-zinc-400 bg-surface-raised/50 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20 hover:border-orange-500/40 hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-105">
-                                <Flame className="w-5 h-5 text-orange-400 group-hover:scale-125 transition-transform duration-300" strokeWidth={2} />
+                            <div className="group flex items-center gap-2 text-sm text-zinc-400 bg-surface-raised/50 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20 hover:border-[#d8aa67]/40 hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-105">
+                                <Flame className="w-5 h-5 text-[#f0c681] group-hover:scale-125 transition-transform duration-300" strokeWidth={2} />
                                 <span className="font-medium">Daily Streak: {stats.dailyStreak} days</span>
                             </div>
                         </div>
@@ -173,24 +173,24 @@ export const Stats: React.FC = () => {
                     {mysteryGift && (
                         <div className="glass-card mb-8 lg:mb-12 animate-fade-in-up">
                             <div className="flex items-center gap-2 mb-4">
-                                <Trophy className="w-5 h-5 text-orange-400" strokeWidth={2} />
-                                <h2 className="text-xs uppercase tracking-widest text-orange-400 font-semibold">
+                                <Trophy className="w-5 h-5 text-[#f0c681]" strokeWidth={2} />
+                                <h2 className="text-xs uppercase tracking-widest text-[#f0c681] font-semibold">
                                     Ultimate Achievement
                                 </h2>
                             </div>
                             
                             <div className={`group p-6 rounded-2xl border-2 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${
                                 mysteryGift.unlocked
-                                    ? 'bg-gradient-to-br from-orange-500/10 to-orange-500/5/50 border-orange-500/40/50 shadow-lg hover:shadow-xl'
+                                    ? 'bg-gradient-to-br from-[#d8aa67]/10 to-[#a67c3d]/5/50 border-[#d8aa67]/50 shadow-lg hover:shadow-xl'
                                     : 'bg-white/5 border-white/20 opacity-75 hover:opacity-85'
                             }`}>
                                 <div className="flex items-center gap-6">
                                     <div className={`flex items-center justify-center w-20 h-20 rounded-2xl flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 ${
                                         mysteryGift.unlocked 
-                                            ? 'bg-surface-raised/80 border-2 border-orange-500/30/50 shadow-md group-hover:shadow-lg' 
+                                            ? 'bg-surface-raised/80 border-2 border-[#d8aa67]/40 shadow-md group-hover:shadow-lg' 
                                             : 'bg-white/5 border-2 border-white/10'
                                     }`}>
-                                        <Trophy className={`w-12 h-12 ${mysteryGift.unlocked ? 'text-orange-400' : 'text-zinc-600'}`} strokeWidth={2} />
+                                        <Trophy className={`w-12 h-12 ${mysteryGift.unlocked ? 'text-[#f0c681]' : 'text-zinc-600'}`} strokeWidth={2} />
                                     </div>
                                     <div className="flex-1">
                                         <div className="flex items-center gap-3 mb-2">
@@ -198,7 +198,7 @@ export const Stats: React.FC = () => {
                                                 {mysteryGift.name}
                                             </h3>
                                             {mysteryGift.unlocked && (
-                                                <CheckCircle2 className="w-7 h-7 text-orange-400" strokeWidth={2.5} />
+                                                <CheckCircle2 className="w-7 h-7 text-[#f0c681]" strokeWidth={2.5} />
                                             )}
                                         </div>
                                         <p className="text-zinc-400 mb-4">

@@ -469,16 +469,16 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
     };
 
     const difficultyColor = {
-        easy: 'bg-green-100 text-green-700',
-        medium: 'bg-yellow-100 text-yellow-700',
-        hard: 'bg-red-100 text-red-700'
+        easy: 'bg-green-500/10 text-green-300 border border-green-500/20',
+        medium: 'bg-[#d8aa67]/10 text-[#f0c681] border border-[#d8aa67]/25',
+        hard: 'bg-red-500/10 text-red-300 border border-red-500/20'
     };
 
     const isScale = resource.category === 'scales';
     const isScaleExercise = resource.category === 'scaleExercises';
 
     return (
-        <div className="p-4 bg-surface-raised/50 backdrop-blur-sm rounded-xl border border-white/10 hover:border-orange-500/40/50 transition-all">
+        <div className="group/row rounded-2xl border border-white/[0.07] bg-[#0b0a09]/80 p-4 backdrop-blur-sm transition-all duration-300 hover:border-[#d8aa67]/40 hover:bg-[#12100e]/90 hover:shadow-[0_14px_40px_-22px_rgba(216,170,103,0.6)]">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
@@ -489,7 +489,7 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                             }
                         </h3>
                         {resource.difficulty && (
-                            <span className={`px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 ${difficultyColor[resource.difficulty]}`}>
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-[0.14em] font-medium flex-shrink-0 ${difficultyColor[resource.difficulty]}`}>
                                 {resource.difficulty}
                             </span>
                         )}
@@ -502,7 +502,7 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                     {(isVocalWarmupActive || vocalWarmupIndex > 0) && (
                         <div className="mt-2 flex items-center gap-2">
                             <div 
-                                className="flex-1 h-3 bg-neutral-200 rounded-full overflow-hidden cursor-pointer hover:h-4 transition-all group relative"
+                                className="flex-1 h-3 bg-white/[0.08] rounded-full overflow-hidden cursor-pointer hover:h-4 transition-all group relative"
                                 onClick={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
                                     const x = e.clientX - rect.left;
@@ -513,14 +513,14 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                                 title="Click to jump to a position"
                             >
                                 <div 
-                                    className="h-full bg-gradient-to-r from-white to-zinc-300 transition-all duration-200 relative"
+                                    className="h-full brand-progress-fill transition-all duration-200 relative"
                                     style={{ width: `${(vocalWarmupIndex / 24) * 100}%` }}
                                 >
                                     {/* Scrubber handle */}
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-raised rounded border border-white/10-full shadow-md border-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-raised rounded-full shadow-md border-2 border-[#d8aa67] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
                                 {/* Hover indicator */}
-                                <div className="absolute inset-0 bg-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                                <div className="absolute inset-0 bg-[#d8aa67]/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                             </div>
                             <span className="text-xs text-zinc-500 font-medium whitespace-nowrap">
                                 {vocalWarmupIndex + 1}/25
@@ -528,7 +528,7 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                         </div>
                     )}
                     {error && (
-                        <p className="text-xs text-red-600 mt-1">
+                        <p className="text-xs text-red-400 mt-1">
                             {error}
                         </p>
                     )}
@@ -536,7 +536,7 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                 <button
                     onClick={isVocalWarmupActive ? stopVocalWarmup : playResource}
                     disabled={isPlaying && !isVocalWarmupActive}
-                    className={`ml-4 px-6 py-2 rounded-lg font-medium transition-all flex-shrink-0 ${
+                    className={`ml-4 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.14em] transition-all flex-shrink-0 ${
                         isVocalWarmupActive
                             ? 'resource-play-btn-stop cursor-pointer'
                             : isPlaying
@@ -553,40 +553,40 @@ export const ResourcePlayerRow: React.FC<ResourcePlayerRowProps> = ({
                 <div className="flex gap-2 mt-3 flex-wrap">
                     <button
                         onClick={() => setScaleDirection('ascending')}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
                             scaleDirection === 'ascending'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-surface-raised/80 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'bg-white/[0.03] text-zinc-400 hover:bg-white/[0.06] hover:text-white border border-white/[0.07]'
                         }`}
                     >
                         Ascending
                     </button>
                     <button
                         onClick={() => setScaleDirection('descending')}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
                             scaleDirection === 'descending'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-surface-raised/80 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'bg-white/[0.03] text-zinc-400 hover:bg-white/[0.06] hover:text-white border border-white/[0.07]'
                         }`}
                     >
                         Descending
                     </button>
                     <button
                         onClick={() => setScaleDirection('scrambled-asc')}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
                             scaleDirection === 'scrambled-asc'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-surface-raised/80 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'bg-white/[0.03] text-zinc-400 hover:bg-white/[0.06] hover:text-white border border-white/[0.07]'
                         }`}
                     >
                         Random ↑
                     </button>
                     <button
                         onClick={() => setScaleDirection('scrambled-desc')}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
                             scaleDirection === 'scrambled-desc'
-                                ? 'bg-orange-500 text-black shadow-md'
-                                : 'bg-surface-raised/80 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/10'
+                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md'
+                                : 'bg-white/[0.03] text-zinc-400 hover:bg-white/[0.06] hover:text-white border border-white/[0.07]'
                         }`}
                     >
                         Random ↓

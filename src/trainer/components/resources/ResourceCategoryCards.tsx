@@ -22,40 +22,27 @@ export const ResourceCategoryCards: React.FC<ResourceCategoryCardsProps> = ({ ca
     };
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {categories.map(category => (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map((category, i) => (
                 <button
                     key={category.id}
                     onClick={() => handleCategoryClick(category.id)}
-                    className="card hover:shadow-xl transition-all duration-300 text-left group hover:border-orange-500/40/50"
+                    className="et-hairline et-anim-rise group relative overflow-hidden rounded-2xl bg-[#0b0a09]/85 p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-[#141210]/95 hover:shadow-[0_18px_50px_-20px_rgba(216,170,103,0.55)]"
+                    style={{ animationDelay: `${i * 50}ms` }}
                 >
-                    <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-opacity duration-300 resource-icon-bg">
+                    <span className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#f0c681]/0 blur-2xl transition-colors duration-500 group-hover:bg-[#f0c681]/15" />
+                    <div className="relative flex items-start gap-4">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#d8aa67]/30 bg-gradient-to-br from-[#d8aa67]/20 to-transparent text-[#f0c681] transition-colors duration-300 group-hover:border-[#f0c681]/60 [&_svg]:h-5 [&_svg]:w-5">
                             {category.icon}
                         </div>
-                        <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-white mb-1 group-hover:text-violet-300 transition-colors">
-                                {category.title}
-                            </h3>
-                            <p className="text-sm text-zinc-500 mb-2">
-                                {category.description}
-                            </p>
-                            <p className="text-xs text-zinc-600">
+                        <div className="min-w-0 flex-1">
+                            <h3 className="font-semibold text-zinc-100 transition-colors group-hover:text-[#fff3dc]">{category.title}</h3>
+                            <p className="mt-1 text-xs leading-relaxed text-zinc-500">{category.description}</p>
+                            <span className="mt-3 inline-flex rounded-full border border-white/[0.07] px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] text-zinc-500">
                                 {category.count} {category.count === 1 ? 'item' : 'items'}
-                            </p>
+                            </span>
                         </div>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-zinc-600 group-hover:text-violet-400 transition-colors flex-shrink-0"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-1 shrink-0 text-zinc-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#f0c681]">
                             <path d="m9 18 6-6-6-6"></path>
                         </svg>
                     </div>

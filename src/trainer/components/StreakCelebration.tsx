@@ -1,12 +1,13 @@
 /**
- * Streak Celebration Component
- * 
- * Displays a celebration overlay when user reaches streak milestones.
- * Shows premium icons and allows tap-to-dismiss on mobile.
+ * Streak Celebration
+ *
+ * Non-blocking banner shown at streak milestones. It never covers the answer
+ * buttons, so play continues uninterrupted.
  */
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Flame } from 'lucide-react';
+import { getComboMultiplier } from '../config/modeMeta';
 
 interface StreakCelebrationProps {
     streak: number;
@@ -14,72 +15,48 @@ interface StreakCelebrationProps {
 }
 
 const STREAK_MILESTONES = [5, 10, 20, 50, 100];
+const TITLES: Record<number, string> = { 5: 'On Fire', 10: 'Blazing', 20: 'Inferno', 50: 'Unstoppable', 100: 'Legendary' };
 
 export const StreakCelebration: React.FC<StreakCelebrationProps> = ({ streak, onComplete }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [message, setMessage] = useState('');
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-    const handleDismiss = () => {
-        if (timerRef.current) {
-            clearTimeout(timerRef.current);
-            timerRef.current = null;
-        }
-        setIsVisible(false);
-        onComplete?.();
-    };
+    const [shown, setShown] = useState<number | null>(null);
+    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const completeRef = useRef(onComplete);
+    completeRef.current = onComplete;
 
     useEffect(() => {
-        if (STREAK_MILESTONES.includes(streak)) {
-            setIsVisible(true);
-            
-            let msg = '';
-            if (streak === 5) msg = '5 Streak!';
-            else if (streak === 10) msg = '10 Streak!';
-            else if (streak === 20) msg = '20 Streak!';
-            else if (streak === 50) msg = '50 Streak!';
-            else if (streak === 100) msg = '100 Streak!';
-            
-            setMessage(msg);
+        if (!STREAK_MILESTONES.includes(streak)) return;
+        setShown(streak);
+        timerRef.current = setTimeout(() => {
+            setShown(null);
+            completeRef.current?.();
+        }, 2600);
+        return () => {
+            if (timerRef.current) clearTimeout(timerRef.current);
+        };
+    }, [streak]);
 
-            // Longer display time: 4000ms (4 seconds) for better visibility on mobile
-            timerRef.current = setTimeout(() => {
-                setIsVisible(false);
-                onComplete?.();
-            }, 4000);
+    if (shown === null) return null;
 
-            return () => {
-                if (timerRef.current) {
-                    clearTimeout(timerRef.current);
-                }
-            };
-        }
-    }, [streak, onComplete]);
-
-    if (!isVisible) return null;
-
-    // Get number of flame icons based on streak
-    const flameCount = streak >= 100 ? 5 : streak >= 50 ? 4 : streak >= 20 ? 3 : streak >= 10 ? 2 : 1;
+    const flameCount = shown >= 100 ? 5 : shown >= 50 ? 4 : shown >= 20 ? 3 : shown >= 10 ? 2 : 1;
+    const mult = getComboMultiplier(shown);
 
     return (
-        <div 
-            className="fixed inset-0 flex items-center justify-center z-30 pointer-events-auto"
-            onClick={handleDismiss}
+        <div
+            className="pointer-events-none fixed left-1/2 top-16 z-[60] sm:top-20"
+            style={{ animation: 'et-drop-in 0.45s cubic-bezier(0.2,1.3,0.4,1) both' }}
+            role="status"
         >
-            <div className="bg-gradient-to-r from-white to-yellow-500 text-white px-8 py-6 lg:px-12 lg:py-8 rounded-2xl shadow-2xl transform animate-bounce scale-110 cursor-pointer">
-                <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="et-hairline flex items-center gap-3 rounded-full bg-[#0b0a09]/95 py-2 pl-2 pr-5 shadow-[0_18px_50px_-12px_rgba(249,115,22,0.45)] backdrop-blur-md" data-active="true">
+                <span className="flex h-10 items-center gap-0.5 rounded-full bg-gradient-to-br from-orange-500/25 to-amber-400/10 px-2.5">
                     {Array.from({ length: flameCount }).map((_, i) => (
-                        <Flame key={i} className="w-8 h-8 lg:w-10 lg:h-10 fill-current" />
+                        <Flame key={i} className="h-5 w-5 fill-orange-400/70 text-orange-300" style={{ animation: `et-bump 0.6s ease ${i * 0.08}s both` }} />
                     ))}
-                </div>
-                <div className="text-4xl lg:text-6xl font-bold text-center mb-2">
-                    {message}
-                </div>
-                <div className="text-lg lg:text-2xl text-center opacity-90">
-                    Amazing work!
-                </div>
-                <div className="text-xs lg:text-sm text-center opacity-75 mt-2">
-                    Tap to dismiss
+                </span>
+                <div className="leading-tight">
+                    <div className="et-gold-text font-display text-lg uppercase tracking-[0.12em]">{shown} Streak</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">
+                        {TITLES[shown]}{mult > 1 ? ` · ${mult}× XP combo` : ''}
+                    </div>
                 </div>
             </div>
         </div>

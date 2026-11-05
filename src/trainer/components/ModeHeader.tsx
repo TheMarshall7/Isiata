@@ -36,7 +36,7 @@ export const ModeHeader: React.FC<ModeHeaderProps> = ({
                             onClick={onToggleDiatonicMode}
                             className={`text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full border transition-all duration-200 ${
                                 isDiatonicMode
-                                    ? 'bg-white text-black border-orange-500'
+                                    ? 'bg-white text-black border-[#d8aa67]'
                                     : 'bg-surface-raised/80 text-zinc-400 border-white/20 hover:bg-white/10'
                             }`}
                         >
@@ -64,8 +64,8 @@ export const ModeHeader: React.FC<ModeHeaderProps> = ({
                             onClick={onToggleDiatonicMode}
                             className={`text-xs lg:text-sm font-medium px-4 py-2 rounded-full border transition-all duration-200 ${
                                 isDiatonicMode
-                                    ? 'bg-white text-black border-orange-500 shadow-md'
-                                    : 'bg-surface-raised/80 text-zinc-400 border-white/20 hover:bg-white/10 hover:border-orange-500/40'
+                                    ? 'bg-white text-black border-[#d8aa67] shadow-md'
+                                    : 'bg-surface-raised/80 text-zinc-400 border-white/20 hover:bg-white/10 hover:border-[#d8aa67]/40'
                             }`}
                             title={isDiatonicMode 
                                 ? 'Diatonic mode ON: Same key until wrong answer' 
@@ -82,7 +82,7 @@ export const ModeHeader: React.FC<ModeHeaderProps> = ({
                     </p>
                 )}
                 {showDiatonicToggle && isDiatonicMode && (
-                    <p className="text-xs text-orange-400 italic text-center">
+                    <p className="text-xs text-[#f0c681] italic text-center">
                         Same key mode: Chords stay in the same key to help learn diatonic relationships
                     </p>
                 )}

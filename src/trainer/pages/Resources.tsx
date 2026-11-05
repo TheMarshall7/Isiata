@@ -165,16 +165,9 @@ export const Resources: React.FC = () => {
                 <ResourceCategoryCards categories={categoryCards} />
                 
                 {/* Quick Tips */}
-                <div
-                    className="mt-12 card"
-                    style={{
-                        background:
-                            'linear-gradient(135deg, rgba(107,78,42,0.22) 0%, rgba(166,124,61,0.14) 50%, rgba(216,170,103,0.1) 100%)',
-                        borderColor: 'rgba(216,170,103,0.3)',
-                    }}
-                >
-                    <h3 className="font-semibold text-white mb-3">Quick Tips</h3>
-                    <ul className="space-y-2 text-sm text-zinc-300">
+                <div className="glass-card mt-10 !p-6">
+                    <h3 className="relative z-[2] et-label mb-4">Quick tips</h3>
+                    <ul className="relative z-[2] grid gap-3 text-sm text-zinc-300 sm:grid-cols-3">
                         <li className="flex items-start gap-2">
                             <span className="mt-0.5 text-[#d8aa67]">•</span>
                             <span>Best results: 20 minutes daily.</span>

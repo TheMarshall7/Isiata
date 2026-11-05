@@ -43,9 +43,9 @@ export const InstrumentOnboarding: React.FC<InstrumentOnboardingProps> = ({
     if (!show) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fade-in">
-            <div className="bg-surface-raised rounded-2xl border border-white/10 shadow-2xl max-w-2xl w-full p-8 animate-slide-up depth-shadow-lg">
-                <div className="text-center mb-8">
+        <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-fade-in">
+            <div className="glass-card !p-6 sm:!p-8 max-w-2xl w-full animate-slide-up">
+                <div className="relative z-[2] text-center mb-8">
                     <h2 className="text-3xl font-display uppercase tracking-normal text-gold mb-3">
                         Welcome to ISIATA
                     </h2>
@@ -57,7 +57,7 @@ export const InstrumentOnboarding: React.FC<InstrumentOnboardingProps> = ({
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="relative z-[2] grid grid-cols-2 gap-3 sm:gap-4">
                     {instruments.map(instrument => {
                         const Icon = getInstrumentIcon(instrument.id);
                         
@@ -65,17 +65,17 @@ export const InstrumentOnboarding: React.FC<InstrumentOnboardingProps> = ({
                             <button
                                 key={instrument.id}
                                 onClick={() => handleSelect(instrument.id)}
-                                className="group relative overflow-hidden rounded-xl p-6 transition-all duration-300 bg-surface border border-white/10 hover:border-orange-500/40 hover:scale-105 hover:shadow-xl active:scale-100"
+                                className="group relative overflow-hidden rounded-xl p-6 transition-all duration-300 et-hairline bg-black/40 hover:-translate-y-1 hover:bg-[#d8aa67]/[0.06] hover:shadow-[0_14px_40px_-16px_rgba(216,170,103,0.5)] active:translate-y-0"
                             >
                                 <div className="flex flex-col items-center gap-3">
-                                    <div className="w-16 h-16 rounded-full bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors duration-300">
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#d8aa67]/20 to-transparent border border-[#d8aa67]/30 flex items-center justify-center group-hover:border-[#f0c681]/60 transition-colors duration-300">
                                         <Icon 
-                                            className="w-8 h-8 text-orange-400 group-hover:text-white transition-colors duration-300" 
+                                            className="w-8 h-8 text-[#f0c681] group-hover:text-white transition-colors duration-300" 
                                             strokeWidth={2} 
                                         />
                                     </div>
                                     <div className="text-center">
-                                        <h3 className="font-bold text-lg text-white group-hover:text-orange-400 transition-colors duration-300">
+                                        <h3 className="font-bold text-lg text-white group-hover:text-[#f0c681] transition-colors duration-300">
                                             {instrument.name}
                                         </h3>
                                         <p className="text-sm text-zinc-500 mt-1">

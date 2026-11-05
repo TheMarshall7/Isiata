@@ -19,7 +19,8 @@ export type GameMode =
   | 'perfectPitch'    // Identify absolute note names (legacy, mapped to keyFinder)
   | 'numberSystem'    // Identify scale degrees within a key
   | 'melody'          // Identify scale degrees in a melodic sequence
-  | 'tempo';          // Identify BPM/tempo from rhythm patterns
+  | 'tempo'           // Identify BPM/tempo from rhythm patterns
+  | 'frequency';      // Identify EQ frequency bands in filtered noise (mixing)
 
 /**
  * Difficulty levels for game questions.

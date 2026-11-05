@@ -29,8 +29,8 @@ export const CompactInstrumentSelector: React.FC<CompactInstrumentSelectorProps>
     disabledInstruments = []
 }) => {
     return (
-        <div className="inline-flex items-center gap-2 bg-surface-raised/60 backdrop-blur-sm rounded-full px-3 py-2 border border-white/40 shadow-sm hover:shadow-md transition-all duration-300">
-            <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider px-2">
+        <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-full px-2 py-1.5 border border-[#d8aa67]/25 hover:border-[#d8aa67]/45 transition-all duration-300">
+            <span className="et-label px-2">
                 Sound
             </span>
             <div className="flex items-center gap-1">
@@ -48,8 +48,8 @@ export const CompactInstrumentSelector: React.FC<CompactInstrumentSelectorProps>
                                 isDisabled
                                     ? 'bg-transparent text-zinc-600 opacity-50 cursor-not-allowed'
                                     : isSelected
-                                        ? 'bg-orange-500 text-black shadow-md shadow-orange-500/20'
-                                        : 'bg-transparent text-zinc-600 hover:bg-surface-raised/80 hover:text-orange-400 hover:scale-110'
+                                        ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-md shadow-[#d8aa67]/20'
+                                        : 'bg-transparent text-zinc-600 hover:bg-surface-raised/80 hover:text-[#f0c681] hover:scale-110'
                             }`}
                             title={isDisabled ? 'Not recommended for chords' : instrument.name}
                         >

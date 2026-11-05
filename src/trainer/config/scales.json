@@ -123,6 +123,54 @@
         "F"
       ],
       "description": "Lydian mode"
+    },
+    {
+      "id": "b_locrian",
+      "name": "Locrian",
+      "difficulty": "hard",
+      "notes": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "A",
+        "B"
+      ],
+      "description": "Locrian mode"
+    },
+    {
+      "id": "a_harmonic_minor",
+      "name": "Harmonic Minor",
+      "difficulty": "hard",
+      "notes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G#",
+        "A"
+      ],
+      "description": "Natural minor with a raised 7th"
+    },
+    {
+      "id": "a_melodic_minor",
+      "name": "Melodic Minor",
+      "difficulty": "hard",
+      "notes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F#",
+        "G#",
+        "A"
+      ],
+      "description": "Minor with raised 6th and 7th (ascending)"
     }
   ]
 }

@@ -228,6 +228,79 @@ export class AudioEngine {
         this.playNote(rootSampleId, targetMidiNote, rootMidi, 0.05 + tempoMs / 1000);
     }
 
+    private noiseBuffer: AudioBuffer | null = null;
+
+    /** 4 s of pink noise (Paul Kellet filter), cached and looped. */
+    private getNoiseBuffer(ctx: AudioContext): AudioBuffer {
+        if (this.noiseBuffer && this.noiseBuffer.sampleRate === ctx.sampleRate) return this.noiseBuffer;
+        const length = ctx.sampleRate * 4;
+        const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < length; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.969 * b2 + white * 0.153852;
+            b3 = 0.8665 * b3 + white * 0.3104856;
+            b4 = 0.55 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.016898;
+            data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+            b6 = white * 0.115926;
+        }
+        this.noiseBuffer = buffer;
+        return buffer;
+    }
+
+    /**
+     * Play pink noise through a band-pass filter centred on `frequency`.
+     * Pass frequency = null for the unfiltered (flat) reference.
+     * Returns the duration in ms.
+     */
+    playFilteredNoise(frequency: number | null, q = 2, durationSec = 2.2): number {
+        const ctx = this.context;
+        if (!ctx || !this.masterGain) return 0;
+        const src = ctx.createBufferSource();
+        src.buffer = this.getNoiseBuffer(ctx);
+        src.loop = true;
+
+        const env = ctx.createGain();
+        const now = ctx.currentTime + 0.02;
+        // Narrower bands carry less energy, so compensate (capped to stay safe).
+        const level = frequency === null ? 0.35 : Math.min(2.6, 0.9 + q * 0.32);
+        env.gain.setValueAtTime(0, now);
+        env.gain.linearRampToValueAtTime(level, now + 0.08);
+        env.gain.setValueAtTime(level, now + durationSec - 0.15);
+        env.gain.linearRampToValueAtTime(0, now + durationSec);
+
+        if (frequency === null) {
+            src.connect(env);
+        } else {
+            const bp = ctx.createBiquadFilter();
+            bp.type = 'bandpass';
+            bp.frequency.value = frequency;
+            bp.Q.value = q;
+            // Second stage steepens the skirts so the band reads clearly.
+            const bp2 = ctx.createBiquadFilter();
+            bp2.type = 'bandpass';
+            bp2.frequency.value = frequency;
+            bp2.Q.value = q;
+            src.connect(bp);
+            bp.connect(bp2);
+            bp2.connect(env);
+        }
+        env.connect(this.masterGain);
+
+        src.start(now);
+        src.stop(now + durationSec + 0.05);
+        this.activeSources.add(src);
+        src.onended = () => {
+            this.activeSources.delete(src);
+            try { env.disconnect(); } catch { }
+        };
+        return durationSec * 1000;
+    }
+
     stopAll() {
         this.activeSources.forEach(s => {
             try { s.stop(); s.disconnect(); } catch { }

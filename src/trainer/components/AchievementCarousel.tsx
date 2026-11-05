@@ -40,21 +40,21 @@ const getCategoryInfo = (category: string) => {
 
 const getAchievementIcon = (ach: Achievement) => {
     // All icons use orange theme to match site
-    if (ach.icon === '🔥' || ach.icon.startsWith('🔥')) return <Flame className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '⭐' || ach.icon.startsWith('⭐') || ach.icon === '🌟' || ach.icon === '💫' || ach.icon === '✨') return <Star className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🎯') return <Target className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🎵' || ach.icon === '🎶') return <Music className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🎹') return <Piano className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🎼') return <Music2 className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🏆' || ach.icon === '👑') return <Trophy className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '📚' || ach.icon === '📖' || ach.icon === '🎓' || ach.icon === '📘') return <BarChart3 className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '📅' || ach.icon === '🗓️' || ach.icon === '💯' || ach.icon === '🎊') return <Calendar className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '⚡' || ach.icon === '💪' || ach.icon === '🏃') return <Zap className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🌱' || ach.icon === '🌿' || ach.icon === '🌳' || ach.icon === '🌲' || ach.icon === '🌴') return <TrendingUp className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🎭') return <Users className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🔑') return <Award className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '⏱️') return <Music className="w-6 h-6 text-orange-400" strokeWidth={2} />;
-    if (ach.icon === '🦉' || ach.icon === '🐦' || ach.icon === '🎷') return <Star className="w-6 h-6 text-orange-400" strokeWidth={2} />;
+    if (ach.icon === '🔥' || ach.icon.startsWith('🔥')) return <Flame className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '⭐' || ach.icon.startsWith('⭐') || ach.icon === '🌟' || ach.icon === '💫' || ach.icon === '✨') return <Star className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🎯') return <Target className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🎵' || ach.icon === '🎶') return <Music className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🎹') return <Piano className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🎼') return <Music2 className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🏆' || ach.icon === '👑') return <Trophy className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '📚' || ach.icon === '📖' || ach.icon === '🎓' || ach.icon === '📘') return <BarChart3 className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '📅' || ach.icon === '🗓️' || ach.icon === '💯' || ach.icon === '🎊') return <Calendar className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '⚡' || ach.icon === '💪' || ach.icon === '🏃') return <Zap className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🌱' || ach.icon === '🌿' || ach.icon === '🌳' || ach.icon === '🌲' || ach.icon === '🌴') return <TrendingUp className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🎭') return <Users className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🔑') return <Award className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '⏱️') return <Music className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
+    if (ach.icon === '🦉' || ach.icon === '🐦' || ach.icon === '🎷') return <Star className="w-6 h-6 text-[#f0c681]" strokeWidth={2} />;
     return <Trophy className="w-6 h-6 text-zinc-600" strokeWidth={2} />;
 };
 
@@ -87,16 +87,16 @@ export const AchievementCarousel: React.FC<AchievementCarouselProps> = ({ catego
             <div className="flex items-center justify-between gap-4">
                 <button
                     onClick={prevCategory}
-                    className="group flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised/50 backdrop-blur-sm border border-white/20 hover:bg-surface-raised/80 hover:border-orange-500/40 transition-all hover:scale-110 hover:shadow-lg"
+                    className="group flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised/50 backdrop-blur-sm border border-white/20 hover:bg-surface-raised/80 hover:border-[#d8aa67]/40 transition-all hover:scale-110 hover:shadow-lg"
                     aria-label="Previous category"
                 >
-                    <ChevronLeft className="w-5 h-5 text-zinc-300 group-hover:text-orange-400 transition-colors" strokeWidth={2.5} />
+                    <ChevronLeft className="w-5 h-5 text-zinc-300 group-hover:text-[#f0c681] transition-colors" strokeWidth={2.5} />
                 </button>
 
                 <div className="flex-1 text-center">
                     <div className="flex items-center justify-center gap-3 mb-2 group">
-                        <div className="w-12 h-12 rounded-xl bg-surface-raised/80 flex items-center justify-center border border-orange-500/30/50 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
-                            <CategoryIcon className="w-6 h-6 text-orange-400 group-hover:rotate-6 transition-transform duration-300" strokeWidth={2} />
+                        <div className="w-12 h-12 rounded-xl bg-surface-raised/80 flex items-center justify-center border border-[#d8aa67]/40 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
+                            <CategoryIcon className="w-6 h-6 text-[#f0c681] group-hover:rotate-6 transition-transform duration-300" strokeWidth={2} />
                         </div>
                         <h3 className="text-xl font-bold text-white">{categoryInfo.title}</h3>
                     </div>
@@ -107,10 +107,10 @@ export const AchievementCarousel: React.FC<AchievementCarouselProps> = ({ catego
 
                 <button
                     onClick={nextCategory}
-                    className="group flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised/50 backdrop-blur-sm border border-white/20 hover:bg-surface-raised/80 hover:border-orange-500/40 transition-all hover:scale-110 hover:shadow-lg"
+                    className="group flex items-center justify-center w-10 h-10 rounded-full bg-surface-raised/50 backdrop-blur-sm border border-white/20 hover:bg-surface-raised/80 hover:border-[#d8aa67]/40 transition-all hover:scale-110 hover:shadow-lg"
                     aria-label="Next category"
                 >
-                    <ChevronRight className="w-5 h-5 text-zinc-300 group-hover:text-orange-400 transition-colors" strokeWidth={2.5} />
+                    <ChevronRight className="w-5 h-5 text-zinc-300 group-hover:text-[#f0c681] transition-colors" strokeWidth={2.5} />
                 </button>
             </div>
 
@@ -123,7 +123,7 @@ export const AchievementCarousel: React.FC<AchievementCarouselProps> = ({ catego
                         className={`transition-all duration-300 rounded-full hover:scale-125 ${
                             index === currentIndex
                                 ? 'w-8 h-2 bg-white shadow-md'
-                                : 'w-2 h-2 bg-neutral-300 hover:bg-orange-400'
+                                : 'w-2 h-2 bg-neutral-300 hover:brightness-110'
                         }`}
                         aria-label={`Go to category ${index + 1}`}
                     />
@@ -137,14 +137,14 @@ export const AchievementCarousel: React.FC<AchievementCarouselProps> = ({ catego
                         key={ach.id}
                         className={`group p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer hover:scale-105 ${
                             ach.unlocked
-                                ? 'bg-gradient-to-br from-orange-500/10 to-orange-500/5/50 border-orange-500/40/50 shadow-md hover:shadow-lg'
-                                : 'bg-white/5 border-white/20 opacity-60 hover:opacity-80 hover:border-orange-500/30/30'
+                                ? 'bg-gradient-to-br from-[#d8aa67]/10 to-[#a67c3d]/5/50 border-[#d8aa67]/50 shadow-md hover:shadow-lg'
+                                : 'bg-white/5 border-white/20 opacity-60 hover:opacity-80 hover:border-[#d8aa67]/25'
                         }`}
                     >
                         <div className="flex items-start gap-3">
                             <div className={`flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300 ${
                                 ach.unlocked 
-                                    ? 'bg-surface-raised/80 border border-orange-500/30/50 group-hover:shadow-md' 
+                                    ? 'bg-surface-raised/80 border border-[#d8aa67]/40 group-hover:shadow-md' 
                                     : 'bg-white/5 border border-white/20'
                             }`}>
                                 {getAchievementIcon(ach)}
@@ -158,7 +158,7 @@ export const AchievementCarousel: React.FC<AchievementCarouselProps> = ({ catego
                                 </div>
                             </div>
                             {ach.unlocked && (
-                                <CheckCircle2 className="w-5 h-5 text-orange-400 flex-shrink-0" strokeWidth={2.5} />
+                                <CheckCircle2 className="w-5 h-5 text-[#f0c681] flex-shrink-0" strokeWidth={2.5} />
                             )}
                         </div>
                     </div>

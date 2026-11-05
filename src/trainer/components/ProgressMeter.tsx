@@ -1,5 +1,7 @@
 import React from 'react';
+import { Flame } from 'lucide-react';
 import { getXPForLevel } from '../context/GameContext';
+import { getComboMultiplier, getRankTitle } from '../config/modeMeta';
 
 interface ProgressMeterProps {
     current: number;
@@ -10,121 +12,120 @@ interface ProgressMeterProps {
     compact?: boolean;
 }
 
-export const ProgressMeter: React.FC<ProgressMeterProps> = ({ 
-    current, 
-    total, 
+/** Level ring with XP, a segmented run track and streak / combo chips. */
+export const LevelRing: React.FC<{ level: number; pct: number; size?: number; stroke?: number }> = ({
+    level,
+    pct,
+    size = 44,
+    stroke = 3,
+}) => {
+    const r = (size - stroke) / 2;
+    const c = 2 * Math.PI * r;
+    const id = `lr-${size}`;
+    return (
+        <div className="relative shrink-0" style={{ width: size, height: size }}>
+            <svg width={size} height={size} className="-rotate-90">
+                <defs>
+                    <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#6b4e2a" />
+                        <stop offset="55%" stopColor="#d8aa67" />
+                        <stop offset="100%" stopColor="#f0c681" />
+                    </linearGradient>
+                </defs>
+                <circle cx={size / 2} cy={size / 2} r={r} fill="rgba(10,10,10,0.9)" stroke="rgba(216,170,103,0.14)" strokeWidth={stroke} />
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={r}
+                    fill="none"
+                    stroke={`url(#${id})`}
+                    strokeWidth={stroke}
+                    strokeLinecap="round"
+                    strokeDasharray={c}
+                    strokeDashoffset={c * (1 - pct / 100)}
+                    style={{ transition: 'stroke-dashoffset 0.8s cubic-bezier(0.2,0.8,0.2,1)' }}
+                />
+            </svg>
+            <span
+                key={level}
+                className="et-anim-bump absolute inset-0 flex items-center justify-center font-display text-[#f0dfc8]"
+                style={{ fontSize: size * 0.36 }}
+            >
+                {level}
+            </span>
+        </div>
+    );
+};
+
+export const ProgressMeter: React.FC<ProgressMeterProps> = ({
+    current,
+    total,
     streak,
     level = 1,
     xp = 0,
     compact = false,
 }) => {
-    const runPercentage = Math.min(100, (current / total) * 100);
-    
-    // Calculate XP progress for current level
     const currentLevelXP = getXPForLevel(level);
     const nextLevelXP = getXPForLevel(level + 1);
     const xpInLevel = xp - currentLevelXP;
     const xpNeededForNext = nextLevelXP - currentLevelXP;
     const xpPercentage = xpNeededForNext > 0 ? Math.min(100, (xpInLevel / xpNeededForNext) * 100) : 100;
-    
-    // Calculate combo multiplier
-    const getComboMultiplier = (streak: number): number => {
-        if (streak >= 20) return 4;
-        if (streak >= 10) return 3;
-        if (streak >= 5) return 2;
-        return 1;
-    };
-    
     const multiplier = getComboMultiplier(streak);
-
-    if (compact) {
-        return (
-            <div className="w-full max-w-4xl mx-auto mb-2 px-4 shrink-0">
-                <div className="glass-card !p-3 space-y-2.5">
-                    <div className="flex items-center justify-between gap-2 text-[11px] sm:text-xs">
-                        <span className="font-bold text-zinc-300 uppercase tracking-wider">
-                            Level {level}
-                        </span>
-                        <span className="text-zinc-500 font-medium tabular-nums">
-                            {xpInLevel}/{xpNeededForNext} XP
-                        </span>
-                        <span className="font-semibold text-zinc-500 uppercase tracking-widest tabular-nums">
-                            Run {current}/{total}
-                        </span>
-                        {streak > 1 && (
-                            <span className={`text-orange-500 font-bold tabular-nums ${streak >= 5 ? 'animate-bounce' : ''}`}>
-                                {streak}🔥
-                            </span>
-                        )}
-                        {multiplier > 1 && (
-                            <span className="brand-eyebrow px-2 py-0.5 rounded-full text-[10px] font-bold">
-                                {multiplier}x
-                            </span>
-                        )}
-                    </div>
-                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
-                        <div
-                            className="h-full brand-progress-fill transition-all duration-500 ease-out"
-                            style={{ width: `${xpPercentage}%` }}
-                        />
-                    </div>
-                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
-                        <div
-                            className="h-full brand-progress-fill transition-all duration-500 ease-out"
-                            style={{ width: `${runPercentage}%` }}
-                        />
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    const done = Math.max(0, Math.min(total, current - 1));
 
     return (
-        <div className="w-full max-w-4xl mx-auto mb-8 lg:mb-12 px-4">
-            {/* Level and XP Bar */}
-            <div className="glass-card mb-6">
-                <div className="flex justify-between items-center mb-3">
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm lg:text-base font-bold text-zinc-300 uppercase tracking-wider">
-                            Level {level}
+        <div className={`w-full max-w-xl mx-auto px-4 shrink-0 ${compact ? 'mb-3' : 'mb-6 lg:mb-8'}`}>
+            <div className="glass-card !p-3 sm:!p-3.5">
+                <div className="relative z-[2] flex items-center gap-3">
+                    <LevelRing level={level} pct={xpPercentage} />
+
+                    <div className="min-w-0 flex-1">
+                        <div className="flex items-baseline justify-between gap-2">
+                            <span className="truncate text-xs font-semibold uppercase tracking-[0.18em] text-[#f0dfc8]">
+                                {getRankTitle(level)}
+                            </span>
+                            <span className="shrink-0 text-[10px] tabular-nums text-zinc-500">
+                                {xpInLevel}/{xpNeededForNext} XP
+                            </span>
+                        </div>
+
+                        {/* Run track: one segment per question */}
+                        <div className="mt-2 flex gap-1" aria-label={`Question ${current} of ${total}`}>
+                            {Array.from({ length: total }).map((_, i) => (
+                                <span
+                                    key={i}
+                                    className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${
+                                        i < done
+                                            ? 'brand-progress-fill'
+                                            : i === done
+                                                ? 'bg-[#d8aa67]/35 animate-pulse'
+                                                : 'bg-white/[0.06]'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                        <div className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 tabular-nums">
+                            Question {Math.min(current, total)} <span className="text-zinc-700">/</span> {total}
+                        </div>
+                    </div>
+
+                    <div className="flex shrink-0 flex-col items-end gap-1">
+                        <span
+                            key={`s-${streak}`}
+                            className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums ${
+                                streak > 0 ? 'et-anim-bump text-orange-300 bg-orange-500/10 border border-orange-400/25' : 'text-zinc-600 border border-white/5'
+                            }`}
+                            title="Current streak"
+                        >
+                            <Flame className={`h-3.5 w-3.5 ${streak >= 5 ? 'fill-orange-400/60' : ''}`} />
+                            {streak}
                         </span>
                         {multiplier > 1 && (
-                            <span className="text-xs lg:text-sm brand-eyebrow px-3 py-1.5 rounded-full font-bold">
-                                {multiplier}x COMBO
+                            <span key={`m-${multiplier}`} className="et-anim-bump brand-eyebrow rounded-full px-2 py-0.5 text-[10px] font-bold">
+                                {multiplier}× XP
                             </span>
                         )}
                     </div>
-                    <span className="text-xs lg:text-sm text-zinc-500 font-medium">
-                        {xpInLevel} / {xpNeededForNext} XP
-                    </span>
-                </div>
-                <div className="h-3 lg:h-4 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
-                    <div
-                        className="h-full brand-progress-fill transition-all duration-500 ease-out"
-                        style={{ width: `${xpPercentage}%` }}
-                    />
-                </div>
-            </div>
-            
-            {/* Run Progress */}
-            <div className="glass-card">
-                <div className="flex justify-between items-center mb-3">
-                    <span className="text-xs lg:text-sm font-semibold text-zinc-600 uppercase tracking-widest">
-                        Run: {current} / {total}
-                    </span>
-                    <div className="flex items-center gap-2">
-                        {streak > 1 && (
-                            <span className={`text-orange-500 font-bold text-sm lg:text-base ${streak >= 5 ? 'animate-bounce' : ''}`}>
-                                {streak} 🔥
-                            </span>
-                        )}
-                    </div>
-                </div>
-                <div className="h-3 lg:h-4 w-full bg-white/5 rounded-full overflow-hidden border border-white/20">
-                    <div
-                        className="h-full brand-progress-fill transition-all duration-500 ease-out"
-                        style={{ width: `${runPercentage}%` }}
-                    />
                 </div>
             </div>
         </div>

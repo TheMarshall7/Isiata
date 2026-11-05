@@ -27,76 +27,62 @@ export const ResourcesLayout: React.FC<ResourcesLayoutProps> = ({ children, cate
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
-            <TrainerAmbientBackground />
+            <TrainerAmbientBackground orbs={false} />
 
-            {/* Top Left Branding */}
-            <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
-                <BrandLogo showText={false} />
-            </div>
+            {/* Top bar */}
+            <header className="relative z-50 mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-5 lg:px-8 lg:pt-7">
+                <BrandLogo />
+                <button
+                    onClick={() => navigate('/')}
+                    className="flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-zinc-400 backdrop-blur-sm transition-colors hover:border-[#d8aa67]/40 hover:text-zinc-100"
+                >
+                    <span>←</span> Train
+                </button>
+            </header>
 
             {/* Header */}
-            <div className="relative z-10 pt-20 pb-8 px-4">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex items-center justify-between mb-6">
-                        <div>
-                            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2">
-                                Resources
-                            </h1>
-                            <p className="text-zinc-500 text-lg">
-                                Hear how things sound before you train.
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => navigate('/')}
-                            className="group flex items-center gap-2 text-zinc-600 hover:text-zinc-400 font-medium text-sm transition-all duration-300 hover:gap-3"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform duration-300">
-                                <path d="m12 19-7-7 7-7"></path>
-                                <path d="M19 12H5"></path>
-                            </svg>
-                            <span>Home</span>
-                        </button>
-                    </div>
+            <div className="relative z-10 px-4 pb-6 pt-10 lg:px-8 lg:pt-12">
+                <div className="mx-auto max-w-6xl">
+                    <div className="et-label">Ear Mastery · Library</div>
+                    <h1 className="mt-3 font-display text-4xl uppercase leading-none text-gold lg:text-6xl">
+                        <span className="et-gold-text">Resources</span>
+                    </h1>
+                    <p className="mt-3 max-w-xl text-sm text-zinc-400 lg:text-base">
+                        Hear how every interval, chord and scale sounds before you train it.
+                    </p>
 
-                    {/* Category Tabs */}
-                    <div className="flex flex-wrap gap-2 border-b border-white/10">
-                        <button
-                            onClick={() => navigate('/resources')}
-                            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-                                isOverview
-                                    ? 'border-orange-500 text-orange-400'
-                                    : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                            }`}
-                        >
-                            Overview
-                        </button>
-                        {categories.map(cat => (
-                            <button
-                                key={cat.id}
-                                onClick={() => navigate(`/resources/${cat.id}`)}
-                                className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-                                    category === cat.id
-                                        ? 'border-orange-500 text-orange-400'
-                                        : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                                }`}
-                            >
-                                {cat.label}
-                            </button>
-                        ))}
-                    </div>
+                    {/* Category tabs */}
+                    <nav className="-mx-4 mt-8 overflow-x-auto px-4 pb-1 [scrollbar-width:none] lg:mx-0 lg:px-0">
+                        <div className="inline-flex min-w-max gap-1 rounded-full border border-white/[0.07] bg-black/40 p-1 backdrop-blur-sm">
+                            {[{ id: 'overview', label: 'Overview' }, ...categories].map((cat) => {
+                                const active = cat.id === 'overview' ? isOverview : category === cat.id;
+                                return (
+                                    <button
+                                        key={cat.id}
+                                        onClick={() => navigate(cat.id === 'overview' ? '/resources' : `/resources/${cat.id}`)}
+                                        aria-current={active ? 'page' : undefined}
+                                        className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium tracking-wide transition-all duration-300 ${
+                                            active
+                                                ? 'bg-gradient-to-b from-[#f0c681] to-[#b88a48] text-[#1a1208] shadow-[0_6px_20px_-8px_rgba(240,198,129,0.7)]'
+                                                : 'text-zinc-400 hover:bg-white/[0.04] hover:text-zinc-100'
+                                        }`}
+                                    >
+                                        {cat.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </nav>
                 </div>
             </div>
 
             {/* Main Content */}
-            <div className="relative z-10 flex-1 px-4 pb-8">
-                <div className="max-w-6xl mx-auto">
-                    {children}
-                </div>
+            <div className="relative z-10 flex-1 px-4 pb-12 lg:px-8">
+                <div className="mx-auto max-w-6xl">{children}</div>
             </div>
 
-            {/* App Info - Hidden Attribution */}
-            <div className="relative z-10 pt-4 pb-6 px-4">
-                <div className="max-w-6xl mx-auto flex justify-center">
+            <div className="relative z-10 px-4 pb-6 pt-4">
+                <div className="mx-auto flex max-w-6xl justify-center">
                     <AppInfo />
                 </div>
             </div>

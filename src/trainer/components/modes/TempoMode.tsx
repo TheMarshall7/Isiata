@@ -4,11 +4,12 @@ import { useGame } from '../../context/GameContext';
 import { generateTempoQuestion, checkTempoAnswer, type TempoQuestion } from '../../logic/trainers/tempoTrainer';
 import { audioEngine } from '../../audio/audioEngine';
 import { loadClickSound } from '../../audio/sampleLoader';
-import { ModeHeader } from '../ModeHeader';
+import { Minus, Plus, Hand, Check, X } from 'lucide-react';
 import { RoundControls } from '../RoundControls';
 import { ProgressMeter } from '../ProgressMeter';
 import { ParticleEffect } from '../ParticleEffect';
 import { BrandLogo } from '../BrandLogo';
+import { TrainerAmbientBackground } from '../TrainerAmbientBackground';
 import { TrainerOverlayTextures } from '../TrainerOverlayTextures';
 import { Footer } from '../Footer';
 import { recordAnswer, updateBestStreak, loadStats, saveStats } from '../../logic/statsTracker';
@@ -217,226 +218,190 @@ export const TempoMode: React.FC<TempoModeProps> = ({
         onNext();
     };
 
+    // ── Tap tempo ────────────────────────────────────────────
+    const tapsRef = useRef<number[]>([]);
+    const [tapFlash, setTapFlash] = useState(0);
+    const handleTap = useCallback(() => {
+        if (checking || !question) return;
+        const now = performance.now();
+        const taps = tapsRef.current.filter((t) => now - t < 2000);
+        taps.push(now);
+        tapsRef.current = taps.slice(-8);
+        setTapFlash((n) => n + 1);
+        if (tapsRef.current.length >= 2) {
+            const t = tapsRef.current;
+            const avg = (t[t.length - 1] - t[0]) / (t.length - 1);
+            const bpm = Math.round(60000 / avg);
+            setUserBPM(Math.max(question.minBPM, Math.min(question.maxBPM, bpm)));
+        }
+    }, [checking, question]);
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            const t = e.target as HTMLElement | null;
+            if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
+            if ((e.key === 't' || e.key === 'T') && !e.repeat) {
+                e.preventDefault();
+                handleTap();
+            }
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [handleTap]);
+
     if (!question) return <div className="p-8 text-center">Loading...</div>;
+
+    const step = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 5 : 1;
+    const pct = ((userBPM - question.minBPM) / (question.maxBPM - question.minBPM)) * 100;
+    const nudge = (dir: 1 | -1) => setUserBPM((b) => Math.max(question.minBPM, Math.min(question.maxBPM, b + dir * step)));
 
     return (
         <div className="min-h-screen bg-background text-white relative flex flex-col">
+            <TrainerAmbientBackground orbs={false} />
             <TrainerOverlayTextures />
 
-            <div className="absolute top-6 left-4 lg:top-8 lg:left-8 z-50">
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-50 flex items-center gap-2">
                 <BrandLogo showText={false} />
+                <button
+                    onClick={() => navigate('/')}
+                    className="group flex items-center gap-1 text-zinc-500 hover:text-zinc-300 font-medium text-[10px] sm:text-xs transition-all duration-200 border border-white/10 hover:border-white/20 rounded-full px-2.5 py-1 bg-white/5 hover:bg-white/10 backdrop-blur-sm"
+                >
+                    <span className="group-hover:-translate-x-0.5 transition-transform">←</span>
+                    <span>Home</span>
+                </button>
             </div>
 
-            <div className="relative z-10 flex flex-col items-center pt-6 lg:pt-8 pb-6 flex-1 min-h-0 overflow-y-auto">
-                <div className="w-full max-w-4xl px-4 flex justify-between items-center mb-4 relative z-50 pl-20 lg:pl-24">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            navigate('/');
-                        }}
-                        className="group flex items-center gap-2 text-zinc-600 hover:text-zinc-400 font-medium text-sm relative z-50 cursor-pointer transition-all duration-300 hover:gap-3"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform duration-300">
-                            <path d="m12 19-7-7 7-7"></path>
-                            <path d="M19 12H5"></path>
-                        </svg>
-                        <span>Home</span>
-                    </button>
-                    <div className="w-16"></div>
+            <div className="relative z-10 flex flex-col items-center pt-8 sm:pt-10 flex-1">
+                <div className="w-full max-w-4xl px-4 flex justify-center mt-5 mb-4 shrink-0">
+                    <div className="flex items-center gap-2 rounded-full border border-[#d8aa67]/25 bg-black/40 px-3 py-1 backdrop-blur-sm">
+                        <span className="font-display text-[11px] uppercase tracking-[0.2em] text-[#f0dfc8]">Tempo</span>
+                        <span className="h-1 w-1 rounded-full bg-[#d8aa67]/60" />
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">{difficulty}</span>
+                    </div>
                 </div>
 
-                <ProgressMeter
-                    current={runProgress + 1}
-                    total={10}
-                    streak={streak}
-                    level={state.level}
-                    xp={state.xp}
-                />
-
+                <ProgressMeter current={runProgress + 1} total={10} streak={streak} level={state.level} xp={state.xp} compact />
                 <ParticleEffect trigger={showParticles} />
 
-                <ModeHeader
-                    title="Tempo Trainer"
-                    difficulty={difficulty}
-                    streak={streak}
-                    runProgress={runProgress}
-                    tip="Listen to the metronome and guess the BPM."
-                />
-
-                <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center">
-                    <div className="trainer-card w-full max-w-xl mx-auto mb-8 pt-6 pb-2">
-                        <RoundControls
-                            onPlay={playMetronome}
-                            onReplay={playMetronome}
-                            isPlaying={isPlaying}
-                            label="Play Metronome"
-                        />
+                <div className="w-full max-w-2xl flex-1 flex flex-col items-center gap-8 px-4 pb-6 pt-[clamp(1.5rem,8vh,5rem)]">
+                    <div className="trainer-card w-full max-w-xl mx-auto pt-5 pb-2">
+                        <div className="relative z-[2] text-center et-label !text-[#a89a85]">Listen to the click</div>
+                        <RoundControls onPlay={playMetronome} onReplay={playMetronome} isPlaying={isPlaying} label="Play metronome" />
                     </div>
 
-                    {/* BPM Input Controls */}
-                    <div className="w-full max-w-xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20">
-                        <h3 className="text-center text-lg font-semibold text-zinc-300 mb-6">
-                            What is the tempo?
-                        </h3>
+                    <div className="glass-card w-full max-w-xl mx-auto !p-5 sm:!p-6">
+                        <div className="relative z-[2]">
+                            <div className="et-label">Your tempo</div>
 
-                        {/* Current BPM Display with Arrow Controls */}
-                        <div className="text-center mb-6">
-                            <div className="flex items-center justify-center gap-4">
+                            {/* BPM readout with a beat light that pulses at your guess */}
+                            <div className="mt-4 flex items-center justify-center gap-5 sm:gap-8">
                                 <button
-                                    onClick={() => {
-                                        const step = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 5 : 1;
-                                        setUserBPM(Math.max(question.minBPM, userBPM - step));
-                                    }}
+                                    onClick={() => nudge(-1)}
                                     disabled={checking || userBPM <= question.minBPM}
-                                    className="p-3 rounded-full bg-surface-raised/80 hover:bg-white/10 border-2 border-white/10 hover:border-orange-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 hover:scale-110 active:scale-95"
-                                    title="Decrease BPM"
+                                    aria-label="Decrease BPM"
+                                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d8aa67]/30 text-[#f0c681] transition-all hover:border-[#f0c681]/70 hover:bg-[#d8aa67]/10 active:scale-90 disabled:opacity-30"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-300">
-                                        <path d="m15 18-6-6 6-6"></path>
-                                    </svg>
+                                    <Minus className="h-5 w-5" />
                                 </button>
-                                <div>
-                                    <div className="text-6xl font-bold text-white mb-2">
-                                        {userBPM}
+                                <div className="flex flex-col items-center">
+                                    <div className="flex items-center gap-3">
+                                        <span
+                                            key={userBPM}
+                                            className="h-2.5 w-2.5 rounded-full bg-[#f0c681]"
+                                            style={{ animation: `et-beat ${(60 / userBPM).toFixed(3)}s ease-out infinite`, boxShadow: '0 0 12px rgba(240,198,129,0.8)' }}
+                                            title="Pulses at your guess"
+                                        />
+                                        <span className="et-gold-text font-display text-6xl tabular-nums leading-none sm:text-7xl">{userBPM}</span>
                                     </div>
-                                    <div className="text-sm text-zinc-500 uppercase tracking-wide">
-                                        BPM
-                                    </div>
+                                    <span className="mt-1 text-[10px] uppercase tracking-[0.3em] text-zinc-500">BPM</span>
                                 </div>
                                 <button
-                                    onClick={() => {
-                                        const step = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 5 : 1;
-                                        setUserBPM(Math.min(question.maxBPM, userBPM + step));
-                                    }}
+                                    onClick={() => nudge(1)}
                                     disabled={checking || userBPM >= question.maxBPM}
-                                    className="p-3 rounded-full bg-surface-raised/80 hover:bg-white/10 border-2 border-white/10 hover:border-orange-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 hover:scale-110 active:scale-95"
-                                    title="Increase BPM"
+                                    aria-label="Increase BPM"
+                                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d8aa67]/30 text-[#f0c681] transition-all hover:border-[#f0c681]/70 hover:bg-[#d8aa67]/10 active:scale-90 disabled:opacity-30"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-300">
-                                        <path d="m9 18 6-6-6-6"></path>
-                                    </svg>
+                                    <Plus className="h-5 w-5" />
                                 </button>
                             </div>
-                        </div>
 
-                        {/* Slider */}
-                        <div className="mb-6">
-                            <input
-                                type="range"
-                                min={question.minBPM}
-                                max={question.maxBPM}
-                                step={difficulty === 'easy' ? 10 : difficulty === 'medium' ? 5 : 1}
-                                value={userBPM}
-                                onChange={(e) => setUserBPM(parseInt(e.target.value))}
-                                disabled={checking}
-                                className="w-full h-3 bg-neutral-200 rounded-lg appearance-none cursor-pointer slider-thumb"
-                                style={{
-                                    background: `linear-gradient(to right, #f97316 0%, #f97316 ${((userBPM - question.minBPM) / (question.maxBPM - question.minBPM)) * 100}%, #e5e5e5 ${((userBPM - question.minBPM) / (question.maxBPM - question.minBPM)) * 100}%, #e5e5e5 100%)`
-                                }}
-                            />
-                            <div className="flex justify-between text-xs text-zinc-600 mt-2">
-                                <span>{question.minBPM}</span>
-                                <span>{question.maxBPM}</span>
+                            <div className="mt-6">
+                                <input
+                                    type="range"
+                                    min={question.minBPM}
+                                    max={question.maxBPM}
+                                    step={step}
+                                    value={userBPM}
+                                    onChange={(e) => setUserBPM(parseInt(e.target.value))}
+                                    disabled={checking}
+                                    className="et-slider w-full"
+                                    style={{ background: `linear-gradient(90deg, #6b4e2a 0%, #d8aa67 ${pct}%, rgba(255,255,255,0.08) ${pct}%)` }}
+                                    aria-label="BPM"
+                                />
+                                <div className="mt-1.5 flex justify-between text-[10px] tabular-nums text-zinc-600">
+                                    <span>{question.minBPM}</span>
+                                    <span>{question.maxBPM}</span>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Number Input */}
-                        <div className="mb-6">
-                            <label className="block text-sm font-medium text-zinc-400 mb-2">
-                                Or enter manually:
-                            </label>
-                            <input
-                                type="number"
-                                min={question.minBPM}
-                                max={question.maxBPM}
-                                value={userBPM}
-                                onChange={(e) => {
-                                    const val = parseInt(e.target.value);
-                                    if (!isNaN(val) && val >= question.minBPM && val <= question.maxBPM) {
-                                        setUserBPM(val);
-                                    }
-                                }}
-                                disabled={checking}
-                                className="w-full px-4 py-3 rounded-lg border-2 border-white/10 focus:border-orange-500 focus:outline-none text-center text-xl font-semibold"
-                            />
-                        </div>
+                            <div className="mt-5 grid grid-cols-[1fr_auto] gap-2">
+                                <button
+                                    onClick={handleTap}
+                                    disabled={checking}
+                                    className="relative flex items-center justify-center gap-2 overflow-hidden rounded-xl border border-[#d8aa67]/30 bg-[#d8aa67]/[0.06] py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#f0dfc8] transition-all hover:border-[#f0c681]/60 active:scale-[0.98] disabled:opacity-40"
+                                >
+                                    <span key={tapFlash} className="pointer-events-none absolute inset-0 bg-[#f0c681]/25" style={{ animation: 'et-tap 0.4s ease-out both' }} />
+                                    <Hand className="h-4 w-4" /> Tap tempo
+                                    <span className="et-keycap hidden sm:inline-flex">T</span>
+                                </button>
+                                <input
+                                    type="number"
+                                    min={question.minBPM}
+                                    max={question.maxBPM}
+                                    value={userBPM}
+                                    onChange={(e) => {
+                                        const val = parseInt(e.target.value);
+                                        if (!isNaN(val) && val >= question.minBPM && val <= question.maxBPM) setUserBPM(val);
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            handleSubmit();
+                                        }
+                                    }}
+                                    disabled={checking}
+                                    aria-label="Type a BPM"
+                                    className="w-24 rounded-xl border border-white/[0.08] bg-black/40 px-3 text-center text-base font-semibold tabular-nums text-zinc-100 focus:border-[#d8aa67]/60 focus:outline-none"
+                                />
+                            </div>
 
-                        {/* Submit Button */}
-                        {!checking && (
-                            <button
-                                onClick={handleSubmit}
-                                className="btn-primary w-full text-lg"
-                            >
-                                Submit Answer
-                            </button>
-                        )}
+                            {!checking && (
+                                <button onClick={handleSubmit} className="btn-primary mt-5 w-full">
+                                    Lock in {userBPM} BPM
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
 
                 {checking && result && (
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-6 flex flex-col items-center animate-slide-up pb-8">
-                        <div className={`w-full max-w-md mx-auto rounded-2xl p-8 backdrop-blur-lg shadow-2xl border transition-all duration-300 ${result.correct
-                                ? 'bg-gradient-to-br from-orange-500/10/90 to-amber-100/80 border-orange-500/30/50'
-                                : 'bg-white/10 border-white/10'
-                            }`}>
-                            <div className="text-center">
-                                {result.correct ? (
-                                    <>
-                                        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${result.accuracy === 'perfect'
-                                                ? 'bg-gradient-to-br from-orange-500 to-white'
-                                                : 'bg-gradient-to-br from-orange-300 to-orange-500/50'
-                                            } shadow-lg`}>
-                                            <span className="text-3xl">{result.accuracy === 'perfect' ? '🎯' : '✓'}</span>
-                                        </div>
-                                        <h3 className="text-3xl font-bold text-white mb-4">
-                                            {result.accuracy === 'perfect' ? 'Perfect!' : 'Close!'}
-                                        </h3>
-                                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-3 border border-orange-500/30/30">
-                                            <div className="flex items-center justify-center gap-2 text-lg text-zinc-300 mb-2">
-                                                <span className="text-zinc-500">Target:</span>
-                                                <span className="font-bold text-orange-400">{question.targetBPM} BPM</span>
-                                            </div>
-                                            <div className="flex items-center justify-center gap-2 text-lg text-zinc-300">
-                                                <span className="text-zinc-500">Your guess:</span>
-                                                <span className="font-bold text-white">{userBPM} BPM</span>
-                                            </div>
-                                        </div>
-                                        <div className="text-sm text-zinc-400 bg-surface-raised/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/30 inline-block">
-                                            Difference: ±{result.difference} BPM
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 mb-4 shadow-lg">
-                                            <span className="text-3xl">✕</span>
-                                        </div>
-                                        <h3 className="text-3xl font-bold text-zinc-200 mb-4">
-                                            Not quite
-                                        </h3>
-                                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-3 border border-white/10">
-                                            <div className="flex items-center justify-center gap-2 text-lg text-zinc-300 mb-2">
-                                                <span className="text-zinc-500">Target:</span>
-                                                <span className="font-bold text-orange-400">{question.targetBPM} BPM</span>
-                                            </div>
-                                            <div className="flex items-center justify-center gap-2 text-lg text-zinc-300">
-                                                <span className="text-zinc-500">Your guess:</span>
-                                                <span className="font-bold text-white">{userBPM} BPM</span>
-                                            </div>
-                                        </div>
-                                        <div className="text-sm text-zinc-400 bg-surface-raised/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10/30 inline-block">
-                                            Difference: {result.difference} BPM • Need ±6 or better
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                            <button
-                                onClick={handleNext}
-                                className="mt-6 btn-primary w-full text-lg"
-                            >
-                                Next Question
-                            </button>
+                    <div className="trainer-next-bar p-4 sm:p-6 flex flex-col items-center animate-slide-up">
+                        <div className="flex items-center gap-2 text-sm font-semibold">
+                            <span className={`flex h-6 w-6 items-center justify-center rounded-full ${result.correct ? 'bg-green-500/15 text-green-400' : 'bg-red-500/15 text-red-400'}`}>
+                                {result.correct ? <Check className="h-4 w-4" strokeWidth={3} /> : <X className="h-4 w-4" strokeWidth={3} />}
+                            </span>
+                            <span className={result.correct ? 'text-green-300' : 'text-red-300'}>
+                                {result.correct ? (result.accuracy === 'perfect' ? 'Perfect tempo' : 'Close enough') : 'Not quite. Streak reset.'}
+                            </span>
                         </div>
+                        <div className="mt-3 flex items-center gap-2 text-xs">
+                            <span className="rounded-full border border-[#d8aa67]/40 bg-[#d8aa67]/10 px-3 py-1 text-[#f0c681]">Target {question.targetBPM}</span>
+                            <span className="rounded-full border border-white/10 px-3 py-1 text-zinc-300">You {userBPM}</span>
+                            <span className="text-zinc-500">±{result.difference} BPM</span>
+                        </div>
+                        <button onClick={handleNext} className="btn-primary mt-4 w-full max-w-md text-base sm:text-lg">
+                            Next Question
+                        </button>
                     </div>
                 )}
             </div>
@@ -445,4 +410,3 @@ export const TempoMode: React.FC<TempoModeProps> = ({
         </div>
     );
 };
-

@@ -20,7 +20,7 @@ interface ParticleEffectProps {
 export const ParticleEffect: React.FC<ParticleEffectProps> = ({
     trigger,
     count = 30,
-    colors = ['#f97316', '#fb923c', '#fdba74', '#fbbf24', '#f59e0b']
+    colors = ['#f0c681', '#d8aa67', '#fff1d6', '#a67c3d', '#e8d4a8']
 }) => {
     const [particles, setParticles] = useState<Particle[]>([]);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);

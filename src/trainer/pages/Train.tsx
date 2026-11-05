@@ -26,6 +26,7 @@ import { KeyFinderMode } from '../components/modes/KeyFinderMode';
 import { NumberSystemMode } from '../components/modes/NumberSystemMode';
 import { MelodyMode } from '../components/modes/MelodyMode';
 import { TempoMode } from '../components/modes/TempoMode';
+import { FrequencyMode } from '../components/modes/FrequencyMode';
 import { ParticleEffect } from '../components/ParticleEffect';
 import { StreakCelebration } from '../components/StreakCelebration';
 import { CelebrationOverlay } from '../components/CelebrationOverlay';
@@ -40,6 +41,7 @@ import { ModeHeader } from '../components/ModeHeader';
 import { TrainerAmbientBackground } from '../components/TrainerAmbientBackground';
 import { TrainerOverlayTextures } from '../components/TrainerOverlayTextures';
 import { hasEarTrainerAccess } from '../lib/access';
+import { MODE_META } from '../config/modeMeta';
 
 // Calculate combo multiplier based on streak
 const getComboMultiplier = (streak: number): number => {
@@ -461,6 +463,31 @@ export const Train: React.FC = () => {
         );
     }
 
+    if (state.currentMode === 'frequency') {
+        return (
+            <>
+                <FrequencyMode
+                    difficulty={state.difficulty}
+                    streak={state.streak}
+                    runProgress={state.runProgress}
+                    onCorrect={(points) => dispatch({ type: 'CORRECT_ANSWER', payload: points })}
+                    onWrong={() => dispatch({ type: 'WRONG_ANSWER' })}
+                    onNext={() => {
+                        if (state.runProgress > 0 && state.runProgress % 10 === 0) {
+                            dispatch({ type: 'INCREMENT_SESSION' });
+                        }
+                    }}
+                />
+                <Paywall
+                    visible={state.isLocked}
+                    onUnlock={() => {
+                        dispatch({ type: 'UNLOCK_FEATURE' });
+                    }}
+                />
+            </>
+        );
+    }
+
     if (state.currentMode === 'tempo') {
         return (
             <>
@@ -489,7 +516,7 @@ export const Train: React.FC = () => {
     if (!question) return <div className="p-8 text-center">Loading...</div>;
 
     return (
-        <div className="h-dvh max-h-dvh bg-background text-white relative flex flex-col overflow-hidden trainer-play-shell">
+        <div className="min-h-dvh bg-background text-white relative flex flex-col trainer-play-shell">
             <TrainerAmbientBackground orbs={false} />
             <TrainerOverlayTextures />
 
@@ -512,11 +539,13 @@ export const Train: React.FC = () => {
                 </button>
             </div>
 
-            <div className="relative z-10 flex flex-col items-center pt-8 sm:pt-10 pb-3 flex-1 min-h-0 overflow-hidden">
+            <div className="relative z-10 flex flex-col items-center pt-8 sm:pt-10 flex-1">
                 {/* Mode badge — centered top bar */}
                 <div className="w-full max-w-4xl px-4 flex justify-center items-center mt-5 mb-4 relative z-50 shrink-0">
-                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest brand-eyebrow backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
-                        {state.difficulty} {state.currentMode}
+                    <div className="flex items-center gap-2 rounded-full border border-[#d8aa67]/25 bg-black/40 px-3 py-1 backdrop-blur-sm">
+                        <span className="font-display text-[11px] uppercase tracking-[0.2em] text-[#f0dfc8]">{MODE_META[state.currentMode].name}</span>
+                        <span className="h-1 w-1 rounded-full bg-[#d8aa67]/60" />
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">{state.difficulty}</span>
                     </div>
                 </div>
 
@@ -566,21 +595,10 @@ export const Train: React.FC = () => {
                     />
                 )}
 
-                <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center min-h-0 gap-2 px-4">
-                    <div className="trainer-card trainer-listen-card relative w-full max-w-xl mx-auto shrink-0 px-5 py-5 sm:px-6 sm:py-6">
-                        {checking && correctId === selectedId && (
-                            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10">
-                                <Feedback
-                                    correct
-                                    points={30}
-                                    multiplier={getComboMultiplier(state.streak)}
-                                    onShowParticles={() => setShowParticles(true)}
-                                    variant="inline"
-                                />
-                            </div>
-                        )}
-                        <h2 className="text-center text-base sm:text-lg font-semibold mb-2 px-2 pt-2">
-                            Listen and Identify
+                <div className="flex-1 w-full max-w-2xl flex flex-col items-center px-4 pb-6 pt-[clamp(1.5rem,13vh,8rem)]">
+                    <div className="trainer-card trainer-listen-card relative w-full max-w-xl mx-auto shrink-0">
+                        <h2 className="relative z-[2] text-center et-label !text-[#a89a85] mb-1 px-2 pt-1">
+                            Listen &amp; identify
                         </h2>
                         <Player
                             key={questionKey}
@@ -591,32 +609,33 @@ export const Train: React.FC = () => {
                         />
                     </div>
 
-                    <AnswerGrid
-                        options={question.options}
-                        onSelect={handleAnswer}
-                        disabled={checking || isPlaying}
-                        selectedId={selectedId}
-                        correctId={correctId}
-                        compact
-                    />
+                    <div className="w-full mt-10 sm:mt-12">
+                        <AnswerGrid
+                            options={question.options}
+                            onSelect={handleAnswer}
+                            disabled={checking || isPlaying}
+                            selectedId={selectedId}
+                            correctId={correctId}
+                            compact
+                        />
+                    </div>
 
-                    {checking && correctId !== selectedId && (
-                        <div className="w-full max-w-xl mx-auto px-1 mt-1 shrink-0">
-                            <div className="flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 text-sm font-medium">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6"/><path d="m9 9 6 6"/>
-                                </svg>
-                                Try Again — correct answer highlighted above
-                            </div>
-                        </div>
-                    )}
+                    <div className="mt-3 h-5 w-full max-w-xl mx-auto shrink-0 text-center text-[10px] uppercase tracking-[0.2em] text-zinc-600">
+                        {!checking && <span className="hidden sm:inline">Press <span className="et-keycap">1</span>–<span className="et-keycap">{Math.min(9, question.options.length)}</span> to answer</span>}
+                    </div>
                 </div>
 
                 {checking && (
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-white/10 p-4 sm:p-6 flex flex-col items-center animate-slide-up pb-6 sm:pb-8">
+                    <div className="trainer-next-bar p-4 sm:p-6 flex flex-col items-center animate-slide-up pb-6 sm:pb-8">
+                        <Feedback
+                            correct={correctId === selectedId}
+                            points={30}
+                            multiplier={getComboMultiplier(state.streak)}
+                            variant="toast"
+                        />
                         <button
                             onClick={handleNext}
-                            className={`btn-primary w-full max-w-md text-base sm:text-lg ${state.isLocked ? 'opacity-50 pointer-events-none' : ''}`}
+                            className={`btn-primary mt-3 w-full max-w-md text-base sm:text-lg ${state.isLocked ? 'opacity-50 pointer-events-none' : ''}`}
                         >
                             Next Question
                         </button>

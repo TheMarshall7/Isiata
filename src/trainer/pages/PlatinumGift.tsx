@@ -91,8 +91,8 @@ export const PlatinumGift: React.FC = () => {
             </div>
 
             {/* Subtle floating orbs */}
-            <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-orange-500/20 to-indigo-500/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-pink-500/20 to-orange-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-[#d8aa67]/20 to-indigo-500/20 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-pink-500/20 to-[#a67c3d]/20 rounded-full blur-3xl" />
 
             {/* Main content */}
             <div className={`relative z-10 max-w-4xl w-full text-center transition-all duration-1000 ${
@@ -102,7 +102,7 @@ export const PlatinumGift: React.FC = () => {
                 {/* Main card with premium glass morphism */}
                 <div className="relative">
                     {/* Subtle outer glow */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/30 via-indigo-500/30 to-zinc-400/30 rounded-3xl blur-xl" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#d8aa67]/30 via-indigo-500/30 to-zinc-400/30 rounded-3xl blur-xl" />
                     
                     {/* Glass morphism card */}
                     <div className="relative bg-gradient-to-br from-white/25 via-white/15 to-white/10 backdrop-blur-3xl rounded-3xl border-2 border-white/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1)] p-8 lg:p-12 overflow-hidden">
@@ -127,7 +127,7 @@ export const PlatinumGift: React.FC = () => {
                             </div>
                             
                             {/* Subtle orbiting elements */}
-                            <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-orange-300 animate-spin" style={{ animationDuration: '4s' }} />
+                            <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-[#f0dfc8] animate-spin" style={{ animationDuration: '4s' }} />
                             <Star className="absolute -bottom-2 -left-2 w-5 h-5 text-pink-300" />
                         </div>
                     </div>
@@ -143,7 +143,7 @@ export const PlatinumGift: React.FC = () => {
 
                     {/* Description */}
                     <p className="text-xl lg:text-2xl text-white mb-8 leading-relaxed">
-                        You've unlocked <span className="font-bold text-orange-300">ALL ACHIEVEMENTS</span>!
+                        You've unlocked <span className="font-bold text-[#f0dfc8]">ALL ACHIEVEMENTS</span>!
                         <br />
                         Claim your exclusive reward below.
                     </p>
@@ -158,7 +158,7 @@ export const PlatinumGift: React.FC = () => {
                             {/* Subtle shimmer */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full animate-shimmer" style={{ animationDelay: '1s', animationDuration: '8s' }} />
                         <div className="flex items-center justify-center gap-4 mb-4">
-                            <Medal className="w-14 h-14 text-orange-400 drop-shadow-lg" style={{ filter: 'drop-shadow(0 4px 8px rgba(255,140,0,0.4))' }} />
+                            <Medal className="w-14 h-14 text-[#f0c681] drop-shadow-lg" style={{ filter: 'drop-shadow(0 4px 8px rgba(255,140,0,0.4))' }} />
                             <div>
                                 <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2">
                                     25% Off the {DRUM_BUNDLE.title}
@@ -178,7 +178,7 @@ export const PlatinumGift: React.FC = () => {
                         <button
                             type="button"
                             onClick={handleRedeem}
-                            className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-400 text-black font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
+                            className="group relative px-8 py-4 bg-gradient-to-r from-[#d8aa67] to-[#a67c3d] text-black font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
                         >
                                 <span className="relative z-10 flex items-center gap-3">
                                     <Zap className="w-6 h-6" />
@@ -192,9 +192,9 @@ export const PlatinumGift: React.FC = () => {
 
                     {/* Stats badge */}
                     <div className="flex items-center justify-center gap-2 text-white/90 mb-6">
-                        <Star className="w-5 h-5 text-orange-400" />
+                        <Star className="w-5 h-5 text-[#f0c681]" />
                         <span className="text-lg">You've completed every achievement!</span>
-                        <Star className="w-5 h-5 text-orange-400" />
+                        <Star className="w-5 h-5 text-[#f0c681]" />
                     </div>
 
                     {/* Back button */}

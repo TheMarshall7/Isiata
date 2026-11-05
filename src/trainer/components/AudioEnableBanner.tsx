@@ -74,18 +74,18 @@ export const AudioEnableBanner: React.FC = () => {
     if (!isMobile || isUnlocked || !showBanner) return null;
 
     return (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 flex items-center justify-between shadow-sm">
+        <div className="mx-auto mb-4 flex w-full max-w-xl items-center justify-between gap-3 rounded-xl border border-[#d8aa67]/30 bg-[#0b0a09]/90 p-3 backdrop-blur-sm">
             <div className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#f0c681]">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                     <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                 </svg>
-                <p className="text-sm text-blue-900 font-medium">Audio is locked on this device</p>
+                <p className="text-sm font-medium text-zinc-200">Audio is locked on this device</p>
             </div>
             <button
                 onClick={handleEnableAudio}
                 disabled={isLoading}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+                className="shrink-0 rounded-full bg-gradient-to-br from-[#f0c681] to-[#a67c3d] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#1a1208] transition-opacity hover:opacity-90 disabled:opacity-50"
             >
                 {isLoading ? 'Enabling...' : 'Enable Audio'}
             </button>
