@@ -73,35 +73,40 @@ export default function PluginPage({ params }: { params: Params }) {
         All plugins
       </Link>
 
-      <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">{plugin.kind}</p>
-      <h1 className="mb-6 font-display text-4xl uppercase tracking-normal text-gold md:text-6xl">{plugin.name}</h1>
-      <p className="mb-6 max-w-2xl text-xl leading-relaxed text-[#ece3d7] md:text-2xl">{plugin.hero}</p>
-      <p className="mb-8 max-w-2xl text-base leading-relaxed text-zinc-400">{plugin.short}</p>
+      <div className="mb-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+        <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">{plugin.kind}</p>
+        <h1 className="mb-6 font-display text-4xl uppercase tracking-normal text-gold md:text-6xl">{plugin.name}</h1>
+        <p className="mb-6 max-w-2xl text-xl leading-relaxed text-[#ece3d7] md:text-2xl">{plugin.hero}</p>
+        <p className="mb-8 max-w-2xl text-base leading-relaxed text-zinc-400">{plugin.short}</p>
 
-      <div className="mb-12 flex flex-wrap items-center gap-6">
-        <span className="text-3xl text-white">
-          <Price value={plugin.price} />
-        </span>
-        <PluginNotifyButton productName={plugin.name} source={`plugin_${plugin.slug}`} />
+        <div className="mb-12 flex flex-wrap items-center gap-6">
+          <span className="text-3xl text-white">
+            <Price value={plugin.price} />
+          </span>
+          <PluginNotifyButton productName={plugin.name} source={`plugin_${plugin.slug}`} />
+        </div>
+        </div>
+        <div className="w-full lg:justify-self-end">
+          {plugin.image ? (
+            <figure
+              className="overflow-hidden border border-[#d8aa67]/25 bg-black/40"
+              style={{ maxWidth: plugin.image.width }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={plugin.image.src}
+                width={plugin.image.width}
+                height={plugin.image.height}
+                alt={`${plugin.name} faceplate`}
+                className="h-auto w-full"
+              />
+            </figure>
+          ) : null}
+        </div>
       </div>
 
-      {plugin.image ? (
-        <figure
-          className="mb-14 overflow-hidden border border-[#d8aa67]/25 bg-black/40"
-          style={{ maxWidth: plugin.image.width }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={plugin.image.src}
-            width={plugin.image.width}
-            height={plugin.image.height}
-            alt={`${plugin.name} faceplate`}
-            className="h-auto w-full"
-          />
-        </figure>
-      ) : null}
-
-      <div className="mb-14 max-w-3xl space-y-4">
+      <div className="mx-auto mb-14 max-w-2xl space-y-4 text-center">
         {plugin.about.map((p) => (
           <p key={p} className="text-base leading-relaxed text-zinc-300">
             {p}

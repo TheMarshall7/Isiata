@@ -140,7 +140,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     short:
       'Delay, reverb, stutter, chorus, phaser, flanger and soft clip, plus three analog colour stages and lo-fi and 8-bit crush, all on a single plugin for any track or bus.',
     about: [
-      'Instead of stacking seven plugins, drop one on a drum bus, a vocal or a whole mix and reach for whatever the moment needs. Every effect follows the tempo of your session.',
+      'Instead of stacking seven plugins, drop one on the bus and reach for whatever the moment needs. Every effect follows the tempo of your session.',
     ],
     features: [
       { label: 'Echo', body: 'Tempo-synced or free delays with tone and stereo width.' },
