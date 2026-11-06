@@ -244,3 +244,184 @@ export function formatBytes(bytes: number): string {
   const v = bytes / Math.pow(1024, i)
   return `${v.toFixed(v >= 100 ? 0 : v >= 10 ? 1 : 2)} ${units[i]}`
 }
+
+// ─── Diatonic chords for playback ────────────────────────────────────
+
+/** MIDI notes of the diatonic triad (or seventh) on a scale degree, root voiced from octave 4. */
+export function diatonicChordMidis(root: string, isMajor: boolean, degree: number, seventh = false): number[] {
+  const rootIndex = ALL_NOTES.indexOf(root as (typeof ALL_NOTES)[number])
+  if (rootIndex < 0) return []
+  const iv = isMajor ? MAJOR_INTERVALS : MINOR_INTERVALS
+  const base = 48 + rootIndex // C3 region keeps chords warm, not shrill
+  const steps = seventh ? [0, 2, 4, 6] : [0, 2, 4]
+  return steps.map((s) => {
+    const idx = degree + s
+    return base + iv[idx % 7] + 12 * Math.floor(idx / 7)
+  })
+}
+
+/** Chord quality suffix per degree for seventh chords (natural major / minor). */
+export function diatonicSeventhNames(notes: string[], isMajor: boolean): string[] {
+  const major = ['maj7', 'm7', 'm7', 'maj7', '7', 'm7', 'm7♭5']
+  const minor = ['m7', 'm7♭5', 'maj7', 'm7', 'm7', 'maj7', '7']
+  const q = isMajor ? major : minor
+  return notes.map((n, i) => `${n}${q[i]}`)
+}
+
+export const COMMON_PROGRESSIONS: { label: string; major: number[]; minor: number[] }[] = [
+  { label: 'Pop', major: [0, 4, 5, 3], minor: [0, 5, 2, 6] },
+  { label: 'Jazz ii–V–I', major: [1, 4, 0, 0], minor: [1, 4, 0, 0] },
+  { label: 'Ballad', major: [0, 5, 3, 4], minor: [0, 3, 6, 2] },
+  { label: 'Andalusian', major: [5, 4, 3, 2], minor: [0, 6, 5, 4] },
+]
+
+// ─── Camelot wheel ───────────────────────────────────────────────────
+
+const CAMELOT_MAJOR: Record<string, number> = {
+  B: 1, 'F#': 2, 'C#': 3, 'G#': 4, 'D#': 5, 'A#': 6, F: 7, C: 8, G: 9, D: 10, A: 11, E: 12,
+}
+const CAMELOT_MINOR: Record<string, number> = {
+  'G#': 1, 'D#': 2, 'A#': 3, F: 4, C: 5, G: 6, D: 7, A: 8, E: 9, B: 10, 'F#': 11, 'C#': 12,
+}
+
+export type CamelotKey = { code: string; num: number; letter: 'A' | 'B'; root: string; isMajor: boolean }
+
+function camelotName(root: string, isMajor: boolean): string {
+  const notes = getScaleNotes(root, isMajor)
+  return `${notes[0] ?? root} ${isMajor ? 'major' : 'minor'}`
+}
+
+export function toCamelot(root: string, isMajor: boolean): CamelotKey {
+  const num = (isMajor ? CAMELOT_MAJOR : CAMELOT_MINOR)[root]
+  const letter = isMajor ? 'B' : 'A'
+  return { code: `${num}${letter}`, num, letter, root, isMajor }
+}
+
+function fromCamelot(num: number, letter: 'A' | 'B'): CamelotKey {
+  const n = ((num - 1 + 12) % 12) + 1
+  const table = letter === 'B' ? CAMELOT_MAJOR : CAMELOT_MINOR
+  const root = Object.keys(table).find((k) => table[k] === n)!
+  return { code: `${n}${letter}`, num: n, letter, root, isMajor: letter === 'B' }
+}
+
+/** Harmonic-mixing neighbours: same key, relative, ±1 on the wheel, and the +2 energy boost. */
+export function camelotMatches(key: CamelotKey) {
+  const other = key.letter === 'A' ? 'B' : 'A'
+  return [
+    { relation: 'Same key', key },
+    { relation: key.isMajor ? 'Relative minor' : 'Relative major', key: fromCamelot(key.num, other) },
+    { relation: 'One step up', key: fromCamelot(key.num + 1, key.letter) },
+    { relation: 'One step down', key: fromCamelot(key.num - 1, key.letter) },
+    { relation: 'Energy boost (+2)', key: fromCamelot(key.num + 2, key.letter) },
+  ].map((m) => ({ ...m, name: camelotName(m.key.root, m.key.isMajor) }))
+}
+
+// ─── Gain / dB ───────────────────────────────────────────────────────
+
+export function dbToGain(db: number): number {
+  return Math.pow(10, db / 20)
+}
+
+export function gainToDb(gain: number): number {
+  return gain > 0 ? 20 * Math.log10(gain) : -Infinity
+}
+
+// ─── Song length ↔ bars ──────────────────────────────────────────────
+
+export function barsToSeconds(bars: number, bpm: number, beatsPerBar = 4): number {
+  return bpm > 0 ? (bars * beatsPerBar * 60) / bpm : 0
+}
+
+export function secondsToBars(seconds: number, bpm: number, beatsPerBar = 4): number {
+  return beatsPerBar > 0 ? (seconds * bpm) / 60 / beatsPerBar : 0
+}
+
+export function formatClock(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds < 0) return '0:00'
+  const m = Math.floor(seconds / 60)
+  const s = seconds - m * 60
+  return `${m}:${s < 10 ? '0' : ''}${s.toFixed(1)}`
+}
+
+// ─── Frequency guide ─────────────────────────────────────────────────
+
+export const FREQUENCY_BANDS = [
+  { key: 'sub', label: 'Sub', short: 'Sub', low: 20, high: 60, note: 'Felt more than heard. 808 tails, kick weight. Mono it.' },
+  { key: 'bass', label: 'Bass', short: 'Bass', low: 60, high: 250, note: 'Kick punch and bass body. Where low-end fights happen.' },
+  { key: 'mud', label: 'Low mids', short: 'Lo', low: 250, high: 500, note: 'Warmth, or mud when it piles up. First place to cut.' },
+  { key: 'mids', label: 'Mids', short: 'Mid', low: 500, high: 2000, note: 'Body of vocals, snares and keys. Honk lives near 1 kHz.' },
+  { key: 'presence', label: 'Upper mids', short: 'Hi', low: 2000, high: 5000, note: 'Presence and bite. Ears are most sensitive here. Harshness too.' },
+  { key: 'air', label: 'Highs', short: 'Air', low: 5000, high: 20000, note: 'Sibilance at 5–8 kHz, sparkle and air above 10 kHz.' },
+] as const
+
+export const INSTRUMENT_RANGES = [
+  { label: 'Kick', low: 40, high: 5000, focus: '50–100 Hz thump, 3–5 kHz click' },
+  { label: '808 / Sub bass', low: 30, high: 250, focus: '40–80 Hz fundamental' },
+  { label: 'Bass guitar', low: 41, high: 5000, focus: '80–250 Hz body, 700 Hz–1 kHz growl' },
+  { label: 'Snare', low: 120, high: 10000, focus: '150–250 Hz body, 5 kHz crack' },
+  { label: 'Hi-hats', low: 3000, high: 16000, focus: '6–12 kHz shimmer' },
+  { label: 'Male vocal', low: 85, high: 12000, focus: '120 Hz body, 3 kHz presence' },
+  { label: 'Female vocal', low: 165, high: 16000, focus: '250 Hz body, 4 kHz presence' },
+  { label: 'Piano', low: 27.5, high: 4186, focus: 'Full range. Clean up 200–400 Hz in a mix' },
+  { label: 'Guitar', low: 82, high: 5000, focus: '200 Hz body, 2–4 kHz definition' },
+] as const
+
+// ─── Pitch detection (tuner) ─────────────────────────────────────────
+
+/**
+ * McLeod Pitch Method (normalized square difference) with parabolic interpolation.
+ * The normalization removes the low-note sharp bias of plain autocorrelation, and the
+ * peak height doubles as a clarity score so noise and chords are rejected.
+ * Use ~4096 samples so low bass notes (41 Hz) span enough periods.
+ * Returns the fundamental in Hz, or null when the signal is quiet or not clearly pitched.
+ */
+export function detectPitch(buf: Float32Array, sampleRate: number, minFreq = 30, maxFreq = 4200): number | null {
+  const n = buf.length
+  let energy = 0
+  for (let i = 0; i < n; i++) energy += buf[i] * buf[i]
+  if (Math.sqrt(energy / n) < 0.008) return null
+
+  const maxLag = Math.min(Math.floor(n / 2), Math.ceil(sampleRate / minFreq))
+  const minLag = Math.max(2, Math.floor(sampleRate / maxFreq))
+  const nsdf = new Float32Array(maxLag + 1)
+  let m = 2 * energy
+  for (let tau = 0; tau <= maxLag; tau++) {
+    let acf = 0
+    for (let i = 0; i < n - tau; i++) acf += buf[i] * buf[i + tau]
+    nsdf[tau] = m > 0 ? (2 * acf) / m : 0
+    m -= buf[tau] * buf[tau] + buf[n - 1 - tau] * buf[n - 1 - tau]
+  }
+
+  // Collect the highest point of each positive lobe after the first zero crossing.
+  let tau = 1
+  while (tau < maxLag && nsdf[tau] > 0) tau++
+  const peaks: number[] = []
+  let bestInLobe = -1
+  for (; tau < maxLag; tau++) {
+    if (nsdf[tau] > 0) {
+      if (bestInLobe < 0 || nsdf[tau] > nsdf[bestInLobe]) bestInLobe = tau
+    } else if (bestInLobe > 0) {
+      peaks.push(bestInLobe)
+      bestInLobe = -1
+    }
+  }
+  if (bestInLobe > 0) peaks.push(bestInLobe)
+  if (!peaks.length) return null
+
+  let highest = 0
+  for (const p of peaks) highest = Math.max(highest, nsdf[p])
+  if (highest < 0.6) return null // not clearly pitched
+
+  // The first peak close to the best one is the fundamental (avoids octave-down errors).
+  const pick = peaks.find((p) => nsdf[p] >= 0.9 * highest && p >= minLag)
+  if (pick == null) return null
+
+  const x1 = nsdf[pick - 1]
+  const x2 = nsdf[pick]
+  const x3 = nsdf[pick + 1]
+  const a = (x1 + x3 - 2 * x2) / 2
+  const b = (x3 - x1) / 2
+  const shift = a < 0 ? -b / (2 * a) : 0
+  const freq = sampleRate / (pick + shift)
+  return freq >= minFreq && freq <= maxFreq ? freq : null
+}

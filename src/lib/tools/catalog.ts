@@ -68,7 +68,7 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
     slug: 'producer-toolbox',
     href: '/tools/toolbox',
     title: 'Producer Toolbox',
-    description: 'Knowledge for the work. Tempo, key, delay, reverb, pitch, loudness, and units, kept close.',
+    description: 'Sixteen free tools for the session: metronome, tuner, chords, key matching, delay, reverb, gain and loudness.',
     image: '/brand/producer-toolbox.png',
     imageFit: 'contain',
     icon: 'solar:tuning-2-linear',

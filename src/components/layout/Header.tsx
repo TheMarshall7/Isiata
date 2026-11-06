@@ -33,8 +33,11 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const isActive = (href: string) =>
-    pathname === href || Boolean(pathname?.startsWith(`${href}/`))
+  const isActive = (href: string) => {
+    // Plugins lives under /tools, so keep the Tools link from lighting up there too.
+    if (href === '/tools' && pathname?.startsWith('/tools/plugins')) return false
+    return pathname === href || Boolean(pathname?.startsWith(`${href}/`))
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)

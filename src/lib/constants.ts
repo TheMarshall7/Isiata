@@ -23,10 +23,12 @@ export const SITE_CONFIG = {
 export const NAV_LINKS_LEFT = [
   { href: '/sound', label: 'Music' },
   { href: '/tools', label: 'Tools' },
+  { href: '/tools/plugins', label: 'Plugins' },
 ]
 
 export const NAV_LINKS_RIGHT = [
   { href: '/objects', label: 'Garments' },
+  { href: '/systems', label: 'Systems' },
   { href: '/contact', label: 'Contact' },
 ]
 

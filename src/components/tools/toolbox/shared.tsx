@@ -83,6 +83,7 @@ export function CopyValue({
   useEffect(() => () => clearTimeout(timer.current), [])
 
   const copy = async () => {
+    if (numeric && !Number.isFinite(value) && copyAs == null) return // nothing meaningful to copy ("—")
     const out = copyAs ?? (numeric ? value.toFixed(decimals) : value)
     if (await copyText(out)) {
       setCopied(true)
@@ -152,40 +153,60 @@ export function Segmented<T extends string>({
   )
 }
 
-// ─── Shared tone player (one oscillator at a time) ───────────────────
+// ─── Shared audio (one context for the whole toolbox) ───────────────
 
 let ctx: AudioContext | null = null
 let stopCurrent: (() => void) | null = null
 
-export function playTone(freq: number, seconds = 1.2) {
-  if (typeof window === 'undefined' || !(freq > 20) || freq > 20000) return
+/** Lazily creates (and resumes) the toolbox's single AudioContext. Call from a user gesture. */
+export function getAudioContext(): AudioContext | null {
+  if (typeof window === 'undefined') return null
   const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
-  if (!AC) return
-  const audio = ctx ?? new AC()
-  ctx = audio
-  if (audio.state === 'suspended') void audio.resume()
+  if (!AC) return null
+  ctx = ctx ?? new AC()
+  if (ctx.state === 'suspended') void ctx.resume()
+  return ctx
+}
+
+/** Plays one or more sine/triangle voices together; cuts off whatever the previous call was playing. */
+export function playNotes(freqs: number[], seconds = 1.2, wave: OscillatorType = 'sine') {
+  const audio = getAudioContext()
+  if (!audio) return
+  const valid = freqs.filter((f) => f > 20 && f < 20000)
+  if (!valid.length) return
   stopCurrent?.()
-  const osc = audio.createOscillator()
-  const gain = audio.createGain()
+
   const now = audio.currentTime
-  osc.type = 'sine'
-  osc.frequency.value = freq
-  gain.gain.setValueAtTime(0, now)
-  gain.gain.linearRampToValueAtTime(0.18, now + 0.02)
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + seconds)
-  osc.connect(gain)
-  gain.connect(audio.destination)
-  osc.start(now)
-  osc.stop(now + seconds + 0.05)
+  const master = audio.createGain()
+  const level = 0.18 / Math.sqrt(valid.length)
+  master.gain.setValueAtTime(0, now)
+  master.gain.linearRampToValueAtTime(level, now + 0.02)
+  master.gain.exponentialRampToValueAtTime(0.0001, now + seconds)
+  master.connect(audio.destination)
+
+  const oscs = valid.map((f) => {
+    const osc = audio.createOscillator()
+    osc.type = wave
+    osc.frequency.value = f
+    osc.connect(master)
+    osc.start(now)
+    osc.stop(now + seconds + 0.05)
+    return osc
+  })
+
   stopCurrent = () => {
     try {
       const t = audio.currentTime
-      gain.gain.cancelScheduledValues(t)
-      gain.gain.setValueAtTime(Math.max(gain.gain.value, 0.0001), t)
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.04)
-      osc.stop(t + 0.05)
+      master.gain.cancelScheduledValues(t)
+      master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), t)
+      master.gain.exponentialRampToValueAtTime(0.0001, t + 0.04)
+      oscs.forEach((o) => o.stop(t + 0.05))
     } catch {
       /* already stopped */
     }
   }
+}
+
+export function playTone(freq: number, seconds = 1.2) {
+  playNotes([freq], seconds)
 }

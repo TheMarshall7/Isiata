@@ -23,6 +23,30 @@ import {
 } from '@/lib/tools/producer-toolbox-math'
 import { AnimatedNumber, CopyValue, PanelTitle, Segmented, copyText, playTone } from '@/components/tools/toolbox/shared'
 import { FileSizeCalc, LoudnessTargets, NoteFrequency, PitchConverter } from '@/components/tools/toolbox/NewTools'
+import {
+  CamelotMatcher,
+  ChordBuilder,
+  ChromaticTuner,
+  FrequencyGuide,
+  GainTools,
+  Metronome,
+  SongLength,
+} from '@/components/tools/toolbox/MoreTools'
+
+const TOOL_GROUPS = [
+  { id: 'tempo', label: 'Tempo & Time', count: 6 },
+  { id: 'pitch', label: 'Pitch & Harmony', count: 6 },
+  { id: 'mix', label: 'Mix & Master', count: 4 },
+]
+
+function GroupHeading({ title, sub }: { title: string; sub: string }) {
+  return (
+    <div className="toolbox-group-head">
+      <h2 className="font-display text-lg uppercase tracking-[0.08em] text-gold md:text-xl">{title}</h2>
+      <p className="text-sm text-zinc-500">{sub}</p>
+    </div>
+  )
+}
 
 const DEFAULT_BPM = 140
 const TAP_RESET_MS = 2500
@@ -37,6 +61,13 @@ function isTyping(el: EventTarget | null) {
 function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void }) {
   const tapTimesRef = useRef<number[]>([])
   const [tapCount, setTapCount] = useState(0)
+  const [draft, setDraft] = useState(String(bpm))
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Mirror outside tempo changes (tap, slider, keys) into the box unless someone is typing in it.
+  useEffect(() => {
+    if (document.activeElement !== inputRef.current) setDraft(String(bpm))
+  }, [bpm])
 
   const handleTap = useCallback(() => {
     const now = Date.now()
@@ -61,7 +92,7 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey) return
-      const step = e.shiftKey ? 10 : 1
+      // +/− nudge the tempo (Shift for ±10). Arrow keys are left alone so the page still scrolls.
       switch (e.key.toLowerCase()) {
         case 't':
           handleTap()
@@ -69,13 +100,17 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
         case 'r':
           reset()
           break
-        case 'arrowup':
-          e.preventDefault()
-          setBpm(clampBpm(bpm + step))
+        case '=':
+          setBpm(clampBpm(bpm + 1))
           break
-        case 'arrowdown':
-          e.preventDefault()
-          setBpm(clampBpm(bpm - step))
+        case '+':
+          setBpm(clampBpm(bpm + 10))
+          break
+        case '-':
+          setBpm(clampBpm(bpm - 1))
+          break
+        case '_':
+          setBpm(clampBpm(bpm - 10))
           break
         case 'h':
           setBpm(clampBpm(bpm / 2))
@@ -124,18 +159,49 @@ function BPMControl({ bpm, setBpm }: { bpm: number; setBpm: (v: number) => void 
         <button type="button" onClick={reset} className="toolbox-btn-secondary">
           Reset
         </button>
-        <input
-          type="number"
-          inputMode="numeric"
-          value={bpm}
-          onChange={(e) => setBpm(clampBpm(parseInt(e.target.value, 10) || DEFAULT_BPM))}
-          className="toolbox-input w-20 px-3 py-2 text-center text-sm"
-          aria-label="BPM"
-        />
+        <div className="toolbox-stepper">
+          <input
+            type="number"
+            inputMode="numeric"
+            min={20}
+            max={999}
+            value={draft}
+            onChange={(e) => {
+              // Let people type freely ("9" on the way to "90"); only commit values in range.
+              setDraft(e.target.value)
+              const n = parseInt(e.target.value, 10)
+              if (n >= 20 && n <= 999) setBpm(n)
+            }}
+            onBlur={() => setDraft(String(bpm))}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const n = parseInt(draft, 10)
+                setBpm(clampBpm(Number.isFinite(n) ? n : bpm))
+                ;(e.target as HTMLInputElement).blur()
+              } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.preventDefault()
+                const next = clampBpm(bpm + (e.key === 'ArrowUp' ? 1 : -1) * (e.shiftKey ? 10 : 1))
+                setBpm(next)
+                setDraft(String(next))
+              }
+            }}
+            ref={inputRef}
+            className="toolbox-input px-3 py-2 text-center text-sm"
+            aria-label="BPM"
+          />
+          <div className="toolbox-stepper-btns">
+            <button type="button" tabIndex={-1} aria-label="Increase BPM" onClick={() => setBpm(clampBpm(bpm + 1))}>
+              <iconify-icon icon="solar:alt-arrow-up-linear" width="12" height="12" />
+            </button>
+            <button type="button" tabIndex={-1} aria-label="Decrease BPM" onClick={() => setBpm(clampBpm(bpm - 1))}>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="12" height="12" />
+            </button>
+          </div>
+        </div>
       </div>
       <p className="toolbox-hint mt-4 hidden text-center md:block">
-        <kbd className="toolbox-kbd">T</kbd> tap · <kbd className="toolbox-kbd">↑</kbd>
-        <kbd className="toolbox-kbd">↓</kbd> ±1, Shift ±10 · <kbd className="toolbox-kbd">H</kbd>
+        <kbd className="toolbox-kbd">T</kbd> tap · <kbd className="toolbox-kbd">+</kbd>
+        <kbd className="toolbox-kbd">−</kbd> ±1, Shift ±10 · <kbd className="toolbox-kbd">H</kbd>
         <kbd className="toolbox-kbd">D</kbd> half / double · <kbd className="toolbox-kbd">R</kbd> reset
       </p>
     </div>
@@ -401,10 +467,10 @@ export default function ToolboxPage() {
                 speed={80}
               />
               <p className="mb-5 text-xl leading-relaxed text-gold md:text-2xl">
-                Tempo, key, delay, pitch, and loudness. Built for the session.
+                Tempo, harmony, tuning, and mix references. Built for the session.
               </p>
               <p className="text-base leading-relaxed text-zinc-500 md:text-lg">
-                Tap tempo, find scales, pitch samples, check loudness targets, and copy any value straight into your DAW.
+                Sixteen tools: metronome, tuner, chord builder, key matching, delay and reverb times, gain staging and loudness targets. Copy any value straight into your DAW.
               </p>
             </div>
 
@@ -426,28 +492,59 @@ export default function ToolboxPage() {
       {/* Tools */}
       <Container bordered className="!px-4 py-12 sm:!px-6">
         <Section reveal>
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <BPMControl bpm={bpm} setBpm={setBpm} />
-              <KeyScale />
-            </div>
+          <nav className="toolbox-jump mb-8" aria-label="Toolbox sections">
+            {TOOL_GROUPS.map((g) => (
+              <a key={g.id} href={`#${g.id}`}>
+                {g.label}
+                <span>{g.count}</span>
+              </a>
+            ))}
+          </nav>
 
-            <Converter bpm={bpm} />
+          <div className="space-y-12">
+            <section id="tempo" className="toolbox-group space-y-4">
+              <GroupHeading title="Tempo & Time" sub="Every tool here follows the BPM you set." />
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <BPMControl bpm={bpm} setBpm={setBpm} />
+                <Metronome bpm={bpm} />
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <Converter bpm={bpm} />
+                <SongLength bpm={bpm} />
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <ReverbCalculator bpm={bpm} />
+                <DelayTable bpm={bpm} />
+              </div>
+            </section>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <ReverbCalculator bpm={bpm} />
-              <DelayTable bpm={bpm} />
-            </div>
+            <section id="pitch" className="toolbox-group space-y-4">
+              <GroupHeading title="Pitch & Harmony" sub="Keys, chords, tuning and sample pitch." />
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <KeyScale />
+                <ChordBuilder bpm={bpm} />
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <ChromaticTuner />
+                <NoteFrequency />
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <PitchConverter />
+                <CamelotMatcher />
+              </div>
+            </section>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <NoteFrequency />
-              <PitchConverter />
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <LoudnessTargets />
-              <FileSizeCalc />
-            </div>
+            <section id="mix" className="toolbox-group space-y-4">
+              <GroupHeading title="Mix & Master" sub="Frequencies, gain staging and delivery." />
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <FrequencyGuide />
+                <GainTools />
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <LoudnessTargets />
+                <FileSizeCalc />
+              </div>
+            </section>
           </div>
         </Section>
       </Container>
