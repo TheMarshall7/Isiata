@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Price } from '@/components/ui/Price'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
+import { PluginBuyButton } from '@/components/tools/PluginBuyButton'
+import { SUBSCRIPTION_SKU, isPurchaseEnabled } from '@/lib/tools/purchase-skus'
 import { PluginGrid } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { ISIATA_LOGO_URL } from '@/lib/constants'
@@ -59,11 +61,15 @@ export default function SubscriptionPage() {
         <span className="text-4xl text-white">
           <Price value={ISI_CREATE_SUBSCRIPTION.price} />
         </span>
-        <PluginNotifyButton
-          productName={ISI_CREATE_SUBSCRIPTION.name}
-          source="subscription_isi_access"
-          label="Notify me on launch"
-        />
+        {isPurchaseEnabled(SUBSCRIPTION_SKU) ? (
+          <PluginBuyButton sku={SUBSCRIPTION_SKU} label="Subscribe" />
+        ) : (
+          <PluginNotifyButton
+            productName={ISI_CREATE_SUBSCRIPTION.name}
+            source="subscription_isi_access"
+            label="Notify me on launch"
+          />
+        )}
       </div>
 
       <section className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-2">

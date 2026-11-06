@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { TSUKUYOMI_DRUM_ENGINE, TSUKUYOMI_DRUM_ENGINE_HREF } from '@/lib/tools/tsukuyomi-drum-engine'
+import { LICENSED_PLUGINS } from '@/lib/tools/license-products'
 import {
   TSUKUYOMI_INSTALLATION_ID_PATTERN,
   TSUKUYOMI_SERIAL_PATTERN,
@@ -14,6 +15,7 @@ const inputClass =
 
 export default function TsukuyomiOfflineLicensePage() {
   const [serial, setSerial] = useState('')
+  const [product, setProduct] = useState(LICENSED_PLUGINS[0].id)
   const [installationId, setInstallationId] = useState('')
   const [status, setStatus] = useState<'idle' | 'working' | 'done' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -26,7 +28,7 @@ export default function TsukuyomiOfflineLicensePage() {
 
     if (!TSUKUYOMI_SERIAL_PATTERN.test(cleanSerial)) {
       setStatus('error')
-      setMessage('Enter the serial as TSU-XXXX-XXXX-XXXX.')
+      setMessage('Enter the serial as XXX-XXXX-XXXX-XXXX.')
       return
     }
     if (!TSUKUYOMI_INSTALLATION_ID_PATTERN.test(cleanId)) {
@@ -42,7 +44,7 @@ export default function TsukuyomiOfflineLicensePage() {
       const response = await fetch('/api/tsukuyomi/offline-license', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ serial: cleanSerial, installation_id: cleanId }),
+        body: JSON.stringify({ serial: cleanSerial, installation_id: cleanId, product }),
       })
       const data = (await response.json()) as { payload?: string; signature?: string; error?: string }
 
@@ -57,7 +59,7 @@ export default function TsukuyomiOfflineLicensePage() {
       const url = URL.createObjectURL(new Blob([file], { type: 'application/json' }))
       const link = document.createElement('a')
       link.href = url
-      link.download = 'license.json'
+      link.download = `${product}-license.json`
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -81,11 +83,24 @@ export default function TsukuyomiOfflineLicensePage() {
           Offline activation
         </h1>
         <p className="mb-8 text-sm leading-relaxed text-zinc-400 md:text-base">
-          Use this only if Tsukuyomi cannot reach the internet to activate. Enter your serial and the
-          installation ID shown in the plugin&apos;s Activate panel. You&apos;ll get a licence file to import.
+          Use this only if your plugin cannot reach the internet to activate. Choose the plugin, then enter your
+          serial and the installation ID shown in its Activate panel. You&apos;ll get a licence file to import.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          <label className="block">
+            <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+              Plugin
+            </span>
+            <select value={product} onChange={(event) => setProduct(event.target.value)} className={inputClass}>
+              {LICENSED_PLUGINS.map((plugin) => (
+                <option key={plugin.id} value={plugin.id}>
+                  {plugin.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <label className="block">
             <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
               Serial
@@ -94,7 +109,7 @@ export default function TsukuyomiOfflineLicensePage() {
               type="text"
               value={serial}
               onChange={(event) => setSerial(event.target.value)}
-              placeholder="TSU-XXXX-XXXX-XXXX"
+              placeholder="XXX-XXXX-XXXX-XXXX"
               autoComplete="off"
               spellCheck={false}
               required

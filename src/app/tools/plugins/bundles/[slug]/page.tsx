@@ -5,6 +5,8 @@ import { Container } from '@/components/ui/Container'
 import { Price } from '@/components/ui/Price'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
+import { PluginBuyButton } from '@/components/tools/PluginBuyButton'
+import { isPurchaseEnabled } from '@/lib/tools/purchase-skus'
 import { BundleCard, PluginGrid } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { productSchema } from '@/lib/seo/json-ld'
@@ -82,7 +84,11 @@ export default function BundlePage({ params }: { params: Params }) {
             Launch price · Regular <Price value={bundle.regularPrice} strikethrough />
           </span>
         </div>
-        <PluginNotifyButton productName={bundle.name} source={`bundle_${bundle.slug}`} />
+        {isPurchaseEnabled(bundle.slug) ? (
+          <PluginBuyButton sku={bundle.slug} />
+        ) : (
+          <PluginNotifyButton productName={bundle.name} source={`bundle_${bundle.slug}`} />
+        )}
       </div>
 
       <section className="mb-14">

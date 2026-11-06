@@ -5,6 +5,8 @@ import { Container } from '@/components/ui/Container'
 import { Price } from '@/components/ui/Price'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
+import { PluginBuyButton } from '@/components/tools/PluginBuyButton'
+import { isPurchaseEnabled, skuForPluginSlug } from '@/lib/tools/purchase-skus'
 import { PluginCard } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { productSchema } from '@/lib/seo/json-ld'
@@ -84,7 +86,11 @@ export default function PluginPage({ params }: { params: Params }) {
           <span className="text-3xl text-white">
             <Price value={plugin.price} />
           </span>
-          <PluginNotifyButton productName={plugin.name} source={`plugin_${plugin.slug}`} />
+          {isPurchaseEnabled(skuForPluginSlug(plugin.slug)) ? (
+            <PluginBuyButton sku={skuForPluginSlug(plugin.slug)} />
+          ) : (
+            <PluginNotifyButton productName={plugin.name} source={`plugin_${plugin.slug}`} />
+          )}
         </div>
         </div>
         <div className="w-full lg:justify-self-end">

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { LICENSED_PLUGINS } from '@/lib/tools/license-products'
 import {
   TSUKUYOMI_INSTALLATION_ID_PATTERN,
   TSUKUYOMI_LICENSE_API_BASE,
@@ -10,6 +11,7 @@ export const runtime = 'nodejs'
 type OfflineLicenseBody = {
   serial?: string
   installation_id?: string
+  product?: string
 }
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -30,9 +32,14 @@ export async function POST(request: NextRequest) {
 
   const serial = typeof body.serial === 'string' ? body.serial.trim().toUpperCase().replace(/\s+/g, '') : ''
   const installationId = typeof body.installation_id === 'string' ? body.installation_id.trim().toLowerCase() : ''
+  // Older callers sent no product and meant the Drum Engine.
+  const product = typeof body.product === 'string' && body.product ? body.product.trim() : 'tsukuyomi'
 
+  if (!LICENSED_PLUGINS.some((plugin) => plugin.id === product)) {
+    return NextResponse.json({ error: 'Choose the plugin to activate.' }, { status: 400 })
+  }
   if (!TSUKUYOMI_SERIAL_PATTERN.test(serial)) {
-    return NextResponse.json({ error: 'Enter the serial as TSU-XXXX-XXXX-XXXX.' }, { status: 400 })
+    return NextResponse.json({ error: 'Enter the serial as XXX-XXXX-XXXX-XXXX.' }, { status: 400 })
   }
   if (!TSUKUYOMI_INSTALLATION_ID_PATTERN.test(installationId)) {
     return NextResponse.json(
@@ -45,7 +52,7 @@ export async function POST(request: NextRequest) {
     const response = await fetch(`${TSUKUYOMI_LICENSE_API_BASE}/v1/activate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ serial, installation_id: installationId, product: 'tsukuyomi' }),
+      body: JSON.stringify({ serial, installation_id: installationId, product }),
       cache: 'no-store',
     })
 
