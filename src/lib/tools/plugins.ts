@@ -965,12 +965,12 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
   {
     slug: 'analog-collection',
     name: 'Isiata Analog Collection',
-    tagline: 'Three EQs with real weight.',
+    tagline: 'Three EQs and three channel strips with real weight.',
     description:
-      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ. Three different ways to shape a sound, each with its own character.',
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression. Three different ways to shape a sound, each with its own character.',
     launchPrice: '$79',
     regularPrice: '$117',
-    groups: ['analog'],
+    groups: ['analog', 'strip'],
     icon: 'solar:equalizer-minimalistic-linear',
   },
   {
