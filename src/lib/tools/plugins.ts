@@ -3,13 +3,25 @@ import { TSUKUYOMI_DRUM_ENGINE_HREF } from './tsukuyomi-drum-engine'
 export const PLUGINS_HREF = '/tools/plugins'
 export const PLUGIN_BUNDLES_HREF = `${PLUGINS_HREF}/bundles`
 
-export type PluginGroupId = 'instrument' | 'tab' | 'effect' | 'saturation' | 'analog' | 'compressor'
+export type PluginGroupId =
+  | 'instrument'
+  | 'tab'
+  | 'effect'
+  | 'creative'
+  | 'saturation'
+  | 'strip'
+  | 'mix'
+  | 'analog'
+  | 'compressor'
 
 export const PLUGIN_GROUPS: { id: PluginGroupId; label: string }[] = [
   { id: 'instrument', label: 'Instruments' },
   { id: 'tab', label: 'Multi-effects' },
   { id: 'effect', label: 'Effects' },
+  { id: 'creative', label: 'Creative' },
   { id: 'saturation', label: 'Saturation' },
+  { id: 'strip', label: 'Channel Strips' },
+  { id: 'mix', label: 'Mix Tools' },
   { id: 'analog', label: 'Analog EQ' },
   { id: 'compressor', label: 'Compressors' },
 ]
@@ -64,6 +76,21 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Tsukuyomi Soft Clip': [760, 440],
   'Tsukuyomi Sound': [900, 640],
   'Tsukuyomi Stutter': [760, 520],
+  'IPI Strip': [2320, 1600],
+  'Iseve Strip': [2320, 1600],
+  'IsiTech Strip': [2320, 1600],
+  'Tsukuyomi Bit Crush': [980, 580],
+  'Tsukuyomi Crunch': [980, 580],
+  'Tsukuyomi De-Esser': [1080, 640],
+  'Tsukuyomi Filter': [980, 580],
+  'Tsukuyomi Gain': [980, 580],
+  'Tsukuyomi Gate': [1040, 600],
+  'Tsukuyomi Ring Mod': [980, 580],
+  'Tsukuyomi Synergy': [980, 580],
+  'Tsukuyomi Tape Stop': [980, 580],
+  'Tsukuyomi Transient': [980, 580],
+  'Tsukuyomi Tri EQ': [980, 580],
+  'Tsukuyomi Motion': [1180, 800],
 }
 
 function withScreenshot(plugin: PluginSpec): PluginSpec {
@@ -386,6 +413,348 @@ const PLUGIN_DEFS: PluginSpec[] = [
     ],
     whoFor: 'Producers who want warmth, grit and presence on drums, bass, vocals and buses, from subtle glue to heavy distortion.',
     icon: 'solar:fire-linear',
+  },
+  {
+    slug: 'tsukuyomi-crunch',
+    name: 'Tsukuyomi Crunch',
+    group: 'saturation',
+    kind: 'Distortion',
+    price: '$29',
+    hero: 'Three flavours of dirt.',
+    short:
+      'A distortion with three personalities: crunchy, fuzzy and warm. Push it from a little bite to a lot of attitude, and shape how it breathes with bias, width and shadow.',
+    about: [
+      'Drive guitars, bass, drums, synths or a whole loop. Switch modes to change the whole character in a click, then use the touch control to decide how much of your playing comes through.',
+    ],
+    features: [
+      { label: 'Crunch, Fuzz and Warm', body: 'Three distortion modes, from tight and biting to thick and furry to soft and round.' },
+      { label: 'Drive and Touch', body: 'Pile on the gain, then choose how dynamic the distortion feels.' },
+      { label: 'Bias, Width and Shadow', body: 'Sculpt the harmonics, stretch the stereo image, and fill in the low-level detail.' },
+      { label: 'Live scope', body: 'Watch the waveform get chewed up in real time.' },
+      { label: 'Mix and Output', body: 'Blend in the dirt for parallel distortion and level match the result.' },
+    ],
+    whoFor: 'Anyone who wants a single distortion that can go from subtle edge to full destruction.',
+    icon: 'solar:fire-minimalistic-linear',
+  },
+
+  /* ───────────── Creative ───────────── */
+  {
+    slug: 'tsukuyomi-synergy',
+    name: 'Tsukuyomi Synergy',
+    group: 'creative',
+    kind: 'Ensemble',
+    price: '$29',
+    hero: 'One sound. A whole ensemble.',
+    short:
+      'Turn a single voice into a lush, wide ensemble. Stack up to several detuned voices, pick how they move, and spread them across the stereo field.',
+    about: [
+      'Fatten a pad, widen a synth, thicken a vocal or give a plucked sound a shimmering halo. Four movement styles keep the motion from ever feeling the same.',
+    ],
+    features: [
+      { label: 'Voices and Detune', body: 'Choose how many voices stack up and how far they drift apart in pitch.' },
+      { label: 'Four movement styles', body: 'Sine and Triangle for smooth sweeps, Wander for organic drift, Swirl for rich, rotating motion.' },
+      { label: 'Width and Rate', body: 'Open up the stereo image and set the speed of the movement.' },
+      { label: 'Mix and Dry', body: 'Balance the ensemble against the original so the core of the sound stays solid.' },
+      { label: 'Live scope', body: 'See the motion as you shape it.' },
+    ],
+    whoFor: 'Producers who want instant width and thickness on pads, synths, vocals and plucks.',
+    icon: 'solar:users-group-rounded-linear',
+  },
+  {
+    slug: 'tsukuyomi-tape-stop',
+    name: 'Tsukuyomi Tape Stop',
+    group: 'creative',
+    kind: 'Spin down and spin up',
+    price: '$19',
+    hero: 'Pull the plug on the groove.',
+    short:
+      'Slow a sound to a stop like a record losing power, then spin it back up. Set how long each takes, bend the curve, and hit the button whenever the moment calls for it.',
+    about: [
+      'The classic end-of-bar drop, a dramatic transition, or a one-shot gag on a loop. Automate the Stop button to land it exactly where you want.',
+    ],
+    features: [
+      { label: 'Stop', body: 'One big button to spin the sound down, and to bring it back.' },
+      { label: 'Spin Down and Spin Up', body: 'Set how long the slowdown and the restart take, from a quick snap to a long slow drag.' },
+      { label: 'Bend', body: 'Shape the curve of the slowdown for a smooth fade or a sudden drop.' },
+      { label: 'Status display', body: 'See at a glance whether the tape is running or stopped.' },
+    ],
+    whoFor: 'Anyone who wants dramatic stops and restarts on drums, loops, vocals or full mixes.',
+    icon: 'solar:stop-circle-linear',
+  },
+  {
+    slug: 'tsukuyomi-ring-mod',
+    name: 'Tsukuyomi Ring Mod',
+    group: 'creative',
+    kind: 'Ring modulator',
+    price: '$19',
+    hero: 'Metallic, robotic, otherworldly.',
+    short:
+      'Multiply your sound with an oscillator to create bell-like, metallic and robotic tones. Pick the waveform, set the frequency, and blend in as much as you want.',
+    about: [
+      'From subtle shimmer to full-on alien voice. Great on vocals, synths, drums and anything that needs to sound like it came from somewhere else.',
+    ],
+    features: [
+      { label: 'Five waveforms', body: 'Sine, Triangle, Saw, Square or Noise, each with its own flavour of metal.' },
+      { label: 'Frequency and Offset', body: 'Tune the modulation and nudge it away from the note for inharmonic textures.' },
+      { label: 'Bleed and Rectify', body: 'Let some of the original through, or fold the signal for harder, edgier results.' },
+      { label: 'Live scope', body: 'Watch the waveform get torn apart in real time.' },
+      { label: 'Mix and Output', body: 'Blend it in and level match the result.' },
+    ],
+    whoFor: 'Sound designers and producers who want robotic, bell-like and experimental textures.',
+    icon: 'solar:soundwave-square-linear',
+  },
+  {
+    slug: 'tsukuyomi-bit-crush',
+    name: 'Tsukuyomi Bit Crush',
+    group: 'creative',
+    kind: 'Bit crusher',
+    price: '$29',
+    hero: 'Crush it. Then shape the damage.',
+    short:
+      'Sample rate and bit depth reduction with the controls to tame it. Go from a hint of lo-fi grit to full digital destruction, with dither and smoothing to keep it musical.',
+    about: [
+      'Dirty up drums, give samples a vintage-sampler crunch, or wreck a synth into pure digital noise. Smoothing on the way in and out lets you decide how harsh the edges get.',
+    ],
+    features: [
+      { label: 'Quantize', body: 'Reduce the sample rate for the aliasing crunch of old samplers and game consoles.' },
+      { label: 'Bits', body: 'Drop the bit depth to flatten the dynamics and add grit.' },
+      { label: 'Dither', body: 'Add noise to smooth out the harshest steps.' },
+      { label: 'Smooth In and Smooth Out', body: 'Soften the edges before and after the crush for a more musical result.' },
+      { label: 'Live scope', body: 'See the signal turn into steps as you turn the knobs.' },
+    ],
+    whoFor: 'Producers who want controllable lo-fi crunch on drums, samples and synths.',
+    icon: 'solar:chart-square-linear',
+  },
+
+  {
+    slug: 'tsukuyomi-motion',
+    name: 'Tsukuyomi Motion',
+    group: 'creative',
+    kind: 'Rhythmic chop, duck and warp',
+    price: '$39',
+    hero: 'Make every sound move in time.',
+    short:
+      'Chop a sound into a rhythm, duck it around the beat, and warp it with repeating shapes, all locked to your tempo. Draw the pattern, play it from your keyboard, and let the groove do the work.',
+    about: [
+      'Turn a held pad into a pulsing gate, carve space for the kick with a ducking curve, or add repeating warp shapes for movement that never sits still. Eight slots let you build and switch between patterns instantly.',
+    ],
+    features: [
+      { label: 'Chop', body: 'A 16-step pattern that slices a sound into rhythm, with rate, attack, decay, sustain and release for tight pulses or long swells.' },
+      { label: 'Duck', body: 'Pumping, sidechain-style volume shapes with adjustable length, band and depth. Trigger them from the tempo or from your playing.' },
+      { label: 'Warp', body: 'Repeating shapes that bend the sound in time for stuttering, rhythmic movement.' },
+      { label: 'Eight patterns', body: 'Build up to eight setups and jump between them from your keyboard.' },
+      { label: 'Live display', body: 'See the chop pattern, duck curve and warp shape move with the tempo.' },
+      { label: 'Mix per section', body: 'Blend each section in separately, and match the output level.' },
+    ],
+    whoFor: 'Producers who want rhythmic gating, sidechain-style pumping and groove-locked movement from a single plugin.',
+    icon: 'solar:soundwave-linear',
+  },
+
+  /* ───────────── Channel Strips ───────────── */
+  {
+    slug: 'iseve-strip',
+    name: 'Iseve Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$59',
+    hero: 'A whole console channel in one plugin.',
+    short:
+      'The Iseve 1095 console EQ, a gate, and your choice of FET or optical compression, wired into one strip. Shape the tone, tighten the dynamics and add analog weight without stacking three plugins.',
+    about: [
+      'Reach for it first on drums, vocals, bass or anything that needs to sit in the mix fast. Run the EQ before the dynamics or flip the order, and let drive, noise and vinyl add the character of the real thing.',
+    ],
+    features: [
+      { label: 'Console EQ', body: 'High, mid and low bands with a high-pass filter, for thick, warm, dimensional tone.' },
+      { label: 'Drive and colour', body: 'Push the analog stage for weight, harmonics and a little bit of noise and vinyl texture.' },
+      { label: 'Two compressors', body: 'Switch between the ISI 76 for fast FET grab and the IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Clean up bleed and tighten tails, with key filters to keep it from false triggering.' },
+      { label: 'Process order', body: 'Run EQ into dynamics or dynamics into EQ, whichever the sound needs.' },
+      { label: 'Metering', body: 'Input and output meters, plus gain reduction on both dynamics sections.' },
+    ],
+    notes: ['Modeled on the behaviour of classic console gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers and mixers who want a complete channel, from first touch to final polish, in one plugin.',
+    icon: 'solar:tuning-square-2-linear',
+  },
+  {
+    slug: 'ipi-strip',
+    name: 'IPI Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$59',
+    hero: 'Punchy, forward and ready to mix.',
+    short:
+      'The IPI EQ with its preamp grit, a gate, and FET or optical compression, all in one strip. Surgical when you want it, aggressive when you need it.',
+    about: [
+      'Bring a track to the front of the mix in a single plugin. Dig into problems with the parametric bands, shape the curve with the graphic EQ, then control and glue it with the compressor.',
+    ],
+    features: [
+      { label: 'IPI EQ', body: 'Preamp grit into three parametric bands and a ten-band graphic EQ.' },
+      { label: 'Drive and colour', body: 'Add attitude, noise and vinyl texture right in the strip.' },
+      { label: 'Two compressors', body: 'ISI 76 for fast FET grab, IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Tidy up bleed and tighten tails, with key filters for precise control.' },
+      { label: 'Process order', body: 'Switch between EQ first and dynamics first.' },
+      { label: 'Metering', body: 'Input, output and gain reduction meters across the strip.' },
+    ],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers who want a punchy, all-in-one channel for drums, bass, guitars and vocals.',
+    icon: 'solar:equalizer-minimalistic-linear',
+  },
+  {
+    slug: 'isitech-strip',
+    name: 'IsiTech Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$59',
+    hero: 'Big, polished and complete.',
+    short:
+      'The IsiTech boost-and-cut program EQ, a gate, and FET or optical compression on one strip. Low-end force, open highs and polished dynamics from a single plugin.',
+    about: [
+      'Make a kick, bass, vocal or mix bus feel bigger without losing control. Boost and cut the low end together for the classic big-but-tight sound, then finish with compression.',
+    ],
+    features: [
+      { label: 'Program EQ', body: 'Low boost and attenuate, high boost with adjustable bandwidth, and a high attenuation selector.' },
+      { label: 'Drive and colour', body: 'Add warmth, weight, noise and vinyl texture.' },
+      { label: 'Two compressors', body: 'ISI 76 for fast FET grab, IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Control bleed and tails with key filters to avoid false triggers.' },
+      { label: 'Process order', body: 'Run EQ before dynamics or flip it.' },
+      { label: 'Metering', body: 'Input, output and gain reduction metering.' },
+    ],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers who want a smooth, polished channel with serious low-end authority.',
+    icon: 'solar:sort-vertical-linear',
+  },
+
+  /* ───────────── Mix Tools ───────────── */
+  {
+    slug: 'tsukuyomi-gate',
+    name: 'Tsukuyomi Gate',
+    group: 'mix',
+    kind: 'Gate and expander',
+    price: '$29',
+    hero: 'Silence the noise. Keep the hit.',
+    short:
+      'A gate and expander with a live scope that shows exactly what it is doing. Tighten drums, clean up bleed and cut the hiss between phrases.',
+    about: [
+      'Choose a hard gate for a clean cut or an expander for a more natural fade. Dial in the envelope, filter what the gate listens to, and hear exactly what is triggering it.',
+    ],
+    features: [
+      { label: 'Gate or Expander', body: 'A clean cut or a natural, gradual closing.' },
+      { label: 'Threshold and Range', body: 'Decide when it opens and how far it closes.' },
+      { label: 'Attack, Hold and Release', body: 'Keep the front of every hit and shape the tail.' },
+      { label: 'Key filters', body: 'High-pass and low-pass what the gate listens to, so snares ignore the kick.' },
+      { label: 'Key Listen', body: 'Hear the trigger signal to dial it in perfectly.' },
+      { label: 'Live scope', body: 'Watch the waveform and the threshold as the gate opens and closes.' },
+    ],
+    whoFor: 'Anyone who wants tight drums, clean vocals and no bleed.',
+    icon: 'solar:shield-minimalistic-linear',
+  },
+  {
+    slug: 'tsukuyomi-de-esser',
+    name: 'Tsukuyomi De-Esser',
+    group: 'mix',
+    kind: 'De-esser',
+    price: '$39',
+    hero: 'Tame the sibilance. Keep the air.',
+    short:
+      'A de-esser for harsh S sounds with a clear view of the band it is working on. Tune it for a single vocal or for a full mix, and listen to exactly what it is removing.',
+    about: [
+      'Smooth out a bright vocal without dulling it. Pick a single-vocal or all-round mode, choose wide-band or split-band processing, and use the audition button to hear the sibilance you are cutting.',
+    ],
+    features: [
+      { label: 'Single Vocal or Allround', body: 'Two detection modes tuned for solo voices or full material.' },
+      { label: 'Wide Band or Split Band', body: 'Pull down the whole signal for transparency, or only the problem band for a more surgical touch.' },
+      { label: 'Frequency range', body: 'Set exactly where the de-esser listens and works.' },
+      { label: 'Lookahead', body: 'Catch sibilance before it hits, with no pumping.' },
+      { label: 'Stereo Link and Mid/Side', body: 'Keep the image steady, or treat the centre and sides separately.' },
+      { label: 'Audition and GR display', body: 'Hear what is being removed and see the gain reduction as it happens.' },
+    ],
+    whoFor: 'Vocalists, producers and mixers who want smooth, natural, non-lispy vocals.',
+    icon: 'solar:microphone-3-linear',
+  },
+  {
+    slug: 'tsukuyomi-transient',
+    name: 'Tsukuyomi Transient',
+    group: 'mix',
+    kind: 'Transient shaper',
+    price: '$29',
+    hero: 'Shape the punch.',
+    short:
+      'Turn the attack up for snap or down for softness, and lengthen or shorten the sustain. Reshape drums, plucks and loops without touching the EQ.',
+    about: [
+      'Bring a snare forward, tame a harsh pick attack or tighten a boomy kick.',
+    ],
+    features: [
+      { label: 'Attack', body: 'Boost the initial hit for snap or cut it for a smoother, softer front.' },
+      { label: 'Sustain', body: 'Extend the tail for body or shorten it for tightness.' },
+      { label: 'Carve and Response', body: 'Shape how the effect behaves and how quickly it reacts.' },
+      { label: 'Soft clip', body: 'Catch the extra level from big boosts before it clips.' },
+      { label: 'Mix and Output', body: 'Parallel blend and level match the result.' },
+    ],
+    whoFor: 'Producers who want punchier drums and more control over how sounds hit.',
+    icon: 'solar:bolt-circle-linear',
+  },
+  {
+    slug: 'tsukuyomi-tri-eq',
+    name: 'Tsukuyomi Tri EQ',
+    group: 'mix',
+    kind: 'Three-band EQ',
+    price: '$29',
+    hero: 'Three bands. Set in seconds.',
+    short:
+      'A simple, powerful three-band EQ with adjustable crossovers and a live spectrum. Boost the lows, tame the mids and open the highs without a maze of knobs.',
+    about: [
+      'When you need to shape a sound quickly, nothing beats low, mid and high. Move the crossover points to choose exactly where each band begins and ends, and watch the curve respond.',
+    ],
+    features: [
+      { label: 'Low, Mid and High', body: 'Three big gain controls for fast, musical tone shaping.' },
+      { label: 'Adjustable crossovers', body: 'Choose where the lows end and the highs begin.' },
+      { label: 'Live spectrum', body: 'See your sound and the EQ curve together.' },
+      { label: 'Output', body: 'Level match the result.' },
+    ],
+    whoFor: 'Anyone who wants a fast, no-nonsense EQ for any track or bus.',
+    icon: 'solar:tuning-linear',
+  },
+  {
+    slug: 'tsukuyomi-filter',
+    name: 'Tsukuyomi Filter',
+    group: 'mix',
+    kind: 'Low cut and high cut',
+    price: '$19',
+    hero: 'Clean up. Or close it down.',
+    short:
+      'A low cut and a high cut with a choice of 12 or 24 dB slopes and a resonance control, with a live spectrum to see what you are removing.',
+    about: [
+      'Clear the rumble from a vocal, darken a loop for a breakdown, or sweep a filter through a build. Use the steeper slope for a decisive cut and add resonance for a squelchy edge.',
+    ],
+    features: [
+      { label: 'Low Cut and High Cut', body: 'Remove low rumble and top-end hiss, or narrow the sound down to a thin band.' },
+      { label: '12 or 24 dB slopes', body: 'A gentle roll-off or a steep, decisive cut.' },
+      { label: 'Resonance', body: 'Add a peak at the cutoff for a more vocal, dramatic sweep.' },
+      { label: 'Live spectrum', body: 'See the frequencies being cut as you move the controls.' },
+    ],
+    whoFor: 'Producers who want clean mixes, smooth transitions and expressive filter sweeps.',
+    icon: 'solar:filter-linear',
+  },
+  {
+    slug: 'tsukuyomi-gain',
+    name: 'Tsukuyomi Gain',
+    group: 'mix',
+    kind: 'Gain and balance',
+    price: '$9',
+    hero: 'Level, balance and polarity.',
+    short:
+      'A clean, simple utility for setting the level, adjusting the stereo balance, flipping the phase or collapsing to mono.',
+    about: [
+      'The tool you always need. Match levels between plugins, check your mix in mono, or flip the phase to fix a cancelling pair.',
+    ],
+    features: [
+      { label: 'Gain', body: 'Turn the level down or up with a single clean control.' },
+      { label: 'Balance', body: 'Shift the stereo image left or right.' },
+      { label: 'Mono and Phase', body: 'Check your mix in mono or flip the polarity to fix phase problems.' },
+      { label: 'Level display', body: 'A live meter shows what you are sending out.' },
+    ],
+    whoFor: 'Everyone, on every project.',
+    icon: 'solar:volume-loud-linear',
   },
 
   /* ───────────── Analog EQ ───────────── */
