@@ -93,13 +93,23 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Tsukuyomi Motion': [1180, 800],
 }
 
+/** Bump a plugin's number when its screenshot file is replaced. Browsers keep these images for
+ *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
+const SCREENSHOT_VERSIONS: Record<string, number> = {
+  'Tsukuyomi Synergy': 2,
+  'Tsukuyomi Tape Stop': 2,
+  'Tsukuyomi Transient': 2,
+  'Tsukuyomi Gain': 2,
+}
+
 function withScreenshot(plugin: PluginSpec): PluginSpec {
   const size = SCREENSHOT_SIZES[plugin.name]
   if (!size) return plugin
+  const version = SCREENSHOT_VERSIONS[plugin.name]
   return {
     ...plugin,
     image: {
-      src: encodeURI(`/Plugin Screenshots/${plugin.name}.png`),
+      src: encodeURI(`/Plugin Screenshots/${plugin.name}.png`) + (version ? `?v=${version}` : ''),
       width: size[0],
       height: size[1],
     },
