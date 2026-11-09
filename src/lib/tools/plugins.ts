@@ -993,6 +993,9 @@ export type PluginBundle = {
   extras?: string[]
   badge?: string
   icon: string
+  /** Product-mockup art, served from /public/bundles */
+  hero: string
+  iconImage: string
 }
 
 export const PLUGIN_BUNDLES: PluginBundle[] = [
@@ -1008,6 +1011,8 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     groups: ['effect'],
     badge: 'Flagship',
     icon: 'solar:music-note-2-linear',
+    hero: '/bundles/tsukuyomi-complete-hero.webp?v=1',
+    iconImage: '/bundles/tsukuyomi-complete-icon.webp?v=1',
   },
   {
     slug: 'analog-collection',
@@ -1019,17 +1024,22 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     regularPrice: '$117',
     groups: ['analog', 'strip'],
     icon: 'solar:equalizer-minimalistic-linear',
+    hero: '/bundles/analog-collection-hero.webp?v=1',
+    iconImage: '/bundles/analog-collection-icon.webp?v=1',
   },
   {
     slug: 'compressor-collection',
     name: 'Isiata Compressor Collection',
-    tagline: 'Five compressors. Five personalities.',
+    tagline: 'Six compressors. Six personalities.',
     description:
-      'Colour, variable-mu thickness, tube smash, FET grab and optical glue. Everything from gentle levelling to full-on parallel destruction.',
+      'Colour, variable-mu thickness, tube smash, FET grab, optical glue and the Tsukuyomi Compressor with its look-ahead, side-chain and live gain-reduction view. Everything from gentle levelling to full-on parallel destruction.',
     launchPrice: '$79',
     regularPrice: '$145',
+    extras: ['tsukuyomi-compressor'],
     groups: ['compressor'],
     icon: 'solar:layers-minimalistic-linear',
+    hero: '/bundles/compressor-collection-hero.webp?v=1',
+    iconImage: '/bundles/compressor-collection-icon.webp?v=1',
   },
   {
     slug: 'everything',
@@ -1042,6 +1052,8 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     all: true,
     badge: 'Best overall value',
     icon: 'solar:crown-linear',
+    hero: '/bundles/everything-hero.webp?v=1',
+    iconImage: '/bundles/everything-icon.webp?v=1',
   },
 ]
 

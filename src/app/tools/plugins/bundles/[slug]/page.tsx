@@ -8,7 +8,6 @@ import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
 import { BundleCard, PluginGrid } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { productSchema } from '@/lib/seo/json-ld'
-import { ISIATA_LOGO_URL } from '@/lib/constants'
 import {
   PLUGINS_HREF,
   PLUGIN_BUNDLES,
@@ -31,7 +30,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     title: `${bundle.name} | Plugin Bundle`,
     description: `${bundle.tagline} ${bundle.description}`,
     path: bundleHref(bundle),
-    image: ISIATA_LOGO_URL,
+    image: bundle.hero,
     imageAlt: bundle.name,
     keywords: [bundle.name, 'Isiata', 'plugin bundle', 'VST3', 'AU'],
   })
@@ -50,7 +49,7 @@ export default function BundlePage({ params }: { params: Params }) {
         data={productSchema({
           name: bundle.name,
           description: bundle.description,
-          image: ISIATA_LOGO_URL,
+          image: bundle.hero,
           url: bundleHref(bundle),
           price: bundle.launchPrice,
           category: 'Music Production > Plugin Bundles',
@@ -72,6 +71,13 @@ export default function BundlePage({ params }: { params: Params }) {
       <h1 className="mb-6 font-display text-4xl uppercase tracking-normal text-gold md:text-6xl">{bundle.name}</h1>
       <p className="mb-6 max-w-2xl text-xl leading-relaxed text-[#ece3d7] md:text-2xl">{bundle.tagline}</p>
       <p className="mb-10 max-w-2xl text-base leading-relaxed text-zinc-400">{bundle.description}</p>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={bundle.hero}
+        alt={`${bundle.name}: the plugins in the bundle`}
+        className="mb-10 w-full border border-[#d8aa67]/25"
+      />
 
       <div className="mb-14 flex flex-wrap items-center gap-6">
         <div>

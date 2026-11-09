@@ -85,17 +85,24 @@ export function BundleCard({ bundle }: { bundle: PluginBundle }) {
   return (
     <Link
       href={bundleHref(bundle)}
-      className="group flashlight-card hover-glow hover-depth flex flex-col border border-[#d8aa67]/35 bg-transparent p-6"
+      className="group flashlight-card hover-glow hover-depth flex flex-col overflow-hidden border border-[#d8aa67]/35 bg-transparent"
       onMouseMove={trackMouse}
     >
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <iconify-icon icon={bundle.icon} width="32" height="32" className="text-gold/60 transition-colors group-hover:text-gold" />
+      <div className="relative aspect-video overflow-hidden bg-black/40">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bundle.hero}
+          alt={bundle.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
         {bundle.badge ? (
-          <span className="rounded-full border border-[#d8aa67]/40 px-3 py-1 text-[10px] uppercase tracking-widest text-[#f0dfc8]">
+          <span className="absolute left-3 top-3 rounded-full border border-[#d8aa67]/40 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-[#f0dfc8] backdrop-blur">
             {bundle.badge}
           </span>
         ) : null}
       </div>
+      <div className="flex flex-1 flex-col p-6">
       <p className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-zinc-500">
         Bundle · {count} plugins
       </p>
@@ -116,6 +123,7 @@ export function BundleCard({ bundle }: { bundle: PluginBundle }) {
           height="18"
           className="mb-1 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-gold"
         />
+      </div>
       </div>
     </Link>
   )
