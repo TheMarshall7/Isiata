@@ -65,7 +65,8 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Isibox': [780, 520],
   'Tsukuyomi 8 Bit': [380, 440],
   'Tsukuyomi Chorus': [760, 440],
-  'Tsukuyomi Comp': [860, 440],
+  'Tsukuyomi Tri Comp': [860, 440],
+  'Tsukuyomi Compressor': [1400, 900],
   'Tsukuyomi Delay': [760, 520],
   'Tsukuyomi Drum Engine': [1628, 1036],
   'Tsukuyomi FX': [900, 640],
@@ -96,10 +97,18 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
 /** Bump a plugin's number when its screenshot file is replaced. Browsers keep these images for
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
-  'Tsukuyomi Synergy': 2,
+  'Tsukuyomi Synergy': 3,
   'Tsukuyomi Tape Stop': 2,
   'Tsukuyomi Transient': 2,
   'Tsukuyomi Gain': 2,
+  'Tsukuyomi Delay': 2,
+  'Tsukuyomi Filter': 2,
+  'Tsukuyomi Motion': 2,
+  'IA2A': 2,
+  'ISI 76': 2,
+  'Iseve Strip': 2,
+  'IPI Strip': 2,
+  'IsiTech Strip': 2,
 }
 
 function withScreenshot(plugin: PluginSpec): PluginSpec {
@@ -196,9 +205,9 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
   {
     slug: 'tsukuyomi-comp',
-    name: 'Tsukuyomi Comp',
+    name: 'Tsukuyomi Tri Comp',
     group: 'tab',
-    kind: 'Parallel compressor rack',
+    kind: 'Three-slot parallel compressor',
     price: '$49',
     hero: 'Three compressors. One blend.',
     short:
@@ -236,6 +245,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
       { label: 'Tone', body: 'Roll off the highs so repeats sit behind the source.' },
       { label: 'Width', body: 'Spread the echoes across the stereo field.' },
       { label: 'Feedback', body: 'From a single slap to a long, evolving trail.' },
+      { label: 'Ping-pong', body: 'Bounce the repeats between left and right.' },
     ],
     target: 'TsukuyomiDelay',
     code: 'TsDl',
@@ -463,7 +473,9 @@ const PLUGIN_DEFS: PluginSpec[] = [
     features: [
       { label: 'Voices and Detune', body: 'Choose how many voices stack up and how far they drift apart in pitch.' },
       { label: 'Four movement styles', body: 'Sine and Triangle for smooth sweeps, Wander for organic drift, Swirl for rich, rotating motion.' },
-      { label: 'Width and Rate', body: 'Open up the stereo image and set the speed of the movement.' },
+      { label: 'Width to 200%', body: 'Open the image past the speakers, with energy kept level.' },
+      { label: 'Timing', body: 'Random start offsets so the voices never line up.' },
+      { label: 'Rate', body: 'Set the speed of the movement.' },
       { label: 'Mix and Dry', body: 'Balance the ensemble against the original so the core of the sound stays solid.' },
       { label: 'Live scope', body: 'See the motion as you shape it.' },
     ],
@@ -552,6 +564,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
       { label: 'Chop', body: 'A 16-step pattern that slices a sound into rhythm, with rate, attack, decay, sustain and release for tight pulses or long swells.' },
       { label: 'Duck', body: 'Pumping, sidechain-style volume shapes with adjustable length, band and depth. Trigger them from the tempo or from your playing.' },
       { label: 'Warp', body: 'Repeating shapes that bend the sound in time for stuttering, rhythmic movement.' },
+      { label: 'Draw your own curves', body: 'Click to add points, drag to move and bend them, with a grid and snap. Duck can repeat one shape (Grouped) or let every beat differ (Free).' },
       { label: 'Eight patterns', body: 'Build up to eight setups and jump between them from your keyboard.' },
       { label: 'Live display', body: 'See the chop pattern, duck curve and warp shape move with the tempo.' },
       { label: 'Mix per section', body: 'Blend each section in separately, and match the output level.' },
@@ -732,14 +745,14 @@ const PLUGIN_DEFS: PluginSpec[] = [
     price: '$19',
     hero: 'Clean up. Or close it down.',
     short:
-      'A low cut and a high cut with a choice of 12 or 24 dB slopes and a resonance control, with a live spectrum to see what you are removing.',
+      'A low cut and a high cut, each with its own slope from 6 to 48 dB and resonance, with a live spectrum to see what you are removing.',
     about: [
       'Clear the rumble from a vocal, darken a loop for a breakdown, or sweep a filter through a build. Use the steeper slope for a decisive cut and add resonance for a squelchy edge.',
     ],
     features: [
       { label: 'Low Cut and High Cut', body: 'Remove low rumble and top-end hiss, or narrow the sound down to a thin band.' },
-      { label: '12 or 24 dB slopes', body: 'A gentle roll-off or a steep, decisive cut.' },
-      { label: 'Resonance', body: 'Add a peak at the cutoff for a more vocal, dramatic sweep.' },
+      { label: 'Slope per side', body: 'Six slopes from 6 to 48 dB, set separately for the low and high cut.' },
+      { label: 'Resonance and Link', body: 'Add a peak at the cutoff, and link both sides to move together.' },
       { label: 'Live spectrum', body: 'See the frequencies being cut as you move the controls.' },
     ],
     whoFor: 'Producers who want clean mixes, smooth transitions and expressive filter sweeps.',
@@ -838,6 +851,30 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
 
   /* ───────────── Compressors ───────────── */
+  {
+    slug: 'tsukuyomi-compressor',
+    name: 'Tsukuyomi Compressor',
+    group: 'effect',
+    kind: 'Studio compressor',
+    price: '$29',
+    hero: 'One studio compressor. Fourteen ways to squeeze.',
+    short:
+      'A program-dependent compressor with fourteen styles, a six-band side-chain EQ, lookahead and oversampling, drawn around a live level history and compression curve.',
+    about: [
+      'Pick a style and the compressor sets its detector, timing, knee and colour to match, then lets you take over every control. Watch the level history with the gain reduction under it, drag the threshold line, and shape what the compressor listens to with the side-chain EQ.',
+    ],
+    features: [
+      { label: '14 styles', body: 'Clean, Classic, Opto, Vocal, Mastering, Bus, Punch, Pumping, Versatile, Smooth, Vari-Mu, Tube Opto, Upward and Maximum.' },
+      { label: 'Side-chain EQ', body: 'Six bands, with an external input and stereo, mid or side modes.' },
+      { label: 'Lookahead and oversampling', body: 'Up to 20 ms of lookahead and up to 32x oversampling.' },
+      { label: 'Tube, Diode or Bright', body: 'Add drive before or after the compressor.' },
+      { label: 'Live display', body: 'Level history, compression curve and in / out meters, with A/B and 19 factory presets.' },
+    ],
+    target: 'TsukuyomiCompressor',
+    code: 'TsCm',
+    dawCategory: 'Fx, Dynamics',
+    icon: 'solar:layers-minimalistic-linear',
+  },
   {
     slug: 'isheen',
     name: 'Isheen',
