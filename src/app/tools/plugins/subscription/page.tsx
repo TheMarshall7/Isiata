@@ -5,7 +5,6 @@ import { Price } from '@/components/ui/Price'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
 import { PluginGrid } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
-import { ISIATA_LOGO_URL } from '@/lib/constants'
 import {
   ISI_CREATE_SUBSCRIPTION,
   PLUGINS_HREF,
@@ -19,7 +18,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: `${ISI_CREATE_SUBSCRIPTION.name} | Every Isiata Plugin`,
   description: ISI_CREATE_SUBSCRIPTION.description,
   path: SUBSCRIPTION_HREF,
-  image: ISIATA_LOGO_URL,
+  image: ISI_CREATE_SUBSCRIPTION.hero,
   imageAlt: ISI_CREATE_SUBSCRIPTION.name,
   keywords: ['Isi Access', 'Isiata', 'plugin subscription', 'VST3', 'AU'],
 })
@@ -54,6 +53,13 @@ export default function SubscriptionPage() {
         {ISI_CREATE_SUBSCRIPTION.tagline}
       </p>
       <p className="mb-10 max-w-2xl text-base leading-relaxed text-zinc-400">{ISI_CREATE_SUBSCRIPTION.description}</p>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={ISI_CREATE_SUBSCRIPTION.hero}
+        alt={`${ISI_CREATE_SUBSCRIPTION.name}: every Isiata plugin`}
+        className="mb-10 w-full border border-[#d8aa67]/25"
+      />
 
       <div className="mb-14 flex flex-wrap items-center gap-6">
         <span className="text-4xl text-white">
