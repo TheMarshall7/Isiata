@@ -72,6 +72,12 @@ export default function SubscriptionPage() {
         />
       </div>
 
+      <p className="mb-14 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualPrice}</span>, two months free
+        compared with monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
+        your subscription does, and subscribers receive every future plugin that qualifies while subscribed.
+      </p>
+
       <section className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {stats.map((stat) => (
           <div key={stat.label} className="border border-[#d8aa67]/25 p-6">

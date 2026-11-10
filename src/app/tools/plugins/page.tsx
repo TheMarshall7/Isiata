@@ -21,11 +21,11 @@ export default function PluginsPage() {
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
-        <PluginShop />
+        <SubscriptionBanner />
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
-        <SubscriptionBanner />
+        <PluginShop />
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 pb-24 pt-12">
