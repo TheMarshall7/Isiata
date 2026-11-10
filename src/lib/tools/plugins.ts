@@ -1122,10 +1122,11 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     name: 'Isiata Analog Collection',
     tagline: 'Three EQs and three channel strips with real weight.',
     description:
-      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression. Three different ways to shape a sound, each with its own character.',
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression, plus the Tsukuyomi Tape 77 tape machine. Four different ways to shape a sound, each with its own character.',
     launchPrice: '$129',
     regularPrice: '$149',
     groups: ['analog', 'strip'],
+    extras: ['tsukuyomi-tape-77'],
     icon: 'solar:equalizer-minimalistic-linear',
     hero: '/bundles/analog-collection-hero.webp?v=1',
     iconImage: '/bundles/analog-collection-icon.webp?v=1',
