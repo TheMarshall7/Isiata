@@ -129,13 +129,13 @@ export default function ToolsPage() {
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div className="max-w-2xl">
                   <p className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-3">
-                    Infrastructure
+                    Artist development
                   </p>
                   <h2 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold mb-3">
-                    ISIATA Systems
+                    Sound. Systems. Revenue.
                   </h2>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    Structure that holds the work. Intake, delivery, and retention in one place.
+                    One partnership for the sound, the infrastructure behind it, and the way it makes money.
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-sm text-zinc-400 group-hover:text-white transition-colors shrink-0">

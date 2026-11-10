@@ -61,7 +61,7 @@ export default function PluginPage({ params }: { params: Params }) {
           description: plugin.short,
           image: plugin.image?.src ?? ISIATA_LOGO_URL,
           url: `${PLUGINS_HREF}/${plugin.slug}`,
-          price: plugin.price,
+          price: plugin.price === 'FREE' ? '0' : plugin.price,
           category: 'Music Production > Plugins',
           availability: 'PreOrder',
         })}

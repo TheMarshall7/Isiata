@@ -85,17 +85,24 @@ export function BundleCard({ bundle }: { bundle: PluginBundle }) {
   return (
     <Link
       href={bundleHref(bundle)}
-      className="group flashlight-card hover-glow hover-depth flex flex-col border border-[#d8aa67]/35 bg-transparent p-6"
+      className="group flashlight-card hover-glow hover-depth flex flex-col overflow-hidden border border-[#d8aa67]/35 bg-transparent"
       onMouseMove={trackMouse}
     >
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <iconify-icon icon={bundle.icon} width="32" height="32" className="text-gold/60 transition-colors group-hover:text-gold" />
+      <div className="relative aspect-video overflow-hidden bg-black/40">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bundle.hero}
+          alt={bundle.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
         {bundle.badge ? (
-          <span className="rounded-full border border-[#d8aa67]/40 px-3 py-1 text-[10px] uppercase tracking-widest text-[#f0dfc8]">
+          <span className="absolute left-3 top-3 rounded-full border border-[#d8aa67]/40 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-[#f0dfc8] backdrop-blur">
             {bundle.badge}
           </span>
         ) : null}
       </div>
+      <div className="flex flex-1 flex-col p-6">
       <p className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-zinc-500">
         Bundle · {count} plugins
       </p>
@@ -116,6 +123,7 @@ export function BundleCard({ bundle }: { bundle: PluginBundle }) {
           height="18"
           className="mb-1 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-gold"
         />
+      </div>
       </div>
     </Link>
   )
@@ -183,27 +191,38 @@ export function SubscriptionBanner() {
   return (
     <Link
       href={SUBSCRIPTION_HREF}
-      className="group flashlight-card hover-glow flex flex-col gap-8 border border-[#d8aa67]/40 bg-transparent p-8 md:flex-row md:items-center md:justify-between md:p-10"
+      className="group flashlight-card hover-glow grid overflow-hidden border border-[#d8aa67]/40 bg-transparent md:grid-cols-2"
       onMouseMove={trackMouse}
     >
-      <div className="max-w-2xl">
-        <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">Subscription</p>
-        <h2 className="mb-3 font-display text-2xl uppercase tracking-normal text-gold md:text-4xl">
-          {ISI_CREATE_SUBSCRIPTION.name}
-        </h2>
-        <p className="text-sm leading-relaxed text-zinc-400 md:text-base">
-          {ISI_CREATE_SUBSCRIPTION.tagline} All {count} plugins, including the Tsukuyomi Drum Engine.
-        </p>
+      <div className="flex flex-col justify-center gap-6 p-8 md:p-10">
+        <div>
+          <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-zinc-500">Subscription</p>
+          <h2 className="mb-3 font-display text-2xl uppercase tracking-normal text-gold md:text-4xl">
+            {ISI_CREATE_SUBSCRIPTION.name}
+          </h2>
+          <p className="text-sm leading-relaxed text-zinc-400 md:text-base">
+            {ISI_CREATE_SUBSCRIPTION.tagline} All {count} plugins, including the Tsukuyomi Drum Engine.
+          </p>
+        </div>
+        <div className="flex items-center gap-6">
+          <span className="text-4xl text-white">
+            <Price value={ISI_CREATE_SUBSCRIPTION.price} />
+          </span>
+          <iconify-icon
+            icon="solar:arrow-right-linear"
+            width="22"
+            height="22"
+            className="text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-gold"
+          />
+        </div>
       </div>
-      <div className="flex shrink-0 items-center gap-6">
-        <span className="text-4xl text-white">
-          <Price value={ISI_CREATE_SUBSCRIPTION.price} />
-        </span>
-        <iconify-icon
-          icon="solar:arrow-right-linear"
-          width="22"
-          height="22"
-          className="text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-gold"
+      <div className="relative min-h-[200px] overflow-hidden bg-black/40">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={ISI_CREATE_SUBSCRIPTION.hero}
+          alt={ISI_CREATE_SUBSCRIPTION.name}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
     </Link>

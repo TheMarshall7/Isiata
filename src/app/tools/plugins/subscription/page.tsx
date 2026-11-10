@@ -7,7 +7,6 @@ import { PluginBuyButton } from '@/components/tools/PluginBuyButton'
 import { SUBSCRIPTION_SKU, isPurchaseEnabled } from '@/lib/tools/purchase-skus'
 import { PluginGrid } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
-import { ISIATA_LOGO_URL } from '@/lib/constants'
 import {
   ISI_CREATE_SUBSCRIPTION,
   PLUGINS_HREF,
@@ -21,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: `${ISI_CREATE_SUBSCRIPTION.name} | Every Isiata Plugin`,
   description: ISI_CREATE_SUBSCRIPTION.description,
   path: SUBSCRIPTION_HREF,
-  image: ISIATA_LOGO_URL,
+  image: ISI_CREATE_SUBSCRIPTION.hero,
   imageAlt: ISI_CREATE_SUBSCRIPTION.name,
   keywords: ['Isi Access', 'Isiata', 'plugin subscription', 'VST3', 'AU'],
 })
@@ -57,6 +56,13 @@ export default function SubscriptionPage() {
       </p>
       <p className="mb-10 max-w-2xl text-base leading-relaxed text-zinc-400">{ISI_CREATE_SUBSCRIPTION.description}</p>
 
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={ISI_CREATE_SUBSCRIPTION.hero}
+        alt={`${ISI_CREATE_SUBSCRIPTION.name}: every Isiata plugin`}
+        className="mb-10 w-full border border-[#d8aa67]/25"
+      />
+
       <div className="mb-14 flex flex-wrap items-center gap-6">
         <span className="text-4xl text-white">
           <Price value={ISI_CREATE_SUBSCRIPTION.price} />
@@ -71,6 +77,12 @@ export default function SubscriptionPage() {
           />
         )}
       </div>
+
+      <p className="mb-14 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualPrice}</span>, two months free
+        compared with monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
+        your subscription does, and subscribers receive every future plugin that qualifies while subscribed.
+      </p>
 
       <section className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {stats.map((stat) => (

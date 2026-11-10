@@ -84,12 +84,12 @@ export const CONTACT_DELIVERED: ContactOffering[] = [
   },
   {
     icon: 'solar:server-square-linear',
-    title: 'Systems for the Business',
+    title: 'Systems',
     lines: [
-      'Backend infrastructure for bookings, leads, and revenue.',
-      'CRM, automations, and full business systems for artists.',
+      'Production, mixing and mastering, and creative direction.',
+      'The business infrastructure that turns the music into revenue.',
     ],
-    tagline: 'Your operation, built to run without you.',
+    tagline: 'Sound. Systems. Revenue.',
     href: '/systems',
     cta: 'View systems',
   },

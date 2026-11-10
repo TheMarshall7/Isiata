@@ -3,13 +3,25 @@ import { TSUKUYOMI_DRUM_ENGINE_HREF } from './tsukuyomi-drum-engine'
 export const PLUGINS_HREF = '/tools/plugins'
 export const PLUGIN_BUNDLES_HREF = `${PLUGINS_HREF}/bundles`
 
-export type PluginGroupId = 'instrument' | 'tab' | 'effect' | 'saturation' | 'analog' | 'compressor'
+export type PluginGroupId =
+  | 'instrument'
+  | 'tab'
+  | 'effect'
+  | 'creative'
+  | 'saturation'
+  | 'strip'
+  | 'mix'
+  | 'analog'
+  | 'compressor'
 
 export const PLUGIN_GROUPS: { id: PluginGroupId; label: string }[] = [
   { id: 'instrument', label: 'Instruments' },
   { id: 'tab', label: 'Multi-effects' },
   { id: 'effect', label: 'Effects' },
+  { id: 'creative', label: 'Creative' },
   { id: 'saturation', label: 'Saturation' },
+  { id: 'strip', label: 'Channel Strips' },
+  { id: 'mix', label: 'Mix Tools' },
   { id: 'analog', label: 'Analog EQ' },
   { id: 'compressor', label: 'Compressors' },
 ]
@@ -53,7 +65,8 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Isibox': [780, 520],
   'Tsukuyomi 8 Bit': [380, 440],
   'Tsukuyomi Chorus': [760, 440],
-  'Tsukuyomi Comp': [860, 440],
+  'Tsukuyomi Tri Comp': [860, 440],
+  'Tsukuyomi Compressor': [1050, 675],
   'Tsukuyomi Delay': [760, 520],
   'Tsukuyomi Drum Engine': [1628, 1036],
   'Tsukuyomi FX': [900, 640],
@@ -64,15 +77,120 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Tsukuyomi Soft Clip': [760, 440],
   'Tsukuyomi Sound': [900, 640],
   'Tsukuyomi Stutter': [760, 520],
+  'IPI Strip': [2320, 1600],
+  'Iseve Strip': [2320, 1600],
+  'IsiTech Strip': [2320, 1600],
+  'Tsukuyomi Bit Crush': [980, 580],
+  'Tsukuyomi Crunch': [980, 580],
+  'Tsukuyomi De-Esser': [1080, 640],
+  'Tsukuyomi Filter': [980, 580],
+  'Tsukuyomi Gain': [980, 580],
+  'Tsukuyomi Gate': [1040, 600],
+  'Tsukuyomi Ring Mod': [980, 580],
+  'Tsukuyomi Synergy': [980, 580],
+  'Tsukuyomi Tape Stop': [980, 580],
+  'Tsukuyomi Tape 77': [1160, 650],
+  'Tsukuyomi Transient': [980, 580],
+  'Tsukuyomi Tri EQ': [980, 580],
+  'Tsukuyomi Motion': [1180, 800],
+}
+
+/** Bump a plugin's number when its screenshot file is replaced. Browsers keep these images for
+ *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
+const SCREENSHOT_VERSIONS: Record<string, number> = {
+  'IA2A': 3,
+  'IPI': 2,
+  'ISI 76': 3,
+  'ISI Pandora': 2,
+  'Icarus': 2,
+  'Iseve 1095': 2,
+  'Isheen': 2,
+  'IsiTech': 2,
+  'Isibox': 2,
+  'Tsukuyomi 8 Bit': 2,
+  'Tsukuyomi Chorus': 2,
+  'Tsukuyomi Tri Comp': 2,
+  'Tsukuyomi Compressor': 2,
+  'Tsukuyomi Delay': 3,
+  'Tsukuyomi FX': 2,
+  'Tsukuyomi Flanger': 2,
+  'Tsukuyomi Lo-Fi': 2,
+  'Tsukuyomi Phaser': 2,
+  'Tsukuyomi Reverb': 2,
+  'Tsukuyomi Soft Clip': 2,
+  'Tsukuyomi Stutter': 2,
+  'IPI Strip': 3,
+  'Iseve Strip': 3,
+  'IsiTech Strip': 3,
+  'Tsukuyomi Bit Crush': 2,
+  'Tsukuyomi Crunch': 2,
+  'Tsukuyomi De-Esser': 2,
+  'Tsukuyomi Filter': 3,
+  'Tsukuyomi Gain': 3,
+  'Tsukuyomi Gate': 2,
+  'Tsukuyomi Ring Mod': 2,
+  'Tsukuyomi Synergy': 4,
+  'Tsukuyomi Tape Stop': 3,
+  'Tsukuyomi Tape 77': 2,
+  'Tsukuyomi Transient': 3,
+  'Tsukuyomi Tri EQ': 2,
+  'Tsukuyomi Motion': 3,
+}
+
+/** Plugins with the shared preset bar in the header (the Compressor has its own browser, with the same arrows). */
+const PRESET_BAR_PLUGINS = new Set<string>([
+  'IA2A',
+  'ISI 76',
+  'Icarus',
+  'Isheen',
+  'Isibox',
+  'IPI',
+  'Iseve 1095',
+  'IsiTech',
+  'Tsukuyomi 8 Bit',
+  'Tsukuyomi Chorus',
+  'Tsukuyomi Tri Comp',
+  'Tsukuyomi Delay',
+  'Tsukuyomi FX',
+  'Tsukuyomi Flanger',
+  'Tsukuyomi Lo-Fi',
+  'Tsukuyomi Phaser',
+  'Tsukuyomi Reverb',
+  'Tsukuyomi Soft Clip',
+  'Tsukuyomi Stutter',
+  'Tsukuyomi Bit Crush',
+  'Tsukuyomi Crunch',
+  'Tsukuyomi De-Esser',
+  'Tsukuyomi Filter',
+  'Tsukuyomi Gain',
+  'Tsukuyomi Gate',
+  'Tsukuyomi Ring Mod',
+  'Tsukuyomi Synergy',
+  'Tsukuyomi Tape Stop',
+  'Tsukuyomi Tape 77',
+  'Tsukuyomi Transient',
+  'Tsukuyomi Tri EQ',
+  'Tsukuyomi Motion',
+])
+
+const PRESET_FEATURE = {
+  label: 'Presets',
+  body: 'Factory sounds and your own saved presets in folders, with arrows to step to the next or previous one without opening the menu.',
+}
+
+function withPresets(plugin: PluginSpec): PluginSpec {
+  if (!PRESET_BAR_PLUGINS.has(plugin.name)) return plugin
+  return { ...plugin, features: [...plugin.features, PRESET_FEATURE] }
 }
 
 function withScreenshot(plugin: PluginSpec): PluginSpec {
   const size = SCREENSHOT_SIZES[plugin.name]
   if (!size) return plugin
+  const version = SCREENSHOT_VERSIONS[plugin.name]
   return {
     ...plugin,
     image: {
-      src: encodeURI(`/Plugin Screenshots/${plugin.name}.png`),
+      src: encodeURI(`/Plugin Screenshots/${plugin.name}.png`) + (version ? `?v=${version}` : ''),
       width: size[0],
       height: size[1],
     },
@@ -159,9 +277,9 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
   {
     slug: 'tsukuyomi-comp',
-    name: 'Tsukuyomi Comp',
+    name: 'Tsukuyomi Tri Comp',
     group: 'tab',
-    kind: 'Parallel compressor rack',
+    kind: 'Three-slot parallel compressor',
     price: '$49',
     hero: 'Three compressors. One blend.',
     short:
@@ -190,7 +308,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi Delay',
     group: 'effect',
     kind: 'Delay',
-    price: '$29',
+    price: '$39',
     hero: 'Echoes with character.',
     short: 'A tempo-synced or free-running echo that sits in the mix instead of cluttering it. Darken the repeats, widen the image and let the tails ring out.',
     about: ['Fast slapbacks, wide dotted echoes, long dark tails. Dial it in and it stays out of the way until you need it.'],
@@ -199,6 +317,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
       { label: 'Tone', body: 'Roll off the highs so repeats sit behind the source.' },
       { label: 'Width', body: 'Spread the echoes across the stereo field.' },
       { label: 'Feedback', body: 'From a single slap to a long, evolving trail.' },
+      { label: 'Ping-pong', body: 'Bounce the repeats between left and right.' },
     ],
     target: 'TsukuyomiDelay',
     code: 'TsDl',
@@ -233,7 +352,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi Chorus',
     group: 'effect',
     kind: 'Chorus',
-    price: '$29',
+    price: 'FREE',
     hero: 'Wide and moving.',
     short: 'A chorus that goes from a subtle widen to a lush, swirling ensemble with three simple controls.',
     about: ['Turn it up for width on drums, shimmer on keys, or movement on a bass that needs to breathe.'],
@@ -330,7 +449,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi Lo-Fi',
     group: 'effect',
     kind: 'Lo-fi',
-    price: '$19',
+    price: 'FREE',
     hero: 'Age anything with one knob.',
     short: 'Worn tape, a dull top end and the grit of a sample hold. Turn it up and the sound gets older.',
     about: ['Dirty up a drum loop, push a sample into a dusty memory, or give a clean track some history.'],
@@ -347,7 +466,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi 8 Bit',
     group: 'effect',
     kind: 'Bit crusher',
-    price: '$19',
+    price: 'FREE',
     hero: 'Crush it down to crunch.',
     short: 'Bit depth and sample rate reduction on a single knob, for low-bit crunch and game-console grit.',
     about: ['Turn a clean drum hit into a crunchy chip-tune hit, or add a gritty edge to a sampler layer.'],
@@ -366,7 +485,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'ISI Pandora',
     group: 'saturation',
     kind: 'Dual tube saturator',
-    price: '$39',
+    price: '$49',
     hero: 'Two tubes. Endless heat.',
     short:
       'A dual tube saturator that takes a sound from a warm glow to a full-blown burn. Stack a pentode and a triode, pick where the heat lands, and finish with a touch of air.',
@@ -386,6 +505,382 @@ const PLUGIN_DEFS: PluginSpec[] = [
     ],
     whoFor: 'Producers who want warmth, grit and presence on drums, bass, vocals and buses, from subtle glue to heavy distortion.',
     icon: 'solar:fire-linear',
+  },
+  {
+    slug: 'tsukuyomi-tape-77',
+    name: 'Tsukuyomi Tape 77',
+    group: 'saturation',
+    kind: 'Two-track tape machine',
+    price: '$39',
+    hero: 'A whole tape machine. Warm or wrecked.',
+    short:
+      'A two-track reel-to-reel in one plugin: three tape formulations, five tape speeds, bias, wow and flutter, hiss and vinyl, a tape echo, and a tape stop, on a deck that turns while you play.',
+    about: [
+      'Hit the tape lightly for glue and warmth, or push it until it squashes and growls. Each formulation reacts differently, and every speed from cassette to 30 IPS changes the top end, the head bump, the wobble and the noise. Then add a tape echo that glides and darkens, or stop the whole machine dead.',
+    ],
+    features: [
+      { label: 'Three formulations', body: 'Vintage is warm and soft, Studio is clean and balanced, Magnetic is hot, dense and compressed. They differ in how they saturate, not just in tone.' },
+      { label: 'Five speeds', body: '1.875, 3.75, 7.5, 15 and 30 IPS. Slower tape is darker, wobblier and noisier, faster tape is tighter and cleaner.' },
+      { label: 'Bias, Drive and Comp', body: 'Move from clean to gritty with bias, set how hard the tape is hit, and add slow tape compression. Auto Gain keeps the level steady.' },
+      { label: 'Head bump and tone', body: 'The playback head\'s low-end bump, plus Low and High shelves.' },
+      { label: 'Wow and flutter', body: 'Natural, wandering speed drift with its own rate, drift and stereo controls, not a plain LFO.' },
+      { label: 'Hiss, vinyl and noise', body: 'Tape hiss that slows and fades with the tape, plus crackle, pops and rumble.' },
+      { label: 'Stereo', body: 'Width, crosstalk between the two tracks, and a variance control that makes them differ, with a mono switch.' },
+      { label: 'Tape delay', body: 'Tempo-synced echo with ping-pong, filtered and saturated repeats, wobble on the repeats, and a feedback loop that always dies away.' },
+      { label: 'Tape stop', body: 'Spin the tape down and back up on one button, or with any held MIDI note. Shape the curve with Bend.' },
+      { label: 'Deck display', body: 'Reels that turn at the tape speed, with the Isiata LED meter on the deck. Open Advanced for the rarely used controls.' },
+      { label: 'Presets', body: 'Over 60 factory presets: warmth, mix bus, drums, vocals, bass, lo-fi, vinyl, warped, ambient, delay, speeds and tape stops.' },
+    ],
+    whoFor: 'Producers who want tape warmth on a bus or a single track, and lo-fi, wobble and echo when the track needs character.',
+    target: 'TsukuyomiTape77',
+    code: 'TsT7',
+    dawCategory: 'Fx, Distortion',
+    icon: 'solar:cassette-2-linear',
+  },
+  {
+    slug: 'tsukuyomi-crunch',
+    name: 'Tsukuyomi Crunch',
+    group: 'saturation',
+    kind: 'Distortion',
+    price: '$29',
+    hero: 'Three flavours of dirt.',
+    short:
+      'A distortion with three personalities: crunchy, fuzzy and warm. Push it from a little bite to a lot of attitude, and shape how it breathes with bias, width and shadow.',
+    about: [
+      'Drive guitars, bass, drums, synths or a whole loop. Switch modes to change the whole character in a click, then use the touch control to decide how much of your playing comes through.',
+    ],
+    features: [
+      { label: 'Crunch, Fuzz and Warm', body: 'Three distortion modes, from tight and biting to thick and furry to soft and round.' },
+      { label: 'Drive and Touch', body: 'Pile on the gain, then choose how dynamic the distortion feels.' },
+      { label: 'Bias, Width and Shadow', body: 'Sculpt the harmonics, stretch the stereo image, and fill in the low-level detail.' },
+      { label: 'Live scope', body: 'Watch the waveform get chewed up in real time.' },
+      { label: 'Mix and Output', body: 'Blend in the dirt for parallel distortion and level match the result.' },
+    ],
+    whoFor: 'Anyone who wants a single distortion that can go from subtle edge to full destruction.',
+    icon: 'solar:fire-minimalistic-linear',
+  },
+
+  /* ───────────── Creative ───────────── */
+  {
+    slug: 'tsukuyomi-synergy',
+    name: 'Tsukuyomi Synergy',
+    group: 'creative',
+    kind: 'Ensemble',
+    price: '$39',
+    hero: 'One sound. A whole ensemble.',
+    short:
+      'Turn a single voice into a lush, wide ensemble. Stack up to several detuned voices, pick how they move, and spread them across the stereo field.',
+    about: [
+      'Fatten a pad, widen a synth, thicken a vocal or give a plucked sound a shimmering halo. Four movement styles keep the motion from ever feeling the same.',
+    ],
+    features: [
+      { label: 'Voices and Detune', body: 'Choose how many voices stack up and how far they drift apart in pitch.' },
+      { label: 'Four movement styles', body: 'Sine and Triangle for smooth sweeps, Wander for organic drift, Swirl for rich, rotating motion.' },
+      { label: 'Width to 200%', body: 'Open the image past the speakers, with energy kept level.' },
+      { label: 'Timing', body: 'Random start offsets so the voices never line up.' },
+      { label: 'Rate', body: 'Set the speed of the movement.' },
+      { label: 'Mix and Dry', body: 'Balance the ensemble against the original so the core of the sound stays solid.' },
+      { label: 'Live scope', body: 'See the motion as you shape it.' },
+    ],
+    whoFor: 'Producers who want instant width and thickness on pads, synths, vocals and plucks.',
+    icon: 'solar:users-group-rounded-linear',
+  },
+  {
+    slug: 'tsukuyomi-tape-stop',
+    name: 'Tsukuyomi Tape Stop',
+    group: 'creative',
+    kind: 'Spin down and spin up',
+    price: 'FREE',
+    hero: 'Pull the plug on the groove.',
+    short:
+      'Slow a sound to a stop like a record losing power, then spin it back up. Set how long each takes, bend the curve, and hit the button whenever the moment calls for it.',
+    about: [
+      'The classic end-of-bar drop, a dramatic transition, or a one-shot gag on a loop. Automate the Stop button to land it exactly where you want.',
+    ],
+    features: [
+      { label: 'Stop', body: 'One big button to spin the sound down, and to bring it back.' },
+      { label: 'Spin Down and Spin Up', body: 'Set how long the slowdown and the restart take, from a quick snap to a long slow drag.' },
+      { label: 'Bend', body: 'Shape the curve of the slowdown for a smooth fade or a sudden drop.' },
+      { label: 'Status display', body: 'See at a glance whether the tape is running or stopped.' },
+    ],
+    whoFor: 'Anyone who wants dramatic stops and restarts on drums, loops, vocals or full mixes.',
+    icon: 'solar:stop-circle-linear',
+  },
+  {
+    slug: 'tsukuyomi-ring-mod',
+    name: 'Tsukuyomi Ring Mod',
+    group: 'creative',
+    kind: 'Ring modulator',
+    price: '$19',
+    hero: 'Metallic, robotic, otherworldly.',
+    short:
+      'Multiply your sound with an oscillator to create bell-like, metallic and robotic tones. Pick the waveform, set the frequency, and blend in as much as you want.',
+    about: [
+      'From subtle shimmer to full-on alien voice. Great on vocals, synths, drums and anything that needs to sound like it came from somewhere else.',
+    ],
+    features: [
+      { label: 'Five waveforms', body: 'Sine, Triangle, Saw, Square or Noise, each with its own flavour of metal.' },
+      { label: 'Frequency and Offset', body: 'Tune the modulation and nudge it away from the note for inharmonic textures.' },
+      { label: 'Bleed and Rectify', body: 'Let some of the original through, or fold the signal for harder, edgier results.' },
+      { label: 'Live scope', body: 'Watch the waveform get torn apart in real time.' },
+      { label: 'Mix and Output', body: 'Blend it in and level match the result.' },
+    ],
+    whoFor: 'Sound designers and producers who want robotic, bell-like and experimental textures.',
+    icon: 'solar:soundwave-square-linear',
+  },
+  {
+    slug: 'tsukuyomi-bit-crush',
+    name: 'Tsukuyomi Bit Crush',
+    group: 'creative',
+    kind: 'Bit crusher',
+    price: '$29',
+    hero: 'Crush it. Then shape the damage.',
+    short:
+      'Sample rate and bit depth reduction with the controls to tame it. Go from a hint of lo-fi grit to full digital destruction, with dither and smoothing to keep it musical.',
+    about: [
+      'Dirty up drums, give samples a vintage-sampler crunch, or wreck a synth into pure digital noise. Smoothing on the way in and out lets you decide how harsh the edges get.',
+    ],
+    features: [
+      { label: 'Quantize', body: 'Reduce the sample rate for the aliasing crunch of old samplers and game consoles.' },
+      { label: 'Bits', body: 'Drop the bit depth to flatten the dynamics and add grit.' },
+      { label: 'Dither', body: 'Add noise to smooth out the harshest steps.' },
+      { label: 'Smooth In and Smooth Out', body: 'Soften the edges before and after the crush for a more musical result.' },
+      { label: 'Live scope', body: 'See the signal turn into steps as you turn the knobs.' },
+    ],
+    whoFor: 'Producers who want controllable lo-fi crunch on drums, samples and synths.',
+    icon: 'solar:chart-square-linear',
+  },
+
+  {
+    slug: 'tsukuyomi-motion',
+    name: 'Tsukuyomi Motion',
+    group: 'creative',
+    kind: 'Rhythmic chop, duck and warp',
+    price: '$59',
+    hero: 'Make every sound move in time.',
+    short:
+      'Chop a sound into a rhythm, duck it around the beat, and warp it with repeating shapes, all locked to your tempo. Draw the pattern, play it from your keyboard, and let the groove do the work.',
+    about: [
+      'Turn a held pad into a pulsing gate, carve space for the kick with a ducking curve, or add repeating warp shapes for movement that never sits still. Eight slots let you build and switch between patterns instantly.',
+    ],
+    features: [
+      { label: 'Chop', body: 'A 16-step pattern that slices a sound into rhythm, with rate, attack, decay, sustain and release for tight pulses or long swells.' },
+      { label: 'Duck', body: 'Pumping, sidechain-style volume shapes with adjustable length, band and depth. Trigger them from the tempo or from your playing.' },
+      { label: 'Warp', body: 'Repeating shapes that bend the sound in time for stuttering, rhythmic movement.' },
+      { label: 'Draw your own curves', body: 'Click to add points, drag to move and bend them, with a grid and snap. Duck can repeat one shape (Grouped) or let every beat differ (Free).' },
+      { label: 'Eight patterns', body: 'Build up to eight setups and jump between them from your keyboard.' },
+      { label: 'Live display', body: 'See the chop pattern, duck curve and warp shape move with the tempo.' },
+      { label: 'Mix per section', body: 'Blend each section in separately, and match the output level.' },
+    ],
+    whoFor: 'Producers who want rhythmic gating, sidechain-style pumping and groove-locked movement from a single plugin.',
+    icon: 'solar:soundwave-linear',
+  },
+
+  /* ───────────── Channel Strips ───────────── */
+  {
+    slug: 'iseve-strip',
+    name: 'Iseve Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$79',
+    hero: 'A whole console channel in one plugin.',
+    short:
+      'The Iseve 1095 console EQ, a gate, and your choice of FET or optical compression, wired into one strip. Shape the tone, tighten the dynamics and add analog weight without stacking three plugins.',
+    about: [
+      'Reach for it first on drums, vocals, bass or anything that needs to sit in the mix fast. Run the EQ before the dynamics or flip the order, and let drive, noise and vinyl add the character of the real thing.',
+    ],
+    features: [
+      { label: 'Console EQ', body: 'High, mid and low bands with a high-pass filter, for thick, warm, dimensional tone.' },
+      { label: 'Drive and colour', body: 'Push the analog stage for weight, harmonics and a little bit of noise and vinyl texture.' },
+      { label: 'Two compressors', body: 'Switch between the ISI 76 for fast FET grab and the IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Clean up bleed and tighten tails, with key filters to keep it from false triggering.' },
+      { label: 'Process order', body: 'Run EQ into dynamics or dynamics into EQ, whichever the sound needs.' },
+      { label: 'Metering', body: 'Input and output meters, plus gain reduction on both dynamics sections.' },
+    ],
+    notes: ['Modeled on the behaviour of classic console gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers and mixers who want a complete channel, from first touch to final polish, in one plugin.',
+    icon: 'solar:tuning-square-2-linear',
+  },
+  {
+    slug: 'ipi-strip',
+    name: 'IPI Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$79',
+    hero: 'Punchy, forward and ready to mix.',
+    short:
+      'The IPI EQ with its preamp grit, a gate, and FET or optical compression, all in one strip. Surgical when you want it, aggressive when you need it.',
+    about: [
+      'Bring a track to the front of the mix in a single plugin. Dig into problems with the parametric bands, shape the curve with the graphic EQ, then control and glue it with the compressor.',
+    ],
+    features: [
+      { label: 'IPI EQ', body: 'Preamp grit into three parametric bands and a ten-band graphic EQ.' },
+      { label: 'Drive and colour', body: 'Add attitude, noise and vinyl texture right in the strip.' },
+      { label: 'Two compressors', body: 'ISI 76 for fast FET grab, IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Tidy up bleed and tighten tails, with key filters for precise control.' },
+      { label: 'Process order', body: 'Switch between EQ first and dynamics first.' },
+      { label: 'Metering', body: 'Input, output and gain reduction meters across the strip.' },
+    ],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers who want a punchy, all-in-one channel for drums, bass, guitars and vocals.',
+    icon: 'solar:equalizer-minimalistic-linear',
+  },
+  {
+    slug: 'isitech-strip',
+    name: 'IsiTech Strip',
+    group: 'strip',
+    kind: 'Channel strip',
+    price: '$79',
+    hero: 'Big, polished and complete.',
+    short:
+      'The IsiTech boost-and-cut program EQ, a gate, and FET or optical compression on one strip. Low-end force, open highs and polished dynamics from a single plugin.',
+    about: [
+      'Make a kick, bass, vocal or mix bus feel bigger without losing control. Boost and cut the low end together for the classic big-but-tight sound, then finish with compression.',
+    ],
+    features: [
+      { label: 'Program EQ', body: 'Low boost and attenuate, high boost with adjustable bandwidth, and a high attenuation selector.' },
+      { label: 'Drive and colour', body: 'Add warmth, weight, noise and vinyl texture.' },
+      { label: 'Two compressors', body: 'ISI 76 for fast FET grab, IA2A for slow optical glue.' },
+      { label: 'Gate and expander', body: 'Control bleed and tails with key filters to avoid false triggers.' },
+      { label: 'Process order', body: 'Run EQ before dynamics or flip it.' },
+      { label: 'Metering', body: 'Input, output and gain reduction metering.' },
+    ],
+    notes: ['Modeled on the behaviour of classic gear. Not a claimed clone of specific hardware.'],
+    whoFor: 'Producers who want a smooth, polished channel with serious low-end authority.',
+    icon: 'solar:sort-vertical-linear',
+  },
+
+  /* ───────────── Mix Tools ───────────── */
+  {
+    slug: 'tsukuyomi-gate',
+    name: 'Tsukuyomi Gate',
+    group: 'mix',
+    kind: 'Gate and expander',
+    price: '$29',
+    hero: 'Silence the noise. Keep the hit.',
+    short:
+      'A gate and expander with a live scope that shows exactly what it is doing. Tighten drums, clean up bleed and cut the hiss between phrases.',
+    about: [
+      'Choose a hard gate for a clean cut or an expander for a more natural fade. Dial in the envelope, filter what the gate listens to, and hear exactly what is triggering it.',
+    ],
+    features: [
+      { label: 'Gate or Expander', body: 'A clean cut or a natural, gradual closing.' },
+      { label: 'Threshold and Range', body: 'Decide when it opens and how far it closes.' },
+      { label: 'Attack, Hold and Release', body: 'Keep the front of every hit and shape the tail.' },
+      { label: 'Key filters', body: 'High-pass and low-pass what the gate listens to, so snares ignore the kick.' },
+      { label: 'Key Listen', body: 'Hear the trigger signal to dial it in perfectly.' },
+      { label: 'Live scope', body: 'Watch the waveform and the threshold as the gate opens and closes.' },
+    ],
+    whoFor: 'Anyone who wants tight drums, clean vocals and no bleed.',
+    icon: 'solar:shield-minimalistic-linear',
+  },
+  {
+    slug: 'tsukuyomi-de-esser',
+    name: 'Tsukuyomi De-Esser',
+    group: 'mix',
+    kind: 'De-esser',
+    price: '$39',
+    hero: 'Tame the sibilance. Keep the air.',
+    short:
+      'A de-esser for harsh S sounds with a clear view of the band it is working on. Tune it for a single vocal or for a full mix, and listen to exactly what it is removing.',
+    about: [
+      'Smooth out a bright vocal without dulling it. Pick a single-vocal or all-round mode, choose wide-band or split-band processing, and use the audition button to hear the sibilance you are cutting.',
+    ],
+    features: [
+      { label: 'Single Vocal or Allround', body: 'Two detection modes tuned for solo voices or full material.' },
+      { label: 'Wide Band or Split Band', body: 'Pull down the whole signal for transparency, or only the problem band for a more surgical touch.' },
+      { label: 'Frequency range', body: 'Set exactly where the de-esser listens and works.' },
+      { label: 'Lookahead', body: 'Catch sibilance before it hits, with no pumping.' },
+      { label: 'Stereo Link and Mid/Side', body: 'Keep the image steady, or treat the centre and sides separately.' },
+      { label: 'Audition and GR display', body: 'Hear what is being removed and see the gain reduction as it happens.' },
+    ],
+    whoFor: 'Vocalists, producers and mixers who want smooth, natural, non-lispy vocals.',
+    icon: 'solar:microphone-3-linear',
+  },
+  {
+    slug: 'tsukuyomi-transient',
+    name: 'Tsukuyomi Transient',
+    group: 'mix',
+    kind: 'Transient shaper',
+    price: '$29',
+    hero: 'Shape the punch.',
+    short:
+      'Turn the attack up for snap or down for softness, and lengthen or shorten the sustain. Reshape drums, plucks and loops without touching the EQ.',
+    about: [
+      'Bring a snare forward, tame a harsh pick attack or tighten a boomy kick.',
+    ],
+    features: [
+      { label: 'Attack', body: 'Boost the initial hit for snap or cut it for a smoother, softer front.' },
+      { label: 'Sustain', body: 'Extend the tail for body or shorten it for tightness.' },
+      { label: 'Carve and Response', body: 'Shape how the effect behaves and how quickly it reacts.' },
+      { label: 'Soft clip', body: 'Catch the extra level from big boosts before it clips.' },
+      { label: 'Mix and Output', body: 'Parallel blend and level match the result.' },
+    ],
+    whoFor: 'Producers who want punchier drums and more control over how sounds hit.',
+    icon: 'solar:bolt-circle-linear',
+  },
+  {
+    slug: 'tsukuyomi-tri-eq',
+    name: 'Tsukuyomi Tri EQ',
+    group: 'mix',
+    kind: 'Three-band EQ',
+    price: '$39',
+    hero: 'Three bands. Set in seconds.',
+    short:
+      'A simple, powerful three-band EQ with adjustable crossovers and a live spectrum. Boost the lows, tame the mids and open the highs without a maze of knobs.',
+    about: [
+      'When you need to shape a sound quickly, nothing beats low, mid and high. Move the crossover points to choose exactly where each band begins and ends, and watch the curve respond.',
+    ],
+    features: [
+      { label: 'Low, Mid and High', body: 'Three big gain controls for fast, musical tone shaping.' },
+      { label: 'Adjustable crossovers', body: 'Choose where the lows end and the highs begin.' },
+      { label: 'Live spectrum', body: 'See your sound and the EQ curve together.' },
+      { label: 'Output', body: 'Level match the result.' },
+    ],
+    whoFor: 'Anyone who wants a fast, no-nonsense EQ for any track or bus.',
+    icon: 'solar:tuning-linear',
+  },
+  {
+    slug: 'tsukuyomi-filter',
+    name: 'Tsukuyomi Filter',
+    group: 'mix',
+    kind: 'Low cut and high cut',
+    price: '$19',
+    hero: 'Clean up. Or close it down.',
+    short:
+      'A low cut and a high cut, each with its own slope from 6 to 48 dB and resonance, with a live spectrum to see what you are removing.',
+    about: [
+      'Clear the rumble from a vocal, darken a loop for a breakdown, or sweep a filter through a build. Use the steeper slope for a decisive cut and add resonance for a squelchy edge.',
+    ],
+    features: [
+      { label: 'Low Cut and High Cut', body: 'Remove low rumble and top-end hiss, or narrow the sound down to a thin band.' },
+      { label: 'Slope per side', body: 'Six slopes from 6 to 48 dB, set separately for the low and high cut.' },
+      { label: 'Resonance and Link', body: 'Add a peak at the cutoff, and link both sides to move together.' },
+      { label: 'Live spectrum', body: 'See the frequencies being cut as you move the controls.' },
+    ],
+    whoFor: 'Producers who want clean mixes, smooth transitions and expressive filter sweeps.',
+    icon: 'solar:filter-linear',
+  },
+  {
+    slug: 'tsukuyomi-gain',
+    name: 'Tsukuyomi Gain',
+    group: 'mix',
+    kind: 'Gain and balance',
+    price: 'FREE',
+    hero: 'Level, balance and polarity.',
+    short:
+      'A clean, simple utility for setting the level, adjusting the stereo balance, flipping the phase or collapsing to mono.',
+    about: [
+      'The tool you always need. Match levels between plugins, check your mix in mono, or flip the phase to fix a cancelling pair.',
+    ],
+    features: [
+      { label: 'Gain', body: 'Turn the level down or up with a single clean control.' },
+      { label: 'Balance', body: 'Shift the stereo image left or right.' },
+      { label: 'Mono and Phase', body: 'Check your mix in mono or flip the polarity to fix phase problems.' },
+      { label: 'Level display', body: 'A live meter shows what you are sending out.' },
+    ],
+    whoFor: 'Everyone, on every project.',
+    icon: 'solar:volume-loud-linear',
   },
 
   /* ───────────── Analog EQ ───────────── */
@@ -459,6 +954,30 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
 
   /* ───────────── Compressors ───────────── */
+  {
+    slug: 'tsukuyomi-compressor',
+    name: 'Tsukuyomi Compressor',
+    group: 'effect',
+    kind: 'Studio compressor',
+    price: '$39',
+    hero: 'One studio compressor. Fourteen ways to squeeze.',
+    short:
+      'A program-dependent compressor with fourteen styles, a six-band side-chain EQ, lookahead and oversampling, drawn around a live level history and compression curve.',
+    about: [
+      'Pick a style and the compressor sets its detector, timing, knee and colour to match, then lets you take over every control. Watch the level history with the gain reduction under it, drag the threshold line, and shape what the compressor listens to with the side-chain EQ.',
+    ],
+    features: [
+      { label: '14 styles', body: 'Clean, Classic, Opto, Vocal, Mastering, Bus, Punch, Pumping, Versatile, Smooth, Vari-Mu, Tube Opto, Upward and Maximum.' },
+      { label: 'Side-chain EQ', body: 'Six bands, with an external input and stereo, mid or side modes.' },
+      { label: 'Lookahead and oversampling', body: 'Up to 20 ms of lookahead and up to 32x oversampling.' },
+      { label: 'Tube, Diode or Bright', body: 'Add drive before or after the compressor.' },
+      { label: 'Live display', body: 'Level history, compression curve and in / out meters, with A/B, 19 factory presets and arrows to step through them.' },
+    ],
+    target: 'TsukuyomiCompressor',
+    code: 'TsCm',
+    dawCategory: 'Fx, Dynamics',
+    icon: 'solar:layers-minimalistic-linear',
+  },
   {
     slug: 'isheen',
     name: 'Isheen',
@@ -562,7 +1081,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
 ]
 
-export const PLUGINS: PluginSpec[] = PLUGIN_DEFS.map(withScreenshot)
+export const PLUGINS: PluginSpec[] = PLUGIN_DEFS.map(withPresets).map(withScreenshot)
 
 export type PluginBundle = {
   slug: string
@@ -577,6 +1096,9 @@ export type PluginBundle = {
   extras?: string[]
   badge?: string
   icon: string
+  /** Product-mockup art, served from /public/bundles */
+  hero: string
+  iconImage: string
 }
 
 export const PLUGIN_BUNDLES: PluginBundle[] = [
@@ -592,40 +1114,49 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     groups: ['effect'],
     badge: 'Flagship',
     icon: 'solar:music-note-2-linear',
+    hero: '/bundles/tsukuyomi-complete-hero.webp?v=1',
+    iconImage: '/bundles/tsukuyomi-complete-icon.webp?v=1',
   },
   {
     slug: 'analog-collection',
     name: 'Isiata Analog Collection',
-    tagline: 'Three EQs with real weight.',
+    tagline: 'Three EQs and three channel strips with real weight.',
     description:
-      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ. Three different ways to shape a sound, each with its own character.',
-    launchPrice: '$79',
-    regularPrice: '$117',
-    groups: ['analog'],
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression. Three different ways to shape a sound, each with its own character.',
+    launchPrice: '$129',
+    regularPrice: '$149',
+    groups: ['analog', 'strip'],
     icon: 'solar:equalizer-minimalistic-linear',
+    hero: '/bundles/analog-collection-hero.webp?v=1',
+    iconImage: '/bundles/analog-collection-icon.webp?v=1',
   },
   {
     slug: 'compressor-collection',
     name: 'Isiata Compressor Collection',
-    tagline: 'Five compressors. Five personalities.',
+    tagline: 'Six compressors. Six personalities.',
     description:
-      'Colour, variable-mu thickness, tube smash, FET grab and optical glue. Everything from gentle levelling to full-on parallel destruction.',
-    launchPrice: '$79',
-    regularPrice: '$145',
+      'Colour, variable-mu thickness, tube smash, FET grab, optical glue and the Tsukuyomi Compressor with its look-ahead, side-chain and live gain-reduction view. Everything from gentle levelling to full-on parallel destruction.',
+    launchPrice: '$99',
+    regularPrice: '$149',
+    extras: ['tsukuyomi-compressor'],
     groups: ['compressor'],
     icon: 'solar:layers-minimalistic-linear',
+    hero: '/bundles/compressor-collection-hero.webp?v=1',
+    iconImage: '/bundles/compressor-collection-icon.webp?v=1',
   },
   {
     slug: 'everything',
     name: 'Isiata Everything Bundle',
     tagline: 'The entire Isiata plugin catalog.',
     description:
-      'Every plugin we make, including future qualifying updates to these products. The best way to own the lot.',
+      'Every plugin we make, including future qualifying updates to these products. Owners also get a direct say in what we build next: vote on requests and see what is planned each quarter. Your input shapes the roadmap, and final decisions stay with Isiata.',
     launchPrice: '$199',
-    regularPrice: '$399',
+    regularPrice: '$449',
     all: true,
     badge: 'Best overall value',
     icon: 'solar:crown-linear',
+    hero: '/bundles/everything-hero.webp?v=1',
+    iconImage: '/bundles/everything-icon.webp?v=1',
   },
 ]
 
@@ -634,7 +1165,9 @@ export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
 export const ISI_CREATE_SUBSCRIPTION = {
   name: 'Isi Access',
   price: '$9/month',
+  annualPrice: '$99/year',
   tagline: 'Every Isiata plugin for $9 a month.',
+  hero: '/bundles/isi-access-hero.webp?v=1',
   description:
     'One low monthly price opens up the whole Isiata plugin catalog: the Tsukuyomi Drum Engine, sound design, effects, saturation, analog EQ and compressors.',
 } as const

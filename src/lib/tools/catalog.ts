@@ -91,8 +91,8 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
   {
     slug: 'isiata-systems',
     href: '/systems',
-    title: 'ISIATA Systems',
-    description: 'Structure that holds the work. Intake, delivery, and retention in one place.',
+    title: 'Systems',
+    description: 'Sound, systems and revenue in one partnership.',
     image: '/brand/isiata-systems-icon.png',
     imageFit: 'contain',
     icon: 'solar:server-square-linear',
