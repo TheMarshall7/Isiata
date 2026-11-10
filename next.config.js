@@ -11,11 +11,11 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  // Artist Development replaces Systems. Keep old links and search results working.
+  // Old Systems sub-pages and the short-lived /artists URL all land on /systems.
   async redirects() {
     return [
-      { source: '/systems', destination: '/artists', permanent: true },
-      { source: '/systems/:path*', destination: '/artists', permanent: true },
+      { source: '/artists', destination: '/systems', permanent: true },
+      { source: '/systems/:path+', destination: '/systems', permanent: true },
     ]
   },
   // Unreleased campaign: unlisted and never indexed. Not mentioned in robots.txt on purpose.

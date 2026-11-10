@@ -86,7 +86,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/artists`,
+      url: `${baseUrl}/systems`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,

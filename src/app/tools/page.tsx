@@ -123,7 +123,7 @@ export default function ToolsPage() {
         <Container bordered className="pb-24">
           <Section reveal>
             <Link
-              href="/artists"
+              href="/systems"
               className="group block border border-[#d8aa67]/20 bg-transparent p-8 transition-all duration-500 hover:border-[#d8aa67]/65 md:p-10"
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -139,7 +139,7 @@ export default function ToolsPage() {
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-sm text-zinc-400 group-hover:text-white transition-colors shrink-0">
-                  Explore Artist Development
+                  Explore Systems
                   <iconify-icon
                     icon="solar:arrow-right-linear"
                     width="18"

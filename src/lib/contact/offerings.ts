@@ -84,13 +84,13 @@ export const CONTACT_DELIVERED: ContactOffering[] = [
   },
   {
     icon: 'solar:server-square-linear',
-    title: 'Artist Development',
+    title: 'Systems',
     lines: [
       'Production, mixing and mastering, and creative direction.',
       'The business infrastructure that turns the music into revenue.',
     ],
     tagline: 'Sound. Systems. Revenue.',
-    href: '/artists',
-    cta: 'View artist development',
+    href: '/systems',
+    cta: 'View systems',
   },
 ]
