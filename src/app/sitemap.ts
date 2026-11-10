@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next'
 import { getAllGarmentSlugs } from '@/lib/garments/catalog'
-import { getAllTierSlugs } from '@/lib/systems/funnel-content'
 import { siteUrl } from '@/lib/seo/site'
 import { PLUGINS, PLUGIN_BUNDLES } from '@/lib/tools/plugins'
 
@@ -87,17 +86,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/systems`,
+      url: `${baseUrl}/artists`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    ...getAllTierSlugs().map((slug) => ({
-      url: `${baseUrl}/systems/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-    })),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

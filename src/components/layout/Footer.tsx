@@ -218,7 +218,7 @@ export function Footer() {
             <div className="mt-8 flex w-full max-w-md items-center gap-4">
               <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d8aa67]/40" />
               <p className="shrink-0 text-[10px] uppercase tracking-[0.32em] text-[#9a8b74]">
-                {(['Music', 'Artifacts', 'Systems'] as const).map((word, i) => {
+                {(['Music', 'Artifacts', 'Artists'] as const).map((word, i) => {
                   const delay = `${1.05 + i * 0.48}s`
                   return (
                     <span
