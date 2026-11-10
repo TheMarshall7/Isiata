@@ -186,17 +186,10 @@ export default function ArtistsPage() {
         <Section reveal>
           <h2 className={h2}>{c.closing.title}</h2>
           <p className={`${bodyText} mb-8`}>{c.closing.body}</p>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div>
             <Link href={ARTISTS_BOOKING_HREF} className="btn-primary">
               {ARTISTS_CTA_LABEL}
               <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
-            </Link>
-            <Link
-              href="/systems"
-              className="inline-flex items-center justify-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-            >
-              Just need the infrastructure?
-              <iconify-icon icon="solar:alt-arrow-right-linear" width="16" height="16" />
             </Link>
           </div>
         </Section>

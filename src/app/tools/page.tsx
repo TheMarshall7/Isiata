@@ -123,23 +123,23 @@ export default function ToolsPage() {
         <Container bordered className="pb-24">
           <Section reveal>
             <Link
-              href="/systems"
+              href="/artists"
               className="group block border border-[#d8aa67]/20 bg-transparent p-8 transition-all duration-500 hover:border-[#d8aa67]/65 md:p-10"
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div className="max-w-2xl">
                   <p className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-3">
-                    Infrastructure
+                    Artist development
                   </p>
                   <h2 className="text-2xl md:text-3xl font-display uppercase tracking-normal text-gold mb-3">
-                    ISIATA Systems
+                    Sound. Systems. Revenue.
                   </h2>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    Structure that holds the work. Intake, delivery, and retention in one place.
+                    One partnership for the sound, the infrastructure behind it, and the way it makes money.
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-sm text-zinc-400 group-hover:text-white transition-colors shrink-0">
-                  Explore Systems
+                  Explore Artist Development
                   <iconify-icon
                     icon="solar:arrow-right-linear"
                     width="18"

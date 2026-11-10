@@ -11,6 +11,13 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  // Artist Development replaces Systems. Keep old links and search results working.
+  async redirects() {
+    return [
+      { source: '/systems', destination: '/artists', permanent: true },
+      { source: '/systems/:path*', destination: '/artists', permanent: true },
+    ]
+  },
   // Unreleased campaign: unlisted and never indexed. Not mentioned in robots.txt on purpose.
   async headers() {
     const noindex = [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive, nosnippet' }]

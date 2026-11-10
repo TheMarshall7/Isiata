@@ -29,7 +29,6 @@ export const NAV_LINKS_LEFT = [
 export const NAV_LINKS_RIGHT = [
   { href: '/objects', label: 'Garments' },
   { href: '/artists', label: 'Artists' },
-  { href: '/systems', label: 'Systems' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -42,7 +41,6 @@ export const FOOTER_LINKS = {
     { href: '/objects', label: 'Garments' },
     { href: '/tools', label: 'Tools' },
     { href: '/artists', label: 'Artist Development' },
-    { href: '/systems', label: 'Systems' },
   ],
   about: [
     { href: '/about', label: 'About Isiata' },
