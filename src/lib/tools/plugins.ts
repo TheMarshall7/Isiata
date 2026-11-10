@@ -100,7 +100,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
-  'ISI Bass': 1,
+  'ISI Bass': 2,
   'IPI': 2,
   'ISI 76': 3,
   'ISI Pandora': 2,
@@ -263,16 +263,16 @@ const PLUGIN_DEFS: PluginSpec[] = [
     ],
     features: [
       { label: 'Three engines', body: 'A sampled key bass, a dual-oscillator bass synth with sub and a 24 dB filter, and a dedicated 808 with pitch drop, punch, drive and tone.' },
-      { label: '808 mode', body: 'Decay, pitch drop and drop time, punch, drive and tone, with legato slides in mono and 808 presets one click away.' },
+      { label: '808 mode', body: 'Decay, pitch drop and drop time, punch, drive, tone and octave. Tap a key and the 808 rings out, every press hits again, and holding one key while you press the next slides. A gate switch lets key-up release it instead.' },
       { label: 'True mono legato', body: 'Hold one note, play the next, let go of the first: the new note keeps ringing. Release the top key and it falls back to the one still held.' },
-      { label: 'Instrument voices', body: 'Classic, Round, Sub and Reese oscillator voicings, plus a synth page for oscillators, filter, envelope and drive.' },
+      { label: 'Instrument voices', body: 'Classic, Round, Sub and Reese oscillator voicings, plus a synth page for oscillators (each with its own octave), filter, envelope and drive.' },
       { label: 'Tone and character', body: 'Bass, Mid and Treble with Soft, Normal and Hard key response, then Drive, Compress and Saturate in Clean, Warm, Punch or Grit.' },
       { label: 'Amp and cabinet', body: 'Classic, Bright and Fuzz amps into Vintage 1x15, Modern 4x10 or Tight 1x12 cabinets, with a wet/dry mix.' },
       { label: 'Real key noise', body: 'Mechanical key click, key-off tick, pedal thud and damper release noise, each with its own level and an on/off switch.' },
       { label: 'Performance', body: 'Glide, pitch bend range, velocity sensitivity with a curve you can drag, hold, and humanize for timing and velocity.' },
       { label: 'Modulation and sidechain', body: 'An LFO with a macro, and sidechain ducking from your kick.' },
       { label: 'Workflow', body: 'A full-width playable keyboard, A/B compare, undo and redo, and the Isiata LED meter.' },
-      { label: 'Presets', body: 'Over 20 factory sounds across key bass, R&B, gospel, funk, hip-hop, drone and 808.' },
+      { label: 'Presets', body: 'Over 30 factory sounds across key bass, R&B, gospel, funk, hip-hop, synth, drone and 808.' },
     ],
     whoFor: 'Producers making hip-hop, R&B and gospel who want key bass, synth bass and 808s from one instrument.',
     target: 'ISI_Bass',
