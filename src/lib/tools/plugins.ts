@@ -553,7 +553,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi Motion',
     group: 'creative',
     kind: 'Rhythmic chop, duck and warp',
-    price: '$49',
+    price: '$59',
     hero: 'Make every sound move in time.',
     short:
       'Chop a sound into a rhythm, duck it around the beat, and warp it with repeating shapes, all locked to your tempo. Draw the pattern, play it from your keyboard, and let the groove do the work.',
@@ -579,7 +579,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Iseve Strip',
     group: 'strip',
     kind: 'Channel strip',
-    price: '$59',
+    price: '$79',
     hero: 'A whole console channel in one plugin.',
     short:
       'The Iseve 1095 console EQ, a gate, and your choice of FET or optical compression, wired into one strip. Shape the tone, tighten the dynamics and add analog weight without stacking three plugins.',
@@ -603,7 +603,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'IPI Strip',
     group: 'strip',
     kind: 'Channel strip',
-    price: '$59',
+    price: '$79',
     hero: 'Punchy, forward and ready to mix.',
     short:
       'The IPI EQ with its preamp grit, a gate, and FET or optical compression, all in one strip. Surgical when you want it, aggressive when you need it.',
@@ -627,7 +627,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'IsiTech Strip',
     group: 'strip',
     kind: 'Channel strip',
-    price: '$59',
+    price: '$79',
     hero: 'Big, polished and complete.',
     short:
       'The IsiTech boost-and-cut program EQ, a gate, and FET or optical compression on one strip. Low-end force, open highs and polished dynamics from a single plugin.',
@@ -1020,7 +1020,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     tagline: 'Three EQs and three channel strips with real weight.',
     description:
       'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression. Three different ways to shape a sound, each with its own character.',
-    launchPrice: '$99',
+    launchPrice: '$129',
     regularPrice: '$149',
     groups: ['analog', 'strip'],
     icon: 'solar:equalizer-minimalistic-linear',
