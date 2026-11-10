@@ -17,6 +17,9 @@ export function Price({
   superscriptClassName = 'text-[0.58em] font-thin align-super -top-[0.35em] relative tabular-nums',
   strikethrough = false,
 }: PriceProps) {
+  if (value === 'FREE') {
+    return <span className={`tabular-nums ${className}`.trim()}>Free</span>
+  }
   const parsed = amount != null ? parsePriceAmount(amount) : parsePriceString(value ?? '')
   const wholeDisplay = formatWholeWithCommas(parsed.whole)
 
