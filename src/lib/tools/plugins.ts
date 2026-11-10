@@ -66,7 +66,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'Tsukuyomi 8 Bit': [380, 440],
   'Tsukuyomi Chorus': [760, 440],
   'Tsukuyomi Tri Comp': [860, 440],
-  'Tsukuyomi Compressor': [1400, 900],
+  'Tsukuyomi Compressor': [1050, 675],
   'Tsukuyomi Delay': [760, 520],
   'Tsukuyomi Drum Engine': [1628, 1036],
   'Tsukuyomi FX': [900, 640],
@@ -97,18 +97,87 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
 /** Bump a plugin's number when its screenshot file is replaced. Browsers keep these images for
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
-  'Tsukuyomi Synergy': 3,
-  'Tsukuyomi Tape Stop': 2,
-  'Tsukuyomi Transient': 2,
-  'Tsukuyomi Gain': 2,
-  'Tsukuyomi Delay': 2,
-  'Tsukuyomi Filter': 2,
-  'Tsukuyomi Motion': 2,
-  'IA2A': 2,
-  'ISI 76': 2,
-  'Iseve Strip': 2,
-  'IPI Strip': 2,
-  'IsiTech Strip': 2,
+  'IA2A': 3,
+  'IPI': 2,
+  'ISI 76': 3,
+  'ISI Pandora': 2,
+  'Icarus': 2,
+  'Iseve 1095': 2,
+  'Isheen': 2,
+  'IsiTech': 2,
+  'Isibox': 2,
+  'Tsukuyomi 8 Bit': 2,
+  'Tsukuyomi Chorus': 2,
+  'Tsukuyomi Tri Comp': 2,
+  'Tsukuyomi Compressor': 2,
+  'Tsukuyomi Delay': 3,
+  'Tsukuyomi FX': 2,
+  'Tsukuyomi Flanger': 2,
+  'Tsukuyomi Lo-Fi': 2,
+  'Tsukuyomi Phaser': 2,
+  'Tsukuyomi Reverb': 2,
+  'Tsukuyomi Soft Clip': 2,
+  'Tsukuyomi Stutter': 2,
+  'IPI Strip': 3,
+  'Iseve Strip': 3,
+  'IsiTech Strip': 3,
+  'Tsukuyomi Bit Crush': 2,
+  'Tsukuyomi Crunch': 2,
+  'Tsukuyomi De-Esser': 2,
+  'Tsukuyomi Filter': 3,
+  'Tsukuyomi Gain': 3,
+  'Tsukuyomi Gate': 2,
+  'Tsukuyomi Ring Mod': 2,
+  'Tsukuyomi Synergy': 4,
+  'Tsukuyomi Tape Stop': 3,
+  'Tsukuyomi Transient': 3,
+  'Tsukuyomi Tri EQ': 2,
+  'Tsukuyomi Motion': 3,
+}
+
+/** Plugins with the shared preset bar in the header (the Compressor has its own browser, with the same arrows). */
+const PRESET_BAR_PLUGINS = new Set<string>([
+  'IA2A',
+  'ISI 76',
+  'Icarus',
+  'Isheen',
+  'Isibox',
+  'IPI',
+  'Iseve 1095',
+  'IsiTech',
+  'Tsukuyomi 8 Bit',
+  'Tsukuyomi Chorus',
+  'Tsukuyomi Tri Comp',
+  'Tsukuyomi Delay',
+  'Tsukuyomi FX',
+  'Tsukuyomi Flanger',
+  'Tsukuyomi Lo-Fi',
+  'Tsukuyomi Phaser',
+  'Tsukuyomi Reverb',
+  'Tsukuyomi Soft Clip',
+  'Tsukuyomi Stutter',
+  'Tsukuyomi Bit Crush',
+  'Tsukuyomi Crunch',
+  'Tsukuyomi De-Esser',
+  'Tsukuyomi Filter',
+  'Tsukuyomi Gain',
+  'Tsukuyomi Gate',
+  'Tsukuyomi Ring Mod',
+  'Tsukuyomi Synergy',
+  'Tsukuyomi Tape Stop',
+  'Tsukuyomi Transient',
+  'Tsukuyomi Tri EQ',
+  'Tsukuyomi Motion',
+])
+
+const PRESET_FEATURE = {
+  label: 'Presets',
+  body: 'Factory sounds and your own saved presets in folders, with arrows to step to the next or previous one without opening the menu.',
+}
+
+function withPresets(plugin: PluginSpec): PluginSpec {
+  if (!PRESET_BAR_PLUGINS.has(plugin.name)) return plugin
+  return { ...plugin, features: [...plugin.features, PRESET_FEATURE] }
 }
 
 function withScreenshot(plugin: PluginSpec): PluginSpec {
@@ -868,7 +937,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
       { label: 'Side-chain EQ', body: 'Six bands, with an external input and stereo, mid or side modes.' },
       { label: 'Lookahead and oversampling', body: 'Up to 20 ms of lookahead and up to 32x oversampling.' },
       { label: 'Tube, Diode or Bright', body: 'Add drive before or after the compressor.' },
-      { label: 'Live display', body: 'Level history, compression curve and in / out meters, with A/B and 19 factory presets.' },
+      { label: 'Live display', body: 'Level history, compression curve and in / out meters, with A/B, 19 factory presets and arrows to step through them.' },
     ],
     target: 'TsukuyomiCompressor',
     code: 'TsCm',
@@ -978,7 +1047,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
   },
 ]
 
-export const PLUGINS: PluginSpec[] = PLUGIN_DEFS.map(withScreenshot)
+export const PLUGINS: PluginSpec[] = PLUGIN_DEFS.map(withPresets).map(withScreenshot)
 
 export type PluginBundle = {
   slug: string
