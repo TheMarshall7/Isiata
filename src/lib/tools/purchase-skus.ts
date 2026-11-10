@@ -7,6 +7,7 @@ import { LICENSED_PLUGINS } from '@/lib/tools/license-products'
  * lookup key (licensing/scripts/create-stripe-catalog.mjs).
  */
 export const SUBSCRIPTION_SKU = 'isi-access'
+export const SUBSCRIPTION_ANNUAL_SKU = 'isi-access-annual'
 
 /** The Drum Engine's licence id predates the catalogue, so its sku is "tsukuyomi". */
 export function skuForPluginSlug(slug: string): string {
@@ -19,9 +20,13 @@ export function describeSku(sku: string): { kind: SkuKind; name: string; href: s
   if (sku === SUBSCRIPTION_SKU) {
     return { kind: 'subscription', name: 'Isi Access', href: SUBSCRIPTION_HREF }
   }
+  if (sku === SUBSCRIPTION_ANNUAL_SKU) {
+    return { kind: 'subscription', name: 'Isi Access (yearly)', href: SUBSCRIPTION_HREF }
+  }
   const bundle = PLUGIN_BUNDLES.find((b) => b.slug === sku)
   if (bundle) return { kind: 'bundle', name: bundle.name, href: bundleHref(bundle) }
-  const plugin = PLUGINS.find((p) => skuForPluginSlug(p.slug) === sku)
+  // Free plugins have no serial, so they are not for sale.
+  const plugin = PLUGINS.find((p) => skuForPluginSlug(p.slug) === sku && p.price !== 'FREE')
   if (plugin) return { kind: 'plugin', name: plugin.name, href: `${PLUGINS_HREF}/${plugin.slug}` }
   return null
 }
