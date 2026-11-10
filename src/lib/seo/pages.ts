@@ -98,6 +98,20 @@ export const SEO_PAGES = {
     ],
   },
 
+  artists: {
+    title: 'Artist Development — Sound, Systems & Revenue',
+    description:
+      'Artist development partnerships: production, mixing and mastering, creative direction, and the business infrastructure that turns music into revenue.',
+    path: '/artists',
+    image: ISIATA_LOGO_URL,
+    keywords: [
+      'artist development',
+      'music producer for artists',
+      'mixing and mastering retainer',
+      'artist business infrastructure',
+      'ISIATA',
+    ],
+  },
   systems: {
     title: 'Systems — Backend Business Infrastructure for Artists',
     description:
