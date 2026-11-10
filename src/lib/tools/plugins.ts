@@ -856,7 +856,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'Tsukuyomi Compressor',
     group: 'effect',
     kind: 'Studio compressor',
-    price: '$29',
+    price: '',
     hero: 'One studio compressor. Fourteen ways to squeeze.',
     short:
       'A program-dependent compressor with fourteen styles, a six-band side-chain EQ, lookahead and oversampling, drawn around a live level history and compression curve.',
