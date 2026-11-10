@@ -1034,7 +1034,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     description:
       'Colour, variable-mu thickness, tube smash, FET grab, optical glue and the Tsukuyomi Compressor with its look-ahead, side-chain and live gain-reduction view. Everything from gentle levelling to full-on parallel destruction.',
     launchPrice: '$99',
-    regularPrice: '$179',
+    regularPrice: '$149',
     extras: ['tsukuyomi-compressor'],
     groups: ['compressor'],
     icon: 'solar:layers-minimalistic-linear',
