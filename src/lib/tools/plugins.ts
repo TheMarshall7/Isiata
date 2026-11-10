@@ -1046,7 +1046,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     name: 'Isiata Everything Bundle',
     tagline: 'The entire Isiata plugin catalog.',
     description:
-      'Every plugin we make, including future qualifying updates to these products. The best way to own the lot.',
+      'Every plugin we make, including future qualifying updates to these products. Owners also get a direct say in what we build next: vote on requests and see what is planned each quarter. Your input shapes the roadmap, and final decisions stay with Isiata.',
     launchPrice: '$199',
     regularPrice: '$449',
     all: true,
