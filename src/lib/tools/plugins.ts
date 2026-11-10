@@ -1199,9 +1199,9 @@ export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
 
 export const ISI_CREATE_SUBSCRIPTION = {
   name: 'Isi Access',
-  price: '$9/month',
+  price: '$11/month',
   annualPrice: '$99/year',
-  tagline: 'Every Isiata plugin for $9 a month.',
+  tagline: 'Every Isiata plugin for $11 a month.',
   hero: '/bundles/isi-access-hero.webp?v=1',
   description:
     'One low monthly price opens up the whole Isiata plugin catalog: the Tsukuyomi Drum Engine, sound design, effects, saturation, analog EQ and compressors.',
