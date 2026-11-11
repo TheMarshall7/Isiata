@@ -57,7 +57,7 @@ export type PluginSpec = {
 /** Product screenshots in /public/Plugin Screenshots, named after each plugin. */
 const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'IA2A': [780, 520],
-  'ISI Bass': [1180, 800],
+  'ISI Bass': [1180, 856],
   'Isynth 7': [1180, 786],
   'IPI': [880, 560],
   'ISI 76': [780, 520],
@@ -103,7 +103,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
-  'ISI Bass': 2,
+  'ISI Bass': 3,
   'Isynth 7': 1,
   'IPI': 2,
   'ISI 76': 3,
@@ -282,6 +282,13 @@ const PLUGIN_DEFS: PluginSpec[] = [
     target: 'ISI_Bass',
     code: 'Isib',
     dawCategory: 'Instrument',
+    gallery: [
+      { label: 'Main', src: encodeURI('/Plugin Screenshots/ISI Bass Main.png'), width: 1180, height: 856 },
+      { label: 'Synth', src: encodeURI('/Plugin Screenshots/ISI Bass Synth.png'), width: 1180, height: 856 },
+      { label: '808', src: encodeURI('/Plugin Screenshots/ISI Bass 808.png'), width: 1180, height: 856 },
+      { label: 'Performance', src: encodeURI('/Plugin Screenshots/ISI Bass Performance.png'), width: 1180, height: 856 },
+      { label: 'Mod', src: encodeURI('/Plugin Screenshots/ISI Bass Mod.png'), width: 1180, height: 856 },
+    ],
     icon: 'solar:music-notes-linear',
   },
 
