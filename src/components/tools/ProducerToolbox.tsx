@@ -229,6 +229,77 @@ function Converter({ bpm }: { bpm: number }) {
   )
 }
 
+// ─── Time → Note Value (LFO / envelope times) ───────────────────────
+
+const NOTE_VALUES: { label: string; beats: number }[] = [
+  { label: '1/128', beats: 1 / 32 }, { label: '1/64', beats: 1 / 16 }, { label: '1/32 T', beats: 1 / 12 },
+  { label: '1/32', beats: 1 / 8 }, { label: '1/16 T', beats: 1 / 6 }, { label: '1/32 D', beats: 3 / 16 },
+  { label: '1/16', beats: 1 / 4 }, { label: '1/8 T', beats: 1 / 3 }, { label: '1/16 D', beats: 3 / 8 },
+  { label: '1/8', beats: 1 / 2 }, { label: '1/4 T', beats: 2 / 3 }, { label: '1/8 D', beats: 3 / 4 },
+  { label: '1/4', beats: 1 }, { label: '1/2 T', beats: 4 / 3 }, { label: '1/4 D', beats: 3 / 2 },
+  { label: '1/2', beats: 2 }, { label: '1/2 D', beats: 3 }, { label: '1 bar', beats: 4 },
+  { label: '2 bars', beats: 8 }, { label: '4 bars', beats: 16 },
+]
+
+function TimeToNote({ bpm }: { bpm: number }) {
+  const [value, setValue] = useState('')
+  const ms = parseFloat(value) || 0
+  const beatMs = 60000 / bpm
+
+  const rows = ms > 0
+    ? NOTE_VALUES.map((n) => ({ ...n, noteMs: n.beats * beatMs }))
+        .map((n) => ({ ...n, off: ((ms - n.noteMs) / n.noteMs) * 100 }))
+        .sort((a, b) => Math.abs(Math.log(ms / a.noteMs)) - Math.abs(Math.log(ms / b.noteMs)))
+        .slice(0, 4)
+    : []
+
+  return (
+    <div className="border border-white/10 bg-black/40 p-6">
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-600 mb-1">Milliseconds to Note Value</h3>
+      <p className="text-xs text-zinc-600 mb-4">
+        For LFO rates, attack / decay / release times and anything a plugin shows in ms. Type the time and see which
+        beat division it lands closest to at {bpm} BPM, so it sits on the grid.
+      </p>
+      <div className="flex gap-2 mb-6 items-center">
+        <input
+          type="number"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Time in ms"
+          className="bg-zinc-900 border border-white/10 text-white text-sm rounded px-3 py-2 flex-1 focus:outline-none focus:border-white/30"
+        />
+        <span className="text-sm text-zinc-500">ms</span>
+      </div>
+      {rows.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="text-left py-2 pr-4 text-xs uppercase tracking-wider text-zinc-500 font-medium">Closest</th>
+                <th className="text-right py-2 px-3 text-xs uppercase tracking-wider text-zinc-500 font-medium">Exact ms</th>
+                <th className="text-right py-2 px-3 text-xs uppercase tracking-wider text-zinc-500 font-medium">Beats</th>
+                <th className="text-right py-2 pl-3 text-xs uppercase tracking-wider text-zinc-500 font-medium">Yours is</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={r.label} className="border-b border-white/5">
+                  <td className={`py-2.5 pr-4 font-medium ${i === 0 ? 'text-white' : 'text-zinc-300'}`}>{r.label}</td>
+                  <td className="text-right py-2.5 px-3"><CopyValue value={r.noteMs.toFixed(1)} /></td>
+                  <td className="text-right py-2.5 px-3 text-zinc-400 tabular-nums">{r.beats.toFixed(3)}</td>
+                  <td className="text-right py-2.5 pl-3 text-zinc-500 tabular-nums">
+                    {Math.abs(r.off) < 0.05 ? 'on the beat' : `${r.off > 0 ? '+' : ''}${r.off.toFixed(1)}%`}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── Reverb Calculator ───────────────────────────────────────────────
 
 function ReverbCalculator({ bpm }: { bpm: number }) {
@@ -375,6 +446,8 @@ export function ProducerToolbox({ isOpen, onClose }: ProducerToolboxProps) {
 
             {/* Converter */}
             <Converter bpm={bpm} />
+
+            <TimeToNote bpm={bpm} />
 
             {/* Bottom Row: Reverb + Delay */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
