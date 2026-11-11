@@ -49,6 +49,8 @@ export type PluginSpec = {
   image?: { src: string; width: number; height: number }
   /** Optional link out for products that already have their own page */
   href?: string
+  /** Extra screens shown in a clickable gallery under the features */
+  gallery?: { src: string; label: string; width: number; height: number }[]
   icon: string
 }
 
@@ -56,6 +58,7 @@ export type PluginSpec = {
 const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'IA2A': [780, 520],
   'ISI Bass': [1180, 800],
+  'Isynth 7': [1180, 786],
   'IPI': [880, 560],
   'ISI 76': [780, 520],
   'ISI Pandora': [1060, 560],
@@ -101,6 +104,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
 const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
   'ISI Bass': 2,
+  'Isynth 7': 1,
   'IPI': 2,
   'ISI 76': 3,
   'ISI Pandora': 2,
@@ -254,7 +258,7 @@ const PLUGIN_DEFS: PluginSpec[] = [
     name: 'ISI Bass',
     group: 'instrument',
     kind: 'Electric key bass and 808',
-    price: '$49',
+    price: '$69',
     hero: 'Vintage soul. Modern control. A deeper low end.',
     short:
       'A playable key bass, a bass synth and a hip-hop 808 in one instrument, with tone, drive, amp and cabinet, and the real key noise of a vintage keyboard bass.',
@@ -279,6 +283,40 @@ const PLUGIN_DEFS: PluginSpec[] = [
     code: 'Isib',
     dawCategory: 'Instrument',
     icon: 'solar:music-notes-linear',
+  },
+
+  {
+    slug: 'isynth-7',
+    name: 'Isynth 7',
+    group: 'instrument',
+    kind: '6-operator FM synthesizer',
+    price: '$79',
+    hero: 'Deep FM sound design. Six macros to play it.',
+    short:
+      'A six-operator FM synthesizer with a full algorithm editor, three envelopes, a filter and effects, and a factory library you can shape in seconds with six macro knobs.',
+    about: [
+      'Pick a preset, turn Brightness, Body, Attack, Release, Motion and Space to make it yours, or open FM Edit and build the sound operator by operator.',
+    ],
+    features: [
+      { label: 'Six operators', body: 'Choose from classic FM algorithms, with the operator layout drawn on screen and a level for every operator.' },
+      { label: 'Six macros', body: 'Brightness, Body, Attack, Release, Motion and Space reshape the whole sound without diving into the FM matrix.' },
+      { label: 'Draggable envelopes', body: 'Amp, mod and pitch envelopes you shape by dragging points on the curve.' },
+      { label: 'Filter', body: 'A multimode filter with LP24 and more, with cutoff and resonance.' },
+      { label: 'Voicing', body: 'Polyphony, unison, detune and stereo spread for anything from tight electric pianos to wide pads.' },
+      { label: 'Organized preset browser', body: 'Factory, User and Favorites with searchable folders for keys, electric pianos, basses, leads, pads, plucks, strings and brass.' },
+      { label: 'Four pages', body: 'Main, FM Edit, Mod and FX pages, plus a playable keyboard with pitch and mod wheels.' },
+    ],
+    whoFor: 'Producers who want electric pianos, bells, basses and glassy leads from real FM, without the menu diving.',
+    target: 'Isynth7',
+    code: 'Isy7',
+    dawCategory: 'Instrument',
+    gallery: [
+      { label: 'Main', src: encodeURI('/Plugin Screenshots/Isynth 7 Main.png'), width: 1536, height: 1024 },
+      { label: 'FM Edit', src: encodeURI('/Plugin Screenshots/Isynth 7 FM Edit.png'), width: 1536, height: 1024 },
+      { label: 'Mod', src: encodeURI('/Plugin Screenshots/Isynth 7 Mod.png'), width: 1536, height: 1024 },
+      { label: 'FX', src: encodeURI('/Plugin Screenshots/Isynth 7 FX.png'), width: 1536, height: 1024 },
+    ],
+    icon: 'solar:soundwave-linear',
   },
 
   /* ───────────── Multi-effects ───────────── */
