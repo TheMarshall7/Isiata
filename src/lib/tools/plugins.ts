@@ -49,12 +49,16 @@ export type PluginSpec = {
   image?: { src: string; width: number; height: number }
   /** Optional link out for products that already have their own page */
   href?: string
+  /** Extra screens shown in a clickable gallery under the features */
+  gallery?: { src: string; label: string; width: number; height: number }[]
   icon: string
 }
 
 /** Product screenshots in /public/Plugin Screenshots, named after each plugin. */
 const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'IA2A': [780, 520],
+  'ISI Bass': [1180, 856],
+  'Isynth 7': [1180, 786],
   'IPI': [880, 560],
   'ISI 76': [780, 520],
   'ISI Pandora': [1060, 560],
@@ -99,6 +103,8 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
+  'ISI Bass': 3,
+  'Isynth 7': 1,
   'IPI': 2,
   'ISI 76': 3,
   'ISI Pandora': 2,
@@ -244,6 +250,79 @@ const PLUGIN_DEFS: PluginSpec[] = [
     target: 'TsukuyomiSound',
     code: 'TsSd',
     dawCategory: 'Instrument',
+    icon: 'solar:soundwave-linear',
+  },
+
+  {
+    slug: 'isi-bass',
+    name: 'ISI Bass',
+    group: 'instrument',
+    kind: 'Electric key bass and 808',
+    price: '$69',
+    hero: 'Vintage soul. Modern control. A deeper low end.',
+    short:
+      'A playable key bass, a bass synth and a hip-hop 808 in one instrument, with tone, drive, amp and cabinet, and the real key noise of a vintage keyboard bass.',
+    about: [
+      'Play it like a real key bass: mono by default with true legato, so a line keeps singing when you roll from one key to the next, and glide when you want it. Switch the engine to 808 for long, sliding sub hits, or to the synth for round R&B and gospel lows, plucks, Reese and drones.',
+    ],
+    features: [
+      { label: 'Three engines', body: 'A sampled key bass, a dual-oscillator bass synth with sub and a 24 dB filter, and a dedicated 808 with pitch drop, punch, drive and tone.' },
+      { label: '808 mode', body: 'Decay, pitch drop and drop time, punch, drive, tone and octave. Tap a key and the 808 rings out, every press hits again, and holding one key while you press the next slides. A gate switch lets key-up release it instead.' },
+      { label: 'True mono legato', body: 'Hold one note, play the next, let go of the first: the new note keeps ringing. Release the top key and it falls back to the one still held.' },
+      { label: 'Instrument voices', body: 'Classic, Round, Sub and Reese oscillator voicings, plus a synth page for oscillators (each with its own octave), filter, envelope and drive.' },
+      { label: 'Tone and character', body: 'Bass, Mid and Treble with Soft, Normal and Hard key response, then Drive, Compress and Saturate in Clean, Warm, Punch or Grit.' },
+      { label: 'Amp and cabinet', body: 'Classic, Bright and Fuzz amps into Vintage 1x15, Modern 4x10 or Tight 1x12 cabinets, with a wet/dry mix.' },
+      { label: 'Real key noise', body: 'Mechanical key click, key-off tick, pedal thud and damper release noise, each with its own level and an on/off switch.' },
+      { label: 'Performance', body: 'Glide, pitch bend range, velocity sensitivity with a curve you can drag, hold, and humanize for timing and velocity.' },
+      { label: 'Modulation and sidechain', body: 'An LFO with a macro, and sidechain ducking from your kick.' },
+      { label: 'Workflow', body: 'A full-width playable keyboard, A/B compare, undo and redo, and the Isiata LED meter.' },
+      { label: 'Presets', body: 'Over 30 factory sounds across key bass, R&B, gospel, funk, hip-hop, synth, drone and 808.' },
+    ],
+    whoFor: 'Producers making hip-hop, R&B and gospel who want key bass, synth bass and 808s from one instrument.',
+    target: 'ISI_Bass',
+    code: 'Isib',
+    dawCategory: 'Instrument',
+    gallery: [
+      { label: 'Main', src: encodeURI('/Plugin Screenshots/ISI Bass Main.png'), width: 1180, height: 856 },
+      { label: 'Synth', src: encodeURI('/Plugin Screenshots/ISI Bass Synth.png'), width: 1180, height: 856 },
+      { label: '808', src: encodeURI('/Plugin Screenshots/ISI Bass 808.png'), width: 1180, height: 856 },
+      { label: 'Performance', src: encodeURI('/Plugin Screenshots/ISI Bass Performance.png'), width: 1180, height: 856 },
+      { label: 'Mod', src: encodeURI('/Plugin Screenshots/ISI Bass Mod.png'), width: 1180, height: 856 },
+    ],
+    icon: 'solar:music-notes-linear',
+  },
+
+  {
+    slug: 'isynth-7',
+    name: 'Isynth 7',
+    group: 'instrument',
+    kind: '6-operator FM synthesizer',
+    price: '$79',
+    hero: 'Deep FM sound design. Six macros to play it.',
+    short:
+      'A six-operator FM synthesizer with a full algorithm editor, three envelopes, a filter and effects, and a factory library you can shape in seconds with six macro knobs.',
+    about: [
+      'Pick a preset, turn Brightness, Body, Attack, Release, Motion and Space to make it yours, or open FM Edit and build the sound operator by operator.',
+    ],
+    features: [
+      { label: 'Six operators', body: 'Choose from classic FM algorithms, with the operator layout drawn on screen and a level for every operator.' },
+      { label: 'Six macros', body: 'Brightness, Body, Attack, Release, Motion and Space reshape the whole sound without diving into the FM matrix.' },
+      { label: 'Draggable envelopes', body: 'Amp, mod and pitch envelopes you shape by dragging points on the curve.' },
+      { label: 'Filter', body: 'A multimode filter with LP24 and more, with cutoff and resonance.' },
+      { label: 'Voicing', body: 'Polyphony, unison, detune and stereo spread for anything from tight electric pianos to wide pads.' },
+      { label: 'Organized preset browser', body: 'Factory, User and Favorites with searchable folders for keys, electric pianos, basses, leads, pads, plucks, strings and brass.' },
+      { label: 'Four pages', body: 'Main, FM Edit, Mod and FX pages, plus a playable keyboard with pitch and mod wheels.' },
+    ],
+    whoFor: 'Producers who want electric pianos, bells, basses and glassy leads from real FM, without the menu diving.',
+    target: 'Isynth7',
+    code: 'Isy7',
+    dawCategory: 'Instrument',
+    gallery: [
+      { label: 'Main', src: encodeURI('/Plugin Screenshots/Isynth 7 Main.png'), width: 1536, height: 1024 },
+      { label: 'FM Edit', src: encodeURI('/Plugin Screenshots/Isynth 7 FM Edit.png'), width: 1536, height: 1024 },
+      { label: 'Mod', src: encodeURI('/Plugin Screenshots/Isynth 7 Mod.png'), width: 1536, height: 1024 },
+      { label: 'FX', src: encodeURI('/Plugin Screenshots/Isynth 7 FX.png'), width: 1536, height: 1024 },
+    ],
     icon: 'solar:soundwave-linear',
   },
 
@@ -1122,10 +1201,11 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     name: 'Isiata Analog Collection',
     tagline: 'Three EQs and three channel strips with real weight.',
     description:
-      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression. Three different ways to shape a sound, each with its own character.',
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression, plus the Tsukuyomi Tape 77 tape machine. Four different ways to shape a sound, each with its own character.',
     launchPrice: '$129',
     regularPrice: '$149',
     groups: ['analog', 'strip'],
+    extras: ['tsukuyomi-tape-77'],
     icon: 'solar:equalizer-minimalistic-linear',
     hero: '/bundles/analog-collection-hero.webp?v=1',
     iconImage: '/bundles/analog-collection-icon.webp?v=1',
@@ -1164,9 +1244,9 @@ export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
 
 export const ISI_CREATE_SUBSCRIPTION = {
   name: 'Isi Access',
-  price: '$9/month',
+  price: '$11/month',
   annualPrice: '$99/year',
-  tagline: 'Every Isiata plugin for $9 a month.',
+  tagline: 'Every Isiata plugin for $11 a month.',
   hero: '/bundles/isi-access-hero.webp?v=1',
   description:
     'One low monthly price opens up the whole Isiata plugin catalog: the Tsukuyomi Drum Engine, sound design, effects, saturation, analog EQ and compressors.',

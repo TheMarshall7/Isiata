@@ -9,10 +9,8 @@ import { LICENSED_PLUGINS } from '@/lib/tools/license-products'
 export const SUBSCRIPTION_SKU = 'isi-access'
 export const SUBSCRIPTION_ANNUAL_SKU = 'isi-access-annual'
 
-/** The Drum Engine's licence id predates the catalogue, so its sku is "tsukuyomi". */
-export function skuForPluginSlug(slug: string): string {
-  return slug === 'tsukuyomi-drum-engine' ? 'tsukuyomi' : slug
-}
+export { skuForPluginSlug } from '@/lib/tools/license-products'
+import { skuForPluginSlug } from '@/lib/tools/license-products'
 
 export type SkuKind = 'plugin' | 'bundle' | 'subscription'
 

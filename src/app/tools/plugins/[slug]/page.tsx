@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
 import { PluginBuyButton } from '@/components/tools/PluginBuyButton'
 import { isPurchaseEnabled, skuForPluginSlug } from '@/lib/tools/purchase-skus'
+import { PluginGallery } from '@/components/tools/PluginGallery'
 import { PluginCard } from '@/components/tools/PluginCards'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { productSchema } from '@/lib/seo/json-ld'
@@ -133,6 +134,8 @@ export default function PluginPage({ params }: { params: Params }) {
           </dl>
         </section>
       ) : null}
+
+      {plugin.gallery?.length ? <PluginGallery name={plugin.name} shots={plugin.gallery} /> : null}
 
       {plugin.notes?.length || plugin.whoFor ? (
         <section className="mb-14 grid gap-10 md:grid-cols-2">
