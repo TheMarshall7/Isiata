@@ -73,8 +73,8 @@ export default function SubscriptionPage() {
       </div>
 
       <p className="mb-14 max-w-2xl text-sm leading-relaxed text-zinc-400">
-        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualPrice}</span>, two months free
-        compared with monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
+        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualPrice}</span>, costs less than
+        paying monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
         your subscription does, and subscribers receive every future plugin that qualifies while subscribed.
       </p>
 

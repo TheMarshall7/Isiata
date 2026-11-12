@@ -25,6 +25,17 @@ export default function PluginsPage() {
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
+        <div className="max-w-2xl">
+          <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">About Isiata</h2>
+          <p className="text-base leading-relaxed text-zinc-400">
+            Isiata makes plugins for music production, created by Brian Marshall. Owners get a say in what we build
+            next: the Everything Bundle includes votes on requests and a view of what is planned each quarter, with
+            final decisions staying with Isiata.
+          </p>
+        </div>
+      </Container>
+
+      <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">
         <PluginShop />
       </Container>
 

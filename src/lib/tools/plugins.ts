@@ -1187,7 +1187,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     tagline: 'A complete drum production environment.',
     description:
       'The drum instrument, the sound designer, the full effects rack, the parallel compressor rack and every single Tsukuyomi effect. Everything you need to write, shape, colour and finish drums, in one purchase.',
-    launchPrice: '$149',
+    launchPrice: '$179',
     regularPrice: '$249',
     extras: ['tsukuyomi-drum-engine', 'tsukuyomi-sound', 'tsukuyomi-fx', 'tsukuyomi-comp'],
     groups: ['effect'],
@@ -1217,7 +1217,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     description:
       'Colour, variable-mu thickness, tube smash, FET grab, optical glue and the Tsukuyomi Compressor with its look-ahead, side-chain and live gain-reduction view. Everything from gentle levelling to full-on parallel destruction.',
     launchPrice: '$99',
-    regularPrice: '$149',
+    regularPrice: '$119',
     extras: ['tsukuyomi-compressor'],
     groups: ['compressor'],
     icon: 'solar:layers-minimalistic-linear',
@@ -1230,8 +1230,8 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     tagline: 'The entire Isiata plugin catalog.',
     description:
       'Every plugin we make, including future qualifying updates to these products. Owners also get a direct say in what we build next: vote on requests and see what is planned each quarter. Your input shapes the roadmap, and final decisions stay with Isiata.',
-    launchPrice: '$199',
-    regularPrice: '$449',
+    launchPrice: '$349',
+    regularPrice: '$559',
     all: true,
     badge: 'Best overall value',
     icon: 'solar:crown-linear',
@@ -1244,8 +1244,8 @@ export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
 
 export const ISI_CREATE_SUBSCRIPTION = {
   name: 'Isi Access',
-  price: '$11/month',
-  annualPrice: '$99/year',
+  price: '$14/month',
+  annualPrice: '$129/year',
   tagline: 'Every Isiata plugin for $11 a month.',
   hero: '/bundles/isi-access-hero.webp?v=1',
   description:
