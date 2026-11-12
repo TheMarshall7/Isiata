@@ -7,6 +7,8 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { PluginNotifyButton } from '@/components/tools/PluginNotifyButton'
 import { PluginGallery } from '@/components/tools/PluginGallery'
 import { PluginCard } from '@/components/tools/PluginCards'
+import { InstrumentLanding } from '@/components/tools/InstrumentLanding'
+import { INSTRUMENT_LANDINGS } from '@/lib/tools/instrument-landings'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { productSchema } from '@/lib/seo/json-ld'
 import { ISIATA_LOGO_URL } from '@/lib/constants'
@@ -51,6 +53,26 @@ export default function PluginPage({ params }: { params: Params }) {
     .slice(0, 3)
   const bundles = PLUGIN_BUNDLES.filter((b) => getBundlePlugins(b).some((p) => p.slug === plugin.slug))
   const formats = PLUGIN_SHARED_FACTS[0].body
+  const landing = INSTRUMENT_LANDINGS[plugin.slug]
+
+  if (landing) {
+    return (
+      <Container bordered className="w-full min-w-0 pb-20 pt-28 sm:pt-32">
+        <JsonLd
+          data={productSchema({
+            name: plugin.name,
+            description: plugin.short,
+            image: plugin.image?.src ?? ISIATA_LOGO_URL,
+            url: `${PLUGINS_HREF}/${plugin.slug}`,
+            price: plugin.price === 'FREE' ? '0' : plugin.price,
+            category: 'Music Production > Plugins',
+            availability: 'PreOrder',
+          })}
+        />
+        <InstrumentLanding plugin={plugin} content={landing} />
+      </Container>
+    )
+  }
 
   return (
     <Container bordered className="pb-24 pt-28 sm:pt-32">
