@@ -34,7 +34,7 @@ export function FunnelHeader() {
           href={SYSTEMS_BOOKING_HREF}
           className="btn-primary min-h-10 px-5 text-[10px]"
         >
-          Book a call
+          Send a message
         </Link>
       </div>
     </nav>

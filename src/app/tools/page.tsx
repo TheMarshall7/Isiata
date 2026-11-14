@@ -69,7 +69,7 @@ export default function ToolsPage() {
               </h1>
 
               <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
-                <p>Artifacts for creation and perception.</p>
+                <p>Artifacts to guide and assist.</p>
                 <p>
                   Built when the work needed something that did not exist.
                   <br />

@@ -41,9 +41,7 @@ export default function ObjectsPage() {
 
               <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
-                  Artifacts of the process.
-                  <br />
-                  The character, made physical.
+                  Wear a piece of the story.
                 </p>
 
                 <p>
@@ -149,7 +147,6 @@ export default function ObjectsPage() {
 
               <p data-reveal style={{ '--d': 3 } as CSSProperties} className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
                 Join the list to hear about the next garment drop and future ISIATA releases first.
-                Focused runs. No noise.
               </p>
 
               <div data-reveal style={{ '--d': 4 } as CSSProperties} className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">

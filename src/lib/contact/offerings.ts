@@ -1,7 +1,9 @@
 export const CONTACT_HREF = '/contact'
-export const CONTACT_BOOKING_HREF = '/contact/booking'
 export const CONTACT_INQUIRY_EMAIL = 'brianmarshallca@gmail.com'
 export const CONTACT_INQUIRY_HREF = `mailto:${CONTACT_INQUIRY_EMAIL}`
+// Booking is paused: the /contact/booking page still exists but nothing links to it.
+// Every former "book a call" link now opens an email instead.
+export const CONTACT_BOOKING_HREF = CONTACT_INQUIRY_HREF
 
 export type ContactOffering = {
   icon: string
@@ -22,7 +24,7 @@ export const CONTACT_ALONGSIDE: ContactOffering[] = [
     ],
     tagline: 'For work that needs clarity and a point of view.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
   {
     icon: 'solar:music-note-slider-linear',
@@ -33,7 +35,7 @@ export const CONTACT_ALONGSIDE: ContactOffering[] = [
     ],
     tagline: 'Direct. Intentional. Limited.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
   {
     icon: 'solar:microphone-3-linear',
@@ -44,7 +46,7 @@ export const CONTACT_ALONGSIDE: ContactOffering[] = [
     ],
     tagline: 'For artists building a career with intention.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
   {
     icon: 'solar:slider-vertical-linear',
@@ -55,7 +57,7 @@ export const CONTACT_ALONGSIDE: ContactOffering[] = [
     ],
     tagline: 'For producers ready to operate at the next level.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
 ]
 
@@ -69,7 +71,7 @@ export const CONTACT_DELIVERED: ContactOffering[] = [
     ],
     tagline: 'Built to translate everywhere.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
   {
     icon: 'solar:sticker-smile-circle-2-linear',
@@ -80,7 +82,7 @@ export const CONTACT_DELIVERED: ContactOffering[] = [
     ],
     tagline: 'Unrepeatable by design.',
     href: CONTACT_BOOKING_HREF,
-    cta: 'Book a call',
+    cta: 'Send a message',
   },
   {
     icon: 'solar:server-square-linear',

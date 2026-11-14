@@ -5,7 +5,6 @@ import { Section } from '@/components/ui/Section'
 import { Price } from '@/components/ui/Price'
 import {
   DRUM_BUNDLE,
-  DRUM_BUNDLE_CHECKOUT_HREF,
   DRUM_BUNDLE_HREF,
   DRUM_BUNDLE_PRICE,
 } from '@/lib/tools/drum-bundle'
@@ -34,7 +33,7 @@ export function DrumBundleFeaturedSection() {
             <div data-reveal style={{ '--d': 0 } as CSSProperties} className="mb-5 flex items-center gap-4">
               <span className="reveal-rail reveal-rail-left h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
               <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
-                Tools
+                Sound Kit
               </p>
               <span className="reveal-rail reveal-rail-right h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
             </div>
@@ -48,7 +47,7 @@ export function DrumBundleFeaturedSection() {
             </p>
 
             <p data-reveal style={{ '--d': 3 } as CSSProperties} className="mt-6 max-w-md text-sm leading-relaxed text-[#d5c8b8]/78 sm:text-base">
-              A cinematic drum collection built for producers who want impact, texture, and atmosphere.
+              A hard-hitting, forward-sounding drum kit built for producers in the hip hop and R&amp;B space who want drum sounds that are dark and slap for the genre. High quality.
             </p>
 
             <div data-reveal style={{ '--d': 4 } as CSSProperties} className="mt-8 grid grid-cols-3 border-y border-[#d8aa67]/25 py-5">
@@ -59,8 +58,8 @@ export function DrumBundleFeaturedSection() {
                   height="24"
                   className="text-[#dfc094]"
                 />
-                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">100 Sounds</p>
-                <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Curated Kit</p>
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">1,000+ Sounds</p>
+                <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">Drum Sounds</p>
               </div>
               <div className="border-x border-[#d8aa67]/25 px-4">
                 <iconify-icon
@@ -69,7 +68,7 @@ export function DrumBundleFeaturedSection() {
                   height="24"
                   className="text-[#dfc094]"
                 />
-                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">32-Bit WAV</p>
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#eee3d5]">24-Bit WAV</p>
                 <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9f907d]">High Quality</p>
               </div>
               <div className="pl-4">
@@ -109,14 +108,6 @@ export function DrumBundleFeaturedSection() {
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
               </Link>
-
-              <Link
-                href={DRUM_BUNDLE_CHECKOUT_HREF}
-                className="lux-link group inline-flex w-fit items-center gap-5 text-[10px] uppercase tracking-[0.22em] text-[#baa990] transition-colors hover:text-[#f1dfc5]"
-              >
-                <span>Get the bundle</span>
-                <span className="h-px w-20 bg-gradient-to-r from-[#b9925e] to-transparent transition-all group-hover:w-28" />
-              </Link>
             </div>
           </div>
         </div>
@@ -125,10 +116,6 @@ export function DrumBundleFeaturedSection() {
           <div>
             <p>Archive</p>
             <p className="mt-1 text-[#b89a72]">001</p>
-          </div>
-          <div className="text-right">
-            <p>Isiata</p>
-            <p className="mt-1 text-[#b89a72]">Systems</p>
           </div>
         </div>
       </Container>

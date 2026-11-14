@@ -18,7 +18,7 @@ const SINGLES = [
     type: 'Single',
     date: 'June 10, 2023',
     runtime: '2 minutes',
-    notes: 'Direct, reflective. Personal tone. Strong visual branding with portrait cover.',
+    notes: "High-energy, hard-hitting single that shows you we don't play with the words that we say.",
     cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e0d017c38062cc20d1.jpeg',
     spotify: 'https://open.spotify.com/album/4pZ0NJano8ya4cnM73BeBQ?si=Dr7lccCVTDenlG58qLS_jw',
     appleMusic: 'https://music.apple.com/ca/album/say-single/1690948732',
@@ -28,7 +28,7 @@ const SINGLES = [
     type: 'Single',
     date: 'March 31, 2023',
     runtime: '3 minutes',
-    notes: 'Minimalist, emotionally resolved. Visual language ties into intimacy and clarity.',
+    notes: "A close love track. Reassuring you that there's no need to worry.",
     cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e00a7fd19237a286bd.jpeg',
     spotify: 'https://open.spotify.com/track/60YUULIajmH9etpI8lqt8G?si=DxzZFRL8RIGAei2Lt4fk2A',
     appleMusic: 'https://music.apple.com/ca/album/no-need/1678432815?i=1678432906',
@@ -73,7 +73,7 @@ function DiscographyContent() {
             <div className="mb-5 flex items-center gap-4">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
               <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
-                Sound
+                Music
               </p>
               <span className="h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
             </div>
@@ -266,20 +266,12 @@ export default function SoundPage() {
           <div className="hero-pair">
             <div ref={copyRef} className="page-hero-frame will-change-transform">
               <h1 data-reveal style={{ '--d': 0 } as CSSProperties} className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold">
-                <TypeWriter text="The Sound" speed={100} />
+                <TypeWriter text="The Music" speed={100} />
               </h1>
 
               <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg md:text-xl text-gold leading-relaxed">
                 <p>
-                  Music that changes the state.
-                  <br />
-                  Not background. A transmission.
-                </p>
-
-                <p className="text-[#d5c8b8]">
-                  Unlocking frequency, the key to the world.
-                  <br />
-                  Listen closely.
+                  Innovation, authenticity, all into a cohesive sonic palette.
                 </p>
               </div>
             </div>

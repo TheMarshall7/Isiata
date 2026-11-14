@@ -22,7 +22,7 @@ export const DRUM_BUNDLE = {
   image: '/tools/tsukuyomi-drum-bundle/tsukuyomi-product-cropped.png',
   description:
     'A premium drum sample pack focused on high-quality, impactful drum sounds — designed for use in major DAWs (FL Studio, Ableton, Logic Pro, etc.).',
-  format: 'High-quality 32-bit WAV files',
+  format: 'High-quality 24-bit WAV files',
   sounds: [
     { name: 'Kicks', count: 20 },
     { name: '808s', count: 16 },
@@ -238,7 +238,7 @@ export const SAMPLE_PACKS = [
     slug: DRUM_BUNDLE_SLUG,
     href: DRUM_BUNDLE_HREF,
     title: DRUM_BUNDLE.title,
-    description: 'An artifact of rhythm. Drum sounds shaped for transmission, not filler.',
+    description: 'A hard-hitting, forward-sounding drum kit for hip hop and R&B producers. Dark, high-quality drum sounds that slap.',
     image: DRUM_BUNDLE.image,
     imageFit: 'contain' as const,
     price: DRUM_BUNDLE_PRICE.display,

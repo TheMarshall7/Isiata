@@ -29,7 +29,7 @@ export function TheyMightBeMadSection() {
               <div data-reveal style={{ '--d': 0 } as CSSProperties} className="mb-5 flex items-center gap-4">
                 <span className="reveal-rail reveal-rail-left h-px w-8 bg-gradient-to-r from-transparent to-[#d6ad72]" />
                 <p className="font-spaced text-[10px] uppercase tracking-[0.34em] text-[#d8c3a4]">
-                  Sound
+                  Music
                 </p>
                 <span className="reveal-rail reveal-rail-right h-px w-12 bg-gradient-to-r from-[#d6ad72] to-transparent" />
               </div>

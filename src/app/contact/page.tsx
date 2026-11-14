@@ -5,7 +5,6 @@ import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
 import {
   CONTACT_ALONGSIDE,
-  CONTACT_BOOKING_HREF,
   CONTACT_DELIVERED,
   CONTACT_INQUIRY_HREF,
   type ContactOffering,
@@ -65,7 +64,7 @@ export default function ContactPage() {
               </div>
 
               <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg leading-relaxed text-gold md:text-xl">
-                <p>Select what fits below, then book a call to get started.</p>
+                <p>Select what fits below, then send a message to get started.</p>
                 <p className="text-[#d5c8b8]">
                   Collaborative work and fully delivered services. Coaching, systems, and community.
                   Not sure yet? Send a general inquiry.
@@ -73,11 +72,7 @@ export default function ContactPage() {
               </div>
 
               <div data-reveal style={{ '--d': 3 } as CSSProperties} className="mt-8 flex flex-wrap gap-4 md:mt-10">
-                <Link href={CONTACT_BOOKING_HREF} className="btn-primary">
-                  Book a call
-                  <iconify-icon icon="solar:calendar-linear" width="16" height="16" />
-                </Link>
-                <a href={CONTACT_INQUIRY_HREF} className="btn-secondary">
+                <a href={CONTACT_INQUIRY_HREF} className="btn-primary">
                   General inquiry
                   <iconify-icon icon="solar:letter-linear" width="16" height="16" />
                 </a>

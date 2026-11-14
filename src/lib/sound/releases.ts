@@ -10,7 +10,7 @@ export const THEY_MIGHT_BE_MAD_EP = {
   appleMusic: 'https://music.apple.com/ca/album/they-might-be-mad-ep/1650275317',
   soundHref: '/sound',
   notes:
-    'Cohesive project. Themes of conflict, self-assertion, communication, and personal reckoning. More aggressive and declarative than earlier singles.',
+    "This is ISIATA's debut EP. A mix of hip hop, R&B, and jazz-like elements. Genre-bending and hard-hitting, a breath of fresh air for the genre.",
   advisory: 'Explicit (select tracks)',
   tracks: [
     { number: 1, title: 'THEY MIGHT BE MAD' },
@@ -26,7 +26,7 @@ export const TWO_TALES = {
   type: 'Single',
   date: 'August 8, 2020',
   runtime: '4 minutes',
-  notes: 'Early release. Introspective. Sets the emotional and thematic foundation of the catalog.',
+  notes: "ISIATA's first release, catching the world off guard.",
   cover: 'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/698569e01dfc02df0ab0d108.jpeg',
   spotify: 'https://open.spotify.com/track/27NZpNhtYUUrPa2t40jRVM?si=EYZnAQh1Rqmtn40E2OD3Xw',
   appleMusic: 'https://music.apple.com/ca/album/two-tales-single/1525969395',
