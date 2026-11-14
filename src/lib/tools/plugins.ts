@@ -59,6 +59,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
   'IA2A': [780, 520],
   'ISI Bass': [1180, 856],
   'Isynth 7': [1180, 786],
+  'ISI Vox': [1180, 786],
   'IPI': [880, 560],
   'ISI 76': [780, 520],
   'ISI Pandora': [1060, 560],
@@ -105,6 +106,7 @@ const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
   'ISI Bass': 3,
   'Isynth 7': 1,
+  'ISI Vox': 1,
   'IPI': 2,
   'ISI 76': 3,
   'ISI Pandora': 2,
@@ -324,6 +326,36 @@ const PLUGIN_DEFS: PluginSpec[] = [
       { label: 'FX', src: encodeURI('/Plugin Screenshots/Details/full-isynth-fx.png'), width: 1800, height: 1200 },
     ],
     icon: 'solar:soundwave-linear',
+  },
+
+  {
+    slug: 'isi-vox',
+    name: 'ISI Vox',
+    group: 'instrument',
+    kind: 'Vocal harmonizer',
+    price: '$79',
+    hero: 'Sing it. Play it. Harmonize it.',
+    short:
+      'Turn your voice into a playable instrument. Sing into it, hold keys, and hear up to ten harmony voices built from your own vocal, each with its own volume, pan, detune and formant.',
+    about: [
+      'Your voice is the source, your MIDI keys are the arranger, and ten voices are the instrument. Hold a chord and the harmonies follow, in your key and scale, with the humanize control keeping the vibrato and drift of your real performance.',
+    ],
+    features: [
+      { label: 'Ten harmony voices', body: 'Ten independent voices, each with volume, pan, detune and formant, plus mute and solo, laid out as pads you can pick and edit.' },
+      { label: 'Three harmony modes', body: 'MIDI sings every held key as itself, Chord snaps voices to the chord you hold, and Smart snaps to your key and avoids clashes.' },
+      { label: 'Key and scale aware', body: 'Choose a root and a scale, such as Natural Minor, and the harmonies stay inside it.' },
+      { label: 'Humanize and glide', body: 'Keep the vibrato, scoops and drift of your real singing in the harmonies, and set how fast voices glide between notes.' },
+      { label: 'Spread controls', body: 'Spread, detune spread and formant spread fan the ten voices out across the stereo field and the vocal range, from tight doubles to a wide choir.' },
+      { label: 'Live and DAW modes', body: 'Live mode leaves your dry vocal undelayed and reports zero latency for performing. DAW mode lines the dry voice up with the harmonies and reports the true latency for delay compensation.' },
+      { label: 'Two pitch engines', body: 'ISI PSOLA, a low latency time-domain engine that keeps formants natural, and an experimental ISI v0.1 engine you can switch to from the settings menu.' },
+      { label: 'Presets', body: 'Sixteen factory presets plus your own, with favourites, save and an init button. Presets never change your key, scale or live mode.' },
+      { label: 'Built to be explored', body: 'Hover over any control for a short explanation of what it does.' },
+    ],
+    whoFor: 'Singers, producers and songwriters who want a vocal choir they can play, without recording stacks of takes.',
+    target: 'ISIVox',
+    code: 'IVox',
+    dawCategory: 'Fx',
+    icon: 'solar:microphone-3-linear',
   },
 
   /* ───────────── Multi-effects ───────────── */
