@@ -1,6 +1,7 @@
 'use client'
 
-import { useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
+import { updateSelection } from './selection-store'
 import {
   ARTIST_BUSINESS_INVESTMENT,
   ARTIST_BUSINESS_PAID_IN_FULL,
@@ -48,6 +49,21 @@ function Slider({ label, hint, value, min, max, step, display, onChange }: Slide
   )
 }
 
+const PRESET_TONES = [
+  { on: 'border-[#d8aa67] bg-[#d8aa67]/15 text-[#f0dfc8]' },
+  { on: 'border-[#4F86AE] bg-[#2D516C]/30 text-[#c9d6e0]' },
+  { on: 'border-[#D0663F] bg-[#A44429]/25 text-[#f6c3ae]' },
+]
+
+/** Order value on a log scale ($5 to $2,500) so both a $10 album and a label package are easy to dial in. */
+const PRICE_MIN = 5
+const PRICE_MAX = 2500
+const sliderToPrice = (v: number) => {
+  const raw = PRICE_MIN * Math.pow(PRICE_MAX / PRICE_MIN, v / 1000)
+  return raw < 100 ? Math.round(raw) : raw < 1000 ? Math.round(raw / 5) * 5 : Math.round(raw / 25) * 25
+}
+const priceToSlider = (p: number) => Math.round((Math.log(p / PRICE_MIN) / Math.log(PRICE_MAX / PRICE_MIN)) * 1000)
+
 /** Visitors per month on a log-ish scale so the slider is usable from 250 to 100k. */
 const VISITOR_STEPS = [250, 500, 1000, 2000, 3500, 5000, 7500, 10000, 15000, 25000, 40000, 60000, 100000]
 
@@ -55,7 +71,7 @@ export function RevenueCalculator() {
   const [visitorIndex, setVisitorIndex] = useState(3)
   const [optIn, setOptIn] = useState(8)
   const [conversion, setConversion] = useState(2)
-  const [price, setPrice] = useState(49)
+  const [price, setPrice] = useState(62)
   const [paidInFull, setPaidInFull] = useState(false)
 
   const visitors = VISITOR_STEPS[visitorIndex]
@@ -72,6 +88,24 @@ export function RevenueCalculator() {
     return { subscribers, buyers, monthly, yearly, paybackMonths, roi, cumulative }
   }, [visitors, optIn, conversion, price, investment])
 
+  // Share the visitor's numbers with the application form.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      updateSelection({
+        calculator: {
+          visitors,
+          optInRate: optIn,
+          conversionRate: conversion,
+          averageOrderValue: price,
+          paidInFull,
+          monthlyRevenue: Math.round(r.monthly),
+          yearlyRevenue: Math.round(r.yearly),
+        },
+      })
+    }, 400)
+    return () => clearTimeout(t)
+  }, [visitors, optIn, conversion, price, paidInFull, r.monthly, r.yearly])
+
   const chartMax = Math.max(investment * 1.15, r.cumulative[11])
   const investY = 100 - (investment / chartMax) * 100
 
@@ -86,9 +120,19 @@ export function RevenueCalculator() {
 
   // Funnel widths on a square-root scale so small stages stay visible.
   const funnel = [
-    { label: 'Visitors', value: visitors, width: 100 },
-    { label: 'Email subscribers', value: r.subscribers, width: Math.max(8, Math.sqrt(optIn / 100) * 100) },
-    { label: 'Customers', value: r.buyers, width: Math.max(4, Math.sqrt(conversion / 100) * 100) },
+    { label: 'Visitors', value: visitors, width: 100, color: 'from-[#BFAC97]/60 to-[#BFAC97]/10' },
+    {
+      label: 'Email subscribers',
+      value: r.subscribers,
+      width: Math.max(8, Math.sqrt(optIn / 100) * 100),
+      color: 'from-[#4F86AE] to-[#2D516C]/30',
+    },
+    {
+      label: 'Customers',
+      value: r.buyers,
+      width: Math.max(4, Math.sqrt(conversion / 100) * 100),
+      color: 'from-[#f0c681] to-[#9B6B3B]/40',
+    },
   ]
 
   return (
@@ -129,28 +173,37 @@ export function RevenueCalculator() {
           <Slider
             label="Average order value"
             hint="What a typical customer spends with you."
-            value={price}
-            min={5}
+            value={priceToSlider(price)}
+            min={0}
             max={1000}
             step={1}
             display={usd.format(price)}
-            onChange={setPrice}
+            onChange={(v) => setPrice(sliderToPrice(v))}
           />
-          <div className="mt-3 flex flex-wrap gap-2">
-            {PRICE_PRESETS.map((preset) => (
-              <button
-                key={preset.label}
-                type="button"
-                onClick={() => setPrice(preset.price)}
-                aria-pressed={price === preset.price}
-                className={`rounded-full border px-3 py-1.5 text-[11px] tracking-wide transition-colors duration-300 ${
-                  price === preset.price
-                    ? 'border-[#d8aa67] bg-[#d8aa67]/15 text-[#f0dfc8]'
-                    : 'border-white/10 text-zinc-400 hover:border-[#d8aa67]/50 hover:text-zinc-200'
-                }`}
-              >
-                {preset.label} · {usd.format(preset.price)}
-              </button>
+          <div className="mt-4 space-y-3">
+            {PRICE_PRESETS.map((group, gi) => (
+              <div key={group.group}>
+                <p className="mb-1.5 text-[10px] uppercase tracking-widest text-zinc-600">{group.group}</p>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((preset) => {
+                    const on = price === preset.price
+                    const tone = PRESET_TONES[gi]
+                    return (
+                      <button
+                        key={preset.label}
+                        type="button"
+                        onClick={() => setPrice(preset.price)}
+                        aria-pressed={on}
+                        className={`rounded-full border px-3 py-1.5 text-[11px] tracking-wide transition-colors duration-300 ${
+                          on ? tone.on : 'border-white/10 text-zinc-400 hover:border-white/30 hover:text-zinc-200'
+                        }`}
+                      >
+                        {preset.label} · {usd.format(preset.price)}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -189,7 +242,7 @@ export function RevenueCalculator() {
             <div key={stage.label} className="flex items-center gap-3">
               <div className="h-8 flex-1">
                 <div
-                  className="h-full rounded-sm bg-gradient-to-r from-[#d8aa67]/70 to-[#d8aa67]/20 transition-[width] duration-700 ease-out"
+                  className={`h-full rounded-sm bg-gradient-to-r ${stage.color} transition-[width] duration-700 ease-out`}
                   style={{ width: `${stage.width}%` }}
                 />
               </div>
@@ -241,7 +294,7 @@ export function RevenueCalculator() {
                     <div
                       title={`Month ${i + 1}: ${usd.format(value)}`}
                       className={`rounded-t-sm transition-all duration-700 ease-out ${
-                        recovered ? 'bg-[#d8aa67]' : 'bg-white/15'
+                        recovered ? 'bg-gradient-to-t from-[#9B6B3B] to-[#f0c681]' : 'bg-gradient-to-t from-[#1B2232] to-[#2D516C]'
                       }`}
                       style={{ height: `${Math.max(1, (value / chartMax) * 100)}%` }}
                     />

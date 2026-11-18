@@ -2,25 +2,28 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { BrandOverlay } from '@/components/ui/BrandOverlay'
+import { ApplicationForm } from '@/components/artist-business/ApplicationForm'
 import { ComponentExplorer } from '@/components/artist-business/ComponentExplorer'
 import { RevenueCalculator } from '@/components/artist-business/RevenueCalculator'
+import { Testimonials } from '@/components/artist-business/Testimonials'
 import {
   AssetSelector,
   FitCheck,
+  HeroFlow,
   IncomeModes,
   InvestmentCard,
   LaunchTimeline,
+  PlatformRisk,
   StickyAuditBar,
 } from '@/components/artist-business/OfferInteractives'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { SEO_PAGES } from '@/lib/seo/pages'
 import {
-  ARTIST_TESTIMONIALS,
   ARTISTS_APPLY_LABEL,
   ARTISTS_BOOKING_HREF,
   ARTISTS_COPY,
   ARTISTS_HERO_CTA_LABEL,
-  HERO_STATS,
   SEPARATE_HIRES,
 } from '@/lib/artists/page-content'
 
@@ -34,7 +37,7 @@ const bodyText = 'text-base font-light text-zinc-400 leading-[1.8] max-w-2xl'
 const ADDITIONAL_ICONS: Record<string, string> = {
   support: 'solar:shield-check-linear',
   'lead-magnet': 'solar:magnet-linear',
-  templates: 'solar:gallery-wide-linear',
+  'social-audit': 'solar:magnifer-zoom-in-linear',
 }
 
 function CtaButton({ label, variant = 'primary' }: { label: string; variant?: 'primary' | 'secondary' }) {
@@ -76,16 +79,9 @@ export default function SystemsPage() {
                 <iconify-icon icon="solar:calculator-linear" width="16" height="16" />
               </a>
             </div>
-            <p className="mt-4 text-sm text-zinc-500">{c.hero.investment}</p>
-
-            <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10">
-              {HERO_STATS.map((stat) => (
-                <div key={stat.label} className="flex flex-col-reverse bg-[#070707] p-5 md:p-6">
-                  <dt className="text-[10px] uppercase tracking-widest text-zinc-500">{stat.label}</dt>
-                  <dd className="mb-1 text-4xl md:text-5xl font-light text-white tabular-nums">{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-16">
+              <HeroFlow />
+            </div>
           </Section>
         </Container>
       </div>
@@ -99,15 +95,16 @@ export default function SystemsPage() {
               <h2 className={h2}>{c.problem.title}</h2>
               <p className={`${bodyText} mb-4`}>{c.problem.intro}</p>
               <p className="text-xl text-white font-light mb-6">{c.problem.question}</p>
-              <div className={`${bodyText} space-y-4`}>
+              <div className={`${bodyText} space-y-4 mb-10`}>
                 {c.problem.body.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
+              <PlatformRisk />
             </div>
-            <div className="lg:pt-12">
+            <div className="lg:pt-12 lg:sticky lg:top-24">
               <IncomeModes />
-              <div className="mt-6 border-l-2 border-[#d8aa67]/60 pl-5">
+              <div className="mt-6 border-l-2 border-[#A44429] pl-5">
                 <p className="text-xs uppercase tracking-widest text-zinc-500 mb-1">{c.problem.resultLabel}</p>
                 <p className="text-[#d5c8b8] mb-3">{c.problem.result}</p>
                 <p className="text-gold font-medium">{c.problem.punch}</p>
@@ -118,18 +115,20 @@ export default function SystemsPage() {
       </Container>
 
       {/* 02 Opportunity */}
-      <Container bordered className={sectionBorder}>
-        <Section reveal>
-          <p className={eyebrow}>{c.opportunity.eyebrow}</p>
-          <h2 className={h2}>{c.opportunity.title}</h2>
-          <p className={`${bodyText} mb-10`}>{c.opportunity.lead} Select what applies to you.</p>
-          <AssetSelector />
-          <div className="mt-12 max-w-3xl">
-            <p className="text-lg text-zinc-400">{c.opportunity.punch[0]}</p>
-            <p className="text-2xl md:text-3xl text-white font-light leading-snug mt-2">{c.opportunity.punch[1]}</p>
-          </div>
-        </Section>
-      </Container>
+      <div id="opportunity" className="abs-section-indigo scroll-mt-24">
+        <Container bordered className={sectionBorder}>
+          <Section reveal>
+            <p className={eyebrow}>{c.opportunity.eyebrow}</p>
+            <h2 className={h2}>{c.opportunity.title}</h2>
+            <p className={`${bodyText} mb-10`}>{c.opportunity.lead} Select what applies to you.</p>
+            <AssetSelector />
+            <div className="mt-12 max-w-3xl">
+              <p className="text-lg text-zinc-400">{c.opportunity.punch[0]}</p>
+              <p className="text-2xl md:text-3xl text-white font-light leading-snug mt-2">{c.opportunity.punch[1]}</p>
+            </div>
+          </Section>
+        </Container>
+      </div>
 
       {/* 03 Solution */}
       <Container bordered className={sectionBorder}>
@@ -148,7 +147,10 @@ export default function SystemsPage() {
               <ul className="space-y-3">
                 {SEPARATE_HIRES.map((hire) => (
                   <li key={hire} className="flex items-center justify-between gap-4 text-sm">
-                    <span className="text-zinc-300">{hire}</span>
+                    <span className="flex items-center gap-2 text-zinc-300">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#6C6B6E]" />
+                      {hire}
+                    </span>
                     <span className="text-[10px] uppercase tracking-widest text-zinc-600">Own brief · invoice · timeline</span>
                   </li>
                 ))}
@@ -188,14 +190,16 @@ export default function SystemsPage() {
       </Container>
 
       {/* 04 What we build */}
-      <Container bordered className={sectionBorder}>
-        <Section reveal>
-          <p className={eyebrow}>{c.build.eyebrow}</p>
-          <h2 className={`${h2} mb-4`}>{c.build.title}</h2>
-          <p className={`${bodyText} mb-12`}>Explore each component. Every piece connects back to the same business.</p>
-          <ComponentExplorer />
-        </Section>
-      </Container>
+      <div className="abs-section-indigo">
+        <Container bordered className={sectionBorder}>
+          <Section reveal>
+            <p className={eyebrow}>{c.build.eyebrow}</p>
+            <h2 className={`${h2} mb-4`}>{c.build.title}</h2>
+            <p className={`${bodyText} mb-12`}>Explore each component. Every piece connects back to the same business.</p>
+            <ComponentExplorer />
+          </Section>
+        </Container>
+      </div>
 
       {/* 05 Experience */}
       <Container bordered className={sectionBorder}>
@@ -222,7 +226,7 @@ export default function SystemsPage() {
               <ol className="space-y-3">
                 {c.experience.items.map((item, i) => (
                   <li key={item} className="flex items-center gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 font-mono text-[11px] text-[#f0c681]">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#2D516C] bg-[#1B2232]/60 font-mono text-[11px] text-[#9cc3df]">
                       {i + 1}
                     </span>
                     <span className="text-sm text-zinc-200">{item}</span>
@@ -240,41 +244,7 @@ export default function SystemsPage() {
         <Section reveal>
           <p className={eyebrow}>In their words</p>
           <h2 className={`${h2} mb-12`}>Artists who have worked with Isiata.</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {ARTIST_TESTIMONIALS.map((t) => (
-              <figure key={t.name} className="abs-panel abs-panel-glow p-6 md:p-8 flex flex-col">
-                <iconify-icon icon="solar:quote-up-square-bold" width="28" height="28" className="text-[#d8aa67]/70 mb-5" />
-                <p className="text-2xl md:text-3xl font-light text-white leading-snug mb-6">“{t.highlight}”</p>
-                <blockquote className="space-y-3 text-sm text-zinc-400 leading-relaxed flex-1">
-                  {t.quote.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </blockquote>
-                <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-                  <img
-                    src={t.avatar}
-                    alt=""
-                    width={48}
-                    height={48}
-                    loading="lazy"
-                    className="h-12 w-12 rounded-full border border-[#d8aa67]/40 object-cover"
-                  />
-                  <div className="flex-1">
-                    <p className="text-white font-medium">{t.name}</p>
-                    <p className="text-xs text-zinc-500">{t.role}</p>
-                  </div>
-                  <a
-                    href={t.screenshot}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[11px] uppercase tracking-widest text-zinc-500 hover:text-[#f0c681] transition-colors"
-                  >
-                    View original
-                  </a>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <Testimonials />
         </Section>
       </Container>
 
@@ -284,10 +254,14 @@ export default function SystemsPage() {
           <p className={eyebrow}>{c.additional.eyebrow}</p>
           <h2 className={`${h2} mb-12`}>{c.additional.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {c.additional.items.map((item) => (
+            {c.additional.items.map((item, i) => (
               <div key={item.id} className="abs-panel hover-lift p-6 md:p-8">
-                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[#d8aa67]/40 bg-[#d8aa67]/10">
-                  <iconify-icon icon={ADDITIONAL_ICONS[item.id]} width="22" height="22" className="text-[#f0c681]" />
+                <span
+                  className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full border ${
+                    ['border-[#d8aa67]/40 bg-[#d8aa67]/10 text-[#f0c681]', 'border-[#4F86AE]/60 bg-[#2D516C]/20 text-[#9cc3df]', 'border-[#D0663F]/50 bg-[#A44429]/15 text-[#f0a184]'][i]
+                  }`}
+                >
+                  <iconify-icon icon={ADDITIONAL_ICONS[item.id]} width="22" height="22" />
                 </span>
                 <h3 className="text-xl font-display uppercase tracking-normal text-gold mb-3">{item.title}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{item.body}</p>
@@ -298,14 +272,17 @@ export default function SystemsPage() {
       </Container>
 
       {/* 07 Implementation */}
-      <Container bordered className={sectionBorder}>
-        <Section reveal>
-          <p className={eyebrow}>{c.implementation.eyebrow}</p>
-          <h2 className={`${h2} mb-12`}>{c.implementation.title}</h2>
-          <LaunchTimeline />
-          <p className="mt-8 text-sm text-zinc-500 max-w-2xl">{c.implementation.note}</p>
-        </Section>
-      </Container>
+      <div className="abs-section-indigo">
+        <Container bordered className={sectionBorder}>
+          <Section reveal>
+            <p className={eyebrow}>{c.implementation.eyebrow}</p>
+            <h2 className={`${h2} mb-4`}>{c.implementation.title}</h2>
+            <p className={`${bodyText} mb-12`}>{c.implementation.subtitle}</p>
+            <LaunchTimeline />
+            <p className="mt-8 text-sm text-zinc-500 max-w-2xl">{c.implementation.note}</p>
+          </Section>
+        </Container>
+      </div>
 
       {/* 08 Bonuses */}
       <Container bordered className={sectionBorder}>
@@ -319,7 +296,7 @@ export default function SystemsPage() {
             <ul className="space-y-3">
               {c.bonuses.items.map((item, i) => (
                 <li key={item} className="abs-panel flex items-center gap-5 p-5">
-                  <span className="font-mono text-xs text-[#d8aa67]">+{String(i + 1).padStart(2, '0')}</span>
+                  <span className="font-mono text-xs text-[#D0663F]">+{String(i + 1).padStart(2, '0')}</span>
                   <span className="text-zinc-200">{item}</span>
                 </li>
               ))}
@@ -328,22 +305,52 @@ export default function SystemsPage() {
         </Section>
       </Container>
 
+      {/* 09 Fit */}
+      <div id="fit" className="scroll-mt-24">
+        <Container bordered className={sectionBorder}>
+          <Section reveal>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div>
+                <p className={eyebrow}>{c.fit.eyebrow}</p>
+                <h2 className={h2}>{c.fit.title}</h2>
+                <p className={`${bodyText} mb-5`}>{c.fit.lead}</p>
+                <ul className="mb-8 space-y-2.5">
+                  {c.fit.for.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                      <iconify-icon icon="solar:check-circle-linear" width="16" height="16" className="mt-0.5 shrink-0 text-[#d8aa67]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className={`${bodyText} space-y-4`}>
+                  <p>{c.fit.requirements}</p>
+                  <p className="text-white font-medium">{c.fit.notFor}</p>
+                </div>
+              </div>
+              <div className="lg:pt-12">
+                <FitCheck ctaLabel={ARTISTS_APPLY_LABEL} />
+              </div>
+            </div>
+          </Section>
+        </Container>
+      </div>
+
       {/* ROI calculator */}
-      <div id="roi" className="scroll-mt-24">
+      <div id="roi" className="abs-section-indigo scroll-mt-24">
         <Container bordered className={sectionBorder}>
           <Section reveal>
             <p className={eyebrow}>Run the numbers</p>
-            <h2 className={h2}>See what a connected business could return.</h2>
+            <h2 className={h2}>See what your connected music business could return.</h2>
             <p className={`${bodyText} mb-12`}>
-              Move the sliders to match your audience and offer. Watch how traffic becomes subscribers,
-              subscribers become customers, and when the investment pays for itself.
+              Move the sliders to match your audience and what you sell. Watch traffic become subscribers,
+              subscribers become customers, and see when the investment pays for itself.
             </p>
             <RevenueCalculator />
           </Section>
         </Container>
       </div>
 
-      {/* 09 Investment */}
+      {/* 10 Investment */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.investment.eyebrow}</p>
@@ -352,51 +359,40 @@ export default function SystemsPage() {
         </Section>
       </Container>
 
-      {/* 10 Fit */}
-      <Container bordered className={sectionBorder}>
-        <Section reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <p className={eyebrow}>{c.fit.eyebrow}</p>
-              <h2 className={h2}>{c.fit.title}</h2>
-              <p className={`${bodyText} mb-5`}>{c.fit.lead}</p>
-              <ul className="mb-8 space-y-2.5">
-                {c.fit.for.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                    <iconify-icon icon="solar:check-circle-linear" width="16" height="16" className="mt-0.5 shrink-0 text-[#d8aa67]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className={`${bodyText} space-y-4`}>
-                <p>{c.fit.criteria}</p>
-                <p>{c.fit.requirements}</p>
-                <p className="text-white font-medium">{c.fit.notFor}</p>
-              </div>
-            </div>
-            <div className="lg:pt-12">
-              <FitCheck ctaLabel={ARTISTS_APPLY_LABEL} />
-            </div>
-          </div>
-        </Section>
-      </Container>
-
-      {/* Closing */}
+      {/* Closing + application */}
       <div id="abs-closing" className="relative overflow-hidden">
-        <div aria-hidden className="abs-hero-glow pointer-events-none absolute inset-0 rotate-180" />
-        <Container bordered className={`relative ${sectionBorder}`}>
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <img
+            src="/brand/overlays/molten-gold-marble-frame.png"
+            alt=""
+            className="h-full w-full object-cover opacity-60 mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        </div>
+        <BrandOverlay variant={3} opacity={0.25} />
+        <Container bordered className={`relative z-10 ${sectionBorder}`}>
           <Section reveal>
-            <div className="mx-auto max-w-3xl text-center">
+            <div id="apply" className="mx-auto max-w-3xl scroll-mt-24 text-center">
               <p className={eyebrow}>{c.closing.eyebrow}</p>
-              <h2 className="text-2xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 leading-[1.15]">
+              <h2 className="text-2xl md:text-4xl font-display uppercase tracking-normal gradient-text-gold mb-4 leading-[1.15]">
                 {c.closing.title}
               </h2>
               <p className="text-xl md:text-2xl text-[#d5c8b8] font-light mb-12">{c.closing.subtitle}</p>
-              <div className="abs-panel abs-panel-glow abs-frame p-8 md:p-10 text-left md:text-center">
-                <h3 className="text-2xl font-display uppercase tracking-normal text-gold mb-4">{c.closing.heading}</h3>
-                <p className="text-base text-zinc-400 leading-[1.8] mb-6">{c.closing.body}</p>
-                <p className="text-white font-medium mb-8">{c.closing.capacity}</p>
-                <CtaButton label={ARTISTS_APPLY_LABEL} />
+
+              <div className="abs-panel abs-frame relative overflow-hidden p-6 md:p-10 text-left shadow-[0_0_80px_-20px_rgba(216,170,103,0.35)] backdrop-blur-md">
+                <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-display uppercase tracking-normal text-gold mb-3">{c.closing.heading}</h3>
+                    <p className="text-sm text-zinc-400 leading-[1.8] max-w-lg">{c.closing.body}</p>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2">
+                    {[1, 2, 3].map((slot) => (
+                      <span key={slot} className="h-3 w-3 rotate-45 border border-[#d8aa67]/70 bg-[#d8aa67]/20" />
+                    ))}
+                    <span className="ml-1 text-[10px] uppercase tracking-widest text-[#f0dfc8]">{c.closing.capacity}</span>
+                  </div>
+                </div>
+                <ApplicationForm ctaLabel={ARTISTS_APPLY_LABEL} />
               </div>
               <p className="mt-12 text-xs text-zinc-600 leading-relaxed">{c.closing.disclaimer}</p>
             </div>

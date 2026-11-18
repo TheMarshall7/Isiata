@@ -1,7 +1,8 @@
 import { CONTACT_BOOKING_HREF } from '@/lib/contact/offerings'
 
-/** Booking is paused site-wide, so this resolves to the inquiry email link. */
-export const ARTISTS_BOOKING_HREF = CONTACT_BOOKING_HREF
+/** CTAs scroll to the on-page application form; email stays as the fallback. */
+export const ARTISTS_BOOKING_HREF = '#apply'
+export const ARTISTS_EMAIL_HREF = CONTACT_BOOKING_HREF
 export const ARTISTS_HERO_CTA_LABEL = 'Book your Artist Business Audit'
 export const ARTISTS_APPLY_LABEL = 'Apply for an Artist Business Audit'
 
@@ -13,8 +14,7 @@ export const ARTISTS_COPY = {
       'Turn your music, audience, skills and creative assets into a connected business with products, automated customer journeys and multiple revenue streams.',
       'We build the brand, digital storefront, product ecosystem and launch infrastructure that helps independent artists generate revenue beyond performing, producing and teaching.',
     ],
-    tagline: 'Your artist business. Designed, built and launch-ready in 30 days.',
-    investment: 'Investment: $13,982 USD',
+    tagline: 'Your artist business. Designed, built and launch-ready in 30 days, then optimized for 30 more.',
   },
   problem: {
     eyebrow: '01. The problem',
@@ -24,8 +24,13 @@ export const ARTISTS_COPY = {
     question: "But what happens when you're not actively working?",
     body: [
       'For many independent artists, income is still tied directly to their time.',
-      "Their music is scattered across streaming platforms. Their audience lives on social media. Their products are underdeveloped or nonexistent. Their website doesn't sell anything meaningful. And there's no connected system bringing everything together.",
+      "Their music is scattered across streaming platforms. Their products are underdeveloped or nonexistent. Their website doesn't sell anything meaningful. And there's no connected system bringing everything together.",
     ],
+    ownership: {
+      title: "Your audience lives on platforms you don't own.",
+      body: 'If TikTok, Instagram or Spotify went down tomorrow, how many of your fans could you still reach?',
+      hint: 'Switch a platform off to see what happens to your reach.',
+    },
     resultLabel: 'The result?',
     result:
       "You're constantly creating opportunities, but not building enough infrastructure to capture them.",
@@ -158,7 +163,7 @@ export const ARTISTS_COPY = {
     items: [
       {
         id: 'support',
-        title: '30-Day Post-Launch Support',
+        title: '30-Day Post-Launch Optimization',
         body: 'We review the system weekly and make reasonable adjustments to existing pages, emails and workflows.',
       },
       {
@@ -167,15 +172,16 @@ export const ARTISTS_COPY = {
         body: 'We create one free downloadable resource, with its opt-in page and automated delivery.',
       },
       {
-        id: 'templates',
-        title: 'Social Media Template Kit',
-        body: 'Twenty branded post and story templates designed around your new identity.',
+        id: 'social-audit',
+        title: 'Social Media Audit',
+        body: "A direct audit of your content to make sure it points toward your business and offers. If you're selling a sample pack but posting guitar videos, we'll show you what to change.",
       },
     ],
   },
   implementation: {
     eyebrow: '07. Implementation',
     title: 'From scattered creative assets to a functioning business in 30 days.',
+    subtitle: 'Then 30 more days of optimization while it runs. Sixty days from kickoff to fully tuned.',
     weeks: [
       {
         id: 'w1',
@@ -201,6 +207,12 @@ export const ARTISTS_COPY = {
         title: 'Launch Preparation',
         body: 'We test the infrastructure, prepare launch communications, finalize the content system and bring everything live.',
       },
+      {
+        id: 'optimize',
+        label: 'Days 31–60',
+        title: 'Post-Launch Optimization',
+        body: 'Your business is live. We review it weekly and refine pages, emails and workflows based on how real customers move through it.',
+      },
     ],
     note: 'The timeline begins once onboarding materials, required access and initial payment have been received.',
   },
@@ -208,14 +220,14 @@ export const ARTISTS_COPY = {
     eyebrow: '08. The bonuses',
     title: 'Included in your implementation:',
     items: [
-      '30 days of post-launch support.',
+      '30 days of post-launch optimization.',
       'One lead magnet with automated delivery.',
-      'Twenty branded social templates.',
+      'A social media audit aligned to your offers.',
     ],
     note: 'Everything is designed to work together as part of the same business ecosystem.',
   },
   investment: {
-    eyebrow: '09. The investment',
+    eyebrow: '10. The investment',
     title: 'Stop building disconnected pieces. Build the business behind your music.',
     name: 'The Artist Business System',
     price: '$13,982 USD',
@@ -226,7 +238,7 @@ export const ARTISTS_COPY = {
     secured: 'Your implementation slot is secured once the initial payment is received.',
   },
   fit: {
-    eyebrow: '10. Who this is for',
+    eyebrow: '09. Who this is for',
     title: 'This is for artists who are ready to operate differently.',
     lead: 'The Artist Business System is designed for:',
     for: [
@@ -235,9 +247,8 @@ export const ARTISTS_COPY = {
       'Musicians with existing audiences.',
       'Music educators and creative entrepreneurs.',
       'Artists already earning from their creative work.',
+      'Labels with artists who want their system built for them.',
     ],
-    criteria:
-      'We generally look for artists earning at least $1,000 monthly from music-related activities or with 20,000 or more engaged followers.',
     requirements:
       'You should also have the creative assets, willingness to participate in onboarding and budget available to begin.',
     notFor: 'This is not designed for someone starting their music career from zero.',
@@ -257,11 +268,23 @@ export const ARTISTS_COPY = {
 export const ARTIST_BUSINESS_INVESTMENT = 13982
 export const ARTIST_BUSINESS_PAID_IN_FULL = 12982
 
-export const HERO_STATS = [
-  { value: '10', label: 'Components' },
-  { value: '30', label: 'Days to launch' },
-  { value: '3', label: 'Builds per quarter' },
-  { value: '1', label: 'Connected business' },
+/** Hero flow: how scattered assets become one connected business. */
+export const HERO_FLOW = [
+  { id: 'assets', label: 'Your music & assets', short: 'Assets', icon: 'solar:music-notes-linear' },
+  { id: 'brand', label: 'Brand', short: 'Brand', icon: 'solar:palette-linear' },
+  { id: 'store', label: 'Storefront', short: 'Store', icon: 'solar:shop-2-linear' },
+  { id: 'audience', label: 'Owned audience', short: 'Audience', icon: 'solar:users-group-rounded-linear' },
+  { id: 'revenue', label: 'Revenue streams', short: 'Revenue', icon: 'solar:graph-up-linear' },
+]
+
+export const HERO_FACTS = ['10 components', 'Live in 30 days', '+30 days optimization', '3 builds per quarter']
+
+/** Illustrative share of an artist's reach on each platform, for the outage demo. */
+export const PLATFORMS = [
+  { id: 'instagram', name: 'Instagram', icon: 'mdi:instagram', share: 35 },
+  { id: 'tiktok', name: 'TikTok', icon: 'ic:baseline-tiktok', share: 30 },
+  { id: 'spotify', name: 'Spotify', icon: 'mdi:spotify', share: 20 },
+  { id: 'youtube', name: 'YouTube', icon: 'mdi:youtube', share: 15 },
 ]
 
 /** Short labels and icons for the ten-component explorer, keyed by component id. */
@@ -280,13 +303,20 @@ export const COMPONENT_META: Record<string, { short: string; icon: string; layer
 
 /** Opportunity checklist: each existing asset and the revenue stream it can become. */
 export const ASSET_STREAMS = [
-  { id: 'music', asset: 'Released or unreleased music', stream: 'Licensing, sales and distribution' },
-  { id: 'beats', asset: 'Beats, samples and instrumentals', stream: 'Digital product store' },
-  { id: 'knowledge', asset: 'Production or music knowledge', stream: 'Courses, guides and lessons' },
-  { id: 'audience', asset: 'A social media audience', stream: 'Owned email customer base' },
-  { id: 'brand', asset: 'A recognizable personal brand', stream: 'Premium client work' },
-  { id: 'services', asset: 'Creative services you already offer', stream: 'Structured, priced offers' },
-  { id: 'merch', asset: 'Merch or live experiences', stream: 'Brand extensions' },
+  { id: 'music', group: 'Artist', asset: 'Released or unreleased music', stream: 'Direct sales and distribution' },
+  { id: 'sync', group: 'Artist', asset: 'A catalog with sync potential', stream: 'Sync and licensing deals' },
+  { id: 'shows', group: 'Artist', asset: 'Live shows or a touring history', stream: 'Tickets, VIP and experiences' },
+  { id: 'merch', group: 'Artist', asset: 'Merch, or a brand people would wear', stream: 'Merch store and drops' },
+  { id: 'audience', group: 'Artist', asset: 'A social media following', stream: 'Owned email customer base' },
+  { id: 'fans', group: 'Artist', asset: 'Superfans who show up every release', stream: 'Memberships and fan clubs' },
+  { id: 'beats', group: 'Producer', asset: 'Beats, samples and instrumentals', stream: 'Digital product store' },
+  { id: 'presets', group: 'Producer', asset: 'Presets, kits or signature sounds', stream: 'Sound packs and bundles' },
+  { id: 'knowledge', group: 'Producer', asset: 'Production or music knowledge', stream: 'Courses, guides and lessons' },
+  { id: 'services', group: 'Business', asset: 'Creative services you already offer', stream: 'Structured, priced offers' },
+  { id: 'studio', group: 'Business', asset: 'A studio or session setup', stream: 'Bookable sessions and packages' },
+  { id: 'brand', group: 'Business', asset: 'A recognizable personal brand', stream: 'Brand partnerships and premium clients' },
+  { id: 'content', group: 'Business', asset: 'A library of videos and visuals', stream: 'Content licensing and ad revenue' },
+  { id: 'roster', group: 'Business', asset: 'A label or roster of artists', stream: 'Shared infrastructure across artists' },
 ]
 
 export const SEPARATE_HIRES = [
@@ -298,28 +328,52 @@ export const SEPARATE_HIRES = [
 ]
 
 export const PRICE_PRESETS = [
-  { label: 'Sample pack', price: 29 },
-  { label: 'Preset bank', price: 49 },
-  { label: 'Course', price: 197 },
-  { label: 'Mentorship', price: 997 },
+  {
+    group: 'Artist',
+    items: [
+      { label: 'Album', price: 10 },
+      { label: 'Show ticket', price: 35 },
+      { label: 'T-shirt', price: 62 },
+      { label: 'VIP experience', price: 150 },
+    ],
+  },
+  {
+    group: 'Producer & educator',
+    items: [
+      { label: 'Sample pack', price: 29 },
+      { label: 'Course', price: 197 },
+      { label: 'Mentorship', price: 997 },
+    ],
+  },
+  {
+    group: 'Label & business',
+    items: [
+      { label: 'Sync license', price: 750 },
+      { label: 'Artist services package', price: 2500 },
+    ],
+  },
 ]
 
 export const FIT_QUESTIONS = [
   {
     id: 'traction',
-    question: 'Do you earn $1,000+ a month from music, or have 20,000+ engaged followers?',
+    question: 'Do you already have traction?',
+    detail: 'An engaged audience, paying fans or clients, or music people already buy, stream or book.',
   },
   {
     id: 'assets',
-    question: 'Do you have creative assets to package, such as music, beats, samples or knowledge?',
+    question: 'Do you have creative assets to package?',
+    detail: 'Music, beats, samples, knowledge, merch ideas, visuals or services.',
   },
   {
     id: 'onboarding',
-    question: 'Can you take part in onboarding and give timely approvals?',
+    question: 'Can you show up for onboarding?',
+    detail: 'Share your assets and direction, and give timely approvals during the 30-day build.',
   },
   {
     id: 'budget',
-    question: 'Do you have the budget available to begin?',
+    question: 'Do you have steady income to invest?',
+    detail: "It doesn't have to come from music. It just needs to support the build without strain.",
   },
 ]
 
