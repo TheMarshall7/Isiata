@@ -1218,7 +1218,7 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
     name: 'Tsukuyomi Complete',
     tagline: 'A complete drum production environment.',
     description:
-      'The drum instrument, the sound designer, the full effects rack, the parallel compressor rack and every single Tsukuyomi effect. Everything you need to write, shape, colour and finish drums, in one purchase.',
+      'The drum instrument, the sound designer, the full effects rack, the parallel compressor rack and every effect that comes with the Tsukuyomi Drum Engine, plus the Tsukuyomi Compressor. Everything you need to write, shape, colour and finish drums, in one purchase.',
     launchPrice: '$179',
     regularPrice: '$249',
     extras: ['tsukuyomi-drum-engine', 'tsukuyomi-sound', 'tsukuyomi-fx', 'tsukuyomi-comp'],
@@ -1231,13 +1231,13 @@ export const PLUGIN_BUNDLES: PluginBundle[] = [
   {
     slug: 'analog-collection',
     name: 'Isiata Analog Collection',
-    tagline: 'Three EQs and three channel strips with real weight.',
+    tagline: 'Three EQs, three channel strips and three analog compressors with real weight.',
     description:
-      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression, plus the Tsukuyomi Tape 77 tape machine. Four different ways to shape a sound, each with its own character.',
-    launchPrice: '$129',
-    regularPrice: '$149',
+      'Console warmth, punchy parametric and graphic control, and boost-and-cut program EQ, on their own and as full channel strips with a gate and FET or optical compression, plus the Icarus, Isheen and Isibox analog compressors and the Tsukuyomi Tape 77 tape machine. Plenty of different ways to shape a sound, each with its own character.',
+    launchPrice: '$149',
+    regularPrice: '$179',
     groups: ['analog', 'strip'],
-    extras: ['tsukuyomi-tape-77'],
+    extras: ['tsukuyomi-tape-77', 'icarus', 'isheen', 'isibox'],
     icon: 'solar:equalizer-minimalistic-linear',
     hero: '/bundles/analog-collection-hero.webp?v=1',
     iconImage: '/bundles/analog-collection-icon.webp?v=1',
@@ -1277,8 +1277,10 @@ export const SUBSCRIPTION_HREF = `${PLUGINS_HREF}/subscription`
 export const ISI_CREATE_SUBSCRIPTION = {
   name: 'Isi Access',
   price: '$14/month',
-  annualPrice: '$129/year',
-  tagline: 'Every Isiata plugin for $11 a month.',
+  annualPrice: '$132/year',
+  /** Annual plan expressed per month ($132 / 12), billed once a year */
+  annualMonthlyPrice: '$11/month',
+  tagline: 'Every Isiata plugin from $11 a month.',
   hero: '/bundles/isi-access-hero.webp?v=1',
   description:
     'One low monthly price opens up the whole Isiata plugin catalog: the Tsukuyomi Drum Engine, sound design, effects, saturation, analog EQ and compressors.',
@@ -1291,7 +1293,7 @@ export function getSubscriptionPlugins(): PluginSpec[] {
 export const PLUGIN_SHARED_FACTS = [
   {
     label: 'Formats',
-    body: 'Windows: VST3 and Standalone. macOS: VST3, AU and Standalone. The Tsukuyomi Drum Engine also ships AAX for Pro Tools.',
+    body: 'Windows only: VST3 and Standalone. The Tsukuyomi Drum Engine also ships AAX for Pro Tools.',
   },
   {
     label: 'Install',
@@ -1301,6 +1303,8 @@ export const PLUGIN_SHARED_FACTS = [
 ] as const
 
 export const PLUGIN_PRICE_NOTE = 'Prices in USD.'
+
+export const PLUGIN_PLATFORM_NOTE = 'Only available for Windows.'
 
 export function getPlugin(slug: string): PluginSpec | undefined {
   return PLUGINS.find((p) => p.slug === slug)

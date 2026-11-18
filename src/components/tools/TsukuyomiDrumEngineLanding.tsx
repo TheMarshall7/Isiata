@@ -815,7 +815,7 @@ export function TsukuyomiDrumEngineLanding() {
               </article>
             </div>
             <div className="mt-6 border border-white/10 p-5 text-sm leading-relaxed text-zinc-300">
-              <span className="font-semibold text-white">Available now:</span> VST3 and Standalone. AU is on the way.
+              <span className="font-semibold text-white">Available now:</span> VST3 and Standalone, for Windows.
             </div>
           </div>
         </div>
@@ -839,7 +839,7 @@ export function TsukuyomiDrumEngineLanding() {
           </dl>
         </div>
         <div className="mt-4 border border-white/10 p-4 text-sm leading-relaxed text-zinc-500">
-          <span className="font-semibold text-zinc-300">System requirements:</span> Final OS and host details publish before release. AU lands in a later version.
+          <span className="font-semibold text-zinc-300">System requirements:</span> Windows only. Final host details publish before release.
         </div>
       </Section>
 

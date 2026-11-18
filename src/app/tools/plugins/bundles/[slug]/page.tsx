@@ -32,7 +32,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     path: bundleHref(bundle),
     image: bundle.hero,
     imageAlt: bundle.name,
-    keywords: [bundle.name, 'Isiata', 'plugin bundle', 'VST3', 'AU'],
+    keywords: [bundle.name, 'Isiata', 'plugin bundle', 'VST3'],
   })
 }
 

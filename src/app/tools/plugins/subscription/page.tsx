@@ -20,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: SUBSCRIPTION_HREF,
   image: ISI_CREATE_SUBSCRIPTION.hero,
   imageAlt: ISI_CREATE_SUBSCRIPTION.name,
-  keywords: ['Isi Access', 'Isiata', 'plugin subscription', 'VST3', 'AU'],
+  keywords: ['Isi Access', 'Isiata', 'plugin subscription', 'VST3'],
 })
 
 export default function SubscriptionPage() {
@@ -30,7 +30,7 @@ export default function SubscriptionPage() {
   )
   const stats = [
     { label: 'Plugins', value: String(plugins.length), note: 'Instruments, effects, saturation, EQ and compressors.' },
-    { label: 'Formats', value: 'VST3 · AU', note: 'Plus Standalone, and AAX for the Drum Engine.' },
+    { label: 'Formats', value: 'VST3', note: 'Plus Standalone, and AAX for the Drum Engine. Windows only.' },
   ]
 
   return (
@@ -73,8 +73,8 @@ export default function SubscriptionPage() {
       </div>
 
       <p className="mb-14 max-w-2xl text-sm leading-relaxed text-zinc-400">
-        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualPrice}</span>, costs less than
-        paying monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
+        Annual plan: <span className="text-zinc-200">{ISI_CREATE_SUBSCRIPTION.annualMonthlyPrice}</span>, paid once
+        as {ISI_CREATE_SUBSCRIPTION.annualPrice}. Costs less than paying monthly. Coming with launch. Cancel any time. Access to the catalogue and free plugins ends when
         your subscription does, and subscribers receive every future plugin that qualifies while subscribed.
       </p>
 

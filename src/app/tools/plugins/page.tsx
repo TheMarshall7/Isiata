@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui/Container'
 import { BundleBanner, PluginShop, SubscriptionBanner } from '@/components/tools/PluginCards'
-import { PLUGIN_PRICE_NOTE, PLUGIN_SHARED_FACTS } from '@/lib/tools/plugins'
+import { PLUGIN_PLATFORM_NOTE, PLUGIN_PRICE_NOTE, PLUGIN_SHARED_FACTS } from '@/lib/tools/plugins'
 
 export default function PluginsPage() {
   return (
@@ -10,6 +10,7 @@ export default function PluginsPage() {
         <p className="max-w-xl text-base text-zinc-400 md:text-lg">
           Instruments, effects, EQs and compressors for the way you make music.
         </p>
+        <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-zinc-600">{PLUGIN_PLATFORM_NOTE}</p>
       </Container>
 
       <Container bordered className="border-t border-[#d8aa67]/15 py-12 md:py-16">

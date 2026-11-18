@@ -37,8 +37,8 @@ export const ISI_ACCESS_PLANS: Record<SubscriptionPlan, { label: string; price: 
   },
   annual: {
     label: 'Annual',
-    price: ISI_CREATE_SUBSCRIPTION.annualPrice,
-    note: 'Billed once a year. Costs less than paying monthly.',
+    price: ISI_CREATE_SUBSCRIPTION.annualMonthlyPrice,
+    note: `Billed once a year as ${ISI_CREATE_SUBSCRIPTION.annualPrice}. Costs less than paying monthly.`,
   },
 }
 

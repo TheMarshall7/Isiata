@@ -40,7 +40,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     path: `${PLUGINS_HREF}/${plugin.slug}`,
     image: plugin.image?.src ?? ISIATA_LOGO_URL,
     imageAlt: plugin.name,
-    keywords: [plugin.name, 'Isiata', 'VST3', 'AU', plugin.kind],
+    keywords: [plugin.name, 'Isiata', 'VST3', plugin.kind],
   })
 }
 

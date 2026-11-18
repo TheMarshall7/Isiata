@@ -205,9 +205,14 @@ export function SubscriptionBanner() {
           </p>
         </div>
         <div className="flex items-center gap-6">
-          <span className="text-4xl text-white">
-            <Price value={ISI_CREATE_SUBSCRIPTION.price} />
-          </span>
+          <div>
+            <span className="text-4xl text-white">
+              <Price value={ISI_CREATE_SUBSCRIPTION.price} />
+            </span>
+            <p className="mt-2 text-xs text-zinc-500">
+              or {ISI_CREATE_SUBSCRIPTION.annualMonthlyPrice} billed annually ({ISI_CREATE_SUBSCRIPTION.annualPrice})
+            </p>
+          </div>
           <iconify-icon
             icon="solar:arrow-right-linear"
             width="22"
