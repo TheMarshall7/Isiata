@@ -1,248 +1,255 @@
 import { CONTACT_BOOKING_HREF } from '@/lib/contact/offerings'
 
+/** Booking is paused site-wide, so this resolves to the inquiry email link. */
 export const ARTISTS_BOOKING_HREF = CONTACT_BOOKING_HREF
-export const ARTISTS_CTA_LABEL = 'Start the conversation'
-export const ARTISTS_APPLY_LABEL = 'Apply for a partnership'
+export const ARTISTS_HERO_CTA_LABEL = 'Book your Artist Business Audit'
+export const ARTISTS_APPLY_LABEL = 'Apply for an Artist Business Audit'
 
 export const ARTISTS_COPY = {
-  eyebrow: 'Artist development',
-  title: 'Sound. Systems. Revenue.',
-  lede: [
-    'You make the music. Everything around it decides whether anyone hears it, buys it, or comes back.',
-    'I develop the artist: the sound, the infrastructure behind it, and the way it makes money. One person, one partnership, one direction.',
-  ],
+  hero: {
+    eyebrow: 'The Artist Business System',
+    title: 'Your music career deserves a business behind it.',
+    lede: [
+      'Turn your music, audience, skills and creative assets into a connected business with products, automated customer journeys and multiple revenue streams.',
+      'We build the brand, digital storefront, product ecosystem and launch infrastructure that helps independent artists generate revenue beyond performing, producing and teaching.',
+    ],
+    tagline: 'Your artist business. Designed, built and launch-ready in 30 days.',
+    investment: 'Investment: $13,982 USD',
+  },
   problem: {
-    eyebrow: 'The problem',
-    title: 'Most artists have a great record and a scattered business.',
+    eyebrow: '01. The problem',
+    title: "You're building a music career. But are you building a business?",
+    intro:
+      'You release music. You perform. You produce for clients. You teach lessons. You create content. You build an audience.',
+    question: "But what happens when you're not actively working?",
+    body: [
+      'For many independent artists, income is still tied directly to their time.',
+      "Their music is scattered across streaming platforms. Their audience lives on social media. Their products are underdeveloped or nonexistent. Their website doesn't sell anything meaningful. And there's no connected system bringing everything together.",
+    ],
+    resultLabel: 'The result?',
+    result:
+      "You're constantly creating opportunities, but not building enough infrastructure to capture them.",
+    punch: 'Your creative output has commercial value. It needs a business capable of capturing that value.',
+  },
+  opportunity: {
+    eyebrow: '02. The opportunity',
+    title: 'Your music career contains more business opportunities than you think.',
+    lead: 'Consider everything you already have:',
     items: [
-      'The song is finished, but the release plan is a guess.',
-      'The website is a template nobody updates.',
-      'The fans who showed up once are gone.',
-      'Merch lives on one platform, email on another, bookings in a text thread.',
-      'Three people each own a piece of the picture, and none of them talk to each other.',
+      'Music that can be licensed, sold or distributed.',
+      'Beats, samples and instrumentals that can become digital products.',
+      'Knowledge that can become courses, guides and educational products.',
+      'An audience that can become an owned customer base.',
+      'A personal brand that can attract premium clients.',
+      'Creative services that can become structured offers.',
+      'Merchandise and experiences that can extend your brand.',
     ],
-    punch: "That isn't a talent problem. It's a structure problem.",
-  },
-  what: {
-    eyebrow: 'What this is',
-    title: 'A partnership, not a service menu.',
-    body: 'I work as your creative director and producer, and I build and run the systems your career sits on.',
-    pillars: [
-      {
-        id: 'sound',
-        number: '01',
-        title: 'Sound',
-        body: 'Production, arrangement, mixing and mastering. A sonic identity that holds across the whole catalog, so the next record sounds like it belongs with the last one.',
-      },
-      {
-        id: 'systems',
-        number: '02',
-        title: 'Systems',
-        body: 'Your website, audience capture, email, merch and digital products, release workflow and distribution. Built once, connected, and maintained.',
-      },
-      {
-        id: 'revenue',
-        number: '03',
-        title: 'Revenue',
-        body: 'A plan for how the work earns: releases, direct sales, licensing, memberships, merch. Reviewed and adjusted as it runs.',
-      },
-    ],
-    punch: 'The system does not replace the art. It removes everything around the art that drains it.',
-  },
-  process: {
-    eyebrow: 'How it works',
-    title: 'Map. Direct. Build. Release. Review.',
-    steps: [
-      {
-        id: 'map',
-        title: 'Map',
-        body: 'We look at where you are: catalog, audience, income, gaps.',
-      },
-      {
-        id: 'direct',
-        title: 'Direct',
-        body: 'We set the sound, the release rhythm and the revenue plan.',
-      },
-      {
-        id: 'build',
-        title: 'Build',
-        body: 'Production starts, and the systems get built alongside it.',
-      },
-      {
-        id: 'release',
-        title: 'Release',
-        body: 'Each release runs through the same machine, so each one starts from where the last one ended.',
-      },
-      {
-        id: 'review',
-        title: 'Review',
-        body: 'We look at what worked, what sold and what to change.',
-      },
+    punch: [
+      "The opportunity isn't necessarily to create more.",
+      "It's to package what already exists, connect the pieces and make it easier for people to buy.",
     ],
   },
-  monthly: {
-    eyebrow: 'Monthly partnerships',
-    title: 'Ongoing support, with defined capacity.',
-    body: 'You get a dedicated slice of my time, not an open-ended inbox.',
-    note: 'Every tier has defined production hours, track allocations and revision limits.',
+  solution: {
+    eyebrow: '03. The solution',
+    title: 'Introducing The Artist Business System.',
+    body: [
+      'A done-for-you business infrastructure built for independent artists, producers and music creatives.',
+      'We bring your brand, products, storefront, audience capture and marketing infrastructure into one connected ecosystem.',
+      'Instead of hiring a designer, web developer, copywriter, automation specialist and marketing consultant separately, you get one integrated implementation.',
+    ],
+    split: [
+      'We build it remotely.',
+      'You provide your creative assets, direction and approvals.',
+      'We handle the implementation.',
+    ],
   },
-  projects: {
-    eyebrow: 'Project partnerships',
-    title: 'A defined transformation over a set period.',
-    body: 'For artists who want a clear beginning and end.',
+  build: {
+    eyebrow: '04. What we build',
+    title: 'Ten components. One connected business.',
+    components: [
+      {
+        id: 'brand',
+        title: 'Brand Identity & Brand System',
+        tagline: 'A recognizable creative identity built around your artistic direction.',
+        body: 'Includes brand positioning, visual identity, typography, palette, textures, logo guidelines, photography direction and sonic principles.',
+      },
+      {
+        id: 'lookbook',
+        title: 'Interactive Digital Lookbook',
+        tagline: 'A premium digital presentation of your artist brand.',
+        body: 'Use it as a press kit, booking presentation, collaboration pitch deck or professional introduction.',
+      },
+      {
+        id: 'storefront',
+        title: 'Website & Digital Storefront',
+        tagline: 'Your own commercial home online.',
+        body: 'A branded website and store designed to showcase your work, sell products, present services and direct visitors to your streaming platforms.',
+      },
+      {
+        id: 'email',
+        title: 'Email & Fan Capture Infrastructure',
+        tagline: 'Turn social media visitors into an audience you can reach directly.',
+        body: 'Includes email opt-in forms, welcome sequences, release announcements and automated customer communication.',
+      },
+      {
+        id: 'ecosystem',
+        title: 'Product & Offer Ecosystem',
+        tagline: 'Turn your creative assets and expertise into structured offers.',
+        body: 'We develop a low-ticket, mid-ticket and premium product ladder with pricing, positioning and checkout infrastructure.',
+      },
+      {
+        id: 'product',
+        title: 'First Digital Product',
+        tagline: 'We build and launch one digital product using your existing creative material.',
+        body: '',
+        examplesLabel: 'Examples include:',
+        examples: [
+          'Sample packs.',
+          'Preset collections.',
+          'Beat collections.',
+          'Production guides.',
+          'Lesson resources.',
+        ],
+      },
+      {
+        id: 'copy',
+        title: 'Sales & Website Copywriting',
+        tagline: 'Professional messaging across your website, storefront and email sequences.',
+        body: 'Designed to communicate your value, explain your offers and guide potential customers toward purchasing.',
+      },
+      {
+        id: 'content',
+        title: 'Content & Launch System',
+        tagline: 'A practical 90-day content and marketing framework.',
+        body: 'Includes content direction, reusable templates, release rollout planning and promotional structure.',
+      },
+      {
+        id: 'launch',
+        title: 'Done-for-You Launch Month',
+        tagline: 'We prepare your initial launch campaign.',
+        body: 'Includes launch emails, scheduled communications and 30 days of promotional content scripts.',
+      },
+      {
+        id: 'audit',
+        title: 'Revenue Opportunity Audit & Roadmap',
+        tagline: 'We identify opportunities within your existing music business.',
+        body: 'Includes an initial 60-minute strategy session and a written 90-day implementation roadmap.',
+      },
+    ],
   },
-  roster: {
-    eyebrow: 'Labels and rosters',
-    title: 'Infrastructure and direction for more than one artist.',
-    body: 'Scoped to the size of the roster. Reviewed by application.',
+  experience: {
+    eyebrow: '05. The experience',
+    title: 'See what your artist business could look like.',
+    videoPlaceholder: 'Demonstration video coming soon',
+    intro: 'A walkthrough of a demonstration artist business, showing:',
+    items: [
+      "The artist's branded website.",
+      'The digital storefront.',
+      'A live digital product.',
+      'Email capture and automated delivery.',
+      'The customer journey from discovery to purchase.',
+    ],
+    disclaimer:
+      "This is a demonstration of the system's capabilities, not a representation of a completed client result.",
+  },
+  additional: {
+    eyebrow: '06. Additional value',
+    title: 'Three additions to help you launch stronger.',
+    items: [
+      {
+        id: 'support',
+        title: '30-Day Post-Launch Support',
+        body: 'We review the system weekly and make reasonable adjustments to existing pages, emails and workflows.',
+      },
+      {
+        id: 'lead-magnet',
+        title: 'Lead Magnet Development',
+        body: 'We create one free downloadable resource, with its opt-in page and automated delivery.',
+      },
+      {
+        id: 'templates',
+        title: 'Social Media Template Kit',
+        body: 'Twenty branded post and story templates designed around your new identity.',
+      },
+    ],
+  },
+  implementation: {
+    eyebrow: '07. Implementation',
+    title: 'From scattered creative assets to a functioning business in 30 days.',
+    weeks: [
+      {
+        id: 'w1',
+        label: 'Week 1',
+        title: 'Strategy & Identity',
+        body: 'We establish your positioning, brand direction, commercial opportunities and visual identity.',
+      },
+      {
+        id: 'w2',
+        label: 'Week 2',
+        title: 'Infrastructure & Storefront',
+        body: 'We build your website, store, email capture and customer journey.',
+      },
+      {
+        id: 'w3',
+        label: 'Week 3',
+        title: 'Products & Offers',
+        body: 'We package your first digital product, develop your product ladder and complete your sales messaging.',
+      },
+      {
+        id: 'w4',
+        label: 'Week 4',
+        title: 'Launch Preparation',
+        body: 'We test the infrastructure, prepare launch communications, finalize the content system and bring everything live.',
+      },
+    ],
+    note: 'The timeline begins once onboarding materials, required access and initial payment have been received.',
+  },
+  bonuses: {
+    eyebrow: '08. The bonuses',
+    title: 'Included in your implementation:',
+    items: [
+      '30 days of post-launch support.',
+      'One lead magnet with automated delivery.',
+      'Twenty branded social templates.',
+    ],
+    note: 'Everything is designed to work together as part of the same business ecosystem.',
+  },
+  investment: {
+    eyebrow: '09. The investment',
+    title: 'Stop building disconnected pieces. Build the business behind your music.',
+    name: 'The Artist Business System',
+    price: '$13,982 USD',
+    optionsLabel: 'Payment options:',
+    options: ['Two payments of $6,991.', '$12,982 paid in full, saving $1,000.'],
+    capacity:
+      'We accept three new implementation projects per quarter to maintain the quality and attention required for each build.',
+    secured: 'Your implementation slot is secured once the initial payment is received.',
   },
   fit: {
-    eyebrow: 'Who this is for',
+    eyebrow: '10. Who this is for',
+    title: 'This is for artists who are ready to operate differently.',
+    lead: 'The Artist Business System is designed for:',
     for: [
-      'Artists with real material who want to be treated like a business.',
-      'Independent artists who have outgrown doing it all alone.',
-      'Labels building a roster who need shared creative and operational infrastructure.',
+      'Independent recording artists.',
+      'Music producers and beatmakers.',
+      'Musicians with existing audiences.',
+      'Music educators and creative entrepreneurs.',
+      'Artists already earning from their creative work.',
     ],
-    notFor: 'Looking for the lowest-price mix, or unlimited revisions on demand? This is not that.',
-    notManagement:
-      "I'm not your manager and I don't take a cut of your career. This is creative and technical work with a defined scope and a clear price.",
+    criteria:
+      'We generally look for artists earning at least $1,000 monthly from music-related activities or with 20,000 or more engaged followers.',
+    requirements:
+      'You should also have the creative assets, willingness to participate in onboarding and budget available to begin.',
+    notFor: 'This is not designed for someone starting their music career from zero.',
   },
   closing: {
-    title: "Let's see what you've got.",
-    body: "Tell me where you are, and we'll figure out whether this is the right fit.",
+    eyebrow: 'Your next move',
+    title: 'Your music career has already created the raw material.',
+    subtitle: "Let's build the business that brings it together.",
+    heading: 'Book an Artist Business Audit.',
+    body: "We'll review your current brand, audience, products and revenue opportunities, then determine whether The Artist Business System is the right implementation for you.",
+    capacity: 'Three implementation slots available per quarter.',
+    disclaimer:
+      'The Artist Business System provides business infrastructure, product development and launch implementation. Revenue, customer acquisition and audience growth depend on market conditions and client participation and are not guaranteed.',
   },
 }
-
-export type ArtistOffer = {
-  id: string
-  name: string
-  /** Shown only on the lower tiers; everything else is by application. */
-  price?: string
-  meta?: string
-  includesNote?: string
-  features: string[]
-}
-
-export const MONTHLY_OFFERS: ArtistOffer[] = [
-  {
-    id: 'support',
-    name: 'Artist Support',
-    price: '$2,000/mo',
-    features: [
-      'Mixing and mastering',
-      'Production and arrangement',
-      'Creative direction',
-      'Release planning and distribution support',
-      'Website management',
-      'Monthly strategy session',
-    ],
-  },
-  {
-    id: 'infrastructure',
-    name: 'Artist Infrastructure',
-    price: '$3,500/mo',
-    includesNote: 'Everything in Artist Support, plus:',
-    features: [
-      'Larger production allocation',
-      'Brand development',
-      'Audience capture and CRM',
-      'Email marketing and automation',
-      'Merch and digital product setup',
-      'Monetization strategy',
-      'Release campaign infrastructure',
-      'Monthly performance review',
-    ],
-  },
-  {
-    id: 'executive',
-    name: 'Executive Artist Partnership',
-    features: [
-      'Executive creative direction',
-      'Production, sonic identity and engineering',
-      'Full artist business infrastructure',
-      'Content and marketing systems',
-      'Multiple revenue streams',
-      'Advanced automation',
-      'Release and campaign management',
-      'Ongoing strategic development',
-    ],
-  },
-]
-
-export const PROJECT_OFFERS: ArtistOffer[] = [
-  {
-    id: 'foundation',
-    name: 'Artist Foundation',
-    meta: '90 days · 3 tracks',
-    features: [
-      'Three fully developed songs',
-      'Production, mixing and mastering',
-      'Artist identity development',
-      'Visual direction',
-      'Release strategy',
-    ],
-  },
-  {
-    id: 'growth',
-    name: 'Artist Growth',
-    meta: '6 months · 6-track EP',
-    features: [
-      'Full EP development',
-      'Production and engineering',
-      'Sonic identity',
-      'Branding and creative direction',
-      'Release infrastructure',
-      'Marketing and rollout planning',
-    ],
-  },
-  {
-    id: 'signature',
-    name: 'Signature Artist Partnership',
-    meta: '12 months · up to 10 tracks',
-    features: [
-      'Executive creative direction',
-      'Complete sonic identity',
-      'Artist positioning',
-      'Website and digital infrastructure',
-      'Release and content systems',
-      'Long-term monetization strategy',
-    ],
-  },
-]
-
-export const ROSTER_OFFERS: ArtistOffer[] = [
-  {
-    id: 'independent-label',
-    name: 'Independent Label Partnership',
-    meta: '12 months · up to 3 artists · up to 30 tracks',
-    features: [
-      'Shared sonic direction',
-      'Artist branding and release infrastructure',
-      'Centralized operational systems',
-    ],
-  },
-  {
-    id: 'advanced-label',
-    name: 'Advanced Label Partnership',
-    meta: '12 months · up to 4 artists · up to 40 tracks',
-    features: [
-      'Coordinated creative direction',
-      'Release operations',
-      'Executive reviews',
-      'Shared digital systems',
-    ],
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise Ecosystem',
-    meta: '24 months · up to 10 artists',
-    features: [
-      'Artist development',
-      'Production and sonic direction',
-      'Identity and releases',
-      'Infrastructure and technology',
-      'Marketing and audience systems',
-      'Operations and strategic oversight',
-    ],
-  },
-]

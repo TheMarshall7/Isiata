@@ -99,16 +99,16 @@ export const SEO_PAGES = {
   },
 
   systems: {
-    title: 'Systems — Backend Business Infrastructure for Artists',
+    title: 'The Artist Business System — Done-for-You Artist Business in 30 Days',
     description:
-      'Artist development partnerships: production, mixing and mastering, creative direction, and the business infrastructure that turns music into revenue.',
+      'A done-for-you business build for independent artists: brand, storefront, products, email capture and launch infrastructure, designed and launch-ready in 30 days.',
     path: '/systems',
     image: ISIATA_LOGO_URL,
     keywords: [
-      'artist development',
-      'artist business systems',
-      'mixing and mastering retainer',
+      'artist business system',
       'artist business infrastructure',
+      'music producer storefront',
+      'digital products for musicians',
       'ISIATA',
     ],
   },

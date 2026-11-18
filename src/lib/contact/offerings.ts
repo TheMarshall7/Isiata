@@ -86,13 +86,13 @@ export const CONTACT_DELIVERED: ContactOffering[] = [
   },
   {
     icon: 'solar:server-square-linear',
-    title: 'Systems',
+    title: 'The Artist Business System',
     lines: [
-      'Production, mixing and mastering, and creative direction.',
-      'The business infrastructure that turns the music into revenue.',
+      'Brand, storefront, products and launch infrastructure.',
+      'A connected artist business, built and launch-ready in 30 days.',
     ],
-    tagline: 'Sound. Systems. Revenue.',
+    tagline: 'The business behind the music.',
     href: '/systems',
-    cta: 'View systems',
+    cta: 'View the system',
   },
 ]
