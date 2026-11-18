@@ -14,6 +14,7 @@ import {
   PLATFORMS,
 } from '@/lib/artists/page-content'
 import { updateSelection, useSelection } from './selection-store'
+import { useCountUp, useInViewOnce, usePrefersReducedMotion } from './motion'
 
 const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 
@@ -367,17 +368,18 @@ export function AssetSelector() {
   const count = ASSET_STREAMS.filter((a) => selected.has(a.id)).length
   const total = ASSET_STREAMS.length
   const chosen = ASSET_STREAMS.filter((a) => selected.has(a.id))
+  const shownCount = useCountUp(count, true, 450)
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-6 items-start">
-      <div className="space-y-6">
+      <div className="space-y-8">
         {groups.map((group) => (
           <div key={group}>
-            <p className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-widest text-zinc-500">
+            <p className="mb-3 flex items-center gap-2 text-[11px] uppercase tracking-widest text-zinc-400">
               <span className={`h-1.5 w-1.5 rounded-full ${GROUP_STYLE[group].dot}`} />
               {group}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {ASSET_STREAMS.filter((a) => a.group === group).map((item) => {
                 const on = selected.has(item.id)
                 const style = GROUP_STYLE[group]
@@ -387,26 +389,18 @@ export function AssetSelector() {
                     type="button"
                     onClick={() => toggle(item.id)}
                     aria-pressed={on}
-                    className={`flex items-start gap-3 rounded-lg border p-3.5 text-left transition-all duration-300 ${
-                      on ? style.on : 'border-white/10 bg-surface-raised/30 hover:border-white/25'
+                    className={`flex items-center gap-3 rounded-lg border px-3.5 py-3 text-left transition-all duration-300 ${
+                      on ? style.on : 'border-transparent bg-white/[0.03] hover:bg-white/[0.06]'
                     }`}
                   >
                     <span
-                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition-colors ${
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
                         on ? `border-transparent ${style.dot} text-black` : 'border-white/25'
                       }`}
                     >
                       {on && <iconify-icon icon="solar:check-read-linear" width="14" height="14" />}
                     </span>
-                    <span>
-                      <span className="block text-sm text-white">{item.asset}</span>
-                      <span
-                        className={`mt-1 flex items-center gap-1.5 text-xs transition-colors ${on ? style.text : 'text-zinc-600'}`}
-                      >
-                        <iconify-icon icon="solar:arrow-right-linear" width="12" height="12" />
-                        {item.stream}
-                      </span>
-                    </span>
+                    <span className="block text-sm text-white">{item.asset}</span>
                   </button>
                 )
               })}
@@ -418,28 +412,28 @@ export function AssetSelector() {
       <div className="abs-panel abs-panel-glow p-6 md:p-8 lg:sticky lg:top-28" aria-live="polite">
         <p className="text-xs uppercase tracking-widest text-zinc-500 mb-3">Revenue streams you could package</p>
         <p className="text-6xl md:text-7xl font-light text-white tabular-nums">
-          {count}
+          <span key={count} className={count > 0 ? 'abs-count-bump' : undefined}>
+            {Math.round(shownCount)}
+          </span>
           <span className="text-2xl text-zinc-600"> / {total}</span>
         </p>
         <div className="mt-6 flex gap-1">
-          {ASSET_STREAMS.map((item) => (
-            <span
-              key={item.id}
-              className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${
-                selected.has(item.id) ? GROUP_STYLE[item.group].dot : 'bg-white/10'
-              }`}
-            />
-          ))}
+          {ASSET_STREAMS.map((item) => {
+            const lit = selected.has(item.id)
+            return (
+              <span key={item.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
+                <span
+                  className={`block h-full rounded-full transition-[width] duration-500 ease-out ${GROUP_STYLE[item.group].dot}`}
+                  style={{ width: lit ? '100%' : '0%' }}
+                />
+              </span>
+            )
+          })}
         </div>
         {chosen.length > 0 && (
-          <ul className="mt-6 space-y-1.5">
-            {chosen.map((a) => (
-              <li key={a.id} className="flex items-center gap-2 text-xs text-zinc-300">
-                <span className={`h-1 w-1 rounded-full ${GROUP_STYLE[a.group].dot}`} />
-                {a.stream}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-6 text-xs leading-relaxed text-zinc-400">
+            {chosen.map((a) => a.stream).join(' · ')}
+          </p>
         )}
         <p className="mt-6 text-sm text-zinc-400 leading-relaxed">
           {count === 0
@@ -448,7 +442,6 @@ export function AssetSelector() {
               ? 'A solid starting point. We help you package these into your first offers.'
               : 'You already have the raw material. The missing piece is the system that connects it.'}
         </p>
-        <p className="mt-4 text-[11px] text-zinc-600">Your selections are included when you apply.</p>
       </div>
     </div>
   )
@@ -469,10 +462,32 @@ const STAGE_DAYS = [
 export function LaunchTimeline() {
   const stages = ARTISTS_COPY.implementation.weeks
   const [active, setActive] = useState(0)
+  const [ref, inView] = useInViewOnce<HTMLDivElement>(0.4)
+  const reduced = usePrefersReducedMotion()
+  const touched = useRef(false)
   const progress = (STAGE_DAYS[active][1] / 60) * 100
 
+  // On first view, step through the stages once so "live in 30 days" plays out on its own.
+  // Any hover, focus or click hands control back to the visitor immediately.
+  useEffect(() => {
+    if (!inView || reduced) return
+    let step = 0
+    const id = window.setInterval(() => {
+      if (touched.current) return window.clearInterval(id)
+      step += 1
+      if (step >= stages.length) return window.clearInterval(id)
+      setActive(step)
+    }, 1100)
+    return () => window.clearInterval(id)
+  }, [inView, reduced, stages.length])
+
+  const select = (i: number) => {
+    touched.current = true
+    setActive(i)
+  }
+
   return (
-    <div>
+    <div ref={ref}>
       <div className="relative mb-10">
         <div className="flex gap-1">
           {[
@@ -500,9 +515,9 @@ export function LaunchTimeline() {
             <button
               key={stage.id}
               type="button"
-              onClick={() => setActive(i)}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
+              onClick={() => select(i)}
+              onMouseEnter={() => select(i)}
+              onFocus={() => select(i)}
               aria-pressed={on}
               className={`min-w-0 rounded-lg border p-4 lg:p-5 text-left transition-all duration-500 ${
                 on

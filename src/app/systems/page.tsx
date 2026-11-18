@@ -6,6 +6,7 @@ import { BrandOverlay } from '@/components/ui/BrandOverlay'
 import { ApplicationForm } from '@/components/artist-business/ApplicationForm'
 import { ComponentExplorer } from '@/components/artist-business/ComponentExplorer'
 import { RevenueCalculator } from '@/components/artist-business/RevenueCalculator'
+import { SolutionMerge } from '@/components/artist-business/SolutionMerge'
 import { Testimonials } from '@/components/artist-business/Testimonials'
 import {
   AssetSelector,
@@ -23,7 +24,6 @@ import {
   ARTISTS_BOOKING_HREF,
   ARTISTS_COPY,
   ARTISTS_HERO_CTA_LABEL,
-  SEPARATE_HIRES,
 } from '@/lib/artists/page-content'
 
 export const metadata: Metadata = buildPageMetadata(SEO_PAGES.systems)
@@ -139,42 +139,7 @@ export default function SystemsPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 items-stretch">
-            <div className="abs-panel p-6">
-              <p className="text-xs uppercase tracking-widest text-zinc-500 mb-5">Hiring separately</p>
-              <ul className="space-y-3">
-                {SEPARATE_HIRES.map((hire) => (
-                  <li key={hire} className="flex items-center justify-between gap-4 text-sm">
-                    <span className="flex items-center gap-2 text-zinc-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#6C6B6E]" />
-                      {hire}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest text-zinc-600">Own brief · invoice · timeline</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex items-center justify-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d8aa67]/40 text-[#f0c681]">
-                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" className="rotate-90 md:rotate-0" />
-              </span>
-            </div>
-            <div className="abs-panel abs-panel-glow abs-frame p-6 flex flex-col justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-[#d8aa67] mb-5">The Artist Business System</p>
-                <p className="text-2xl md:text-3xl text-white font-light leading-snug">
-                  One integrated implementation. One team. One connected business.
-                </p>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {['1 brief', '1 build', '30 days'].map((tag) => (
-                  <span key={tag} className="rounded-full border border-[#d8aa67]/40 px-3 py-1 text-xs text-[#f0dfc8]">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SolutionMerge />
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {c.solution.split.map((line, i) => (
@@ -304,7 +269,11 @@ export default function SystemsPage() {
                   { panel: 'abs-panel-ember', num: 'border-[#D0663F]/60 bg-[#A44429]/20 text-[#f0a184]', icon: 'solar:magnifer-zoom-in-linear' },
                 ][i % 3]
                 return (
-                  <li key={item} className={`abs-panel ${tone.panel} hover-lift flex items-center gap-5 p-5`}>
+                  <li
+                    key={item}
+                    className={`abs-panel ${tone.panel} abs-bonus flex items-center gap-5 p-5`}
+                    style={{ ['--i' as string]: i }}
+                  >
                     <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border ${tone.num}`}>
                       <iconify-icon icon={tone.icon} width="20" height="20" />
                     </span>

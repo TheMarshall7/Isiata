@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useState } from 'react'
 import { updateSelection } from './selection-store'
+import { useCountUp, useInViewOnce } from './motion'
 import {
   ARTIST_BUSINESS_INVESTMENT,
   ARTIST_BUSINESS_PAID_IN_FULL,
@@ -105,6 +106,13 @@ export function RevenueCalculator() {
     }, 400)
     return () => clearTimeout(t)
   }, [visitors, optIn, conversion, price, paidInFull, r.monthly, r.yearly])
+
+  // Numbers roll up to their values the first time the results come into view, then glide on every change.
+  const [outRef, inView] = useInViewOnce<HTMLDivElement>(0.3)
+  const shownMonthly = useCountUp(r.monthly, inView)
+  const shownYearly = useCountUp(r.yearly, inView, 900)
+  const shownRoi = useCountUp(Math.round(r.roi * 100), inView, 900)
+  const paybackIndex = r.cumulative.findIndex((v) => v >= investment)
 
   const chartMax = Math.max(investment * 1.15, r.cumulative[11])
   const investY = 100 - (investment / chartMax) * 100
@@ -210,15 +218,15 @@ export function RevenueCalculator() {
       </div>
 
       {/* Outputs */}
-      <div className="abs-panel abs-panel-glow p-6 md:p-8 flex flex-col" aria-live="polite">
+      <div ref={outRef} className="abs-panel abs-panel-glow p-6 md:p-8 flex flex-col" aria-live="polite">
         <div className="grid grid-cols-2 gap-6">
           <div>
             <p className="text-xs uppercase tracking-widest text-zinc-500 mb-1">Monthly revenue</p>
-            <p className="text-3xl md:text-5xl font-light text-white tabular-nums">{usd.format(r.monthly)}</p>
+            <p className="text-3xl md:text-5xl font-light text-white tabular-nums">{usd.format(shownMonthly)}</p>
           </div>
           <div>
             <p className="text-xs uppercase tracking-widest text-zinc-500 mb-1">12-month revenue</p>
-            <p className="text-3xl md:text-5xl font-light text-[#f0c681] tabular-nums">{usd.format(r.yearly)}</p>
+            <p className="text-3xl md:text-5xl font-light text-[#f0c681] tabular-nums">{usd.format(shownYearly)}</p>
           </div>
           <div>
             <p className="text-xs uppercase tracking-widest text-zinc-500 mb-1">Investment recovered in</p>
@@ -230,7 +238,7 @@ export function RevenueCalculator() {
               className={`text-xl md:text-2xl tabular-nums ${r.roi >= 0 ? 'text-emerald-300' : 'text-zinc-400'}`}
             >
               {r.roi >= 0 ? '+' : ''}
-              {Math.round(r.roi * 100)}%
+              {Math.round(shownRoi)}%
               <span className="ml-2 text-sm text-zinc-500">({(r.yearly / investment).toFixed(1)}x)</span>
             </p>
           </div>
@@ -286,6 +294,21 @@ export function RevenueCalculator() {
                 Investment {usd.format(investment)}
               </span>
             </div>
+            {paybackIndex >= 0 && (
+              <div
+                className="absolute inset-y-0 z-20 pointer-events-none transition-[left,opacity] duration-700 ease-out"
+                style={{
+                  left: `calc(${((paybackIndex + 0.5) / 12) * 100}% - 0.5px)`,
+                  opacity: inView ? 1 : 0,
+                  transitionDelay: inView ? '600ms' : undefined,
+                }}
+              >
+                <div className="h-full w-px bg-gradient-to-b from-[#f0c681] to-transparent" />
+                <span className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#d8aa67]/50 bg-black/70 px-2 py-0.5 text-[9px] uppercase tracking-widest text-[#f0c681]">
+                  Paid back
+                </span>
+              </div>
+            )}
             <div className="absolute inset-0 flex items-end gap-1.5">
               {r.cumulative.map((value, i) => {
                 const recovered = value >= investment
@@ -296,7 +319,10 @@ export function RevenueCalculator() {
                       className={`rounded-t-sm transition-all duration-700 ease-out ${
                         recovered ? 'bg-gradient-to-t from-[#9B6B3B] to-[#f0c681]' : 'bg-gradient-to-t from-[#1B2232] to-[#2D516C]'
                       }`}
-                      style={{ height: `${Math.max(1, (value / chartMax) * 100)}%` }}
+                      style={{
+                        height: inView ? `${Math.max(1, (value / chartMax) * 100)}%` : '0%',
+                        transitionDelay: inView ? `${i * 45}ms` : undefined,
+                      }}
                     />
                   </div>
                 )
