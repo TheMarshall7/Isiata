@@ -2958,3 +2958,103 @@
     box-shadow: 0 4px 14px -4px rgba(220, 38, 38, 0.4);
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Artist Business System page (/systems)                              */
+/* ------------------------------------------------------------------ */
+.abs-panel {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(22, 20, 17, 0.85), rgba(10, 10, 10, 0.85));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+    0 24px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.abs-panel-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(120% 80% at 100% 0%, rgba(216, 170, 103, 0.1), transparent 55%);
+}
+
+.abs-frame {
+  border-color: rgba(216, 170, 103, 0.35);
+}
+
+.abs-hero-glow {
+  background:
+    radial-gradient(50% 60% at 80% 20%, rgba(216, 170, 103, 0.16), transparent 70%),
+    radial-gradient(40% 50% at 10% 90%, rgba(217, 119, 43, 0.08), transparent 70%);
+}
+
+.abs-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #d8aa67 0%, #d8aa67 var(--fill, 50%), rgba(255, 255, 255, 0.1) var(--fill, 50%));
+  outline: none;
+  cursor: pointer;
+}
+
+.abs-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #0b0b0b;
+  border: 2px solid #f0c681;
+  box-shadow: 0 0 0 4px rgba(216, 170, 103, 0.15), 0 0 18px rgba(216, 170, 103, 0.35);
+  transition: transform 200ms;
+}
+
+.abs-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #0b0b0b;
+  border: 2px solid #f0c681;
+  box-shadow: 0 0 0 4px rgba(216, 170, 103, 0.15), 0 0 18px rgba(216, 170, 103, 0.35);
+}
+
+.abs-range:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.abs-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.abs-flow {
+  stroke-dasharray: 4 6;
+  animation: abs-flow 1.2s linear infinite;
+}
+
+@keyframes abs-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.abs-node-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: abs-node-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes abs-node-pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abs-flow,
+  .abs-node-pulse {
+    animation: none;
+  }
+}

@@ -253,3 +253,102 @@ export const ARTISTS_COPY = {
       'The Artist Business System provides business infrastructure, product development and launch implementation. Revenue, customer acquisition and audience growth depend on market conditions and client participation and are not guaranteed.',
   },
 }
+
+export const ARTIST_BUSINESS_INVESTMENT = 13982
+export const ARTIST_BUSINESS_PAID_IN_FULL = 12982
+
+export const HERO_STATS = [
+  { value: '10', label: 'Components' },
+  { value: '30', label: 'Days to launch' },
+  { value: '3', label: 'Builds per quarter' },
+  { value: '1', label: 'Connected business' },
+]
+
+/** Short labels and icons for the ten-component explorer, keyed by component id. */
+export const COMPONENT_META: Record<string, { short: string; icon: string; layer: string }> = {
+  brand: { short: 'Brand', icon: 'solar:palette-linear', layer: 'Identity' },
+  lookbook: { short: 'Lookbook', icon: 'solar:book-2-linear', layer: 'Identity' },
+  storefront: { short: 'Storefront', icon: 'solar:shop-2-linear', layer: 'Storefront' },
+  email: { short: 'Email', icon: 'solar:letter-linear', layer: 'Audience' },
+  ecosystem: { short: 'Offers', icon: 'solar:layers-linear', layer: 'Products' },
+  product: { short: 'Product', icon: 'solar:box-linear', layer: 'Products' },
+  copy: { short: 'Copy', icon: 'solar:pen-new-square-linear', layer: 'Storefront' },
+  content: { short: 'Content', icon: 'solar:calendar-linear', layer: 'Launch' },
+  launch: { short: 'Launch', icon: 'solar:rocket-2-linear', layer: 'Launch' },
+  audit: { short: 'Roadmap', icon: 'solar:map-arrow-up-linear', layer: 'Strategy' },
+}
+
+/** Opportunity checklist: each existing asset and the revenue stream it can become. */
+export const ASSET_STREAMS = [
+  { id: 'music', asset: 'Released or unreleased music', stream: 'Licensing, sales and distribution' },
+  { id: 'beats', asset: 'Beats, samples and instrumentals', stream: 'Digital product store' },
+  { id: 'knowledge', asset: 'Production or music knowledge', stream: 'Courses, guides and lessons' },
+  { id: 'audience', asset: 'A social media audience', stream: 'Owned email customer base' },
+  { id: 'brand', asset: 'A recognizable personal brand', stream: 'Premium client work' },
+  { id: 'services', asset: 'Creative services you already offer', stream: 'Structured, priced offers' },
+  { id: 'merch', asset: 'Merch or live experiences', stream: 'Brand extensions' },
+]
+
+export const SEPARATE_HIRES = [
+  'Designer',
+  'Web developer',
+  'Copywriter',
+  'Automation specialist',
+  'Marketing consultant',
+]
+
+export const PRICE_PRESETS = [
+  { label: 'Sample pack', price: 29 },
+  { label: 'Preset bank', price: 49 },
+  { label: 'Course', price: 197 },
+  { label: 'Mentorship', price: 997 },
+]
+
+export const FIT_QUESTIONS = [
+  {
+    id: 'traction',
+    question: 'Do you earn $1,000+ a month from music, or have 20,000+ engaged followers?',
+  },
+  {
+    id: 'assets',
+    question: 'Do you have creative assets to package, such as music, beats, samples or knowledge?',
+  },
+  {
+    id: 'onboarding',
+    question: 'Can you take part in onboarding and give timely approvals?',
+  },
+  {
+    id: 'budget',
+    question: 'Do you have the budget available to begin?',
+  },
+]
+
+export const ARTIST_TESTIMONIALS = [
+  {
+    name: 'Jozy',
+    role: 'Artist',
+    avatar:
+      'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc120a7728534876c64b.png',
+    screenshot:
+      'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc1276f60c1083fd0333.png',
+    highlight: 'The best investment I could have made for my music.',
+    quote: [
+      'Working with you has been the best investment I could have made for my music. Your knowledge and understanding of how to bring creative ideas to life has not only been a huge pleasure to witness, but also an undeniable asset to every song.',
+      "As I continue to grow as an artist, I think that it's extremely important to keep in mind all the concepts that you've taught me throughout the years.",
+      'I look forward to all the future projects together!',
+    ],
+  },
+  {
+    name: 'Moqemae',
+    role: 'Artist',
+    avatar:
+      'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a014e0890b9.png',
+    screenshot:
+      'https://storage.googleapis.com/msgsndr/F1J2yvd2AUT4owDs9EPl/media/67dcfc124bc20a323c0890ba.png',
+    highlight: 'Truly taken my career to the next level.',
+    quote: [
+      'Working with Isiata has truly taken my career to the next level. His mixing and mastering services have elevated my tracks to a professional standard, and his production quality is top-tier.',
+      "He delivers work in a timely manner and treats every project with the same care and passion as if it were his own. If you're looking for someone who can bring out the best in your music, I highly recommend working with Isiata. He is the FUTURE!",
+    ],
+  },
+]

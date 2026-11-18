@@ -2,39 +2,44 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
+import { ComponentExplorer } from '@/components/artist-business/ComponentExplorer'
+import { RevenueCalculator } from '@/components/artist-business/RevenueCalculator'
+import {
+  AssetSelector,
+  FitCheck,
+  IncomeModes,
+  InvestmentCard,
+  LaunchTimeline,
+  StickyAuditBar,
+} from '@/components/artist-business/OfferInteractives'
 import { buildPageMetadata } from '@/lib/seo/metadata'
 import { SEO_PAGES } from '@/lib/seo/pages'
 import {
+  ARTIST_TESTIMONIALS,
   ARTISTS_APPLY_LABEL,
   ARTISTS_BOOKING_HREF,
   ARTISTS_COPY,
   ARTISTS_HERO_CTA_LABEL,
+  HERO_STATS,
+  SEPARATE_HIRES,
 } from '@/lib/artists/page-content'
 
 export const metadata: Metadata = buildPageMetadata(SEO_PAGES.systems)
 
-const sectionBorder = 'py-24 border-t border-[#d8aa67]/15'
-const eyebrow = 'text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3'
-const h2 = 'text-3xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 max-w-3xl'
+const sectionBorder = 'py-24 md:py-32 border-t border-[#d8aa67]/15'
+const eyebrow = 'text-xs font-semibold uppercase tracking-widest text-[#d8aa67]/80 mb-4'
+const h2 = 'text-2xl md:text-4xl font-display uppercase tracking-normal text-gold mb-6 max-w-4xl leading-[1.15]'
 const bodyText = 'text-base font-light text-zinc-400 leading-[1.8] max-w-2xl'
-const card = 'rounded-lg border border-white/10 bg-surface-raised/30 p-6'
 
-function BulletList({ items, className = '' }: { items: string[]; className?: string }) {
-  return (
-    <ul className={`space-y-2 text-sm text-zinc-300 leading-relaxed ${className}`}>
-      {items.map((item) => (
-        <li key={item} className="flex gap-3">
-          <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d8aa67]" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  )
+const ADDITIONAL_ICONS: Record<string, string> = {
+  support: 'solar:shield-check-linear',
+  'lead-magnet': 'solar:magnet-linear',
+  templates: 'solar:gallery-wide-linear',
 }
 
-function CtaButton({ label }: { label: string }) {
+function CtaButton({ label, variant = 'primary' }: { label: string; variant?: 'primary' | 'secondary' }) {
   return (
-    <Link href={ARTISTS_BOOKING_HREF} className="btn-primary">
+    <Link href={ARTISTS_BOOKING_HREF} className={variant === 'primary' ? 'btn-primary cta-sheen' : 'btn-secondary'}>
       {label}
       <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
     </Link>
@@ -46,137 +51,244 @@ export default function SystemsPage() {
 
   return (
     <>
-      <Container bordered className="pt-28 md:pt-32 pb-16 md:pb-20">
-        <Section reveal>
-          <p className={eyebrow}>{c.hero.eyebrow}</p>
-          <h1 className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold">
-            {c.hero.title}
-          </h1>
-          <div className="max-w-2xl space-y-5 text-base font-light text-[#d5c8b8] leading-[1.8]">
-            {c.hero.lede.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <p className="mt-8 text-white font-medium max-w-2xl">{c.hero.tagline}</p>
-          <p className="mt-2 text-lg text-gold">{c.hero.investment}</p>
-          <div className="mt-10">
-            <CtaButton label={ARTISTS_HERO_CTA_LABEL} />
-          </div>
-        </Section>
-      </Container>
+      {/* Hero */}
+      <div id="abs-hero" className="relative overflow-hidden">
+        <div aria-hidden className="abs-hero-glow pointer-events-none absolute inset-0" />
+        <Container bordered className="relative pt-28 md:pt-36 pb-16 md:pb-24">
+          <Section reveal>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#d8aa67]/30 bg-black/30 px-3 py-1.5 mb-8">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#d8aa67] animate-pulse" />
+              <span className="text-[11px] uppercase tracking-widest text-[#f0dfc8]">{c.hero.eyebrow}</span>
+            </div>
+            <h1 className="page-hero-title mb-8 font-display uppercase tracking-normal text-gold max-w-5xl">
+              {c.hero.title}
+            </h1>
+            <div className="max-w-2xl space-y-5 text-base md:text-lg font-light text-[#d5c8b8] leading-[1.8]">
+              {c.hero.lede.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+            <p className="mt-8 text-white font-medium max-w-2xl">{c.hero.tagline}</p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <CtaButton label={ARTISTS_HERO_CTA_LABEL} />
+              <a href="#roi" className="btn-secondary">
+                Calculate your return
+                <iconify-icon icon="solar:calculator-linear" width="16" height="16" />
+              </a>
+            </div>
+            <p className="mt-4 text-sm text-zinc-500">{c.hero.investment}</p>
 
+            <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10">
+              {HERO_STATS.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse bg-[#070707] p-5 md:p-6">
+                  <dt className="text-[10px] uppercase tracking-widest text-zinc-500">{stat.label}</dt>
+                  <dd className="mb-1 text-4xl md:text-5xl font-light text-white tabular-nums">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Section>
+        </Container>
+      </div>
+
+      {/* 01 Problem */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
-          <p className={eyebrow}>{c.problem.eyebrow}</p>
-          <h2 className={h2}>{c.problem.title}</h2>
-          <p className={`${bodyText} mb-4`}>{c.problem.intro}</p>
-          <p className="text-white font-medium mb-6">{c.problem.question}</p>
-          <div className={`${bodyText} space-y-4 mb-8`}>
-            {c.problem.body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <p className={eyebrow}>{c.problem.eyebrow}</p>
+              <h2 className={h2}>{c.problem.title}</h2>
+              <p className={`${bodyText} mb-4`}>{c.problem.intro}</p>
+              <p className="text-xl text-white font-light mb-6">{c.problem.question}</p>
+              <div className={`${bodyText} space-y-4`}>
+                {c.problem.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+            <div className="lg:pt-12">
+              <IncomeModes />
+              <div className="mt-6 border-l-2 border-[#d8aa67]/60 pl-5">
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mb-1">{c.problem.resultLabel}</p>
+                <p className="text-[#d5c8b8] mb-3">{c.problem.result}</p>
+                <p className="text-gold font-medium">{c.problem.punch}</p>
+              </div>
+            </div>
           </div>
-          <p className="text-xs uppercase tracking-widest text-zinc-500 mb-2">{c.problem.resultLabel}</p>
-          <p className="text-[#d5c8b8] max-w-2xl mb-8">{c.problem.result}</p>
-          <p className="text-gold font-medium max-w-2xl">{c.problem.punch}</p>
         </Section>
       </Container>
 
+      {/* 02 Opportunity */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.opportunity.eyebrow}</p>
           <h2 className={h2}>{c.opportunity.title}</h2>
-          <p className={`${bodyText} mb-6`}>{c.opportunity.lead}</p>
-          <BulletList items={c.opportunity.items} className="mb-10 max-w-2xl" />
-          <div className="space-y-1 max-w-2xl">
-            {c.opportunity.punch.map((line, index) => (
-              <p key={line} className={index === 0 ? 'text-zinc-400' : 'text-white font-medium'}>
-                {line}
-              </p>
-            ))}
+          <p className={`${bodyText} mb-10`}>{c.opportunity.lead} Select what applies to you.</p>
+          <AssetSelector />
+          <div className="mt-12 max-w-3xl">
+            <p className="text-lg text-zinc-400">{c.opportunity.punch[0]}</p>
+            <p className="text-2xl md:text-3xl text-white font-light leading-snug mt-2">{c.opportunity.punch[1]}</p>
           </div>
         </Section>
       </Container>
 
+      {/* 03 Solution */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.solution.eyebrow}</p>
           <h2 className={h2}>{c.solution.title}</h2>
-          <div className={`${bodyText} space-y-4 mb-10`}>
+          <div className={`${bodyText} space-y-4 mb-12`}>
             {c.solution.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {c.solution.split.map((line) => (
-              <div key={line} className={card}>
-                <p className="text-lg font-display uppercase tracking-normal text-gold">{line}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 items-stretch">
+            <div className="abs-panel p-6">
+              <p className="text-xs uppercase tracking-widest text-zinc-500 mb-5">Hiring separately</p>
+              <ul className="space-y-3">
+                {SEPARATE_HIRES.map((hire) => (
+                  <li key={hire} className="flex items-center justify-between gap-4 text-sm">
+                    <span className="text-zinc-300">{hire}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-zinc-600">Own brief · invoice · timeline</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex items-center justify-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d8aa67]/40 text-[#f0c681]">
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" className="rotate-90 md:rotate-0" />
+              </span>
+            </div>
+            <div className="abs-panel abs-panel-glow abs-frame p-6 flex flex-col justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-[#d8aa67] mb-5">The Artist Business System</p>
+                <p className="text-2xl md:text-3xl text-white font-light leading-snug">
+                  One integrated implementation. One team. One connected business.
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {['1 brief', '1 build', '30 days'].map((tag) => (
+                  <span key={tag} className="rounded-full border border-[#d8aa67]/40 px-3 py-1 text-xs text-[#f0dfc8]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {c.solution.split.map((line, i) => (
+              <div key={line} className="flex items-center gap-4 rounded-lg border border-white/10 bg-surface-raised/30 p-5">
+                <span className="font-mono text-xs text-[#d8aa67]">{String(i + 1).padStart(2, '0')}</span>
+                <p className="text-sm text-zinc-200">{line}</p>
               </div>
             ))}
           </div>
         </Section>
       </Container>
 
+      {/* 04 What we build */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.build.eyebrow}</p>
-          <h2 className={`${h2} mb-10`}>{c.build.title}</h2>
-          <ol className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {c.build.components.map((component, index) => (
-              <li key={component.id} className={card}>
-                <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">
-                  {String(index + 1).padStart(2, '0')}
-                </p>
-                <h3 className="text-xl font-display uppercase tracking-normal text-gold mb-3">
-                  {component.title}
-                </h3>
-                <p className="text-sm text-white leading-relaxed mb-2">{component.tagline}</p>
-                {component.body && <p className="text-sm text-zinc-400 leading-relaxed">{component.body}</p>}
-                {'examples' in component && component.examples && (
-                  <>
-                    <p className="mt-3 mb-2 text-xs uppercase tracking-widest text-zinc-500">
-                      {component.examplesLabel}
-                    </p>
-                    <BulletList items={component.examples} />
-                  </>
-                )}
-              </li>
-            ))}
-          </ol>
+          <h2 className={`${h2} mb-4`}>{c.build.title}</h2>
+          <p className={`${bodyText} mb-12`}>Explore each component. Every piece connects back to the same business.</p>
+          <ComponentExplorer />
         </Section>
       </Container>
 
+      {/* 05 Experience */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.experience.eyebrow}</p>
-          <h2 className={`${h2} mb-10`}>{c.experience.title}</h2>
-          {/* INSERT DEMONSTRATION VIDEO HERE */}
-          <div
-            role="img"
-            aria-label={c.experience.videoPlaceholder}
-            className="mb-10 flex aspect-video w-full max-w-3xl items-center justify-center rounded-lg border border-dashed border-[#d8aa67]/30 bg-surface-raised/30"
-          >
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              {c.experience.videoPlaceholder}
-            </p>
+          <h2 className={`${h2} mb-12`}>{c.experience.title}</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8 items-center">
+            {/* INSERT DEMONSTRATION VIDEO HERE */}
+            <div
+              role="img"
+              aria-label={c.experience.videoPlaceholder}
+              className="abs-panel abs-frame relative flex aspect-video w-full items-center justify-center overflow-hidden"
+            >
+              <div aria-hidden className="abs-hero-glow absolute inset-0" />
+              <div className="relative flex flex-col items-center gap-4">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full border border-[#d8aa67]/60 bg-black/40">
+                  <iconify-icon icon="solar:play-bold" width="22" height="22" className="text-[#f0c681] ml-1" />
+                </span>
+                <p className="text-xs uppercase tracking-widest text-zinc-400">{c.experience.videoPlaceholder}</p>
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-zinc-400 mb-5">{c.experience.intro}</p>
+              <ol className="space-y-3">
+                {c.experience.items.map((item, i) => (
+                  <li key={item} className="flex items-center gap-4">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 font-mono text-[11px] text-[#f0c681]">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm text-zinc-200">{item}</span>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 text-xs text-zinc-600 leading-relaxed">{c.experience.disclaimer}</p>
+            </div>
           </div>
-          <p className={`${bodyText} mb-4`}>{c.experience.intro}</p>
-          <ol className="mb-8 max-w-2xl list-decimal space-y-2 pl-5 text-sm text-zinc-300 leading-relaxed marker:text-[#d8aa67]">
-            {c.experience.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ol>
-          <p className="text-sm text-zinc-500 max-w-2xl">{c.experience.disclaimer}</p>
         </Section>
       </Container>
 
+      {/* Testimonials */}
+      <Container bordered className={sectionBorder}>
+        <Section reveal>
+          <p className={eyebrow}>In their words</p>
+          <h2 className={`${h2} mb-12`}>Artists who have worked with Isiata.</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {ARTIST_TESTIMONIALS.map((t) => (
+              <figure key={t.name} className="abs-panel abs-panel-glow p-6 md:p-8 flex flex-col">
+                <iconify-icon icon="solar:quote-up-square-bold" width="28" height="28" className="text-[#d8aa67]/70 mb-5" />
+                <p className="text-2xl md:text-3xl font-light text-white leading-snug mb-6">“{t.highlight}”</p>
+                <blockquote className="space-y-3 text-sm text-zinc-400 leading-relaxed flex-1">
+                  {t.quote.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </blockquote>
+                <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
+                  <img
+                    src={t.avatar}
+                    alt=""
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                    className="h-12 w-12 rounded-full border border-[#d8aa67]/40 object-cover"
+                  />
+                  <div className="flex-1">
+                    <p className="text-white font-medium">{t.name}</p>
+                    <p className="text-xs text-zinc-500">{t.role}</p>
+                  </div>
+                  <a
+                    href={t.screenshot}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] uppercase tracking-widest text-zinc-500 hover:text-[#f0c681] transition-colors"
+                  >
+                    View original
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </Section>
+      </Container>
+
+      {/* 06 Additional value */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.additional.eyebrow}</p>
-          <h2 className={`${h2} mb-10`}>{c.additional.title}</h2>
+          <h2 className={`${h2} mb-12`}>{c.additional.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {c.additional.items.map((item) => (
-              <div key={item.id} className={card}>
+              <div key={item.id} className="abs-panel hover-lift p-6 md:p-8">
+                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[#d8aa67]/40 bg-[#d8aa67]/10">
+                  <iconify-icon icon={ADDITIONAL_ICONS[item.id]} width="22" height="22" className="text-[#f0c681]" />
+                </span>
                 <h3 className="text-xl font-display uppercase tracking-normal text-gold mb-3">{item.title}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{item.body}</p>
               </div>
@@ -185,73 +297,114 @@ export default function SystemsPage() {
         </Section>
       </Container>
 
+      {/* 07 Implementation */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.implementation.eyebrow}</p>
-          <h2 className={`${h2} mb-10`}>{c.implementation.title}</h2>
-          <ol className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {c.implementation.weeks.map((week) => (
-              <li key={week.id} className={card}>
-                <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">{week.label}</p>
-                <h3 className="text-lg font-display uppercase tracking-normal text-gold mb-2">{week.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{week.body}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-6 text-sm text-zinc-500 max-w-2xl">{c.implementation.note}</p>
+          <h2 className={`${h2} mb-12`}>{c.implementation.title}</h2>
+          <LaunchTimeline />
+          <p className="mt-8 text-sm text-zinc-500 max-w-2xl">{c.implementation.note}</p>
         </Section>
       </Container>
 
+      {/* 08 Bonuses */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
-          <p className={eyebrow}>{c.bonuses.eyebrow}</p>
-          <h2 className={h2}>{c.bonuses.title}</h2>
-          <BulletList items={c.bonuses.items} className="mb-6 max-w-2xl" />
-          <p className={bodyText}>{c.bonuses.note}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <p className={eyebrow}>{c.bonuses.eyebrow}</p>
+              <h2 className={h2}>{c.bonuses.title}</h2>
+              <p className={bodyText}>{c.bonuses.note}</p>
+            </div>
+            <ul className="space-y-3">
+              {c.bonuses.items.map((item, i) => (
+                <li key={item} className="abs-panel flex items-center gap-5 p-5">
+                  <span className="font-mono text-xs text-[#d8aa67]">+{String(i + 1).padStart(2, '0')}</span>
+                  <span className="text-zinc-200">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Section>
       </Container>
 
+      {/* ROI calculator */}
+      <div id="roi" className="scroll-mt-24">
+        <Container bordered className={sectionBorder}>
+          <Section reveal>
+            <p className={eyebrow}>Run the numbers</p>
+            <h2 className={h2}>See what a connected business could return.</h2>
+            <p className={`${bodyText} mb-12`}>
+              Move the sliders to match your audience and offer. Watch how traffic becomes subscribers,
+              subscribers become customers, and when the investment pays for itself.
+            </p>
+            <RevenueCalculator />
+          </Section>
+        </Container>
+      </div>
+
+      {/* 09 Investment */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.investment.eyebrow}</p>
-          <h2 className={`${h2} mb-10`}>{c.investment.title}</h2>
-          <div className={`${card} max-w-xl`}>
-            <h3 className="text-xl font-display uppercase tracking-normal text-gold">{c.investment.name}</h3>
-            <p className="mt-2 text-3xl text-white font-light">{c.investment.price}</p>
-            <p className="mt-6 text-xs uppercase tracking-widest text-zinc-500">{c.investment.optionsLabel}</p>
-            <BulletList items={c.investment.options} className="mt-3" />
-          </div>
-          <p className={`${bodyText} mt-8 mb-3`}>{c.investment.capacity}</p>
-          <p className="text-sm text-zinc-500 max-w-2xl">{c.investment.secured}</p>
+          <h2 className={`${h2} mb-12`}>{c.investment.title}</h2>
+          <InvestmentCard ctaLabel={ARTISTS_HERO_CTA_LABEL} />
         </Section>
       </Container>
 
+      {/* 10 Fit */}
       <Container bordered className={sectionBorder}>
         <Section reveal>
-          <p className={eyebrow}>{c.fit.eyebrow}</p>
-          <h2 className={h2}>{c.fit.title}</h2>
-          <p className={`${bodyText} mb-6`}>{c.fit.lead}</p>
-          <BulletList items={c.fit.for} className="mb-8 max-w-2xl" />
-          <div className={`${bodyText} space-y-4`}>
-            <p>{c.fit.criteria}</p>
-            <p>{c.fit.requirements}</p>
-            <p className="text-white font-medium">{c.fit.notFor}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <p className={eyebrow}>{c.fit.eyebrow}</p>
+              <h2 className={h2}>{c.fit.title}</h2>
+              <p className={`${bodyText} mb-5`}>{c.fit.lead}</p>
+              <ul className="mb-8 space-y-2.5">
+                {c.fit.for.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                    <iconify-icon icon="solar:check-circle-linear" width="16" height="16" className="mt-0.5 shrink-0 text-[#d8aa67]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={`${bodyText} space-y-4`}>
+                <p>{c.fit.criteria}</p>
+                <p>{c.fit.requirements}</p>
+                <p className="text-white font-medium">{c.fit.notFor}</p>
+              </div>
+            </div>
+            <div className="lg:pt-12">
+              <FitCheck ctaLabel={ARTISTS_APPLY_LABEL} />
+            </div>
           </div>
         </Section>
       </Container>
 
-      <Container bordered className={sectionBorder}>
-        <Section reveal>
-          <p className={eyebrow}>{c.closing.eyebrow}</p>
-          <h2 className={h2}>{c.closing.title}</h2>
-          <p className="text-lg text-[#d5c8b8] mb-8 max-w-2xl">{c.closing.subtitle}</p>
-          <h3 className="text-2xl font-display uppercase tracking-normal text-gold mb-3">{c.closing.heading}</h3>
-          <p className={`${bodyText} mb-4`}>{c.closing.body}</p>
-          <p className="text-white font-medium mb-8">{c.closing.capacity}</p>
-          <CtaButton label={ARTISTS_APPLY_LABEL} />
-          <p className="mt-12 text-xs text-zinc-500 leading-relaxed max-w-2xl">{c.closing.disclaimer}</p>
-        </Section>
-      </Container>
+      {/* Closing */}
+      <div id="abs-closing" className="relative overflow-hidden">
+        <div aria-hidden className="abs-hero-glow pointer-events-none absolute inset-0 rotate-180" />
+        <Container bordered className={`relative ${sectionBorder}`}>
+          <Section reveal>
+            <div className="mx-auto max-w-3xl text-center">
+              <p className={eyebrow}>{c.closing.eyebrow}</p>
+              <h2 className="text-2xl md:text-4xl font-display uppercase tracking-normal text-gold mb-4 leading-[1.15]">
+                {c.closing.title}
+              </h2>
+              <p className="text-xl md:text-2xl text-[#d5c8b8] font-light mb-12">{c.closing.subtitle}</p>
+              <div className="abs-panel abs-panel-glow abs-frame p-8 md:p-10 text-left md:text-center">
+                <h3 className="text-2xl font-display uppercase tracking-normal text-gold mb-4">{c.closing.heading}</h3>
+                <p className="text-base text-zinc-400 leading-[1.8] mb-6">{c.closing.body}</p>
+                <p className="text-white font-medium mb-8">{c.closing.capacity}</p>
+                <CtaButton label={ARTISTS_APPLY_LABEL} />
+              </div>
+              <p className="mt-12 text-xs text-zinc-600 leading-relaxed">{c.closing.disclaimer}</p>
+            </div>
+          </Section>
+        </Container>
+      </div>
+
+      <StickyAuditBar label="Book your audit" />
     </>
   )
 }
