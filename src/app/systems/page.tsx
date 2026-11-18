@@ -10,7 +10,6 @@ import { Testimonials } from '@/components/artist-business/Testimonials'
 import {
   AssetSelector,
   FitCheck,
-  HeroFlow,
   IncomeModes,
   InvestmentCard,
   LaunchTimeline,
@@ -79,14 +78,12 @@ export default function SystemsPage() {
                 <iconify-icon icon="solar:calculator-linear" width="16" height="16" />
               </a>
             </div>
-            <div className="mt-16">
-              <HeroFlow />
-            </div>
           </Section>
         </Container>
       </div>
 
       {/* 01 Problem */}
+      <div className="abs-section-ember">
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -113,6 +110,7 @@ export default function SystemsPage() {
           </div>
         </Section>
       </Container>
+      </div>
 
       {/* 02 Opportunity */}
       <div id="opportunity" className="abs-section-indigo scroll-mt-24">
@@ -202,6 +200,7 @@ export default function SystemsPage() {
       </div>
 
       {/* 05 Experience */}
+      <div className="abs-section-gold">
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.experience.eyebrow}</p>
@@ -238,6 +237,7 @@ export default function SystemsPage() {
           </div>
         </Section>
       </Container>
+      </div>
 
       {/* Testimonials */}
       <Container bordered className={sectionBorder}>
@@ -249,13 +249,14 @@ export default function SystemsPage() {
       </Container>
 
       {/* 06 Additional value */}
+      <div className="abs-section-ember">
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <p className={eyebrow}>{c.additional.eyebrow}</p>
           <h2 className={`${h2} mb-12`}>{c.additional.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {c.additional.items.map((item, i) => (
-              <div key={item.id} className="abs-panel hover-lift p-6 md:p-8">
+              <div key={item.id} className={`abs-panel ${['abs-panel-gold', 'abs-panel-indigo', 'abs-panel-ember'][i]} hover-lift p-6 md:p-8`}>
                 <span
                   className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full border ${
                     ['border-[#d8aa67]/40 bg-[#d8aa67]/10 text-[#f0c681]', 'border-[#4F86AE]/60 bg-[#2D516C]/20 text-[#9cc3df]', 'border-[#D0663F]/50 bg-[#A44429]/15 text-[#f0a184]'][i]
@@ -270,6 +271,7 @@ export default function SystemsPage() {
           </div>
         </Section>
       </Container>
+      </div>
 
       {/* 07 Implementation */}
       <div className="abs-section-indigo">
@@ -285,6 +287,7 @@ export default function SystemsPage() {
       </div>
 
       {/* 08 Bonuses */}
+      <div className="abs-section-gold">
       <Container bordered className={sectionBorder}>
         <Section reveal>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -294,16 +297,27 @@ export default function SystemsPage() {
               <p className={bodyText}>{c.bonuses.note}</p>
             </div>
             <ul className="space-y-3">
-              {c.bonuses.items.map((item, i) => (
-                <li key={item} className="abs-panel flex items-center gap-5 p-5">
-                  <span className="font-mono text-xs text-[#D0663F]">+{String(i + 1).padStart(2, '0')}</span>
-                  <span className="text-zinc-200">{item}</span>
-                </li>
-              ))}
+              {c.bonuses.items.map((item, i) => {
+                const tone = [
+                  { panel: 'abs-panel-gold', num: 'border-[#f0c681]/60 bg-[#f0c681]/10 text-[#f0c681]', icon: 'solar:shield-check-linear' },
+                  { panel: 'abs-panel-bronze', num: 'border-[#c98a45]/60 bg-[#b0783c]/15 text-[#e0a869]', icon: 'solar:magnet-linear' },
+                  { panel: 'abs-panel-ember', num: 'border-[#D0663F]/60 bg-[#A44429]/20 text-[#f0a184]', icon: 'solar:magnifer-zoom-in-linear' },
+                ][i % 3]
+                return (
+                  <li key={item} className={`abs-panel ${tone.panel} hover-lift flex items-center gap-5 p-5`}>
+                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border ${tone.num}`}>
+                      <iconify-icon icon={tone.icon} width="20" height="20" />
+                    </span>
+                    <span className="flex-1 text-[#f0dfc8]">{item}</span>
+                    <span className="font-mono text-xs text-[#d8aa67]/70">+{String(i + 1).padStart(2, '0')}</span>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </Section>
       </Container>
+      </div>
 
       {/* 09 Fit */}
       <div id="fit" className="scroll-mt-24">

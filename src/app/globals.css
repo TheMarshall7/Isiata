@@ -2987,9 +2987,10 @@
 
 .abs-hero-glow {
   background:
-    radial-gradient(50% 60% at 85% 15%, rgba(216, 170, 103, 0.16), transparent 70%),
-    radial-gradient(45% 55% at 5% 85%, rgba(45, 81, 108, 0.35), transparent 70%),
-    radial-gradient(35% 40% at 60% 100%, rgba(164, 68, 41, 0.12), transparent 70%);
+    radial-gradient(55% 65% at 90% 10%, rgba(240, 198, 129, 0.26), transparent 70%),
+    radial-gradient(45% 55% at 5% 85%, rgba(45, 81, 108, 0.05), transparent 70%),
+    radial-gradient(40% 45% at 55% 100%, rgba(208, 102, 63, 0.03), transparent 70%),
+    radial-gradient(35% 45% at 0% 10%, rgba(176, 120, 60, 0.18), transparent 70%);
 }
 
 .abs-panel-indigo {
@@ -2998,7 +2999,39 @@
 }
 
 .abs-section-indigo {
-  background: linear-gradient(180deg, transparent, rgba(27, 34, 50, 0.35) 30%, rgba(27, 34, 50, 0.35) 70%, transparent);
+  background: linear-gradient(180deg, transparent, rgba(27, 34, 50, 0.07) 30%, rgba(27, 34, 50, 0.07) 70%, transparent);
+}
+
+/* Molten gold / bronze / ember accents pulled from the brand banner */
+.abs-section-gold {
+  background:
+    radial-gradient(55% 70% at 0% 40%, rgba(240, 198, 129, 0.14), transparent 70%),
+    radial-gradient(45% 60% at 100% 70%, rgba(164, 68, 41, 0.025), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(58, 38, 14, 0.28) 30%, rgba(58, 38, 14, 0.28) 70%, transparent);
+}
+
+.abs-section-ember {
+  background:
+    radial-gradient(50% 65% at 100% 30%, rgba(208, 102, 63, 0.025), transparent 70%),
+    radial-gradient(40% 55% at 0% 80%, rgba(216, 170, 103, 0.12), transparent 70%);
+}
+
+.abs-panel-gold {
+  background: linear-gradient(150deg, rgba(62, 42, 16, 0.75), rgba(10, 7, 5, 0.92) 70%);
+  border-color: rgba(216, 170, 103, 0.4);
+  box-shadow: 0 0 40px -18px rgba(240, 198, 129, 0.45), 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.abs-panel-bronze {
+  background: linear-gradient(150deg, rgba(74, 44, 20, 0.7), rgba(10, 7, 5, 0.92) 70%);
+  border-color: rgba(176, 120, 60, 0.45);
+  box-shadow: 0 0 40px -18px rgba(176, 120, 60, 0.45), 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.abs-panel-ember {
+  background: linear-gradient(150deg, rgba(80, 30, 16, 0.7), rgba(10, 7, 5, 0.92) 70%);
+  border-color: rgba(208, 102, 63, 0.45);
+  box-shadow: 0 0 40px -18px rgba(208, 102, 63, 0.5), 0 24px 60px -30px rgba(0, 0, 0, 0.8);
 }
 
 /* Hero flow: a beam travels from assets to revenue, lighting each node */

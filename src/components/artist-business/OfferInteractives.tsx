@@ -492,7 +492,7 @@ export function LaunchTimeline() {
           <span className="text-right text-[#9cc3df]">Optimize · Days 31–60</span>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-5 items-stretch gap-3">
         {stages.map((stage, i) => {
           const on = i === active
           const optimize = i === 4
@@ -504,7 +504,7 @@ export function LaunchTimeline() {
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
               aria-pressed={on}
-              className={`rounded-lg border p-5 text-left transition-all duration-500 ${
+              className={`min-w-0 rounded-lg border p-4 lg:p-5 text-left transition-all duration-500 ${
                 on
                   ? optimize
                     ? 'border-[#4F86AE]/70 bg-[#2D516C]/20 md:-translate-y-1'
@@ -521,7 +521,7 @@ export function LaunchTimeline() {
                 )}
               </div>
               <h3
-                className={`text-base font-display uppercase tracking-normal mb-2 transition-colors ${
+                className={`text-sm lg:text-[13px] xl:text-sm font-display uppercase tracking-normal mb-2 min-h-[3.5rem] [overflow-wrap:anywhere] transition-colors ${
                   on ? (optimize ? 'text-[#c9d6e0]' : 'text-gold') : 'text-zinc-400'
                 }`}
               >
