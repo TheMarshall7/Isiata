@@ -123,7 +123,7 @@ export default function ToolsPage() {
         <Container bordered className="pb-24">
           <Section reveal>
             <Link
-              href="/systems"
+              href="/services"
               className="group block border border-[#d8aa67]/20 bg-transparent p-8 transition-all duration-500 hover:border-[#d8aa67]/65 md:p-10"
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">

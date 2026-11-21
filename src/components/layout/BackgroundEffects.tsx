@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 export function BackgroundEffects() {
   const pathname = usePathname()
   // Systems keeps the grayscale ambient; the main site gets warm energy light
-  const warm = !pathname?.startsWith('/systems')
+  const warm = !pathname?.startsWith('/services/business/artist-business-system')
 
   return (
     <>

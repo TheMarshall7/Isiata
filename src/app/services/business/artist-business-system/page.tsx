@@ -56,7 +56,7 @@ export default function SystemsPage() {
       {/* Hero */}
       <div id="abs-hero" className="relative overflow-hidden">
         <div aria-hidden className="abs-hero-glow pointer-events-none absolute inset-0" />
-        <Container bordered className="relative pt-28 md:pt-36 pb-16 md:pb-24">
+        <Container bordered className="relative pt-10 md:pt-16 pb-16 md:pb-24">
           <Section reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#d8aa67]/30 bg-black/30 px-3 py-1.5 mb-8">
               <span className="h-1.5 w-1.5 rounded-full bg-[#d8aa67] animate-pulse" />

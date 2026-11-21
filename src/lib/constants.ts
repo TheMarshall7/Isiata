@@ -28,7 +28,7 @@ export const NAV_LINKS_LEFT = [
 
 export const NAV_LINKS_RIGHT = [
   { href: '/objects', label: 'Garments' },
-  { href: '/systems', label: 'Systems' },
+  { href: '/services', label: 'Services' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -40,7 +40,9 @@ export const FOOTER_LINKS = {
     { href: '/sound', label: 'Music' },
     { href: '/objects', label: 'Garments' },
     { href: '/tools', label: 'Tools' },
-    { href: '/systems', label: 'Systems' },
+    { href: '/services', label: 'Services' },
+    { href: '/services/music', label: 'Music Services' },
+    { href: '/services/business', label: 'Business Services' },
   ],
   about: [
     { href: '/about', label: 'About Isiata' },

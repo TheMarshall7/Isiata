@@ -90,8 +90,8 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
   },
   {
     slug: 'isiata-systems',
-    href: '/systems',
-    title: 'Systems',
+    href: '/services',
+    title: 'Services',
     description: 'Sound, systems and revenue in one partnership.',
     image: '/brand/isiata-systems-icon.png',
     imageFit: 'contain',

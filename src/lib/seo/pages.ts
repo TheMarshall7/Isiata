@@ -98,11 +98,39 @@ export const SEO_PAGES = {
     ],
   },
 
+  services: {
+    title: 'Services — Music Production and Artist Business Builds',
+    description:
+      'Two routes for independent artists: Music gets your song finished and released, Business builds the brand, store and system around it. Earlier payments credit toward bigger builds.',
+    path: '/services',
+    keywords: ['artist services', 'music production services', 'artist business', 'ISIATA services'],
+  },
+  servicesBusiness: {
+    title: 'Business Services — Brand, Store and Artist Business Builds',
+    description:
+      'Paid Teardown, Brand and Lookbook Starter, Business Starter, the Artist Business System and a January cohort. Brand, store, email and products built for independent artists.',
+    path: '/services/business',
+    keywords: ['artist brand identity', 'music artist website and store', 'artist lookbook', 'artist business system', 'ISIATA'],
+  },
+  servicesMusic: {
+    title: 'Music Services — Finish, Mix, Master and Release Your Song',
+    description:
+      'Finish My Track, Release-Ready and Signature Singles, EP and Album Builds. Hear real before and afters, then pick the tier that gets your song finished and released.',
+    path: '/services/music',
+    keywords: [
+      'mixing and mastering',
+      'online mastering',
+      'mix and master service',
+      'hip hop mixing',
+      'vocal mixing',
+      'ISIATA',
+    ],
+  },
   systems: {
     title: 'The Artist Business System — Done-for-You Artist Business in 30 Days',
     description:
       'A done-for-you business build for independent artists: brand, storefront, products, email capture and launch infrastructure, designed and launch-ready in 30 days.',
-    path: '/systems',
+    path: '/services/business/artist-business-system',
     image: ISIATA_LOGO_URL,
     keywords: [
       'artist business system',

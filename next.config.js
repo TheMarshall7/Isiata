@@ -11,11 +11,15 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  // Old Systems sub-pages and the short-lived /artists URL all land on /systems.
+  // Systems became Services. The old Systems page now lives under Services → Business,
+  // and the short-lived /mix-master page folded into Services → Music.
   async redirects() {
+    const system = '/services/business/artist-business-system'
     return [
-      { source: '/artists', destination: '/systems', permanent: true },
-      { source: '/systems/:path+', destination: '/systems', permanent: true },
+      { source: '/artists', destination: system, permanent: true },
+      { source: '/systems', destination: system, permanent: true },
+      { source: '/systems/:path+', destination: system, permanent: true },
+      { source: '/mix-master', destination: '/services/music', permanent: true },
     ]
   },
   // Unreleased campaign: unlisted and never indexed. Not mentioned in robots.txt on purpose.

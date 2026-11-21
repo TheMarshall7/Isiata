@@ -3,50 +3,7 @@ import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { PageTitle } from '@/components/ui/PageTitle'
-import {
-  CONTACT_ALONGSIDE,
-  CONTACT_DELIVERED,
-  CONTACT_INQUIRY_HREF,
-  type ContactOffering,
-} from '@/lib/contact/offerings'
-
-function OfferingCard({ offering }: { offering: ContactOffering }) {
-  return (
-    <Link
-      href={offering.href}
-      className="group flashlight-card hover-glow block h-full border border-[#d8aa67]/20 bg-transparent p-10 transition-all duration-300 hover:border-[#d8aa67]/65 lg:p-12"
-    >
-      <iconify-icon
-        icon={offering.icon}
-        width="48"
-        height="48"
-        className="icon-hover-drift mb-6 text-gold"
-      />
-      <h3 className="mb-6 text-2xl font-semibold text-gold">{offering.title}</h3>
-      <div className="mb-6 space-y-1">
-        {offering.lines.map((line) => (
-          <p key={line} className="leading-relaxed text-zinc-400">
-            {line}
-          </p>
-        ))}
-      </div>
-      <p className="mb-8 text-sm italic text-zinc-500">{offering.tagline}</p>
-      <span className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-all duration-300 group-hover:gap-3">
-        {offering.cta}
-        <iconify-icon icon="solar:arrow-right-linear" width="16" height="16" />
-      </span>
-    </Link>
-  )
-}
-
-function SectionHeader({ label, description }: { label: string; description: string }) {
-  return (
-    <div className="mb-10 max-w-2xl">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{label}</p>
-      <p className="text-lg leading-relaxed text-zinc-400">{description}</p>
-    </div>
-  )
-}
+import { CONTACT_INQUIRY_HREF } from '@/lib/contact/offerings'
 
 export default function ContactPage() {
   return (
@@ -64,10 +21,10 @@ export default function ContactPage() {
               </div>
 
               <div data-reveal style={{ '--d': 2 } as CSSProperties} className="max-w-2xl space-y-5 text-lg leading-relaxed text-gold md:text-xl">
-                <p>Select what fits below, then send a message to get started.</p>
+                <p>Send a message to get started.</p>
                 <p className="text-[#d5c8b8]">
-                  Collaborative work and fully delivered services. Coaching, systems, and community.
-                  Not sure yet? Send a general inquiry.
+                  Looking for music or business services? See the Services page. Anything else, send a
+                  general inquiry.
                 </p>
               </div>
 
@@ -96,34 +53,6 @@ export default function ContactPage() {
                 className="relative z-10 h-auto w-full max-w-[200px] object-contain sm:max-w-[260px]"
               />
             </div>
-          </div>
-        </Section>
-      </Container>
-
-      <Container bordered className="border-t border-[#d8aa67]/15 py-24">
-        <Section reveal>
-          <SectionHeader
-            label="Alongside you"
-            description="Collaborative work. You stay in the process."
-          />
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {CONTACT_ALONGSIDE.map((offering) => (
-              <OfferingCard key={offering.title} offering={offering} />
-            ))}
-          </div>
-        </Section>
-      </Container>
-
-      <Container bordered className="border-t border-[#d8aa67]/15 py-24">
-        <Section reveal>
-          <SectionHeader
-            label="Fully delivered"
-            description="We execute. You receive the finished result."
-          />
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {CONTACT_DELIVERED.map((offering) => (
-              <OfferingCard key={offering.title} offering={offering} />
-            ))}
           </div>
         </Section>
       </Container>
