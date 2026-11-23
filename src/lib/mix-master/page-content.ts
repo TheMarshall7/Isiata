@@ -56,10 +56,10 @@ export const MIX_MASTER_EXAMPLES: MixMasterExample[] = [
     socials: [],
     service: 'Mix + Master',
     before: '/audio/mix-master/space-cadet-before.mp3',
-    after: null,
+    after: '/audio/mix-master/space-cadet-after.mp3',
     beforeLabel: "Artist's own mix",
     afterLabel: 'Final mix & master',
-    story: 'Sent over as stems with a rough mix. The final mix is on the board right now.',
+    story: 'Jag sent stems and his own mix. We rebuilt it from the stems so the vocal sits on top and the record opens up wide.',
     work: [
       'Full mix from the original stems',
       'Vocal placement and cleanup',

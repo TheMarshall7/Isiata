@@ -370,7 +370,7 @@ function Spectrum({
         <div>
           <p className="text-[10px] uppercase tracking-widest text-zinc-500">Live frequency picture</p>
           <p className="text-xs text-zinc-600">
-            Both versions at once{matchVolume ? ', volume-matched' : ''}. Lows on the left, highs on the right.
+            Both versions at once{matchVolume ? ', vocals matched' : ''}. Lows on the left, highs on the right.
           </p>
         </div>
         <div className="flex items-center gap-4 text-[10px] uppercase tracking-widest">
@@ -620,8 +620,8 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
   const trims =
     pair && matchVolume && !pending
       ? (() => {
-          const target = Math.min(pair.beforeStats.rms, pair.afterStats.rms)
-          return { before: target / pair.beforeStats.rms, after: target / pair.afterStats.rms }
+          const target = Math.min(pair.beforeStats.vocalLevel, pair.afterStats.vocalLevel)
+          return { before: target / pair.beforeStats.vocalLevel, after: target / pair.afterStats.vocalLevel }
         })()
       : { before: 1, after: 1 }
   const beforePeaks = pair ? pair.beforePeaks.map((p) => p * trims.before) : []
@@ -808,14 +808,14 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
                           )}
                         />
                       </span>
-                      Match volume
+                      Match vocals
                     </button>
                   </div>
                   <p className="mt-2 text-[11px] leading-relaxed text-zinc-600">
                     {pending
                       ? 'Comparison tools unlock when the final mix lands.'
                       : matchVolume
-                        ? 'On: both versions play at the same loudness, so you hear the mix, not the volume knob.'
+                        ? 'On: the vocals sit at the same level in both versions, so you hear the mix, not the volume knob.'
                         : `Off: raw levels. The after is ${Math.abs(levelGapDb).toFixed(1)} dB ${levelGapDb >= 0 ? 'louder' : 'quieter'} than the before.`}
                   </p>
                 </div>

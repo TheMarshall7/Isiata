@@ -13,6 +13,8 @@ export const FOCUS_BANDS: Record<FocusBand, { label: string; hint: string; hp: n
 
 export type ClipStats = {
   rms: number
+  /** Level of the vocal range in the centre of the mix, quiet gaps ignored. Used for level matching. */
+  vocalLevel: number
   width: number
   lowShare: number
   airShare: number
@@ -80,6 +82,15 @@ function computeStats(buffer: AudioBuffer): ClipStats {
   const air2 = onePole(8000)
   const pres1 = onePole(2000)
   const pres2 = onePole(5000)
+  // Vocal band: centre channel, roughly 300 Hz – 3.5 kHz (two poles each side).
+  const vHp1 = onePole(300)
+  const vHp2 = onePole(300)
+  const vLp1 = onePole(3500)
+  const vLp2 = onePole(3500)
+  const FRAME = Math.round(sr * 0.05)
+  const frames: number[] = []
+  let frameSum = 0
+  let frameN = 0
   let mid2 = 0
   let side2 = 0
   let low = 0
@@ -103,11 +114,25 @@ function computeStats(buffer: AudioBuffer): ClipStats {
     air += hi * hi
     const pr = pres2(m) - pres1(m)
     pres += pr * pr
+    const hpOnce = m - vHp1(m)
+    const hp = hpOnce - vHp2(hpOnce)
+    const v = vLp2(vLp1(hp))
+    frameSum += v * v
+    if (++frameN === FRAME) {
+      frames.push(frameSum / FRAME)
+      frameSum = 0
+      frameN = 0
+    }
   }
+  // Ignore the quietest 40% of moments (gaps between lines) so the match follows the voice.
+  const sorted = [...frames].sort((x, y) => x - y)
+  const loud = sorted.slice(Math.floor(sorted.length * 0.4))
+  const vocalLevel = Math.sqrt(loud.reduce((a, b) => a + b, 0) / Math.max(1, loud.length))
   const n = L.length
   const rms = Math.sqrt((mid2 + side2) / n)
   return {
     rms,
+    vocalLevel,
     width: Math.sqrt(side2 / Math.max(1e-12, mid2)),
     lowShare: low / Math.max(1e-12, mid2),
     airShare: air / Math.max(1e-12, mid2),
@@ -165,9 +190,10 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
     let trimBefore = 1
     let trimAfter = 1
     if (mv && p) {
-      const target = Math.min(p.beforeStats.rms, p.afterStats.rms)
-      trimBefore = target / p.beforeStats.rms
-      trimAfter = target / p.afterStats.rms
+      // Match the vocals, not the whole song: that is what listeners set their volume by.
+      const target = Math.min(p.beforeStats.vocalLevel, p.afterStats.vocalLevel)
+      trimBefore = target / p.beforeStats.vocalLevel
+      trimAfter = target / p.afterStats.vocalLevel
     }
     set(engine.before.trim.gain, trimBefore)
     set(engine.after.trim.gain, trimAfter)
