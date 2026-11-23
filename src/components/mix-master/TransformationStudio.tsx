@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { MixMasterExample, TransformationStat } from '@/lib/mix-master/page-content'
 import { cn } from '@/lib/utils'
-import { FOCUS_BANDS, useAbEngine, type ClipStats, type FocusBand } from './useAbEngine'
+import { FOCUS_BANDS, sideAt, useAbEngine, type ClipStats, type FocusBand } from './useAbEngine'
 
 const NOISE_BG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
 
@@ -613,9 +613,9 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
     setScore((s) => ({ right: s.right + (g === blind.answer ? 1 : 0), total: s.total + 1 }))
   }
 
-  const afterAmount = Math.round(100 - effectiveDivider)
-  const hearing = afterAmount >= 90 ? 'After' : afterAmount <= 10 ? 'Before' : 'Blend'
   const progress = pair ? (position / pair.duration) * 100 : 0
+  // The divider splits the timeline: playhead in the white is the before, in the gold is the after.
+  const hearing = sideAt(effectiveDivider, progress) === 'after' ? 'After' : 'Before'
   // When volume is matched, draw the waveforms matched too.
   const trims =
     pair && matchVolume && !pending
@@ -703,8 +703,8 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
                     min={0}
                     max={100}
                     value={divider}
-                    aria-label="Crossfade between before and after"
-                    aria-valuetext={`${afterAmount}% after`}
+                    aria-label="Where the song switches from before to after"
+                    aria-valuetext={`After from ${Math.round(divider)}% of the clip`}
                     onChange={(event) => setDivider(Number(event.target.value))}
                     onPointerDown={(event) => setFromClientX(event.clientX)}
                     className="absolute inset-0 z-30 h-full w-full cursor-ew-resize opacity-0"
@@ -735,7 +735,7 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
                     <p className="shrink-0 text-[10px] uppercase tracking-widest text-zinc-500">
                       Hearing{' '}
                       <span className="text-[#f0dfc8]">
-                        {blind && !blind.picked ? '???' : hearing === 'Blend' ? `${afterAmount}% after` : hearing}
+                        {blind && !blind.picked ? '???' : hearing}
                       </span>
                     </p>
                   </div>
@@ -782,10 +782,10 @@ export function TransformationStudio({ examples }: { examples: MixMasterExample[
                           type="button"
                           disabled={pending || !!blind}
                           onClick={() => setDivider(value)}
-                          aria-pressed={!blind && hearing === label}
+                          aria-pressed={!blind && divider === value}
                           className={cn(
                             'rounded-full px-4 py-1.5 text-[10px] uppercase tracking-widest transition-colors disabled:opacity-40',
-                            !blind && hearing === label ? 'bg-[#d8aa67] text-black' : 'text-zinc-400 hover:text-white'
+                            !blind && divider === value ? 'bg-[#d8aa67] text-black' : 'text-zinc-400 hover:text-white'
                           )}
                         >
                           {label}

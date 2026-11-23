@@ -73,7 +73,7 @@ export const MIX_MASTER_EXAMPLES: MixMasterExample[] = [
 export const MUSIC_COPY = {
   listen: {
     title: 'Hear the difference',
-    body: 'Real songs from real artists. Press play and drag the divider: left is what they sent, right is what they got back. Both play in sync, so you hear exactly what changed. Headphones recommended.',
+    body: 'Real songs from real artists. Press play and drag the divider. While the playhead is in the white you hear what they sent; the moment it crosses into the gold, it switches to what they got back. Both stay in sync, so you hear exactly what changed. Headphones recommended.',
   },
   changes: [
     { icon: 'solar:tuning-2-linear', title: 'Balance', body: 'Every part gets its own space. Nothing fights the vocal, nothing gets lost.' },

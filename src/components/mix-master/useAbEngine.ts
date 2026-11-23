@@ -141,19 +141,20 @@ function computeStats(buffer: AudioBuffer): ClipStats {
   }
 }
 
-/** Equal-power crossfade so the middle of the slider is not quieter than the ends. */
-export function crossfadeGains(divider: number) {
-  const afterAmount = 1 - divider / 100
-  return {
-    before: Math.cos((afterAmount * Math.PI) / 2),
-    after: Math.sin((afterAmount * Math.PI) / 2),
-  }
+/**
+ * Which version is heard: the divider splits the timeline. Playhead left of it (white) is the
+ * before, right of it (gold) is the after. A hard switch, never a blend.
+ */
+export function sideAt(divider: number, progressPct: number): 'before' | 'after' {
+  if (divider <= 0) return 'after'
+  if (divider >= 100) return 'before'
+  return progressPct >= divider ? 'after' : 'before'
 }
 
 type Options = {
   beforeUrl: string
   afterUrl: string | null
-  /** 0 = all after, 100 = all before (the divider position). */
+  /** Divider position in % of the timeline. 0 = all after, 100 = all before. */
   divider: number
   matchVolume: boolean
   focus: FocusBand
@@ -174,18 +175,44 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
   const rafRef = useRef<number>()
   const live = useRef({ divider, matchVolume, focus, pair })
   live.current = { divider, matchVolume, focus, pair }
+  const sideRef = useRef<'before' | 'after' | null>(null)
+
+  /** Playhead position in seconds, read from the audio clock. */
+  const clockPosition = useCallback(() => {
+    const engine = engineRef.current
+    const p = live.current.pair
+    if (!engine || !p) return 0
+    if (!engine.sources.length) return engine.offset
+    const elapsed = Math.max(0, engine.ctx.currentTime - engine.startedAt)
+    return (engine.offset + elapsed) % p.duration
+  }, [])
+
+  /** Switch to whichever version the playhead is over. A ~5 ms ramp avoids a click. */
+  const applySide = useCallback((instant = false) => {
+    const engine = engineRef.current
+    if (!engine) return
+    const p = live.current.pair
+    const pct = p ? (clockPosition() / p.duration) * 100 : 0
+    const side = sideAt(live.current.divider, pct)
+    if (!instant && side === sideRef.current) return
+    sideRef.current = side
+    const t = engine.ctx.currentTime
+    const set = (param: AudioParam, v: number) =>
+      instant ? param.setValueAtTime(v, t) : param.setTargetAtTime(v, t, 0.005)
+    set(engine.before.xfade.gain, side === 'before' ? 1 : 0)
+    set(engine.after.xfade.gain, side === 'after' ? 1 : 0)
+  }, [clockPosition])
 
   const applyMix = useCallback((instant = false) => {
     const engine = engineRef.current
     if (!engine) return
-    const { divider: d, matchVolume: mv, focus: f, pair: p } = live.current
+    const { matchVolume: mv, focus: f, pair: p } = live.current
     const t = engine.ctx.currentTime
     const set = (param: AudioParam, v: number) =>
       instant ? param.setValueAtTime(v, t) : param.setTargetAtTime(v, t, 0.02)
 
-    const g = crossfadeGains(d)
-    set(engine.before.xfade.gain, g.before)
-    set(engine.after.xfade.gain, g.after)
+    sideRef.current = null
+    applySide(instant)
 
     let trimBefore = 1
     let trimAfter = 1
@@ -200,7 +227,7 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
 
     set(engine.hp.frequency, FOCUS_BANDS[f].hp)
     set(engine.lp.frequency, FOCUS_BANDS[f].lp)
-  }, [])
+  }, [applySide])
 
   const getEngine = useCallback(() => {
     if (engineRef.current) return engineRef.current
@@ -293,13 +320,7 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
     applyMix()
   }, [divider, matchVolume, focus, pair, applyMix])
 
-  const currentTime = useCallback(() => {
-    const engine = engineRef.current
-    if (!engine || !pair) return 0
-    if (!engine.sources.length) return engine.offset
-    const elapsed = Math.max(0, engine.ctx.currentTime - engine.startedAt)
-    return (engine.offset + elapsed) % pair.duration
-  }, [pair])
+  const currentTime = clockPosition
 
   const startAt = useCallback(
     (offset: number) => {
@@ -323,8 +344,9 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
       })
       engine.offset = offset
       engine.startedAt = when
+      applySide(true)
     },
-    [pair, getEngine, stopSources]
+    [pair, getEngine, stopSources, applySide]
   )
 
   const play = useCallback(async () => {
@@ -348,15 +370,19 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
       if (!pair) return
       const offset = Math.max(0, Math.min(0.999, fraction)) * pair.duration
       if (playing) startAt(offset)
-      else if (engineRef.current) engineRef.current.offset = offset
+      else if (engineRef.current) {
+        engineRef.current.offset = offset
+        applySide(true)
+      }
       setPosition(offset)
     },
-    [pair, playing, startAt]
+    [pair, playing, startAt, applySide]
   )
 
   useEffect(() => {
     if (!playing) return
     const tick = () => {
+      applySide()
       setPosition(currentTime())
       rafRef.current = requestAnimationFrame(tick)
     }
@@ -364,7 +390,7 @@ export function useAbEngine({ beforeUrl, afterUrl, divider, matchVolume, focus }
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [playing, currentTime])
+  }, [playing, currentTime, applySide])
 
   useEffect(
     () => () => {
