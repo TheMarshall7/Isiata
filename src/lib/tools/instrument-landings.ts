@@ -46,7 +46,8 @@ export type InstrumentLanding = {
 }
 
 const root = '/Plugin Screenshots/Details'
-export const landingShotSrc = (file: string) => encodeURI(`${root}/${file}`)
+export const landingShotSrc = (file: string) =>
+  encodeURI(`${root}/${file}`) + (file.startsWith('bass-') ? '?v=2' : '')
 
 export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
   'isi-bass': {
@@ -77,7 +78,7 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-keyboard.png',
           width: 2600,
-          height: 543,
+          height: 544,
           cssWidth: 1160,
           alt: 'ISI Bass full width playable keyboard with volume and tone faders',
         },
@@ -95,9 +96,9 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-engines.png',
           width: 2600,
-          height: 680,
+          height: 664,
           cssWidth: 746,
-          alt: 'ISI Bass engine selector with the 808 controls: decay, pitch drop, drop time, punch, drive, tone and octave',
+          alt: 'ISI Bass engine selector for sample, synth and 808, with release and humanize controls',
         },
       },
       {
@@ -111,9 +112,9 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-slide-presets.png',
           width: 1633,
-          height: 780,
+          height: 601,
           cssWidth: 408,
-          alt: 'ISI Bass slide controls and eleven 808 presets',
+          alt: 'ISI Bass 808 sculpt, sweep, drive and slide controls',
         },
         flip: true,
       },
@@ -125,7 +126,7 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-synth.png',
           width: 2600,
-          height: 437,
+          height: 432,
           cssWidth: 1160,
           alt: 'ISI Bass synth page with oscillators, filter and voice controls',
         },
@@ -143,7 +144,7 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-voicing-tone.png',
           width: 2600,
-          height: 798,
+          height: 796,
           cssWidth: 652,
           alt: 'ISI Bass instrument voicings with tone and character controls',
         },
@@ -157,7 +158,7 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-amp-cab.png',
           width: 2007,
-          height: 801,
+          height: 802,
           cssWidth: 502,
           alt: 'ISI Bass amp and cabinet selection with output level, pan and LED meter',
         },
@@ -173,7 +174,7 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-humanize-noise.png',
           width: 2402,
-          height: 780,
+          height: 718,
           cssWidth: 600,
           alt: 'ISI Bass humanize and noise controls',
         },
@@ -186,22 +187,22 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         shot: {
           file: 'bass-velocity.png',
           width: 2215,
-          height: 780,
+          height: 856,
           cssWidth: 554,
-          alt: 'ISI Bass draggable velocity curve and release control',
+          alt: 'ISI Bass envelope controls and draggable velocity curve',
         },
       },
       {
         eyebrow: 'Performance',
         title: 'Mono, poly, glide and envelope.',
-        body: 'Switch between mono and poly, set glide, pitch bend range and velocity sensitivity, and shape attack, decay, sustain and release with a live envelope display.',
-        chips: ['Mono / Poly', 'Glide', 'Bend range', 'Vel sense', 'ADSR'],
+        body: 'Switch between mono and poly, set glide, pitch bend range and velocity sensitivity, and shape attack, decay, sustain and release with a live envelope display. Load your own samples here too.',
+        chips: ['Mono / Poly', 'Glide', 'Bend range', 'Vel sense', 'ADSR', 'Your own samples'],
         shot: {
           file: 'bass-performance.png',
           width: 2600,
-          height: 437,
+          height: 432,
           cssWidth: 1160,
-          alt: 'ISI Bass performance page with voice and envelope controls',
+          alt: 'ISI Bass performance page with voice, envelope, velocity and sample controls',
         },
         wide: true,
       },
@@ -212,14 +213,13 @@ export const INSTRUMENT_LANDINGS: Record<string, InstrumentLanding> = {
         points: [
           ['LFO and macro', 'Rate, amount, and a macro that moves several things at once.'],
           ['Sidechain ducking', 'Amount, attack and release, driven by your kick.'],
-          ['Your own samples', 'Load audio from your content folder for the sample engine.'],
         ],
         shot: {
           file: 'bass-mod.png',
           width: 2600,
-          height: 437,
+          height: 432,
           cssWidth: 1160,
-          alt: 'ISI Bass modulation, sidechain, source and sample controls',
+          alt: 'ISI Bass modulation and sidechain controls',
         },
         wide: true,
       },

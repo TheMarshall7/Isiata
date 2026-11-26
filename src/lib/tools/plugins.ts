@@ -104,7 +104,7 @@ const SCREENSHOT_SIZES: Record<string, [number, number]> = {
  *  hours, so a new ?v= makes them fetch the new file instead of showing the old one. */
 const SCREENSHOT_VERSIONS: Record<string, number> = {
   'IA2A': 3,
-  'ISI Bass': 3,
+  'ISI Bass': 4,
   'Isynth 7': 1,
   'ISI Vox': 1,
   'IPI': 2,
@@ -285,11 +285,11 @@ const PLUGIN_DEFS: PluginSpec[] = [
     code: 'Isib',
     dawCategory: 'Instrument',
     gallery: [
-      { label: 'Main', src: encodeURI('/Plugin Screenshots/Details/full-bass-main.png'), width: 1800, height: 1306 },
-      { label: 'Synth', src: encodeURI('/Plugin Screenshots/Details/full-bass-synth.png'), width: 1800, height: 1306 },
-      { label: '808', src: encodeURI('/Plugin Screenshots/Details/full-bass-808.png'), width: 1800, height: 1306 },
-      { label: 'Performance', src: encodeURI('/Plugin Screenshots/Details/full-bass-performance.png'), width: 1800, height: 1306 },
-      { label: 'Mod', src: encodeURI('/Plugin Screenshots/Details/full-bass-mod.png'), width: 1800, height: 1306 },
+      { label: 'Main', src: encodeURI('/Plugin Screenshots/Details/full-bass-main.png') + '?v=2', width: 1800, height: 1306 },
+      { label: 'Synth', src: encodeURI('/Plugin Screenshots/Details/full-bass-synth.png') + '?v=2', width: 1800, height: 1306 },
+      { label: '808', src: encodeURI('/Plugin Screenshots/Details/full-bass-808.png') + '?v=2', width: 1800, height: 1306 },
+      { label: 'Performance', src: encodeURI('/Plugin Screenshots/Details/full-bass-performance.png') + '?v=2', width: 1800, height: 1306 },
+      { label: 'Mod', src: encodeURI('/Plugin Screenshots/Details/full-bass-mod.png') + '?v=2', width: 1800, height: 1306 },
     ],
     icon: 'solar:music-notes-linear',
   },
